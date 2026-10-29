@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>데이터 이전 도구</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{ --bg:#0B0E14; --paper:#131824; --paper-2:#1A2130; --border:#242D40; --ink:#E9EDF5; --muted:#8C96AB; --accent:#E9C46A; --ok:#3DD68C; --err:#FF4D5E; color-scheme:dark; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Pretendard Variable",Pretendard,sans-serif; padding:32px 16px 64px; line-height:1.6; }
+  .wrap{ max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:16px; }
+  h1{ font-size:26px; margin:0; }
+  .card{ background:var(--paper); border:1px solid var(--border); border-radius:14px; padding:20px; }
+  .card h2{ font-size:16px; margin:0 0 6px; }
+  .note{ font-size:13px; color:var(--muted); }
+  button{ font-family:inherit; font-size:14px; font-weight:700; padding:10px 16px; border-radius:10px; border:none; background:var(--accent); color:#1B1608; cursor:pointer; margin-top:12px; }
+  button:disabled{ opacity:.5; cursor:wait; }
+  .log{ margin-top:12px; background:var(--paper-2); border:1px solid var(--border); border-radius:10px; padding:10px 12px; font-family:ui-monospace,monospace; font-size:12px; max-height:220px; overflow-y:auto; white-space:pre-wrap; }
+  .ok{ color:var(--ok); } .err{ color:var(--err); }
+  a{ color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>자료실 이전 도구 (처음 1회)</h1>
+  <div class="card note">100불 챌린지 데이터(참여자·코드·일지)는 기존 그대로 쓰기 때문에 옮길 필요가 없어요. 여기서는 예전 자료실 글만 옮깁니다.</div>
+  <div class="card" id="who">로그인 상태 확인 중…</div>
+
+  <div class="card">
+    <h2>예전 VIP 자료실 → 공부 자료실 이전</h2>
+    <div class="note">예전 자료실 프로젝트(vip-memvership)의 글, PDF, 이미지를 이 사이트로 복사합니다. 원본은 그대로 남아요. 자료가 많으면 몇 분 걸릴 수 있어요. 여러 번 실행해도 같은 글은 덮어쓰기만 돼요.</div>
+    <button id="btn2" disabled>자료실 이전 실행</button>
+    <div class="log" id="log2" hidden></div>
+  </div>
+
+  <div class="card note">모두 끝나면 GitHub 저장소에서 <b>migrate.html 파일을 삭제</b>해주세요. 이 파일에는 예전 자료실 프로젝트 설정이 들어 있어요. · <a href="./#admin">사이트로 돌아가기</a></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getFirestore, collection, doc, getDocs, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAsu1RXjvdcxmZK9L5MN902_m9PE9F3rLI",
+  authDomain: "challenge-45dfd.firebaseapp.com",
+  projectId: "challenge-45dfd",
+  storageBucket: "challenge-45dfd.firebasestorage.app",
+  messagingSenderId: "371905793972",
+  appId: "1:371905793972:web:a80188789aa3d612036ce1"
+};
+const OLD_LIBRARY_CONFIG = {
+  apiKey: "AIzaSyCzPGoQM2B96S_U_WDYqxkWMWuo1Mm-Yr0",
+  authDomain: "vip-memvership.firebaseapp.com",
+  projectId: "vip-memvership",
+  storageBucket: "vip-memvership.firebasestorage.app",
+  messagingSenderId: "9178339685",
+  appId: "1:9178339685:web:f9cb9b21b35515e72fa98c"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const oldDb = getFirestore(initializeApp(OLD_LIBRARY_CONFIG, 'oldLibrary'));
+const $ = s => document.querySelector(s);
+function logger(id){ const el = $(id); el.hidden = false; return (m, cls) => { const line = document.createElement('div'); if (cls) line.className = cls; line.textContent = m; el.appendChild(line); el.scrollTop = el.scrollHeight; }; }
+
+onAuthStateChanged(auth, async user => {
+  if (!user){ $('#who').innerHTML = '로그인되어 있지 않아요. <a href="./">사이트</a>에서 관리자 텔레그램 계정으로 로그인한 뒤 이 페이지를 새로고침하세요.'; return; }
+  const tr = await user.getIdTokenResult();
+  if (tr.claims.admin !== true){ $('#who').innerHTML = '<span class="err">관리자 계정이 아니에요.</span> Worker의 ADMIN_TG_IDS에 내 텔레그램 ID가 들어 있는지 확인하고, 사이트에서 로그아웃 후 다시 로그인하세요.'; return; }
+  $('#who').innerHTML = '<span class="ok">관리자로 로그인됨</span> · ' + user.uid;
+  $('#btn2').disabled = false;
+});
+
+$('#btn2').addEventListener('click', async () => {
+  const log = logger('#log2'); $('#btn2').disabled = true;
+  try{
+    const posts = await getDocs(collection(oldDb, 'vip_posts'));
+    log(`예전 글 ${posts.size}개 발견`);
+    let i = 0;
+    for (const d of posts.docs){
+      i++;
+      const p = d.data();
+      const files = [];
+      if (p.pdfId) files.push([p.pdfId, p.pdfChunks || 1]);
+      if (p.imgId) files.push([p.imgId, p.imgChunks || 1]);
+      if (Array.isArray(p.images)) p.images.forEach(im => files.push([im.id, im.chunks || 1]));
+      for (const [fid, chunks] of files){
+        for (let c = 0; c < chunks; c++){
+          const f = await getDoc(doc(oldDb, 'vip_files', fid + '_' + c));
+          if (f.exists()) await setDoc(doc(db, 'files', fid + '_' + c), f.data());
+        }
+      }
+      await setDoc(doc(db, 'posts', d.id), { ...p, views: p.views || 0 });
+      log(`(${i}/${posts.size}) ${p.title || d.id} · 첨부 ${files.length}개`);
+    }
+    try{
+      const st = await getDoc(doc(oldDb, 'vip_settings', 'auth'));
+      const cur = await getDoc(doc(db, 'config', 'announcement'));
+      if (st.exists() && st.data().notice && !(cur.exists() && cur.data().text)){
+        await setDoc(doc(db, 'config', 'announcement'), { text: st.data().notice, at: st.data().noticeAt || Date.now() });
+        log('예전 공지 배너도 옮겼어요.');
+      }
+    } catch(e){ /* 무시 */ }
+    log('완료!', 'ok');
+  } catch(e){ log('실패: ' + e.message + ' — 예전 프로젝트의 읽기 권한을 확인하세요.', 'err'); $('#btn2').disabled = false; }
+});
+
+</script>
+</body>
+</html>
