@@ -1204,6 +1204,51 @@
   .sp-acc-bank{ font-size:13px; color:var(--muted); font-weight:600; }
   .sp-acc-num{ font-size:24px; font-weight:700; letter-spacing:.01em; }
   .sp-acc-owner{ font-size:13.5px; color:var(--muted); margin-bottom:12px; }
+
+  /* ===== v7: 법적 고지 · 개인정보 · 신고 ===== */
+  .calc-note{ margin:10px 0 14px; padding:12px 14px; border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px; background:var(--surface); font-size:13px; line-height:1.6; color:var(--muted); }
+  .calc-note b{ color:var(--text); font-size:13px; }
+  .calc-note p{ margin:4px 0 0; }
+  .calc-note details{ margin-top:6px; }
+  .calc-note summary{ cursor:pointer; color:var(--text-2); font-weight:600; font-size:12.5px; }
+  .calc-note ul{ margin:6px 0 0; padding-left:18px; }
+  .board-note{ font-size:11.5px; color:var(--muted); padding:8px 2px 0; }
+  .mk-srcline{ font-size:11.5px; color:var(--muted); margin:-4px 0 10px; line-height:1.5; }
+  .field-hint{ font-size:12px; color:var(--muted); margin-top:5px; line-height:1.5; }
+  .risk-note{ margin-top:12px; padding:10px 12px; border-radius:10px; background:var(--loss-soft); border:1px solid var(--loss); color:var(--text); font-size:12.5px; line-height:1.55; }
+  .hold-tag{ font-size:11px; font-weight:600; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
+  .hold-tag.holding{ color:var(--loss); border-color:var(--loss); background:var(--loss-soft); }
+  .btn-mini.ghost{ background:none; color:var(--muted); }
+  .adm-flag{ font-size:10.5px; font-weight:700; color:var(--loss); border:1px solid var(--loss); border-radius:99px; padding:1px 6px; margin-left:4px; }
+  .adm-rep-list{ display:flex; flex-direction:column; gap:10px; max-height:520px; overflow:auto; }
+  .adm-rep{ border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--surface); }
+  .adm-rep-h{ display:flex; gap:8px; align-items:baseline; font-size:13px; } .adm-rep-h span{ color:var(--muted); font-size:12px; }
+  .adm-rep-t{ white-space:pre-wrap; font-size:13px; margin:6px 0; color:var(--text-2); }
+  .adm-rep-d{ font-size:12px; color:var(--muted); margin-bottom:6px; }
+  .r-comp{ margin:12px 0 0; padding:10px 12px; border-radius:10px; background:var(--surface-2); border:1px solid var(--line); font-size:12.5px; line-height:1.6; color:var(--muted); }
+  .r-comp div + div{ margin-top:4px; }
+  .comp-grid{ display:grid; grid-template-columns:160px 1fr 200px; gap:8px; }
+  .comp-grid select, .comp-grid input{ background:var(--bg); color:var(--text); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:14px; font-family:inherit; }
+  @media (max-width:720px){ .comp-grid{ grid-template-columns:1fr; } }
+  .mi-modal, .rp-modal{ max-width:520px; width:100%; }
+  .mi-list{ margin:12px 0; display:grid; gap:6px; }
+  .mi-list div{ display:grid; grid-template-columns:96px 1fr; gap:10px; font-size:13.5px; }
+  .mi-list dt{ color:var(--muted); } .mi-list dd{ margin:0; word-break:break-all; }
+  .mi-sec{ border-top:1px solid var(--line); padding:12px 0 2px; }
+  .mi-sec > b{ font-size:14px; }
+  .mi-toggle{ display:flex; gap:8px; align-items:center; margin-top:8px; font-size:13.5px; cursor:pointer; }
+  .mi-danger > b{ color:var(--loss); }
+  .btn.danger{ background:var(--loss); border-color:var(--loss); color:#fff; }
+  .mi-sec input[type=text], .rp-modal select, .rp-modal textarea{ background:var(--bg); color:var(--text); border:1px solid var(--line); border-radius:9px; padding:9px 11px; font:inherit; font-size:14px; width:100%; }
+  .tgl-notice{ font-size:12px; color:var(--muted); line-height:1.5; margin:-2px 0 10px; }
+  .foot-indep{ color:var(--muted); font-size:12px; }
+  .doc h4{ margin:16px 0 6px; font-size:14px; }
+  .doc p, .doc li{ font-size:13px; line-height:1.65; }
+  .doc ul{ padding-left:18px; margin:4px 0; }
+  .doc-date{ color:var(--muted); font-size:12px !important; }
+  .doc-tbl{ width:100%; border-collapse:collapse; font-size:12.5px; margin:6px 0; }
+  .doc-tbl th, .doc-tbl td{ border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top; line-height:1.5; }
+  .doc-tbl th{ background:var(--surface-2); }
 </style>
 </head>
 <body>
@@ -1250,6 +1295,7 @@
           <a href="#rank">순위</a>
           <a href="#challenge" id="umChallenge">내 챌린지</a>
           <a href="#support">후원</a>
+          <button type="button" id="btnMyInfo">내 정보 · 알림 · 탈퇴</button>
           <button type="button" id="btnTourAgain">사용 방법 다시 보기</button>
           <button type="button" id="btnLogout">로그아웃</button>
         </div>
@@ -1289,6 +1335,7 @@
         <div class="board-cols" aria-hidden="true"><span>순위</span><span>참여자</span><span>추이</span><span>수익률</span><span>잔액</span></div>
         <ol class="board-rows" id="boardRows"></ol>
         <div class="board-foot"><span id="boardTotal"></span><a href="#challenge">전체 순위 보기</a></div>
+        <div class="board-note">참가자가 직접 입력한 기록 기준 · 실제 계좌로 검증된 수익률이 아니에요</div>
       </div>
     </div>
 
@@ -1299,6 +1346,7 @@
 
     <section class="home-sec">
       <div class="hs-head"><h2>시장 지표</h2><span class="hs-hint">환율 · 지수 · 공포 지수</span></div>
+      <div class="mk-srcline">출처: TradingView 위젯(환율 · 나스닥 100 · VIX), 네이버 금융(코스피), CNN Fear &amp; Greed Index(공포·탐욕 지수). 지연되거나 실제와 다를 수 있으며, 투자 판단의 근거로 쓰지 마세요.</div>
       <div class="mk-cards">
         <div class="mk-card"><div class="mk-l">원/달러 환율</div><div class="mk-tv" data-tv-quote="FX_IDC:USDKRW"></div></div>
         <div class="mk-card"><div class="mk-l">코스피</div><div class="mk-v" id="mkKospi">-</div><div class="mk-c" id="mkKospiC"></div><div class="mk-s" id="mkKospiS">한국거래소</div></div>
@@ -1416,6 +1464,20 @@
           <button type="button" class="tq" data-tag="미국주식">미국주식</button>
         </div>
       </div>
+      <div class="lfield comp-fields">
+        <label>자료 기준일 · 근거 · 이해관계 (투자정보 고지용)</label>
+        <div class="comp-grid">
+          <input type="date" id="wAsOf" title="분석 기준일">
+          <input id="wSource" placeholder="근거·출처 (예: 한국거래소 공시, 회사 IR 자료, 직접 작성)">
+          <select id="wHolding">
+            <option value="">작성자 보유 여부 선택</option>
+            <option value="none">언급 종목 보유 안 함</option>
+            <option value="holding">언급 종목 보유 중</option>
+            <option value="na">특정 종목 언급 없음</option>
+          </select>
+        </div>
+        <p class="lhint">증권사 리포트·유료 자료·기사 원문은 허락 없이 올리지 마세요. 직접 작성한 요약·분석만 올리고, 인용은 출처를 밝혀 필요한 만큼만 써 주세요.</p>
+      </div>
       <label class="notify-row" id="notifyRow"><input type="checkbox" id="wNotify" checked> 올린 뒤 로그인 회원 전체에게 텔레그램 알림 보내기</label>
       <button class="btn-primary" id="btnPublish" type="button">자료 올리기</button>
       <p class="lhint" id="publishHint">올린 글은 카드의 ✎ 버튼으로 언제든 수정할 수 있어요.</p>
@@ -1465,7 +1527,7 @@
     </div>
     <button class="btn primary" type="button" id="vwBtnWrite" hidden>글 올리기</button>
   </div>
-  <div class="disclaimer vw-disc"><strong>면책 안내</strong> 이 게시판의 글은 작성자 개인의 의견이며 투자 권유나 종목 추천이 아니에요. 글의 내용을 근거로 한 투자 판단과 그 결과에 대한 책임은 투자자 본인에게 있어요. 허위 정보, 시세 조종 목적의 글, 광고·리딩방 홍보, 타인 비방 글은 예고 없이 삭제될 수 있어요.</div>
+  <div class="disclaimer vw-disc"><strong>면책 안내</strong> 이 게시판의 글은 작성자 개인의 의견이며 투자 권유나 종목 추천이 아니에요. 글의 내용을 근거로 한 투자 판단과 그 결과에 대한 책임은 투자자 본인에게 있어요. 허위 정보·허위 수익 인증, 수익·원금 보장 표현, 시세 조종 목적의 글, 유료 리딩방·오픈채팅 홍보, 타인의 저작물(유료 리포트·기사 전문) 무단 게재, 타인 비방 글은 신고 후 예고 없이 삭제될 수 있어요. 글마다 작성 시점과 작성자의 보유 여부가 표시돼요.</div>
   <div class="blur-gate" id="vwLocked">
     <div class="bg-fake" aria-hidden="true">
       <div class="fake-card"><i></i><b>이번 주 나스닥, 기술주 눌림목 구간으로 봅니다</b><p>금리 하락 기대가 살아 있는 동안은 빅테크 중심 매수 관점 유지. 다만 실적 발표 전 변동성 주의…</p></div>
@@ -1483,7 +1545,16 @@
       <div class="vw-form-head"><b id="vwFormTitle">글 올리기</b><button type="button" class="btn sm" id="vwCancel">닫기</button></div>
       <div class="field"><label for="vwTitle">제목</label><input type="text" id="vwTitle" maxlength="120" required placeholder="예: 이번 주 반도체, 눌림목 매수 관점"></div>
       <div class="field"><label for="vwBody">내용</label><textarea id="vwBody" class="vw-ta" required placeholder="근거, 시나리오, 대응 계획 등을 자유롭게 적어 주세요. 글에 붙여 넣은 링크는 자동으로 연결돼요."></textarea></div>
-      <div class="field"><label for="vwLink">참고 링크 (선택)</label><input type="url" id="vwLink" placeholder="https://"></div>
+      <div class="field"><label for="vwLink">참고 링크 · 출처 (선택)</label><input type="url" id="vwLink" placeholder="https://"></div>
+      <div class="field"><label for="vwHolding">언급한 종목 보유 여부 (필수)</label>
+        <select id="vwHolding" required>
+          <option value="">선택하세요</option>
+          <option value="none">언급한 종목을 보유하고 있지 않아요</option>
+          <option value="holding">언급한 종목을 보유하고 있어요</option>
+          <option value="na">특정 종목을 언급하지 않았어요</option>
+        </select>
+        <div class="field-hint">보유 중인 종목을 좋게 쓰는 글은 이해관계가 있을 수 있어서 글에 함께 표시돼요. 수익·원금 보장 표현과 리딩방·오픈채팅 홍보는 올릴 수 없어요.</div>
+      </div>
       <div class="field"><label for="vwImgs">이미지 (최대 3장)</label>
         <div class="photo-input-row"><input type="file" accept="image/*" id="vwImgs" multiple></div>
         <div class="vw-thumbs" id="vwThumbs"></div>
@@ -1540,7 +1611,7 @@
     </div>
     <div class="card" id="moesanDonation" hidden style="border-left:3px solid var(--accent);margin-top:14px;">
       <div style="font-weight:700;font-size:14px;margin-bottom:8px;">후원 안내</div>
-      <div class="section-note" style="margin-bottom:12px;">이 사이트와 채널은 광고 없이 100% 무료로 운영돼요. 운영 비용에 도움을 주시고 싶으신 분은 자유롭게 후원해주시면 감사하겠습니다.</div>
+      <div class="section-note" style="margin-bottom:12px;">이 사이트와 채널은 광고 없이 100% 무료로 운영돼요. 운영 비용에 도움을 주시고 싶으신 분은 자유롭게 후원해주시면 감사하겠습니다. 후원 여부와 관계없이 모든 기능·자료는 똑같이 무료이며, 후원자에게 별도 혜택은 없어요.</div>
       <div class="support-account">
         <div class="acc-info"><span class="acc-bank">토스뱅크</span><span class="acc-num mono" id="supportAccNum2">1001-6492-2687</span><span class="acc-owner">예금주: 윤서준</span></div>
         <button type="button" class="btn-mini" id="btnCopyAccount2">계좌번호 복사</button>
@@ -1651,7 +1722,7 @@
     </div>
     <div class="card" id="usageGuideDonation" hidden style="border-left:3px solid var(--accent);margin-top:14px;">
       <div style="font-weight:700;font-size:14px;margin-bottom:8px;">후원 안내</div>
-      <div class="section-note" style="margin-bottom:12px;">이 사이트와 채널은 광고 없이 100% 무료로 운영돼요. 운영 비용에 도움을 주시고 싶으신 분은 자유롭게 후원해주시면 감사하겠습니다.</div>
+      <div class="section-note" style="margin-bottom:12px;">이 사이트와 채널은 광고 없이 100% 무료로 운영돼요. 운영 비용에 도움을 주시고 싶으신 분은 자유롭게 후원해주시면 감사하겠습니다. 후원 여부와 관계없이 모든 기능·자료는 똑같이 무료이며, 후원자에게 별도 혜택은 없어요.</div>
       <div class="support-account">
         <div class="acc-info"><span class="acc-bank">토스뱅크</span><span class="acc-num mono" id="supportAccNum3">1001-6492-2687</span><span class="acc-owner">예금주: 윤서준</span></div>
         <button type="button" class="btn-mini" id="btnCopyAccount3">계좌번호 복사</button>
@@ -1671,7 +1742,21 @@
 
   <section id="ranking">
     <h2>TOP 3</h2>
-    <div class="section-note">매매 실력으로 증명하는 순위 · 실시간 업데이트</div>
+    <div class="section-note">참가자가 직접 입력한 기록 기준 순위 · 실시간 업데이트</div>
+    <div class="calc-note" id="chCalcNote">
+      <b>수익률 안내</b>
+      <p>본 챌린지의 수익률은 참가자가 직접 입력한 매매 기록을 기준으로 계산됩니다. 실제 투자계좌와 연동하여 검증된 수익률이 아니며, 해당 결과는 투자 권유 또는 향후 수익을 보장하는 자료가 아닙니다.</p>
+      <details><summary>계산 방식 보기</summary>
+        <ul>
+          <li>수익금 = 참가자가 입력한 매매별 수익금(USD)의 합계</li>
+          <li>잔액 = 시작 자금 $100 + 수익금 · 수익률 = 수익금 ÷ $100 × 100</li>
+          <li>수수료·펀딩비·세금은 따로 계산하지 않아요. 입력한 수익금에 포함했는지는 참가자마다 다를 수 있어요.</li>
+          <li>순위는 수익률이 높은 순서, 같으면 참가 번호 순서예요.</li>
+          <li>잔액이 0 아래가 되는 손실이나 비정상적으로 큰 수익은 입력할 때 확인하고, 운영자가 검토해 수정·삭제할 수 있어요.</li>
+          <li>원화 환산 금액은 참고용 환율을 적용한 값이에요.</li>
+        </ul>
+      </details>
+    </div>
     <div class="goal-wave" id="goalWave">
       <div class="goal-wave-fill" id="goalWaveFill" style="width:0%">
         <svg class="goal-wave-svg" viewBox="0 0 200 26" preserveAspectRatio="none"><path d="M0 13 Q 10 2, 20 13 T 40 13 T 60 13 T 80 13 T 100 13 T 120 13 T 140 13 T 160 13 T 180 13 T 200 13 V26 H0 Z"/></svg>
@@ -1803,6 +1888,7 @@
         <li>-50% 이상 손실 시 무조건 손절</li>
         <li>초반에는 BTC·ETH만 매매</li>
       </ul>
+      <div class="risk-note">⚠ 레버리지(선물) 거래는 짧은 시간에 원금 전부를 잃을 수 있는 고위험 거래예요. 위 조건은 챌린지 참여 규칙이며 투자 권유가 아니에요. 감당할 수 있는 금액 안에서 본인 판단으로만 참여하세요.</div>
       <div class="rule-important">
         <div class="rule-important-title">가장 중요</div>
         <ul class="rule-list">
@@ -1815,7 +1901,7 @@
   </div>
   <div class="card" style="border-left:3px solid var(--accent);">
     <div style="font-weight:700;font-size:14px;margin-bottom:8px;">후원 안내</div>
-    <div class="section-note" style="margin-bottom:12px;">이 사이트와 채널은 광고 없이 100% 무료로 운영돼요. 운영 비용에 도움을 주시고 싶으신 분은 자유롭게 후원해주시면 감사하겠습니다.</div>
+    <div class="section-note" style="margin-bottom:12px;">이 사이트와 채널은 광고 없이 100% 무료로 운영돼요. 운영 비용에 도움을 주시고 싶으신 분은 자유롭게 후원해주시면 감사하겠습니다. 후원 여부와 관계없이 모든 기능·자료는 똑같이 무료이며, 후원자에게 별도 혜택은 없어요.</div>
     <div class="support-account">
       <div class="acc-info"><span class="acc-bank">토스뱅크</span><span class="acc-num mono" id="supportAccNum">1001-6492-2687</span><span class="acc-owner">예금주: 윤서준</span></div>
       <button type="button" class="btn-mini" id="btnCopyAccount">계좌번호 복사</button>
@@ -1825,19 +1911,20 @@
     <strong>유의사항 / 면책 안내</strong> — 본 공간은 투자 자문이 아닌 학습·기록 목적의 공간이며, 모든 투자 판단과 매매 결과의 책임은 참여자 본인에게 있습니다.
     <button type="button" class="note-more-btn" id="btnDisclaimerMore" data-expanded="0" style="display:block;margin:6px 0 0;">더보기</button>
     <div id="disclaimerFull" hidden style="margin-top:10px;">
-      본 방에 입장하는 즉시 아래 사항에 명시적으로 동의한 것으로 간주합니다.
+      챌린지에 참여하는 분은 아래 내용을 확인해 주세요.
       <ul class="rule-list" style="margin-top:8px;">
         <li>본 공간은 「자본시장과 금융투자업에 관한 법률」상 투자 자문 또는 유사투자자문 행위를 제공하지 않습니다.</li>
         <li>언급되는 모든 종목, 가격, 사례 등은 학습을 위한 예시일 뿐, 투자 판단을 유도하는 목적이 아닙니다.</li>
         <li>모든 투자 판단, 매매 실행 및 그로 인한 손익에 대한 책임은 전적으로 참여자 본인에게 있습니다.</li>
-        <li>본 방의 내용을 근거로 투자 결정을 내렸을 경우, 그 결과에 대해 운영자는 어떠한 법적·재정적 책임도 부담하지 않습니다.</li>
+        <li>본 챌린지의 내용을 근거로 한 투자 결정의 결과에 대해 운영자는 고의 또는 중대한 과실이 없는 한 책임을 지지 않습니다.</li>
+        <li>챌린지 참여 여부나 후원 여부에 따라 투자정보·알림·상담에 차이를 두지 않으며, 개인별 맞춤 투자자문이나 유료 리딩은 제공하지 않습니다.</li>
         <li>참여자는 매수·매도 유도 또는 이를 암시하는 표현, 리딩방으로 오인될 수 있는 단어 및 직접·간접적 투자 판단 유도 표현을 사용하지 않을 것에 동의합니다.</li>
         <li>참여자는 비난, 욕설, 타인을 공격하는 표현을 사용하지 않을 것에 동의합니다.</li>
-        <li>운영 원칙 위반 시 경고 조치가 이루어지며, 누적 경고 5회 초과 시 사전 통보 없이 강제 퇴장될 수 있음을 인지하고 이에 동의합니다.</li>
+        <li>운영 원칙 위반 시 경고 조치가 이루어지며, 누적 경고 5회를 넘으면 참여가 제한될 수 있습니다.</li>
         <li>본 챌린지는 참가비, 가입비, 레퍼럴(추천인) 가입 등의 금전적·제도적 요구 조건이 일절 없으며, 참가자 본인의 완전한 자의에 의해서만 참여가 이루어집니다.</li>
         <li>챌린지 참여 시 입장하는 채팅방은 참여자 간의 자유로운 의견 공유 및 일반적인 차트 매매 관점을 학습하는 정보 교류의 장입니다. 이는 특정 종목의 매수/매도를 지시하는 1:1 리딩이나 투자 자문이 아니며, 제공되는 정보는 참고용으로만 활용되어야 합니다.</li>
         <li>매매 기법, 진입 시점, 매수 및 매도에 대한 어떠한 강제성이나 제약 조건도 없습니다. 시장 상황에 따른 투자의 최종 결정권은 참가자 본인에게 있으며, 그로 인해 발생하는 모든 손실과 이익에 대한 법적·재무적 책임 역시 전적으로 투자자 본인에게 귀속됩니다.</li>
-        <li>챌린지의 최종 평가는 2026년 12월 31일을 기준으로 각 참가자의 총 수익금 및 수익률을 투명하게 합산하여 산정됩니다.</li>
+        <li>챌린지의 최종 평가는 2026년 12월 31일을 기준으로, 각 참가자가 직접 입력한 매매 기록의 총 수익금 및 수익률을 합산하여 산정됩니다. 실제 계좌 잔고와 대조한 결과가 아닙니다.</li>
       </ul>
     </div>
   </div>
@@ -1867,7 +1954,19 @@
   <!-- 처음 설정 -->
   <div class="card j-setup" id="jSetup" hidden>
     <h2 style="margin:0 0 4px;" id="jSetupTitle">매매일지 시작하기</h2>
-    <div class="section-note">순위는 시작 금액 대비 수익률로 매겨져요. 시작 금액은 나중에 바꿀 수 있어요.</div>
+    <div class="section-note">순위는 시작 금액 대비 수익률로 매겨져요. 시작 금액은 나중에 바꿀 수 있어요. 랭킹 참여와 기록 공개는 직접 고를 때만 켜져요(기본 비공개).</div>
+    <div class="calc-note">
+    <b>수익률 안내</b>
+    <p>매매일지 수익률은 회원이 직접 입력한 매매 기록을 기준으로 계산됩니다. 실제 투자계좌와 연동하여 검증된 수익률이 아니며, 해당 결과는 투자 권유 또는 향후 수익을 보장하는 자료가 아닙니다.</p>
+    <details><summary>계산 방식 보기</summary>
+      <ul>
+        <li>수익률 = 입력한 손익의 합계 ÷ 회원이 정한 시작 금액 × 100 (통화별 그대로 계산, 환율 변환 없음)</li>
+        <li>수수료·세금은 따로 계산하지 않아요. 입력한 손익에 포함했는지는 회원마다 다를 수 있어요.</li>
+        <li>랭킹에는 '랭킹 참여'를 직접 고른 일지만 나와요. 매매 기록은 '공개'를 고른 경우에만 로그인한 회원이 볼 수 있어요. 기본값은 모두 비공개예요.</li>
+        <li>잔액이 0 아래가 되는 손실은 입력할 수 없고, 비정상적인 수익률은 운영자가 검토해 랭킹에서 제외할 수 있어요.</li>
+      </ul>
+    </details>
+      </div>
     <form id="jSetupForm">
       <div class="form-grid">
         <div class="field full"><label>닉네임 (순위표에 보여요)</label><input type="text" id="jsNick" maxlength="20" required placeholder="예: 반도체러버"></div>
@@ -1875,14 +1974,14 @@
         <div class="field"><label>시작 금액</label><input type="number" id="jsCap" min="1" step="any" required placeholder="예: 1000000"></div>
         <div class="field full"><span class="f-label">수익률 랭킹</span>
           <div class="radio-row">
-            <label class="radio"><input type="radio" name="jsRank" value="on" checked><span><b>랭킹 참여</b><small>닉네임과 수익률이 순위에 표시돼요</small></span></label>
-            <label class="radio"><input type="radio" name="jsRank" value="off"><span><b>참여 안 함</b><small>순위에 나오지 않아요</small></span></label>
+            <label class="radio"><input type="radio" name="jsRank" value="on"><span><b>랭킹 참여</b><small>닉네임과 수익률이 순위에 표시돼요</small></span></label>
+            <label class="radio"><input type="radio" name="jsRank" value="off" checked><span><b>참여 안 함 (기본)</b><small>순위에 나오지 않고, 나만 볼 수 있어요</small></span></label>
           </div>
         </div>
         <div class="field full"><span class="f-label">매매일지 공개</span>
           <div class="radio-row">
-            <label class="radio"><input type="radio" name="jsOpen" value="on" checked><span><b>공개</b><small>순위에서 다른 회원이 내 매매 기록을 볼 수 있어요</small></span></label>
-            <label class="radio"><input type="radio" name="jsOpen" value="off"><span><b>비공개</b><small>수익률만 보이고, 회원들은 하트로 공개를 요청할 수 있어요</small></span></label>
+            <label class="radio"><input type="radio" name="jsOpen" value="on"><span><b>공개</b><small>랭킹에 참여하면 로그인한 회원이 내 매매 기록·메모·사진을 볼 수 있어요</small></span></label>
+            <label class="radio"><input type="radio" name="jsOpen" value="off" checked><span><b>비공개 (기본)</b><small>매매 기록은 나만 봐요. 랭킹 참여 시 수익률만 보이고, 회원들은 하트로 공개를 요청할 수 있어요</small></span></label>
           </div>
         </div>
       </div>
@@ -2000,6 +2099,18 @@
     <section>
       <h2>종합 수익률 TOP 3</h2>
       <div class="section-note">시작 금액 대비 수익률 기준이에요. 랭킹 참여를 선택한 일지만 보여요.</div>
+      <div class="calc-note">
+        <b>수익률 안내</b>
+        <p>매매일지 수익률은 회원이 직접 입력한 매매 기록을 기준으로 계산됩니다. 실제 투자계좌와 연동하여 검증된 수익률이 아니며, 해당 결과는 투자 권유 또는 향후 수익을 보장하는 자료가 아닙니다.</p>
+        <details><summary>계산 방식 보기</summary>
+          <ul>
+            <li>수익률 = 입력한 손익의 합계 ÷ 회원이 정한 시작 금액 × 100 (통화별 그대로 계산, 환율 변환 없음)</li>
+            <li>수수료·세금은 따로 계산하지 않아요. 입력한 손익에 포함했는지는 회원마다 다를 수 있어요.</li>
+            <li>랭킹에는 '랭킹 참여'를 직접 고른 일지만 나와요. 매매 기록은 '공개'를 고른 경우에만 로그인한 회원이 볼 수 있어요. 기본값은 모두 비공개예요.</li>
+            <li>잔액이 0 아래가 되는 손실은 입력할 수 없고, 비정상적인 수익률은 운영자가 검토해 랭킹에서 제외할 수 있어요.</li>
+          </ul>
+        </details>
+      </div>
       <div class="tri-stats">
         <div class="stat"><div class="n mono" id="jrUsers">0</div><div class="t">참여 인원</div></div>
         <div class="stat"><div class="n mono" id="jrAvg">0%</div><div class="t">평균 수익률</div></div>
@@ -2092,8 +2203,8 @@
   <section class="sp-give">
     <div class="sp-give-copy">
       <h2>이 이야기에 함께해 주시려면</h2>
-      <p>이 공간은 앞으로도 누구나 무료로 쓸 수 있어요. 다만 서버와 자료를 만드는 비용은 지금까지 사비로 감당해 왔어요. 도움이 되셨다면 부담 없는 만큼 마음을 보태 주세요. 보내 주신 후원금은 홈페이지 운영과 자료 제작, 그리고 매년 이어가는 기부에 쓰여요.</p>
-      <p class="sp-small">입금하실 때 보내는 분 이름(입금자명)을 닉네임으로 적어 주시면 '함께해 주신 분들'에 이름을 올려 드려요. 원하지 않으시면 비워 두셔도 돼요.</p>
+      <p>이 공간은 앞으로도 누구나 무료로 쓸 수 있어요. 다만 서버와 자료를 만드는 비용은 지금까지 사비로 감당해 왔어요. 도움이 되셨다면 부담 없는 만큼 마음을 보태 주세요. 보내 주신 후원금은 홈페이지 운영과 자료 제작에 쓰여요.</p>
+      <p class="sp-small">'함께해 주신 분들'에는 이름 공개에 동의한 분만 올려요. 공개를 원하시면 입금 메모에 <b>공개 + 닉네임</b>(예: 공개 반도체러버)을 적어 주세요. 메모가 없으면 이름을 올리지 않아요(익명). 올라간 이름은 언제든 문의 메일로 내릴 수 있어요.</p>
     </div>
     <div class="sp-acc">
       <div class="sp-acc-bank">토스뱅크</div>
@@ -2102,7 +2213,7 @@
       <button class="btn primary" type="button" id="spCopy">계좌번호 복사</button>
     </div>
   </section>
-  <p class="chart-note">후원은 선택이에요. 후원 여부와 관계없이 모든 기능과 자료는 똑같이 무료로 이용할 수 있어요. 후원금은 투자 자문·리딩의 대가가 아니에요.</p>
+  <p class="chart-note">후원은 선택이에요. 후원 여부와 관계없이 모든 기능과 자료는 똑같이 무료로 이용할 수 있어요. 후원금은 투자 자문·리딩의 대가가 아니며, 후원자에게 특별한 투자정보·알림·상담 등 별도 혜택을 드리지 않아요.</p>
 </section>
 
 <!-- ================= 도구 ================= -->
@@ -2314,9 +2425,15 @@
         <div class="board-scroll"><table><thead><tr><th>닉네임</th><th>수익률</th><th>기록</th><th>랭킹</th><th>공개</th><th>보고싶어요</th><th></th></tr></thead><tbody id="admJBody"></tbody></table></div>
       </div>
 
+    <div class="card adm-card" id="admReportsCard">
+      <h3>게시물 신고 <span class="mono" style="font-size:13px;color:var(--muted)" id="admRepCount"></span></h3>
+      <div class="section-note">정보 공유 게시판에서 회원이 신고한 글·댓글이에요. 내용을 확인한 뒤 삭제하거나 신고만 처리(보관 삭제)하세요.</div>
+      <div class="adm-rep-list" id="admRepList"><div class="section-note">신고된 게시물이 없어요.</div></div>
+    </div>
+
     <div class="card adm-card" id="admSupportCard">
       <h3>후원자 명단 <span class="mono" style="font-size:13px;color:var(--muted)" id="admSupCount"></span></h3>
-      <div class="section-note">후원 페이지에서 옆으로 흐르며 보여요. 한 줄에 한 명씩 닉네임을 적고 저장하세요.</div>
+      <div class="section-note">후원 페이지에서 옆으로 흐르며 보여요. 한 줄에 한 명씩 닉네임을 적고 저장하세요. <b>입금 메모에 '공개'를 적어 동의한 분만</b> 적고, 실명 대신 본인이 정한 닉네임을 쓰세요. 내려 달라는 요청이 오면 바로 지워 주세요.</div>
       <textarea class="ta" id="admSupList" rows="6" placeholder="예)&#10;반도체러버&#10;미장가즈아"></textarea>
       <div class="adm-row" style="margin-top:8px"><button class="btn primary sm" type="button" id="admSupSave">저장</button><span class="submit-msg" id="admSupMsg"></span></div>
     </div>
@@ -2341,13 +2458,16 @@
     <li>본 페이지의 모든 콘텐츠는 정보 제공 및 교육 목적이며, 특정 종목·자산의 매수 또는 매도 추천이 아닙니다. <button class="disc-toggle" id="discToggle" type="button">전체 보기 ▾</button></li>
   </ul>
   <ul class="foot-disc disc-more" id="discMore">
-    <li>모든 투자의 최종 판단과 그에 따른 책임은 투자자 본인에게 있으며, 본 콘텐츠를 근거로 한 투자 결과에 대해 운영자는 어떠한 법적 책임도 지지 않습니다.</li>
-    <li>과거의 수익률 및 분석 결과가 미래의 수익을 보장하지 않습니다.</li>
+    <li>모든 투자의 최종 판단과 그에 따른 책임은 투자자 본인에게 있으며, 본 콘텐츠를 근거로 한 투자 결과에 대해 운영자는 고의 또는 중대한 과실이 없는 한 책임을 지지 않습니다.</li>
+    <li>투자에는 원금 손실 위험이 있으며, 과거의 수익률 및 분석 결과가 미래의 수익을 보장하지 않습니다.</li>
+    <li>본 사이트는 금융투자업자(투자자문업·투자일임업)나 유사투자자문업자가 아니며, 개인별 맞춤 투자자문이나 유료 리딩을 제공하지 않습니다.</li>
+    <li>챌린지·매매일지의 수익률은 회원이 직접 입력한 기록 기준이며 실제 계좌로 검증된 값이 아닙니다.</li>
     <li>본 페이지의 콘텐츠는 운영자의 동의 없는 무단 복제·배포·공유(캡처, 재업로드 포함)를 금합니다.</li>
   </ul>
   <div class="foot-contact">
     <b>고려대 재학생 트레이더</b>
-    <span>문의: <a href="mailto:korea.treadr.y@gmail.com">korea.treadr.y@gmail.com</a></span>
+    <span>문의: <a href="mailto:korea.trader.y@gmail.com">korea.trader.y@gmail.com</a></span>
+    <span class="foot-indep">고려대학교와 무관한 개인 운영 사이트입니다.</span>
     <button type="button" data-doc="terms">이용약관</button>
     <button type="button" data-doc="privacy">개인정보 처리방침</button>
   </div>
@@ -2375,6 +2495,51 @@
   </div>
 </div>
 
+<!-- ================= 내 정보 · 알림 · 탈퇴 ================= -->
+<div class="backdrop" id="miBackdrop" hidden>
+  <div class="modal mi-modal" role="dialog" aria-modal="true" aria-labelledby="miTitle">
+    <div class="jv-head"><div><h2 id="miTitle">내 정보</h2><div class="jv-sub">이 사이트가 보관하고 있는 내 정보예요.</div></div><button class="btn sm" type="button" id="miClose">닫기</button></div>
+    <dl class="mi-list" id="miList"></dl>
+    <div class="mi-sec">
+      <b>공지·새 자료 알림</b>
+      <label class="mi-toggle"><input type="checkbox" id="miNotify"> <span>텔레그램으로 공지·새 자료 알림 받기</span></label>
+      <div class="section-note" style="margin:4px 0 0">로그인 확인 메시지는 알림 설정과 관계없이 발송돼요. 봇을 차단해도 알림이 멈춰요.</div>
+      <span class="submit-msg" id="miNotifyMsg"></span>
+    </div>
+    <div class="mi-sec">
+      <b>정정 · 열람</b>
+      <div class="section-note" style="margin:4px 0 0">닉네임·시작 금액·공개 범위는 매매일지 '설정'에서, 글·댓글은 직접 수정·삭제할 수 있어요. 텔레그램 이름은 다음 로그인 때 텔레그램 정보로 갱신돼요. 그 밖의 열람·정정 요청은 <a class="text-link" href="mailto:korea.trader.y@gmail.com">korea.trader.y@gmail.com</a>으로 보내 주세요.</div>
+    </div>
+    <div class="mi-sec mi-danger">
+      <b>회원 탈퇴</b>
+      <div class="section-note" style="margin:4px 0 8px">탈퇴하면 회원 정보, 매매일지와 사진, 정보 공유 글·댓글·하트, 신고 기록이 바로 삭제되고 되돌릴 수 없어요. 100불 챌린지 기록은 텔레그램 계정과 연결되어 있지 않아 따로 삭제를 요청해 주세요.</div>
+      <div class="adm-row"><input type="text" id="miDelConfirm" placeholder="'탈퇴'라고 입력" style="max-width:160px"><button class="btn sm danger" type="button" id="miDelete">탈퇴하고 데이터 삭제</button></div>
+      <span class="submit-msg" id="miDelMsg"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 게시물 신고 ================= -->
+<div class="backdrop" id="rpBackdrop" hidden>
+  <div class="modal rp-modal" role="dialog" aria-modal="true" aria-labelledby="rpTitle">
+    <h2 id="rpTitle" style="margin:0 0 6px">신고하기</h2>
+    <div class="section-note">운영자가 확인한 뒤 게시물을 삭제하거나 이용을 제한할 수 있어요. 신고한 사람은 공개되지 않아요.</div>
+    <div class="field"><label for="rpReason">사유</label>
+      <select id="rpReason">
+        <option value="false_return">허위 수익률·허위 수익 인증</option>
+        <option value="guarantee">수익·원금 보장 표현</option>
+        <option value="solicit">무단 투자 권유·매수 유도</option>
+        <option value="leading">유료 리딩방·오픈채팅 홍보, 광고</option>
+        <option value="copyright">저작권 침해 (리포트·기사·이미지 무단 게재)</option>
+        <option value="abuse">욕설·비방</option>
+        <option value="privacy">개인정보 노출</option>
+        <option value="etc">기타</option>
+      </select></div>
+    <div class="field"><label for="rpDetail">내용 (선택)</label><textarea id="rpDetail" maxlength="500" rows="3" placeholder="문제가 되는 부분을 적어 주세요."></textarea></div>
+    <div class="form-actions"><span class="submit-msg" id="rpMsg"></span><button type="button" class="btn" id="rpCancel">취소</button><button type="button" class="btn primary" id="rpSend">신고</button></div>
+  </div>
+</div>
+
 <!-- ================= 텔레그램 로그인 모달 ================= -->
 <div class="tgl-backdrop" id="tglBackdrop" hidden>
   <div class="tgl" role="dialog" aria-modal="true" aria-labelledby="tglTitle">
@@ -2383,7 +2548,8 @@
       <span id="tglTitle">텔레그램으로 로그인</span>
       <button class="tgl-close" id="tglClose" type="button" aria-label="닫기">×</button>
     </div>
-    <label class="tgl-consent"><input type="checkbox" id="tglConsent"> <span><a data-doc="terms">이용약관</a> · <a data-doc="privacy">개인정보 처리방침</a>에 동의해요</span></label>
+    <label class="tgl-consent"><input type="checkbox" id="tglConsent"> <span>[필수] <a data-doc="terms">이용약관</a>에 동의하고 <a data-doc="privacy">개인정보 처리방침</a>을 확인했어요</span></label>
+    <div class="tgl-notice">로그인하면 공지·새 자료 알림을 텔레그램으로 받아요. 원하지 않으면 봇에 /stop 을 보내거나 '내 정보'에서 언제든 끌 수 있어요.</div>
     <a class="tgl-open disabled" id="tglOpen" href="#" target="_blank" rel="noopener">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.9 19.05c-.23 1.02-.83 1.27-1.69.79l-4.66-3.43-2.25 2.16c-.25.25-.46.46-.94.46l.34-4.76 8.66-7.82c.38-.34-.08-.52-.58-.19L7.08 13.01 2.5 11.58c-1-.31-1.01-1 .21-1.48L20.6 3.2c.83-.31 1.56.19 1.34 1.1z"/></svg>
       텔레그램 열기
@@ -2517,6 +2683,7 @@
       <div class="reader-meta"><span id="rDate"></span><span id="rViews"></span></div>
       <div class="img-stage" id="rImgStage" style="display:none"></div>
       <div class="reader-comment" id="rComment"></div>
+      <div class="r-comp" id="rComp"></div>
       <div class="pdf-stage" id="pdfStage" style="display:none"></div>
     </div>
   </div>
@@ -2534,7 +2701,7 @@ import {
   onSnapshot, deleteField, query, where, orderBy, increment, writeBatch, limit, getCountFromServer
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 import {
-  getAuth, onAuthStateChanged, signInWithCustomToken, signOut
+  getAuth, onAuthStateChanged, signInWithCustomToken, signOut, initializeAuth, inMemoryPersistence
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
 /* =================================================================
@@ -2559,100 +2726,103 @@ const END_DATE = new Date("2026-12-31T23:59:59+09:00");
 const NOTE_TRUNC = 30;
 const MOESAN_PW = "1212";
 
-/* 100불 챌린지 참여자 명단 + 코드 (기존 코드 그대로) */
+/* 100불 챌린지 참여자 명단 (코드는 서버에서만 확인 — 페이지 소스에 넣지 않음) */
 const PARTICIPANTS = [
-  {id:"p01",name:"김민식",order:1,code:"3913"},
-  {id:"p02",name:"펭구르르르",order:2,code:"7971"},
-  {id:"p03",name:"박아현",order:3,code:"5131"},
-  {id:"p04",name:"테스트",order:4,code:"1973"},
-  {id:"p05",name:"jinigi",order:5,code:"1168"},
-  {id:"p06",name:"Djdj",order:6,code:"1270"},
-  {id:"p07",name:"타일러1",order:7,code:"8111"},
-  {id:"p08",name:"홍시",order:8,code:"6626"},
-  {id:"p09",name:"Dream",order:9,code:"5920"},
-  {id:"p10",name:"asurabalbalta",order:10,code:"1750"},
-  {id:"p11",name:"SURL",order:11,code:"5095"},
-  {id:"p12",name:"강남중",order:12,code:"1159"},
-  {id:"p13",name:"김윤아",order:13,code:"3031"},
-  {id:"p14",name:"LEE JH",order:14,code:"7628"},
-  {id:"p15",name:"Rface",order:15,code:"4792"},
-  {id:"p16",name:"다우존슨",order:16,code:"4162"},
-  {id:"p17",name:"BonghwanHwang황봉환",order:17,code:"0115"},
-  {id:"p18",name:"장준혁",order:18,code:"2184"},
-  {id:"p19",name:"lynn",order:19,code:"5754"},
-  {id:"p20",name:"KJ",order:20,code:"8821"},
-  {id:"p21",name:"jhoon0329",order:21,code:"3215"},
-  {id:"p22",name:"ddtel99",order:22,code:"0200"},
-  {id:"p23",name:"보리나무 doberima",order:23,code:"8265"},
-  {id:"p24",name:"hohohoho",order:24,code:"2334"},
-  {id:"p25",name:"dongrami92",order:25,code:"8531"},
-  {id:"p26",name:"enfl5643",order:26,code:"1147"},
-  {id:"p27",name:"Yeon Jewan",order:27,code:"4626"},
-  {id:"p28",name:"chae bae",order:28,code:"3351"},
-  {id:"p29",name:"윤",order:29,code:"7007"},
-  {id:"p30",name:"파그락파그락",order:30,code:"1843"},
-  {id:"p31",name:"박가을",order:31,code:"6945"},
-  {id:"p32",name:"Hi",order:32,code:"1931"},
-  {id:"p33",name:"이이이",order:33,code:"0898"},
-  {id:"p34",name:"fuwoq",order:34,code:"0582"},
-  {id:"p35",name:"안창우",order:35,code:"6631"},
-  {id:"p36",name:"김수종",order:36,code:"0609"},
-  {id:"p37",name:"배리그",order:37,code:"2092"},
-  {id:"p38",name:"Lex",order:38,code:"4243"},
-  {id:"p39",name:"세연김",order:39,code:"9925"},
-  {id:"p40",name:"Ap Slide",order:40,code:"5185"},
-  {id:"p41",name:"fightingant1",order:41,code:"0468"},
-  {id:"p42",name:"감전남",order:42,code:"3007"},
-  {id:"p43",name:"kwkim",order:43,code:"8081"},
-  {id:"p44",name:"채채♡",order:44,code:"2260"},
-  {id:"p45",name:"민규 킴",order:45,code:"9609"},
-  {id:"p46",name:"방랑시영",order:46,code:"2153"},
-  {id:"p47",name:"전성민",order:47,code:"2129"},
-  {id:"p48",name:"Jakeu",order:48,code:"1729"},
-  {id:"p49",name:"보송",order:49,code:"3526"},
-  {id:"p50",name:"HZ",order:50,code:"0537"},
-  {id:"p51",name:"Ss송",order:51,code:"0733"},
-  {id:"p52",name:"종만 육",order:52,code:"4591"},
-  {id:"p53",name:"효",order:53,code:"0523"},
-  {id:"p54",name:"강은호",order:54,code:"3506"},
-  {id:"p55",name:"유연성",order:55,code:"1550"},
-  {id:"p56",name:"monkey money",order:56,code:"7281"},
-  {id:"p57",name:"홀스킹",order:57,code:"5764"},
-  {id:"p58",name:"김 체리시",order:58,code:"3207"},
-  {id:"p59",name:"크리스탈",order:59,code:"5496"},
-  {id:"p60",name:"지니",order:60,code:"8381"},
-  {id:"p61",name:"꿀붓",order:61,code:"0522"},
-  {id:"p62",name:"Shin Minkyung",order:62,code:"7580"},
-  {id:"p63",name:"ko kyoungbo",order:63,code:"0476"},
-  {id:"p64",name:"Cotam25",order:64,code:"4259"},
-  {id:"p65",name:"홍빵",order:65,code:"6591"},
-  {id:"p66",name:"강한",order:66,code:"9437"},
-  {id:"p67",name:"탕 수육",order:67,code:"8643"},
-  {id:"p68",name:"YJ",order:68,code:"1600"},
-  {id:"p69",name:"gfazs",order:69,code:"0945"},
-  {id:"p70",name:"STOCK PICK | 고재트",order:70,code:"5577",host:true},
-  {id:"p71",name:"소리소리",order:71,code:"1824"},
-  {id:"p72",name:"승훈한",order:72,code:"0409"},
-  {id:"p73",name:"N Dong",order:73,code:"4506"},
-  {id:"p74",name:"박종철",order:74,code:"4012"},
-  {id:"p75",name:"치킨똥",order:75,code:"3657"},
-  {id:"p76",name:"Choi JS",order:76,code:"2286"},
-  {id:"p77",name:"sysgood9",order:77,code:"1679"},
-  {id:"p78",name:"신혜선",order:78,code:"8935"},
-  {id:"p79",name:"vvliep",order:79,code:"1424"},
-  {id:"p80",name:"역전쓰리런",order:80,code:"9674"},
-  {id:"p81",name:"lsh744",order:81,code:"6912"},
-  {id:"p82",name:"빡찬",order:82,code:"0520"},
-  {id:"p83",name:"럭스",order:83,code:"0488"},
-  {id:"p84",name:"김기현",order:84,code:"1535"},
-  {id:"p85",name:"bom",order:85,code:"3582"}
+  {id:"p01",name:"김민식",order:1},
+  {id:"p02",name:"펭구르르르",order:2},
+  {id:"p03",name:"박아현",order:3},
+  {id:"p04",name:"테스트",order:4},
+  {id:"p05",name:"jinigi",order:5},
+  {id:"p06",name:"Djdj",order:6},
+  {id:"p07",name:"타일러1",order:7},
+  {id:"p08",name:"홍시",order:8},
+  {id:"p09",name:"Dream",order:9},
+  {id:"p10",name:"asurabalbalta",order:10},
+  {id:"p11",name:"SURL",order:11},
+  {id:"p12",name:"강남중",order:12},
+  {id:"p13",name:"김윤아",order:13},
+  {id:"p14",name:"LEE JH",order:14},
+  {id:"p15",name:"Rface",order:15},
+  {id:"p16",name:"다우존슨",order:16},
+  {id:"p17",name:"BonghwanHwang황봉환",order:17},
+  {id:"p18",name:"장준혁",order:18},
+  {id:"p19",name:"lynn",order:19},
+  {id:"p20",name:"KJ",order:20},
+  {id:"p21",name:"jhoon0329",order:21},
+  {id:"p22",name:"ddtel99",order:22},
+  {id:"p23",name:"보리나무 doberima",order:23},
+  {id:"p24",name:"hohohoho",order:24},
+  {id:"p25",name:"dongrami92",order:25},
+  {id:"p26",name:"enfl5643",order:26},
+  {id:"p27",name:"Yeon Jewan",order:27},
+  {id:"p28",name:"chae bae",order:28},
+  {id:"p29",name:"윤",order:29},
+  {id:"p30",name:"파그락파그락",order:30},
+  {id:"p31",name:"박가을",order:31},
+  {id:"p32",name:"Hi",order:32},
+  {id:"p33",name:"이이이",order:33},
+  {id:"p34",name:"fuwoq",order:34},
+  {id:"p35",name:"안창우",order:35},
+  {id:"p36",name:"김수종",order:36},
+  {id:"p37",name:"배리그",order:37},
+  {id:"p38",name:"Lex",order:38},
+  {id:"p39",name:"세연김",order:39},
+  {id:"p40",name:"Ap Slide",order:40},
+  {id:"p41",name:"fightingant1",order:41},
+  {id:"p42",name:"감전남",order:42},
+  {id:"p43",name:"kwkim",order:43},
+  {id:"p44",name:"채채♡",order:44},
+  {id:"p45",name:"민규 킴",order:45},
+  {id:"p46",name:"방랑시영",order:46},
+  {id:"p47",name:"전성민",order:47},
+  {id:"p48",name:"Jakeu",order:48},
+  {id:"p49",name:"보송",order:49},
+  {id:"p50",name:"HZ",order:50},
+  {id:"p51",name:"Ss송",order:51},
+  {id:"p52",name:"종만 육",order:52},
+  {id:"p53",name:"효",order:53},
+  {id:"p54",name:"강은호",order:54},
+  {id:"p55",name:"유연성",order:55},
+  {id:"p56",name:"monkey money",order:56},
+  {id:"p57",name:"홀스킹",order:57},
+  {id:"p58",name:"김 체리시",order:58},
+  {id:"p59",name:"크리스탈",order:59},
+  {id:"p60",name:"지니",order:60},
+  {id:"p61",name:"꿀붓",order:61},
+  {id:"p62",name:"Shin Minkyung",order:62},
+  {id:"p63",name:"ko kyoungbo",order:63},
+  {id:"p64",name:"Cotam25",order:64},
+  {id:"p65",name:"홍빵",order:65},
+  {id:"p66",name:"강한",order:66},
+  {id:"p67",name:"탕 수육",order:67},
+  {id:"p68",name:"YJ",order:68},
+  {id:"p69",name:"gfazs",order:69},
+  {id:"p70",name:"STOCK PICK | 고재트",order:70,host:true},
+  {id:"p71",name:"소리소리",order:71},
+  {id:"p72",name:"승훈한",order:72},
+  {id:"p73",name:"N Dong",order:73},
+  {id:"p74",name:"박종철",order:74},
+  {id:"p75",name:"치킨똥",order:75},
+  {id:"p76",name:"Choi JS",order:76},
+  {id:"p77",name:"sysgood9",order:77},
+  {id:"p78",name:"신혜선",order:78},
+  {id:"p79",name:"vvliep",order:79},
+  {id:"p80",name:"역전쓰리런",order:80},
+  {id:"p81",name:"lsh744",order:81},
+  {id:"p82",name:"빡찬",order:82},
+  {id:"p83",name:"럭스",order:83},
+  {id:"p84",name:"김기현",order:84},
+  {id:"p85",name:"bom",order:85}
 ];
-const ADMIN_CODE_DEFAULT = "9002";
 const LOGO_DATA_URI = "data:image/png;base64,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";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+/* 100불 챌린지 전용 로그인 (텔레그램 로그인과 별개, 새로고침하면 해제) */
+const chApp = initializeApp(firebaseConfig, 'challenge');
+const chDb = getFirestore(chApp);
+const chAuth = initializeAuth(chApp, { persistence: inMemoryPersistence });
 const SITE_URL = location.origin + location.pathname;
 const WORKER_READY = !!WORKER_URL && !/YOUR-WORKER/.test(WORKER_URL);
 
@@ -2795,7 +2965,6 @@ let isAdmin = false;
 let me = null;              // users/{uid} 문서
 let participantsCache = PARTICIPANTS;
 let codeOverrides = {};          // 관리자가 바꾼 참여자 코드 (codes 컬렉션)
-let adminCodeCurrent = ADMIN_CODE_DEFAULT;
 let chAdmin = false;             // 챌린지 관리자 모드 (관리자 코드)
 let chUnlocked = null;           // 코드로 들어간 참여자 id
 let tradesCache = [];
@@ -3193,7 +3362,17 @@ function hostBadge(isHost){ return isHost ? ' <span class="host-badge">방장</s
 function joinedBadge(joinedAt){ return joinedAt ? ` <span class="joined-badge" title="참여일: ${escapeAttr(joinedAt)}">참여중</span>` : ''; }
 function rankMedal(rank){ return rank ? `<span class="rank-chip r${rank}" title="${rank}위">${rank}</span>` : ''; }
 function canEditParticipant(pid){ return chAdmin || (pid && chUnlocked === pid); }
-function effectiveCode(p){ return codeOverrides[p.id] || p.code; }
+function effectiveCode(p){ return codeOverrides[p.id] || ''; }
+
+/* 수익금 입력 검증: 잔액이 음수가 되거나 비정상적으로 큰 값 방지 */
+function validateChallengePnl(pid, pnl, excludeId){
+  if (!isFinite(pnl)) return '수익금을 숫자로 입력하세요.';
+  const others = tradesCache.filter(t => t.participantId === pid && t.id !== excludeId).reduce((s,t) => s + Number(t.pnl || 0), 0);
+  const before = START_CAPITAL + others;
+  if (before + pnl < 0) return `이 기록을 반영하면 잔액이 $${(before + pnl).toFixed(2)}로 0 아래가 돼요. 손실은 현재 잔액($${before.toFixed(2)})을 넘을 수 없어요.`;
+  if (pnl > Math.max(before, START_CAPITAL) * 5 && !window.confirm(`수익금 $${pnl.toLocaleString()}은(는) 현재 잔액의 5배가 넘는 큰 값이에요. 실제 기록이 맞나요?`)) return '저장을 취소했어요.';
+  return '';
+}
 
 function tradeRow(t){
   const cls = pctClass(Number(t.pnl||0));
@@ -3391,7 +3570,7 @@ function wireMainEvents(){
   });
   $$('#plist [data-del-trade]').forEach(btn => btn.addEventListener('click', async () => {
     if (!confirmClick(btn)) return;
-    try{ await deleteDoc(doc(db, 'trades', btn.getAttribute('data-del-trade'))); } catch(err){ toast('삭제 실패: ' + err.message); }
+    try{ await deleteDoc(doc(chDb, 'trades', btn.getAttribute('data-del-trade'))); } catch(err){ toast('삭제 실패: ' + err.message); }
   }));
   $$('#plist [data-save-code]').forEach(btn => btn.addEventListener('click', async () => {
     const pid = btn.getAttribute('data-save-code');
@@ -3399,7 +3578,7 @@ function wireMainEvents(){
     const msg = document.querySelector(`[data-code-msg="${pid}"]`);
     const val = (input.value || '').replace(/\D/g,'').slice(0,4);
     if (val.length !== 4){ msg.textContent = '4자리 숫자'; msg.className = 'submit-msg err'; return; }
-    try{ await setDoc(doc(db, 'codes', pid), { code: val }, { merge: true }); msg.textContent = '저장됨'; msg.className = 'submit-msg ok'; }
+    try{ await setDoc(doc(chDb, 'codes', pid), { code: val }, { merge: true }); msg.textContent = '저장됨'; msg.className = 'submit-msg ok'; }
     catch(err){ msg.textContent = '실패: ' + err.message; msg.className = 'submit-msg err'; }
   }));
   $$('#plist [data-view-personal]').forEach(btn => btn.addEventListener('click', () => openPersonalScreen(btn.getAttribute('data-view-personal'))));
@@ -3418,6 +3597,8 @@ function wireMainEvents(){
       const sel = form.querySelector('.f-ticker-select').value;
       const ticker = sel === 'ALT' ? form.querySelector('.f-ticker-alt').value.trim() : sel;
       if (!ticker){ msg.className = 'submit-msg err'; msg.textContent = '종목명을 입력하세요.'; return; }
+      const vErr = validateChallengePnl(form.getAttribute('data-pid'), Number(form.querySelector('.f-pnl').value || 0));
+      if (vErr){ msg.className = 'submit-msg err'; msg.textContent = vErr; return; }
       msg.className = 'submit-msg'; msg.textContent = '저장 중…';
       const payload = {
         participantId: form.getAttribute('data-pid'), name: form.getAttribute('data-name'),
@@ -3429,7 +3610,7 @@ function wireMainEvents(){
       try{
         const photo = await compressImageFile(form.querySelector('.f-photo').files[0], 1000, 0.7);
         if (photo) payload.photo = photo;
-        await addDoc(collection(db, 'trades'), payload);
+        await addDoc(collection(chDb, 'trades'), payload);
         msg.className = 'submit-msg ok'; msg.textContent = '저장됐습니다.';
       } catch(err){ msg.className = 'submit-msg err'; msg.textContent = '저장 실패: ' + err.message; }
     });
@@ -3460,21 +3641,43 @@ codeBackdrop.addEventListener('click', e => { if (e.target === codeBackdrop) clo
 pinInput.addEventListener('input', () => { pinInput.value = pinInput.value.replace(/\D/g,'').slice(0,4); });
 pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') attemptUnlock(); });
 $('#btnUnlock').addEventListener('click', attemptUnlock);
-function attemptUnlock(){
-  if (!pendingUnlock) return;
+/* 코드는 서버(Worker)에서 확인 → 챌린지 전용 토큰으로 로그인. 5회 틀리면 10분 잠금 */
+let unlocking = false;
+async function attemptUnlock(){
+  if (!pendingUnlock || unlocking) return;
   const code = pinInput.value.trim();
   if (code.length !== 4){ pinError.textContent = '4자리 숫자를 입력하세요.'; return; }
-  if (pendingUnlock.type === 'admin'){
-    if (code !== adminCodeCurrent){ pinError.textContent = '코드가 올바르지 않습니다.'; return; }
-    closeCodeModal(); setChAdmin(true);
-  } else {
-    const p = participantsCache.find(x => x.id === pendingUnlock.id);
-    if (!p || effectiveCode(p) !== code){ pinError.textContent = '코드가 올바르지 않습니다.'; return; }
-    closeCodeModal(); chUnlocked = p.id; renderAll(); openPersonalScreen(p.id);
-  }
+  const target = pendingUnlock;
+  const p = target.type === 'admin' ? null : participantsCache.find(x => x.id === target.id);
+  if (target.type !== 'admin' && !p){ pinError.textContent = '참여자를 찾을 수 없어요.'; return; }
+  unlocking = true; pinError.textContent = '확인 중…';
+  try{
+    const r = await fetch(WORKER_URL + '/ch/unlock', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(target.type === 'admin' ? { admin: true, code } : { pid: p.id, code }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.customToken){ pinError.textContent = d.message || '코드가 올바르지 않습니다.'; return; }
+    await signInWithCustomToken(chAuth, d.customToken);
+    pinError.textContent = '';
+    closeCodeModal();
+    if (target.type === 'admin') setChAdmin(true);
+    else { chUnlocked = p.id; renderAll(); openPersonalScreen(p.id); }
+  } catch(err){ pinError.textContent = '확인하지 못했어요. 잠시 후 다시 시도하세요.'; }
+  finally { unlocking = false; }
 }
+let codesUnsub = null;
 function setChAdmin(on){
   chAdmin = on;
+  if (on){
+    chUnlocked = null;
+    if (!codesUnsub) codesUnsub = onSnapshot(collection(chDb, 'codes'), snap => {
+      const map = {}; snap.docs.forEach(d => { map[d.id] = d.data().code; });
+      codeOverrides = map; if (chAdmin) renderAll();
+    }, err => console.warn('codes', err));
+  } else {
+    if (codesUnsub){ codesUnsub(); codesUnsub = null; }
+    codeOverrides = {};
+    signOut(chAuth).catch(() => {});
+  }
   document.body.classList.toggle('ch-admin', on);
   $('#btnChAdmin').textContent = on ? '관리자 모드 종료' : '관리자 모드';
   $('#footMode').textContent = on ? '관리자 모드' : '공개 열람 모드';
@@ -3487,13 +3690,13 @@ $('#btnSaveAdminCode').addEventListener('click', async () => {
   const val = (input.value || '').replace(/\D/g,'').slice(0,4);
   if (val.length !== 4){ msg.textContent = '4자리 숫자를 입력하세요.'; msg.className = 'submit-msg err'; return; }
   msg.textContent = '저장 중…'; msg.className = 'submit-msg';
-  try{ await setDoc(doc(db, 'config', 'admin'), { code: val }, { merge: true }); msg.textContent = '변경됨 (다음 로그인부터 새 코드 사용)'; msg.className = 'submit-msg ok'; input.value = ''; }
+  try{ await setDoc(doc(chDb, 'config', 'admin'), { code: val }, { merge: true }); msg.textContent = '변경됨 (다음 로그인부터 새 코드 사용)'; msg.className = 'submit-msg ok'; input.value = ''; }
   catch(err){ msg.textContent = '실패: ' + err.message; msg.className = 'submit-msg err'; }
 });
 $('#btnSaveAnnounce').addEventListener('click', async () => {
   const msg = $('#announceMsg'); msg.textContent = '저장 중…'; msg.className = 'submit-msg';
   const text = $('#announceInput').value.trim();
-  try{ await setDoc(doc(db, 'config', 'announcement'), { text, at: text ? Date.now() : null }, { merge: true }); msg.textContent = '저장됨'; msg.className = 'submit-msg ok'; }
+  try{ await setDoc(doc(chDb, 'config', 'announcement'), { text, at: text ? Date.now() : null }, { merge: true }); msg.textContent = '저장됨'; msg.className = 'submit-msg ok'; }
   catch(err){ msg.textContent = '실패: ' + err.message; msg.className = 'submit-msg err'; }
 });
 
@@ -3550,7 +3753,7 @@ function renderJoinStatus(){
   row.innerHTML = `<button type="button" class="btn-join" id="btnJoinChallenge">챌린지 참여하기</button>`;
   $('#btnJoinChallenge').addEventListener('click', async (e) => {
     e.currentTarget.disabled = true;
-    try{ await setDoc(doc(db, 'joins', currentParticipant.id), { joinedAt: todayStr() }); }
+    try{ await setDoc(doc(chDb, 'joins', currentParticipant.id), { joinedAt: todayStr() }); }
     catch(err){ toast('실패: ' + err.message); e.currentTarget.disabled = false; }
   });
 }
@@ -3676,7 +3879,7 @@ document.addEventListener('click', async (e) => {
     if (!confirmClick(del)) return;
     const [kind, id] = del.getAttribute('data-del-row').split(':');
     try{
-      if (kind === 'c') await deleteDoc(doc(db, 'trades', id));
+      if (kind === 'c') await deleteDoc(doc(chDb, 'trades', id));
       else { await deleteDoc(doc(db, 'jtrades', id)); deleteDoc(doc(db, 'jphotos', id)).catch(() => {}); }
     } catch(err){ toast('삭제 실패: ' + err.message); }
   }
@@ -3691,6 +3894,9 @@ function wireEditForm(row, kind, t){
     const msg = row.querySelector('.ef-msg');
     const ticker = sel ? (sel.value === 'ALT' ? row.querySelector('.ef-ticker-alt').value.trim() : sel.value) : row.querySelector('.ef-ticker').value.trim();
     if (!ticker){ msg.className = 'submit-msg ef-msg err'; msg.textContent = '종목명을 입력하세요.'; return; }
+    const pnlVal = Number(row.querySelector('.ef-pnl').value || 0);
+    const vErr = kind === 'c' ? validateChallengePnl(t.participantId, pnlVal, t.id) : validateJournalPnl(pnlVal, t.id);
+    if (vErr){ msg.className = 'submit-msg ef-msg err'; msg.textContent = vErr; return; }
     msg.className = 'submit-msg ef-msg'; msg.textContent = '저장 중…';
     const payload = {
       date: row.querySelector('.ef-date').value, ticker,
@@ -3703,7 +3909,7 @@ function wireEditForm(row, kind, t){
       if (kind === 'c'){
         if (file) payload.photo = await compressImageFile(file, 1000, 0.7);
         else if (remove && remove.checked) payload.photo = deleteField();
-        await updateDoc(doc(db, 'trades', t.id), payload);
+        await updateDoc(doc(chDb, 'trades', t.id), payload);
       } else {
         payload.market = row.querySelector('.ef-market').value;
         if (file){ await setDoc(doc(db, 'jphotos', t.id), { uid: authUser.uid, data: await compressImageFile(file, 1000, 0.7) }); payload.hasPhoto = true; }
@@ -3729,6 +3935,8 @@ $('#pTradeForm').addEventListener('submit', async (e) => {
   const sel = $('#pfTickerSelect').value;
   const ticker = sel === 'ALT' ? $('#pfTickerAlt').value.trim() : sel;
   if (!ticker){ msg.className = 'submit-msg err'; msg.textContent = sel === 'ALT' ? '알트코인 종목명을 입력하세요.' : '종목명을 선택하세요.'; return; }
+  const vErr = validateChallengePnl(currentParticipant.id, Number($('#pfPnl').value || 0));
+  if (vErr){ msg.className = 'submit-msg err'; msg.textContent = vErr; return; }
   msg.className = 'submit-msg'; msg.textContent = '저장 중…';
   const payload = {
     participantId: currentParticipant.id, name: currentParticipant.name,
@@ -3738,7 +3946,7 @@ $('#pTradeForm').addEventListener('submit', async (e) => {
   try{
     const photo = await compressImageFile($('#pfPhoto').files[0], 1000, 0.7);
     if (photo) payload.photo = photo;
-    await addDoc(collection(db, 'trades'), payload);
+    await addDoc(collection(chDb, 'trades'), payload);
     msg.className = 'submit-msg ok'; msg.textContent = '저장됐습니다.';
     e.target.reset(); $('#pfDate').value = todayStr(); $('#pfTickerAltWrap').hidden = true;
     $('#pfPhotoPreview').hidden = true; $('#pfPhotoPreview').src = '';
@@ -3746,13 +3954,6 @@ $('#pTradeForm').addEventListener('submit', async (e) => {
 });
 
 /* ---------- 데이터 구독 (공개) ---------- */
-onSnapshot(collection(db, 'codes'), snap => {
-  const map = {}; snap.docs.forEach(d => { map[d.id] = d.data().code; });
-  codeOverrides = map; if (chAdmin) renderAll();
-}, err => console.warn('codes', err));
-onSnapshot(doc(db, 'config', 'admin'), snap => {
-  adminCodeCurrent = (snap.exists() && snap.data().code) ? snap.data().code : ADMIN_CODE_DEFAULT;
-}, err => console.warn('admin', err));
 onSnapshot(collection(db, 'trades'), snap => {
   tradesCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
   renderAll(); updateSendCount();
@@ -4206,6 +4407,9 @@ function openViewer(p){
   $('#vBody').textContent = p.content || "";
   $('#vBodyWrap').style.display = p.content ? "block" : "none";
   const foot = $('#vFoot'); foot.innerHTML = "";
+  let comp = $('#vComp');
+  if (!comp){ comp = document.createElement('div'); comp.id = 'vComp'; comp.className = 'r-comp'; foot.parentNode.insertBefore(comp, foot); }
+  comp.innerHTML = compLine(p);
   if (p.videoUrl) foot.innerHTML += `<a class="pdf-chip" style="color:var(--up)" href="${esc(p.videoUrl)}" target="_blank" rel="noopener">▶ 녹화본 시청</a>`;
   if (p.pdfId) foot.innerHTML += pdfChipHtml(p, esc(p.pdfName || "PDF") + " 내려받기");
   foot.style.display = (p.pdfId || p.videoUrl) ? "flex" : "none";
@@ -4258,12 +4462,21 @@ async function renderImageStage(stageEl, p){
 }
 
 let readerToken = 0;
+/* 투자정보 고지: 기준일 · 근거 · 작성자 보유 여부 · 교육 목적 */
+const HOLDING_LABEL = { none: '작성자: 언급 종목 보유 안 함', holding: '작성자: 언급 종목 보유 중 (이해관계 있음)', na: '특정 종목 언급 없음' };
+function compLine(p){
+  const parts = [`기준일 ${escapeHtml(p.asOf || fmtDate(p.createdAt))}`];
+  if (p.source) parts.push(`근거·출처: ${escapeHtml(p.source)}`);
+  if (p.holding && HOLDING_LABEL[p.holding]) parts.push(HOLDING_LABEL[p.holding]);
+  return `<div>${parts.join(' · ')}</div><div>일반적인 정보 제공·교육 목적의 자료이며 개인별 투자자문이나 매수·매도 추천이 아니에요. 투자에는 원금 손실 위험이 있고, 판단과 결과의 책임은 투자자 본인에게 있어요.</div>`;
+}
 async function openReader(p){
   const token = ++readerToken;
   $('#rTitle').textContent = p.title || fmtMD(p.createdAt) + " 리포트";
   $('#rDate').textContent = fmtDate(p.createdAt);
   $('#rComment').textContent = p.content || "";
   $('#rComment').style.display = p.content ? "block" : "none";
+  $('#rComp').innerHTML = compLine(p);
   renderImageStage($('#rImgStage'), p);
   const stage = $('#pdfStage'); stage.innerHTML = "";
   const dlBar = $('#readerDl'); dlBar.innerHTML = "";
@@ -4378,6 +4591,7 @@ function startEdit(id){
   $('#wAi').value = p.category === 'live' ? (p.content || '') : '';
   $('#wBody').value = p.category === 'live' ? '' : (p.content || '');
   $('#wTags').value = (p.tags || []).join(', '); syncTagQuick();
+  $('#wAsOf').value = p.asOf || ''; $('#wSource').value = p.source || ''; $('#wHolding').value = p.holding || '';
   $('#wPdf').value = '';
   if (p.pdfId){ $('#wPdfName').textContent = '기존 첨부: ' + (p.pdfName || 'PDF'); $('#wPdfRemove').style.display = 'inline'; } else { $('#wPdfName').textContent = ''; $('#wPdfRemove').style.display = 'none'; }
   $('#wImg').value = '';
@@ -4391,7 +4605,7 @@ function startEdit(id){
 }
 function cancelEdit(){
   editingId = null; editingPost = null; keepPdf = true; keepImg = true;
-  ['wTitle','wDur','wVideo','wOneline','wChapters','wAi','wBody','wTags'].forEach(i => { $('#' + i).value = ''; });
+  ['wTitle','wDur','wVideo','wOneline','wChapters','wAi','wBody','wTags','wAsOf','wSource','wHolding'].forEach(i => { $('#' + i).value = ''; });
   syncTagQuick();
   $('#wPdf').value = ''; $('#wPdfName').textContent = ''; $('#wPdfRemove').style.display = 'none';
   $('#wImg').value = ''; $('#wImgName').textContent = ''; $('#wImgRemove').style.display = 'none';
@@ -4406,6 +4620,8 @@ $('#btnPublish').addEventListener('click', async () => {
   const file = isLive ? null : $('#wPdf').files[0];
   const imgFiles = [...$('#wImg').files];
   const tags = $('#wTags').value.split(',').map(s => s.trim()).filter(Boolean);
+  const comp = { asOf: $('#wAsOf').value || null, source: $('#wSource').value.trim() || null, holding: $('#wHolding').value || null };
+  if (!comp.holding){ toast('작성자 보유 여부를 선택하세요. (투자정보 고지용)'); return; }
   if (isLive){ if (!content && !$('#wOneline').value.trim()){ toast('한 줄 요약 또는 AI 핵심 요약을 입력하세요.'); return; } }
   else if (!title || !content){ toast('제목과 내용을 입력하세요.'); return; }
   if (file && file.size > MAX_PDF_MB * 1048576){ toast(`PDF는 ${MAX_PDF_MB}MB 이하만 올릴 수 있어요.`); return; }
@@ -4436,7 +4652,7 @@ $('#btnPublish').addEventListener('click', async () => {
       target.pdfSizeMB = +(file.size / 1048576).toFixed(1);
     };
     if (editingId){
-      const data = { title, content, category: writeCat, tags, ...liveData };
+      const data = { title, content, category: writeCat, tags, ...liveData, ...comp };
       if (file){ if (editingPost.pdfId) await store.delFile(editingPost.pdfId, editingPost.pdfChunks || 1); await uploadPdf(data); }
       else if ((!keepPdf || isLive) && editingPost.pdfId){
         await store.delFile(editingPost.pdfId, editingPost.pdfChunks || 1);
@@ -4454,7 +4670,7 @@ $('#btnPublish').addEventListener('click', async () => {
       toast('수정을 저장했어요.');
     } else {
       const post = { id: uid(), title, content, category: writeCat, tags, createdAt: Date.now(), views: 0,
-        pdfId: null, pdfName: null, pdfChunks: 0, pdfThumb: null, pdfPages: 0, pdfSizeMB: 0, searchText: null, images: [], ...liveData };
+        pdfId: null, pdfName: null, pdfChunks: 0, pdfThumb: null, pdfPages: 0, pdfSizeMB: 0, searchText: null, images: [], ...liveData, ...comp };
       if (file) await uploadPdf(post);
       if (imgFiles.length) post.images = await uploadImages();
       await store.addPost(post);
@@ -4490,9 +4706,19 @@ function journalStats(j){
   return { pnl, count, wins, pct: pnl / cap * 100, winRate: count ? wins / count * 100 : 0 };
 }
 function rankList(){
-  return journalsCache.filter(j => j.public !== false && Number(j.count || 0) > 0)
+  return journalsCache.filter(j => j.public === true && !j.rankHidden && Number(j.count || 0) > 0)
     .map(j => ({ ...j, _s: journalStats(j) }))
     .sort((a,b) => (b._s.pct - a._s.pct) || (b._s.count - a._s.count));
+}
+/* 매매일지 수익금 검증: 잔액 음수·비정상적으로 큰 값 방지 */
+function validateJournalPnl(pnl, excludeId){
+  const mj = myJournal(); if (!mj) return '';
+  if (!isFinite(pnl)) return '수익금을 숫자로 입력하세요.';
+  const cap = Number(mj.startCapital) || 0, cur = mj.currency || 'KRW';
+  const before = cap + myJTrades.filter(t => t.id !== excludeId).reduce((s,t) => s + Number(t.pnl || 0), 0);
+  if (before + pnl < 0) return `이 기록을 반영하면 잔액이 ${fmtMoney(before + pnl, cur)}로 0 아래가 돼요. 손실은 현재 잔액(${fmtMoney(before, cur)})을 넘을 수 없어요.`;
+  if (pnl > Math.max(before, cap) * 5 && !window.confirm(`수익금 ${fmtMoney(pnl, cur)}은(는) 현재 잔액의 5배가 넘는 큰 값이에요. 실제 기록이 맞나요?`)) return '저장을 취소했어요.';
+  return '';
 }
 function myJTradesSorted(){ return myJTrades.slice().sort((a,b) => (b.date||'').localeCompare(a.date||'') || (b.createdAt||0) - (a.createdAt||0)); }
 
@@ -4545,9 +4771,9 @@ function renderJournal(){
       $('#jsNick').value = mj ? mj.nickname : (me ? myName() : '');
       $('#jsCur').value = mj ? (mj.currency || 'KRW') : 'KRW';
       $('#jsCap').value = mj ? mj.startCapital : '';
-      const rv = mj && mj.public === false ? 'off' : 'on';
+      const rv = mj && mj.public === true ? 'on' : 'off';
       $$('input[name=jsRank]').forEach(r => { r.checked = r.value === rv; });
-      const ov = mj && mj.openTrades === false ? 'off' : 'on';
+      const ov = mj && mj.openTrades === true ? 'on' : 'off';
       $$('input[name=jsOpen]').forEach(r => { r.checked = r.value === ov; });
       if (mj || me) $('#jsNick').dataset.filled = '1';
     }
@@ -4569,7 +4795,7 @@ $('#jSetupForm').addEventListener('submit', async (e) => {
   if (taken){ msg.className = 'submit-msg err'; msg.textContent = '이미 쓰고 있는 닉네임이에요.'; return; }
   msg.className = 'submit-msg'; msg.textContent = '저장 중…';
   const mj = myJournal();
-  const data = { nickname, currency: $('#jsCur').value, startCapital, public: (document.querySelector('input[name=jsRank]:checked') || {}).value !== 'off', openTrades: (document.querySelector('input[name=jsOpen]:checked') || {}).value !== 'off', updatedAt: Date.now() };
+  const data = { nickname, currency: $('#jsCur').value, startCapital, public: (document.querySelector('input[name=jsRank]:checked') || {}).value === 'on', openTrades: (document.querySelector('input[name=jsOpen]:checked') || {}).value === 'on', updatedAt: Date.now() };
   if (!mj) Object.assign(data, { createdAt: Date.now(), totalPnl: 0, count: 0, wins: 0, lastTradeDate: '' });
   try{
     await setDoc(doc(db, 'journals', authUser.uid), data, { merge: true });
@@ -4590,9 +4816,9 @@ function renderJMine(){
   $('#jCapLine').textContent = `시작 ${fmtMoney(mj.startCapital, cur)} → 현재 ${fmtMoney(Number(mj.startCapital) + s.pnl, cur)}`;
   $('#jCount').textContent = s.count; $('#jWinRate').textContent = s.winRate.toFixed(0) + '%';
   const ranked = rankList(); const r = ranked.findIndex(j => j.id === mj.id) + 1;
-  $('#jRank').textContent = mj.public === false ? '랭킹 미참여' : (r ? `${r}위 / ${ranked.length}명` : '순위 -');
+  $('#jRank').textContent = mj.public !== true ? '랭킹 미참여' : mj.rankHidden ? '랭킹 제외(관리자 검토)' : (r ? `${r}위 / ${ranked.length}명` : '순위 -');
   $$('.jCurLbl').forEach(el => { el.textContent = cur; });
-  $('#jSettingsLine').textContent = `${mj.nickname} · ${cur} · 시작 ${fmtMoney(mj.startCapital, cur)} · ${mj.public === false ? '랭킹 참여 안 함' : '랭킹 참여 중'} · 일지 ${mj.openTrades === false ? '비공개' : '공개'}` + (mj.openTrades === false && Number(mj.wants || 0) > 0 ? ` · ${mj.wants}명이 공개를 원해요` : '');
+  $('#jSettingsLine').textContent = `${mj.nickname} · ${cur} · 시작 ${fmtMoney(mj.startCapital, cur)} · ${mj.public !== true ? '랭킹 참여 안 함' : '랭킹 참여 중'} · 일지 ${mj.openTrades !== true ? '비공개' : '공개'}` + (mj.openTrades !== true && Number(mj.wants || 0) > 0 ? ` · ${mj.wants}명이 공개를 원해요` : '');
   drawCumChart($('#jChart'), $('#jChartTooltip'), $('#jChartEmpty'), dailyCum(trades), v => fmtMoney(v, cur, true));
   $('#jTabAll').hidden = jPersonalTab !== 'all'; $('#jTabDay').hidden = jPersonalTab !== 'day'; $('#jTabMonth').hidden = jPersonalTab !== 'month';
   $$('#jTabs .tab-btn').forEach(b => b.classList.toggle('active', b.dataset.jt === jPersonalTab));
@@ -4614,6 +4840,8 @@ $('#jTradeForm').addEventListener('submit', async (e) => {
   const market = $('#jfMarket').value;
   if (!market){ msg.className = 'submit-msg err'; msg.textContent = '시장을 선택하세요.'; return; }
   if (!ticker){ msg.className = 'submit-msg err'; msg.textContent = '종목명을 입력하세요.'; return; }
+  const vErr = validateJournalPnl(Number($('#jfPnl').value || 0));
+  if (vErr){ msg.className = 'submit-msg err'; msg.textContent = vErr; return; }
   msg.className = 'submit-msg'; msg.textContent = '저장 중…';
   const payload = {
     uid: authUser.uid, date: $('#jfDate').value, ticker, market,
@@ -4950,21 +5178,100 @@ $('#btnSaveGuide').addEventListener('click', async () => {
 /* ================================================================
    약관 / 개인정보, 푸터
 ================================================================ */
+const DOCS_DATE = '2026년 10월 30일';
 const DOCS = {
-  terms: { title: '이용약관', body: `<ol>
-    <li>이 사이트(고려대 재학생 트레이더)는 투자 공부 자료, 100불 챌린지, 매매일지 기능을 무료로 제공합니다.</li>
-    <li>모든 콘텐츠는 정보 제공·교육 목적이며 투자 자문이나 매수·매도 추천이 아닙니다. 투자 판단과 결과의 책임은 이용자 본인에게 있습니다.</li>
-    <li>이용자는 매매일지에 사실에 맞는 기록을 남기고, 타인을 비방하거나 투자를 유도하는 내용을 쓰지 않습니다.</li>
-    <li>자료실 콘텐츠를 운영자 동의 없이 복제·배포·재업로드할 수 없습니다.</li>
-    <li>운영 원칙을 위반하면 사전 통보 없이 이용이 제한될 수 있습니다.</li>
-    <li>서비스는 운영 사정에 따라 변경되거나 중단될 수 있습니다.</li></ol>` },
-  privacy: { title: '개인정보 처리방침', body: `<ul>
-    <li><b>수집 항목</b>: 텔레그램 숫자 ID, 이름, 사용자명(@username), 최근 로그인 시각, 직접 입력한 매매일지·닉네임</li>
-    <li><b>수집 목적</b>: 텔레그램 로그인, 매매일지·챌린지 기록 저장과 순위 표시, 공지·새 자료 알림 발송</li>
-    <li><b>보관 기간</b>: 회원 탈퇴(삭제 요청) 시까지. 요청하면 지체 없이 삭제합니다.</li>
-    <li><b>제3자 제공</b>: 하지 않습니다. 데이터는 Google Firebase에 저장되고, 메시지는 텔레그램 봇으로 발송됩니다.</li>
-    <li><b>알림 거부</b>: 텔레그램에서 봇을 차단하면 더 이상 메시지를 받지 않습니다.</li>
-    <li><b>문의·삭제 요청</b>: korea.treadr.y@gmail.com</li></ul>` }
+  terms: { title: '이용약관', body: `<div class="doc">
+    <p class="doc-date">시행일: ${DOCS_DATE}</p>
+    <h4>제1조 (목적과 운영자)</h4>
+    <p>이 약관은 '고려대 재학생 트레이더' 사이트(이하 '사이트')의 이용 조건을 정합니다. 사이트는 개인(운영자: 윤서준)이 비영리로 운영하며 고려대학교와 무관합니다.</p>
+    <h4>제2조 (제공 서비스)</h4>
+    <p>공부 자료실, 100불 챌린지, 매매일지·순위, 정보 공유 게시판, 계산기 등 도구, 텔레그램 알림을 제공합니다. 모든 기능과 자료는 무료이며, 이용료나 회원 등급에 따른 차등이 없습니다.</p>
+    <h4>제3조 (투자정보의 성격)</h4>
+    <ul>
+      <li>사이트의 모든 콘텐츠는 일반적인 정보 제공과 교육 목적이며, 개인별 맞춤 투자자문·투자일임·매수·매도 추천이 아닙니다.</li>
+      <li>운영자는 금융투자업자(투자자문업·투자일임업)나 유사투자자문업자가 아니며, 유료 리딩이나 1:1 상담을 제공하지 않습니다.</li>
+      <li>투자에는 원금 손실 위험이 있고, 과거 수익률은 미래 수익을 보장하지 않습니다. 투자 판단과 결과의 책임은 이용자 본인에게 있습니다.</li>
+      <li>자료에는 기준일과 근거, 작성자의 보유 여부를 표시합니다. 기준일 이후 시장 상황은 달라질 수 있습니다.</li>
+    </ul>
+    <h4>제4조 (챌린지·매매일지 수익률)</h4>
+    <p>100불 챌린지와 매매일지의 수익률은 이용자가 직접 입력한 매매 기록으로 계산되며, 실제 투자계좌와 연동해 검증한 값이 아닙니다. 투자 권유나 향후 수익을 보장하는 자료가 아니며, 비정상적인 기록은 운영자가 수정·삭제하거나 순위에서 제외할 수 있습니다.</p>
+    <h4>제5조 (이용자의 의무와 금지 행위)</h4>
+    <ul>
+      <li>사실과 다른 매매 기록·허위 수익 인증</li>
+      <li>수익·원금 보장 등 투자자를 오인하게 하는 표현, 특정 종목의 매수·매도를 유도하는 글</li>
+      <li>시세 조종이나 부정거래 목적의 글, 유료 리딩방·오픈채팅·광고 홍보</li>
+      <li>증권사 리포트·유료 자료·기사 원문·타인의 이미지 등 저작물의 무단 게재</li>
+      <li>타인 비방, 욕설, 개인정보 노출, 다른 이용자의 코드·계정 도용</li>
+    </ul>
+    <h4>제6조 (게시물의 관리)</h4>
+    <p>게시물의 권리와 책임은 작성자에게 있습니다. 작성자는 자기 글을 수정·삭제할 수 있고, 이용자는 문제가 있는 게시물을 신고할 수 있습니다. 운영자는 신고를 검토해 제5조에 해당하는 게시물을 삭제하거나 이용을 제한할 수 있습니다.</p>
+    <h4>제7조 (저작권)</h4>
+    <p>운영자가 만든 자료의 저작권은 운영자에게 있으며, 동의 없는 복제·재배포·재업로드를 금합니다. 외부 데이터(TradingView 위젯, 네이버 금융, CNN 지수 등)는 각 제공자의 조건에 따라 표시하며 출처를 밝힙니다.</p>
+    <h4>제8조 (후원)</h4>
+    <p>후원은 자발적이며 언제든 하지 않아도 됩니다. 후원은 투자자문·리딩의 대가가 아니고, 후원 여부에 따라 정보·알림·상담 등 혜택을 다르게 제공하지 않습니다. 후원자 이름은 본인이 공개에 동의한 경우에만 표시합니다.</p>
+    <h4>제9조 (탈퇴)</h4>
+    <p>이용자는 '내 정보'에서 언제든 탈퇴할 수 있으며, 탈퇴하면 개인정보 처리방침에 따라 정보가 삭제됩니다.</p>
+    <h4>제10조 (서비스 변경·중단과 책임)</h4>
+    <p>서비스는 운영 사정에 따라 변경되거나 중단될 수 있습니다. 운영자는 고의 또는 중대한 과실이 없는 한 무료로 제공되는 서비스의 이용이나 콘텐츠를 근거로 한 투자 결과에 대해 책임을 지지 않습니다.</p>
+    <h4>제11조 (문의)</h4>
+    <p>korea.trader.y@gmail.com</p>
+  </div>` },
+  privacy: { title: '개인정보 처리방침', body: `<div class="doc">
+    <p class="doc-date">시행일: ${DOCS_DATE}</p>
+    <p>'고려대 재학생 트레이더'(이하 '사이트')는 「개인정보 보호법」에 따라 이용자의 개인정보를 다음과 같이 처리합니다.</p>
+    <h4>1. 처리하는 개인정보와 목적</h4>
+    <table class="doc-tbl">
+      <tr><th>구분</th><th>항목</th><th>목적</th></tr>
+      <tr><td>텔레그램 로그인</td><td>텔레그램 숫자 ID, 대화(chat) ID, 이름(성·이름), 사용자명(@username), 최근 로그인 시각, 알림 수신 여부·봇 차단 여부</td><td>본인 확인과 로그인, 공지·새 자료 알림 발송, 회원 관리</td></tr>
+      <tr><td>매매일지</td><td>닉네임, 통화, 시작 금액, 매매 기록(날짜·종목·포지션·손익·메모), 첨부 사진, 랭킹 참여·공개 설정, '보고 싶어요' 기록</td><td>매매일지 저장, 수익률 계산, 본인이 고른 범위의 순위 표시</td></tr>
+      <tr><td>정보 공유</td><td>글·댓글·이미지·참고 링크, 보유 여부 표시, 하트, 신고 내용</td><td>게시판 운영, 게시물 관리와 신고 처리</td></tr>
+      <tr><td>100불 챌린지</td><td>운영자가 등록한 참가자 이름(닉네임), 참가자가 입력한 매매 기록·사진, 참여일</td><td>챌린지 기록과 순위 공개(챌린지 규칙상 전체 공개)</td></tr>
+      <tr><td>자동 처리</td><td>로그인 요청 임시 기록(최대 5분), 챌린지 코드 오입력 횟수, 서비스 제공자의 기술 로그(접속 IP 등)</td><td>로그인 처리, 무단 접근 방지, 장애 대응</td></tr>
+    </table>
+    <p>로그인 기능 제공(이용 계약의 이행)에 필요한 범위에서만 처리하며, 그 밖의 목적으로 이용하거나 광고에 쓰지 않습니다. 사이트는 사이트 자체 쿠키를 쓰지 않고, 사용 안내 확인 여부 같은 화면 설정만 이용자 기기의 브라우저 저장소에 보관합니다.</p>
+    <h4>2. 보유 기간과 파기</h4>
+    <ul>
+      <li>회원 정보·매매일지·게시물: 탈퇴할 때까지. 탈퇴하면 지체 없이 삭제합니다.</li>
+      <li>로그인 요청 기록: 로그인이 끝나거나 5분이 지나면 삭제합니다.</li>
+      <li>100불 챌린지 기록: 챌린지 종료 후 1년 이내에 삭제하며, 참가자가 요청하면 지체 없이 삭제합니다.</li>
+      <li>파기 방법: 데이터베이스에서 복구할 수 없도록 삭제합니다. 별도 백업은 두지 않습니다.</li>
+    </ul>
+    <h4>3. 제3자 제공</h4>
+    <p>이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 법령에 따른 요청이 있는 경우는 예외로 합니다.</p>
+    <h4>4. 처리위탁과 국외 이전</h4>
+    <p>서비스 운영을 위해 아래 업체의 시스템을 이용하며, 이 과정에서 개인정보가 국외로 이전될 수 있습니다(「개인정보 보호법」 제28조의8). 이전은 서비스를 이용할 때 네트워크를 통해 수시로 이루어지고, 보유 기간은 위 2번과 같습니다.</p>
+    <table class="doc-tbl">
+      <tr><th>받는 자 (국가)</th><th>이전 항목</th><th>목적</th></tr>
+      <tr><td>Google LLC — Firebase (데이터베이스: 대한민국 서울 리전, 로그인 계정: 미국 등 Google 데이터센터)</td><td>위 1번의 회원·매매일지·게시물·챌린지 정보, 로그인 계정 식별자</td><td>데이터 저장, 로그인 인증</td></tr>
+      <tr><td>Cloudflare, Inc. (미국 등 전 세계 서버)</td><td>텔레그램 ID·이름·사용자명, 로그인 요청, 알림 내용, 접속 IP</td><td>텔레그램 로그인·알림 처리 서버</td></tr>
+      <tr><td>Telegram (Telegram Messenger Inc. 등, 아랍에미리트 등)</td><td>대화 ID, 알림·로그인 확인 메시지</td><td>로그인 확인과 알림 메시지 발송</td></tr>
+      <tr><td>GitHub, Inc. (미국)</td><td>사이트 접속 기술 로그(접속 IP 등)</td><td>사이트 화면 제공(호스팅)</td></tr>
+    </table>
+    <p>국외 이전을 원하지 않으면 로그인하지 않으면 됩니다. 이 경우 로그인이 필요한 기능(자료실, 매매일지, 정보 공유 등)은 이용할 수 없습니다. 화면에 넣은 외부 위젯(TradingView, YouTube)은 각 제공자의 정책에 따라 접속 정보를 처리할 수 있습니다.</p>
+    <h4>5. 이용자의 권리와 행사 방법</h4>
+    <ul>
+      <li>열람: '내 정보'에서 보관 중인 정보를 확인할 수 있습니다.</li>
+      <li>정정: 매매일지 설정과 자기 게시물은 직접 고칠 수 있습니다.</li>
+      <li>삭제·처리 정지: '내 정보 → 회원 탈퇴'로 바로 삭제할 수 있고, 알림은 '내 정보' 또는 봇에 /stop 을 보내 끌 수 있습니다.</li>
+      <li>그 밖의 요청은 아래 이메일로 보내 주시면 10일 이내에 처리 결과를 알려 드립니다. 대리인을 통해서도 요청할 수 있습니다.</li>
+    </ul>
+    <h4>6. 알림 수신</h4>
+    <p>로그인한 회원에게 공지와 새 자료 알림을 텔레그램으로 보냅니다. 광고성 정보는 보내지 않으며, 언제든 수신을 거부할 수 있습니다. 로그인 확인 메시지는 로그인 처리에 필요해 수신 설정과 관계없이 발송됩니다.</p>
+    <h4>7. 안전성 확보 조치</h4>
+    <ul>
+      <li>데이터베이스 보안 규칙으로 본인·관리자만 접근하도록 제한 (매매일지 기본 비공개)</li>
+      <li>챌린지 코드는 서버에서만 확인하고, 반복 오입력 시 잠금</li>
+      <li>관리자 권한은 지정된 텔레그램 계정에만 부여, 전송 구간 암호화(HTTPS)</li>
+    </ul>
+    <h4>8. 만 14세 미만</h4>
+    <p>사이트는 만 14세 미만 아동의 회원 가입(로그인)을 받지 않습니다.</p>
+    <h4>9. 개인정보 보호책임자</h4>
+    <p>운영자 윤서준 · korea.trader.y@gmail.com</p>
+    <h4>10. 권익 침해 구제</h4>
+    <p>개인정보침해신고센터(privacy.kisa.or.kr, 국번 없이 118), 개인정보분쟁조정위원회(kopico.go.kr, 1833-6972), 대검찰청(1301), 경찰청(ecrm.police.go.kr, 182)에 상담이나 신고를 할 수 있습니다.</p>
+    <h4>11. 처리방침의 변경</h4>
+    <p>내용이 바뀌면 시행 7일 전부터 사이트에 알립니다.</p>
+  </div>` }
 };
 document.addEventListener('click', e => {
   const d = e.target.closest('[data-doc]'); if (!d) return;
@@ -5264,16 +5571,34 @@ setInterval(() => { if (!document.hidden) loadMarketData(); }, 60000);
    순위 (종합 · 국내주식 대회 · 미국주식 대회) + 일지 공개 요청(하트)
 ================================================================ */
 let rkTab = 'all';
-/* 매매일지 목록: 로그인 없이도 순위를 볼 수 있도록 항상 구독 (매매 기록 자체는 로그인 필요) */
-onSnapshot(collection(db, 'journals'), snap => {
-  journalsCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+/* 매매일지 목록: 랭킹 참여를 고른 일지만 공개 구독 + 내 일지 + (관리자) 전체 */
+let jPub = [], jMine = null, jAll = null, jMineUnsub = null, jAllUnsub = null;
+function rebuildJournals(){
+  let list = jAll ? jAll.slice() : jPub.filter(j => !jMine || j.id !== jMine.id);
+  if (!jAll && jMine) list.push(jMine);
+  journalsCache = list;
   if (authUser) syncJournalAggregates();
   renderJournal(); renderHome();
   journalHooks.forEach(f => { try{ f(); } catch(e){ console.warn(e); } });
+}
+onSnapshot(query(collection(db, 'journals'), where('public', '==', true)), snap => {
+  jPub = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  rebuildJournals();
 }, err => console.warn('journals', err));
+authHooks.push(() => {
+  if (jMineUnsub){ jMineUnsub(); jMineUnsub = null; }
+  if (jAllUnsub){ jAllUnsub(); jAllUnsub = null; }
+  jMine = null; jAll = null;
+  if (authUser){
+    const uid = authUser.uid;
+    jMineUnsub = onSnapshot(doc(db, 'journals', uid), s => { jMine = s.exists() ? { id: s.id, ...s.data() } : null; rebuildJournals(); }, err => console.warn('myjournal', err));
+    if (isAdmin) jAllUnsub = onSnapshot(collection(db, 'journals'), snap => { jAll = snap.docs.map(d => ({ id: d.id, ...d.data() })); rebuildJournals(); }, err => console.warn('alljournals', err));
+  }
+  rebuildJournals();
+});
 const myWants = new Set();
 let wantsUnsub = null;
-function canViewTrades(j){ return !!authUser && (j.id === authUser.uid || isAdmin || j.openTrades !== false); }
+function canViewTrades(j){ return !!authUser && (j.id === authUser.uid || isAdmin || j.openTrades === true); }
 const HEART_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.3C1.1 8.3 3.3 5 6.7 5c2 0 3.4 1.1 4.3 2.4h2C13.9 6.1 15.3 5 17.3 5c3.4 0 5.6 3.3 4.2 6.7C19.5 16.4 12 21 12 21z"/></svg>';
 function wantBtn(j){
   const on = myWants.has(j.id), n = Number(j.wants || 0);
@@ -5362,7 +5687,7 @@ function refreshJViewer(onlyUid){
   const s = journalStats(j);
   $('#jvRank').textContent = jvOpen.rank ? `${jvOpen.market ? LG_NAME[jvOpen.market] + ' 대회 ' : '종합 '}${jvOpen.rank}위` : (isAdmin ? '관리자 열람' : '');
   $('#jvName').textContent = j.nickname || '회원';
-  $('#jvSub').textContent = `시작 ${fmtMoney(j.startCapital, j.currency)} · ${j.public === false ? '랭킹 미참여' : '랭킹 참여'} · 일지 ${j.openTrades === false ? '비공개' : '공개'}${Number(j.wants || 0) ? ` · 보고 싶어요 ${j.wants}` : ''}`;
+  $('#jvSub').textContent = `시작 ${fmtMoney(j.startCapital, j.currency)} · ${j.public !== true ? '랭킹 미참여' : '랭킹 참여'} · 일지 ${j.openTrades !== true ? '비공개' : '공개'}${Number(j.wants || 0) ? ` · 보고 싶어요 ${j.wants}` : ''}`;
   $('#jvStats').innerHTML = `<div class="stat"><div class="n mono ${pctClass(s.pct)}">${fmtPct(s.pct)}</div><div class="t">누적 수익률</div></div>
     <div class="stat"><div class="n mono ${pctClass(s.pnl)}">${fmtMoney(s.pnl, j.currency, true)}</div><div class="t">수익금</div></div>
     <div class="stat"><div class="n mono">${s.count}건</div><div class="t">거래</div></div>
@@ -5391,15 +5716,22 @@ function renderAdminJournals(){
   $('#admJCount').textContent = journalsCache.length + '개';
   $('#admJBody').innerHTML = list.map(j => `<tr>
       <td><b>${escapeHtml(j.nickname || '-')}</b></td>
-      <td class="mono ${pctClass(j._s.pct)}">${fmtPct(j._s.pct)}</td>
+      <td class="mono ${pctClass(j._s.pct)}">${fmtPct(j._s.pct)}${Math.abs(j._s.pct) >= 1000 ? ' <span class="adm-flag">검토 필요</span>' : ''}</td>
       <td class="mono">${j._s.count}건</td>
-      <td>${j.public === false ? '미참여' : '참여'}</td>
-      <td>${j.openTrades === false ? '비공개' : '공개'}</td>
+      <td>${j.public !== true ? '미참여' : '참여'}</td>
+      <td>${j.openTrades !== true ? '비공개' : '공개'}</td>
       <td class="mono">${Number(j.wants || 0)}</td>
-      <td><button type="button" class="btn-mini" data-open-jv="${j.id}">일지 보기</button></td>
+      <td><button type="button" class="btn-mini" data-open-jv="${j.id}">일지 보기</button> <button type="button" class="btn-mini" data-rank-hide="${j.id}">${j.rankHidden ? '랭킹 복원' : '랭킹 제외'}</button></td>
     </tr>`).join('') || '<tr class="empty-row"><td colspan="7">아직 매매일지가 없어요.</td></tr>';
 }
 $('#admJSearch').addEventListener('input', renderAdminJournals);
+/* 관리자: 비정상 수익률 일지를 랭킹에서 제외/복원 (본인은 변경 불가) */
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-rank-hide]'); if (!b || !isAdmin) return;
+  const j = journalsCache.find(x => x.id === b.getAttribute('data-rank-hide')); if (!j) return;
+  try{ await updateDoc(doc(db, 'journals', j.id), { rankHidden: !j.rankHidden }); toast(j.rankHidden ? '랭킹에 다시 표시해요.' : '랭킹에서 제외했어요.'); }
+  catch(err){ toast('실패: ' + err.message); }
+});
 routeHooks.admin = renderAdminJournals;
 
 /* ================================================================
@@ -5465,6 +5797,11 @@ async function loadHot(){
 }
 setInterval(() => { if (authUser && currentView === 'views' && hotSlotStart(Date.now()) !== vwHotSlot) loadHot(); }, 60000);
 
+/* 금지 표현: 수익·원금 보장, 리딩방·오픈채팅 홍보 (보안 규칙과 같은 기준) */
+const BANNED_RE = /(원금 ?보장|수익 ?보장|손실 ?보장|무조건 ?수익|확정 ?수익|open\.kakao\.com|리딩 ?방 ?(입장|모집|초대))/;
+function bannedMsg(t){ const m = String(t || '').match(BANNED_RE); return m ? `'${m[0]}' 같은 수익·원금 보장 표현이나 리딩방·오픈채팅 홍보는 올릴 수 없어요.` : ''; }
+const VW_HOLD = { none: '작성자 보유 없음', holding: '작성자 보유 중', na: '종목 언급 없음' };
+function vwHoldTag(p){ return p.holding && VW_HOLD[p.holding] ? `<span class="hold-tag ${p.holding}">${VW_HOLD[p.holding]}</span>` : ''; }
 function vwPostHtml(p, hot){
   const mine = authUser && p.uid === authUser.uid;
   const liked = vwMyHearts.has(p.id);
@@ -5476,7 +5813,7 @@ function vwPostHtml(p, hot){
   const cmtOpen = vwCmtOpen.has(p.id);
   const cmts = vwCmtCache[p.id] || [];
   return `<article class="vw-post${hot ? ' hot' : ''}${p.admin ? ' admin' : ''}" data-vpost="${p.id}">
-    <div class="vw-meta"><span class="av">${escapeHtml(initials(p.name))}</span><b>${escapeHtml(p.name || '회원')}</b>${p.admin ? '<span class="admin-tag">운영자</span>' : ''}<span>${relTime(p.createdAt)}${p.updatedAt && p.updatedAt - p.createdAt > 60000 ? ' · 수정됨' : ''}</span>${hot ? `<span class="hot-badge">HOT</span>` : ''}</div>
+    <div class="vw-meta"><span class="av">${escapeHtml(initials(p.name))}</span><b>${escapeHtml(p.name || '회원')}</b>${p.admin ? '<span class="admin-tag">운영자</span>' : ''}<span title="${escapeAttr(fmtDate(p.createdAt))}">${relTime(p.createdAt)}${p.updatedAt && p.updatedAt - p.createdAt > 60000 ? ' · 수정됨' : ''}</span>${vwHoldTag(p)}${hot ? `<span class="hot-badge">HOT</span>` : ''}</div>
     <h3 class="vw-title">${escapeHtml(p.title || '')}</h3>
     <div class="vw-text${long && !expanded ? ' clamp' : ''}">${linkify(p.body || '')}</div>
     ${long ? `<button type="button" class="text-link" data-vexpand="${p.id}" style="align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;font:inherit;font-size:13.5px">${expanded ? '접기' : '더 보기'}</button>` : ''}
@@ -5488,9 +5825,10 @@ function vwPostHtml(p, hot){
       <span class="sp"></span>
       ${mine ? `<button type="button" class="btn-mini" data-vedit="${p.id}">수정</button>` : ''}
       ${mine || isAdmin ? `<button type="button" class="btn-mini" data-vdel="${p.id}">삭제</button>` : ''}
+      ${!mine ? `<button type="button" class="btn-mini ghost" data-report="view" data-rid="${p.id}" data-rpost="${p.id}">신고</button>` : ''}
     </div>
     ${cmtOpen ? `<div class="vw-cmts">
-      ${cmts.length ? cmts.map(c => `<div class="vw-cmt"><div class="cm-h"><b>${escapeHtml(c.name || '회원')}</b><span>${relTime(c.createdAt)}</span>${(authUser && c.uid === authUser.uid) || isAdmin ? `<button type="button" class="btn-mini" data-vcdel="${c.id}" data-post="${p.id}">삭제</button>` : ''}</div><div class="cm-t">${linkify(c.text || '')}</div></div>`).join('') : '<div class="section-note" style="margin:0">첫 댓글을 남겨 보세요.</div>'}
+      ${cmts.length ? cmts.map(c => `<div class="vw-cmt"><div class="cm-h"><b>${escapeHtml(c.name || '회원')}</b><span>${relTime(c.createdAt)}</span>${(authUser && c.uid === authUser.uid) || isAdmin ? `<button type="button" class="btn-mini" data-vcdel="${c.id}" data-post="${p.id}">삭제</button>` : ''}${!(authUser && c.uid === authUser.uid) ? `<button type="button" class="btn-mini ghost" data-report="comment" data-rid="${c.id}" data-rpost="${p.id}">신고</button>` : ''}</div><div class="cm-t">${linkify(c.text || '')}</div></div>`).join('') : '<div class="section-note" style="margin:0">첫 댓글을 남겨 보세요.</div>'}
       <form class="vw-cmt-form" data-vcform="${p.id}"><input class="inp" maxlength="1000" placeholder="댓글 쓰기" required><button class="btn sm" type="submit">등록</button></form>
     </div>` : ''}
   </article>`;
@@ -5545,6 +5883,7 @@ function vwOpenForm(post){
   $('#vwTitle').value = post ? post.title || '' : '';
   $('#vwBody').value = post ? post.body || '' : '';
   $('#vwLink').value = post ? post.link || '' : '';
+  $('#vwHolding').value = post ? post.holding || '' : '';
   $('#vwImgs').value = ''; $('#vwMsg').textContent = '';
   vwFiles = [];
   if (post){ for (let i = 0; i < Number(post.imgCount || 0); i++){ const src = vwImgCache[post.id + '_' + i]; if (src) vwFiles.push({ src, keep: true }); } }
@@ -5570,6 +5909,10 @@ $('#vwForm').addEventListener('submit', async e => {
   const title = $('#vwTitle').value.trim(), body = $('#vwBody').value.trim(), link = $('#vwLink').value.trim();
   if (!title || !body){ msg.className = 'submit-msg err'; msg.textContent = '제목과 내용을 입력하세요.'; return; }
   if (link && !safeUrl(link)){ msg.className = 'submit-msg err'; msg.textContent = '링크는 http:// 또는 https:// 로 시작해야 해요.'; return; }
+  const holding = $('#vwHolding').value;
+  if (!holding){ msg.className = 'submit-msg err'; msg.textContent = '언급한 종목 보유 여부를 선택하세요.'; return; }
+  const bm = bannedMsg(title + '\n' + body);
+  if (bm){ msg.className = 'submit-msg err'; msg.textContent = bm; return; }
   msg.className = 'submit-msg'; msg.textContent = '올리는 중…'; $('#vwSubmit').disabled = true;
   try{
     const id = vwEditing || doc(collection(db, 'views')).id;
@@ -5580,9 +5923,9 @@ $('#vwForm').addEventListener('submit', async e => {
     vwFiles.forEach((f, i) => { vwImgCache[id + '_' + i] = f.src; });
     for (let i = vwFiles.length; i < oldCount; i++) delete vwImgCache[id + '_' + i];
     if (old){
-      await updateDoc(doc(db, 'views', id), { title, body, link, imgCount: vwFiles.length, updatedAt: Date.now() });
+      await updateDoc(doc(db, 'views', id), { title, body, link, holding, imgCount: vwFiles.length, updatedAt: Date.now() });
     } else {
-      const data = { uid: authUser.uid, name: vwName(), title, body, link, imgCount: vwFiles.length, hearts: 0, comments: 0, createdAt: Date.now(), updatedAt: Date.now() };
+      const data = { uid: authUser.uid, name: vwName(), title, body, link, holding, imgCount: vwFiles.length, hearts: 0, comments: 0, createdAt: Date.now(), updatedAt: Date.now() };
       if (isAdmin) data.admin = true;
       await setDoc(doc(db, 'views', id), data);
     }
@@ -5657,6 +6000,7 @@ document.addEventListener('submit', async e => {
   e.preventDefault();
   if (!authUser) return;
   const input = f.querySelector('input'), text = input.value.trim(); if (!text) return;
+  const bm = bannedMsg(text); if (bm){ toast(bm); return; }
   const id = f.dataset.vcform;
   input.value = '';
   try{
@@ -5667,6 +6011,131 @@ document.addEventListener('submit', async e => {
   } catch(err){ toast('댓글 실패: ' + err.message); const i2 = document.querySelector(`[data-vcform="${id}"] input`); if (i2 && !i2.value) i2.value = text; }
 });
 renderViewsGate();
+
+/* ---------- 게시물 신고 ---------- */
+let rpTarget = null;
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-report]'); if (!b) return;
+  if (!authUser){ openLogin(); return; }
+  rpTarget = { kind: b.dataset.report, target: b.dataset.rid, post: b.dataset.rpost };
+  $('#rpTitle').textContent = rpTarget.kind === 'view' ? '이 글 신고하기' : '이 댓글 신고하기';
+  $('#rpReason').value = 'false_return'; $('#rpDetail').value = ''; $('#rpMsg').textContent = '';
+  $('#rpBackdrop').hidden = false;
+});
+const closeRp = () => { $('#rpBackdrop').hidden = true; rpTarget = null; };
+$('#rpCancel').addEventListener('click', closeRp);
+$('#rpBackdrop').addEventListener('click', e => { if (e.target.id === 'rpBackdrop') closeRp(); });
+$('#rpSend').addEventListener('click', async () => {
+  if (!rpTarget || !authUser) return;
+  const msg = $('#rpMsg'); msg.className = 'submit-msg'; msg.textContent = '보내는 중…';
+  try{
+    await addDoc(collection(db, 'reports'), { uid: authUser.uid, kind: rpTarget.kind, target: rpTarget.target, post: rpTarget.post || '', reason: $('#rpReason').value, detail: $('#rpDetail').value.trim().slice(0, 500), at: Date.now() });
+    closeRp(); toast('신고했어요. 운영자가 확인할게요.');
+  } catch(err){ msg.className = 'submit-msg err'; msg.textContent = '실패: ' + err.message; }
+});
+
+/* 관리자: 신고 목록 검토 */
+const RP_REASON = { false_return: '허위 수익률', guarantee: '수익·원금 보장', solicit: '무단 투자 권유', leading: '리딩방·광고', copyright: '저작권 침해', abuse: '욕설·비방', privacy: '개인정보 노출', etc: '기타' };
+let reportsUnsub = null, reportsCache = [];
+authHooks.push(() => {
+  if (reportsUnsub){ reportsUnsub(); reportsUnsub = null; }
+  reportsCache = [];
+  if (authUser && isAdmin) reportsUnsub = onSnapshot(query(collection(db, 'reports'), orderBy('at', 'desc')), snap => {
+    reportsCache = snap.docs.map(d => ({ id: d.id, ...d.data() })); renderReports();
+  }, err => console.warn('reports', err));
+  renderReports();
+});
+async function reportTargetText(r){
+  try{
+    const s = await getDoc(doc(db, r.kind === 'view' ? 'views' : 'vcomments', r.target));
+    if (!s.exists()) return { gone: true, text: '(이미 삭제됨)' };
+    const d = s.data();
+    return { gone: false, text: r.kind === 'view' ? `${d.name || '회원'} · ${d.title || ''}\n${(d.body || '').slice(0, 300)}` : `${d.name || '회원'} · ${(d.text || '').slice(0, 300)}` };
+  } catch(e){ return { gone: false, text: '(불러오지 못함)' }; }
+}
+async function renderReports(){
+  const box = $('#admRepList'); if (!box) return;
+  $('#admRepCount').textContent = reportsCache.length ? reportsCache.length + '건' : '';
+  if (!reportsCache.length){ box.innerHTML = '<div class="section-note">신고된 게시물이 없어요.</div>'; return; }
+  const rows = await Promise.all(reportsCache.map(async r => ({ r, t: await reportTargetText(r) })));
+  box.innerHTML = rows.map(({ r, t }) => `<div class="adm-rep">
+      <div class="adm-rep-h"><b>${RP_REASON[r.reason] || r.reason}</b><span>${r.kind === 'view' ? '글' : '댓글'} · ${fmtDate(r.at)}</span></div>
+      <div class="adm-rep-t">${escapeHtml(t.text)}</div>
+      ${r.detail ? `<div class="adm-rep-d">신고 내용: ${escapeHtml(r.detail)}</div>` : ''}
+      <div class="adm-row">${t.gone ? '' : `<button class="btn-mini" type="button" data-rep-del="${r.id}">게시물 삭제</button>`}<button class="btn-mini" type="button" data-rep-done="${r.id}">신고 처리 완료</button>${r.kind === 'view' && !t.gone ? `<a class="text-link" href="#views">게시판에서 보기</a>` : ''}</div>
+    </div>`).join('');
+}
+document.addEventListener('click', async e => {
+  const del = e.target.closest('[data-rep-del]'), done = e.target.closest('[data-rep-done]');
+  if (!del && !done) return;
+  if (!isAdmin) return;
+  const r = reportsCache.find(x => x.id === (del || done).getAttribute(del ? 'data-rep-del' : 'data-rep-done')); if (!r) return;
+  try{
+    if (del){
+      if (!confirmClick(del)) return;
+      if (r.kind === 'view'){
+        const s = await getDoc(doc(db, 'views', r.target));
+        for (let i = 0; i < Number((s.exists() && s.data().imgCount) || 0); i++) await deleteDoc(doc(db, 'vimgs', r.target + '_' + i)).catch(() => {});
+        await deleteDoc(doc(db, 'views', r.target));
+      } else {
+        const batch = writeBatch(db);
+        batch.delete(doc(db, 'vcomments', r.target));
+        if (r.post){ const ps = await getDoc(doc(db, 'views', r.post)); if (ps.exists()) batch.update(doc(db, 'views', r.post), { comments: increment(-1) }); }
+        await batch.commit();
+      }
+    }
+    await deleteDoc(doc(db, 'reports', r.id));
+    toast(del ? '게시물을 삭제하고 신고를 처리했어요.' : '신고를 처리했어요.');
+  } catch(err){ toast('실패: ' + err.message); }
+});
+
+/* ---------- 내 정보 · 알림 · 탈퇴 ---------- */
+function openMyInfo(){
+  if (!authUser){ openLogin(); return; }
+  const mj = myJournal();
+  const rows = [
+    ['텔레그램 ID', me && me.tgId ? me.tgId : authUser.uid.replace(/^tg_/, '')],
+    ['이름', [me && me.firstName, me && me.lastName].filter(Boolean).join(' ') || '-'],
+    ['사용자명', me && me.username ? '@' + me.username : '-'],
+    ['최근 로그인', me && me.lastLoginAt ? fmtDate(me.lastLoginAt) : '-'],
+    ['매매일지', mj ? `${mj.nickname} · 기록 ${myJTrades.length}건 · 랭킹 ${mj.public === true ? '참여' : '미참여'} · 기록 ${mj.openTrades === true ? '공개' : '비공개'}` : '없음'],
+    ['알림 수신', me && me.notify === false ? '받지 않음' : '받음']
+  ];
+  $('#miList').innerHTML = rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join('');
+  $('#miNotify').checked = !(me && me.notify === false);
+  $('#miNotifyMsg').textContent = ''; $('#miDelMsg').textContent = ''; $('#miDelConfirm').value = '';
+  $('#userMenu').hidden = true;
+  $('#miBackdrop').hidden = false;
+}
+$('#btnMyInfo').addEventListener('click', openMyInfo);
+$('#miClose').addEventListener('click', () => { $('#miBackdrop').hidden = true; });
+$('#miBackdrop').addEventListener('click', e => { if (e.target.id === 'miBackdrop') $('#miBackdrop').hidden = true; });
+async function meApi(path, body){
+  const token = await authUser.getIdToken();
+  const r = await fetch(WORKER_URL + path, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }, body: JSON.stringify(body || {}) });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.message || d.error || ('HTTP ' + r.status));
+  return d;
+}
+$('#miNotify').addEventListener('change', async e => {
+  const on = e.target.checked, msg = $('#miNotifyMsg');
+  msg.className = 'submit-msg'; msg.textContent = '저장 중…';
+  try{ await meApi('/me/notify', { on }); msg.className = 'submit-msg ok'; msg.textContent = on ? '알림을 받아요.' : '알림을 껐어요.'; }
+  catch(err){ e.target.checked = !on; msg.className = 'submit-msg err'; msg.textContent = '실패: ' + err.message; }
+});
+$('#miDelete').addEventListener('click', async () => {
+  const msg = $('#miDelMsg');
+  if ($('#miDelConfirm').value.trim() !== '탈퇴'){ msg.className = 'submit-msg err'; msg.textContent = "확인을 위해 '탈퇴'라고 입력하세요."; return; }
+  msg.className = 'submit-msg'; msg.textContent = '삭제하는 중…'; $('#miDelete').disabled = true;
+  try{
+    await meApi('/me/delete');
+    $('#miBackdrop').hidden = true;
+    try{ localStorage.removeItem('tourDone_' + authUser.uid); } catch(e){}
+    await signOut(auth);
+    toast('탈퇴했어요. 저장된 정보를 모두 삭제했어요.');
+  } catch(err){ msg.className = 'submit-msg err'; msg.textContent = '실패: ' + err.message; }
+  $('#miDelete').disabled = false;
+});
 
 /* ================================================================
    후원 — 후원자 닉네임 흐름 + 계좌 복사 / 관리자 명단 관리
