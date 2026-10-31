@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>고려대 재학생 트레이더</title>
+<title>STOCK PICK!</title>
 <meta name="description" content="국내주식·미국주식·코인 공부 자료와 매매일지, 100불 챌린지 수익률 랭킹. 모두 무료.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="고려대 재학생 트레이더">
-<meta property="og:title" content="고려대 재학생 트레이더">
+<meta property="og:site_name" content="STOCK PICK!">
+<meta property="og:title" content="STOCK PICK!">
 <meta name="theme-color" content="#0C131D">
 <meta property="og:description" content="국내주식·미국주식·코인 공부 자료와 매매일지, 100불 챌린지 수익률 랭킹. 모두 무료.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1099,6 +1099,14 @@
   /* 트레이딩뷰 위젯 투명 배경 (다크 페이지에서 흰 배경 방지) */
   .tape-tv, .mk-tv, .tv-heat, .tv-frame, .tv-chart{ color-scheme:light; }
 
+
+  /* 매매일지·순위: 수익 초록, 손실 빨강 */
+  #view-journal, #view-rank, #jvBackdrop{ --pnl-gain:var(--gain); --pnl-loss:var(--loss); }
+  #view-journal .gain, #view-journal .pnl-figure.gain, #view-rank .gain, #view-rank .pnl-figure.gain, #jvBackdrop .gain{ color:var(--gain); background-image:none; -webkit-background-clip:border-box; background-clip:border-box; }
+  #view-journal .loss, #view-journal .pnl-figure.loss, #view-rank .loss, #view-rank .pnl-figure.loss, #jvBackdrop .loss{ color:var(--loss); background-image:none; -webkit-background-clip:border-box; background-clip:border-box; }
+  #jfPnl.gain{ color:var(--gain); border-color:var(--gain); font-weight:700; }
+  #jfPnl.loss{ color:var(--loss); border-color:var(--loss); font-weight:700; }
+
   /* 100불 챌린지: 기존 사이트 색상 복원 (수익 초록, 목표 달성률 황금 물결) */
   #view-challenge{ --pnl-gain:var(--gain); --pnl-loss:var(--loss); }
   #view-challenge .gain, #view-challenge .pnl-figure.gain{ color:var(--gain); }
@@ -1287,7 +1295,7 @@
   <div class="sh-inner">
     <a class="brand" href="#home" aria-label="홈으로">
       <img class="brand-logo" id="brandLogo" alt="">
-      <span class="nm">고려대 재학생 트레이더</span>
+      <span class="nm">STOCK PICK!</span>
     </a>
     <nav class="tabnav" id="tabnav" aria-label="메뉴">
       <a data-view="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span class="nl">홈</span><span class="ns">홈</span></a>
@@ -2530,7 +2538,7 @@
     <li>본 페이지의 콘텐츠는 운영자의 동의 없는 무단 복제·배포·공유(캡처, 재업로드 포함)를 금합니다.</li>
   </ul>
   <div class="foot-contact">
-    <b>고려대 재학생 트레이더</b>
+    <b>STOCK PICK!</b>
     <span>문의: <a href="mailto:korea.trader.y@gmail.com">korea.trader.y@gmail.com</a></span>
     <span class="foot-indep">고려대학교와 무관한 개인 운영 사이트입니다.</span>
     <button type="button" data-doc="terms">이용약관</button>
@@ -4166,7 +4174,7 @@ const CANVAS_SANS = '"Pretendard Variable", Pretendard, sans-serif';
 function drawShareCard(canvas, o){
   const ctx = canvas.getContext('2d');
   const w = canvas.width, h = canvas.height;
-  const accent = o.isGain ? '#f04452' : '#3182f6';
+  const accent = o.green ? (o.isGain ? '#2FB67C' : '#F04452') : (o.isGain ? '#f04452' : '#3182f6');
   ctx.fillStyle = '#080808'; ctx.fillRect(0, 0, w, h);
   if (logoImgReady){ const lw = 88, lh = lw * (logoImg.naturalHeight / logoImg.naturalWidth || 0.71); ctx.drawImage(logoImg, 48, 44, lw, lh); }
   ctx.font = `600 15px ${CANVAS_SANS}`;
@@ -4923,6 +4931,10 @@ $('#jTradeForm').addEventListener('submit', async (e) => {
     $('#jfPhotoPreview').hidden = true; $('#jfPhotoPreview').src = '';
   } catch(err){ msg.className = 'submit-msg err'; msg.textContent = '저장 실패: ' + err.message; }
 });
+// 수익금 입력: 수익이면 초록, 손실이면 빨강
+function paintJfPnl(){ const el = $('#jfPnl'); if (!el) return; const v = Number(el.value); el.classList.remove('gain', 'loss'); if (el.value !== '' && v > 0) el.classList.add('gain'); else if (v < 0) el.classList.add('loss'); }
+$('#jfPnl').addEventListener('input', paintJfPnl);
+$('#jTradeForm').addEventListener('reset', () => setTimeout(paintJfPnl, 0));
 $$('[data-jshare]').forEach(btn => btn.addEventListener('click', () => {
   const mj = myJournal(); if (!mj) return;
   const period = btn.getAttribute('data-jshare');
@@ -4932,7 +4944,7 @@ $$('[data-jshare]').forEach(btn => btn.addEventListener('click', () => {
     label: PERIOD_LABEL[period], name: mj.nickname, isGain: s.pnl >= 0,
     pctText: fmtPctRound(s.pct), pnlText: fmtMoney(s.pnl, cur, true), subText: '',
     rows: [{ label: '거래 횟수', val: s.count + '건' }, { label: '승률', val: s.winRate.toFixed(0) + '%' }, { label: '누적 수익률', val: fmtPct(total.pct) }],
-    footL: '고려대 재학생 트레이더 · 매매일지', footR: 'TRADING JOURNAL'
+    footL: 'STOCK PICK! · 매매일지', footR: 'TRADING JOURNAL', green: true
   });
   $('#jSharePreview').hidden = false;
   $('#jBtnSaveShare').onclick = () => saveCanvas($('#jShareCanvas'), `${mj.nickname}_${PERIOD_LABEL[period]}_수익카드.png`);
@@ -5248,7 +5260,7 @@ const DOCS = {
   terms: { title: '이용약관', body: `<div class="doc">
     <p class="doc-date">시행일: ${DOCS_DATE}</p>
     <h4>제1조 (목적과 운영자)</h4>
-    <p>이 약관은 '고려대 재학생 트레이더' 사이트(이하 '사이트')의 이용 조건을 정합니다. 사이트는 개인(운영자: 윤서준)이 비영리로 운영하며 고려대학교와 무관합니다.</p>
+    <p>이 약관은 'STOCK PICK!' 사이트(이하 '사이트')의 이용 조건을 정합니다. 사이트는 개인(운영자: 윤서준)이 비영리로 운영하며 고려대학교와 무관합니다.</p>
     <h4>제2조 (제공 서비스)</h4>
     <p>공부 자료실, 100불 챌린지, 매매일지·순위, 정보 공유 게시판, 계산기 등 도구, 텔레그램 알림을 제공합니다. 모든 기능과 자료는 무료이며, 이용료나 회원 등급에 따른 차등이 없습니다.</p>
     <h4>제3조 (투자정보의 성격)</h4>
@@ -5283,7 +5295,7 @@ const DOCS = {
   </div>` },
   privacy: { title: '개인정보 처리방침', body: `<div class="doc">
     <p class="doc-date">시행일: ${DOCS_DATE}</p>
-    <p>'고려대 재학생 트레이더'(이하 '사이트')는 「개인정보 보호법」에 따라 이용자의 개인정보를 다음과 같이 처리합니다.</p>
+    <p>'STOCK PICK!'(이하 '사이트')는 「개인정보 보호법」에 따라 이용자의 개인정보를 다음과 같이 처리합니다.</p>
     <h4>1. 처리하는 개인정보와 목적</h4>
     <table class="doc-tbl">
       <tr><th>구분</th><th>항목</th><th>목적</th></tr>
@@ -6022,7 +6034,7 @@ $('#vwSubmit').addEventListener('click', async () => {
     if (old){
       await updateDoc(doc(db, 'views', id), fields);
     } else {
-      created = { uid: authUser.uid, name: '고려대 재학생 트레이더', admin: true, link: '', hearts: 0, comments: 0, createdAt: Date.now(), pdfId: null, pdfName: null, pdfChunks: 0, ...fields };
+      created = { uid: authUser.uid, name: 'STOCK PICK!', admin: true, link: '', hearts: 0, comments: 0, createdAt: Date.now(), pdfId: null, pdfName: null, pdfChunks: 0, ...fields };
       await setDoc(doc(db, 'views', id), created);
     }
     toast(old ? '수정했어요.' : '글을 올렸어요.');
@@ -6246,7 +6258,7 @@ $('#admSupSave').addEventListener('click', async () => {
 ================================================================ */
 const TI = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 const TOUR = [
-  { ic: TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>'), t: '환영해요!', d: '고려대 재학생 트레이더 홈페이지는 국내주식·미국주식·코인을 공부하고 기록하는 무료 공간이에요. 1분이면 둘러볼 수 있게 메뉴를 하나씩 소개할게요.', p: ['맨 위 가격 레일에서 코스피·나스닥·비트코인 시세를 바로 볼 수 있어요', '홈에서 미국 주식 히트맵과 환율·공포 지수를 확인해요'], go: 'home' },
+  { ic: TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>'), t: '환영해요!', d: 'STOCK PICK! 홈페이지는 국내주식·미국주식·코인을 공부하고 기록하는 무료 공간이에요. 1분이면 둘러볼 수 있게 메뉴를 하나씩 소개할게요.', p: ['맨 위 가격 레일에서 코스피·나스닥·비트코인 시세를 바로 볼 수 있어요', '홈에서 미국 주식 히트맵과 환율·공포 지수를 확인해요'], go: 'home' },
   { ic: TI('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>'), t: '공부 자료실', d: '라이브 요약, 증시 브리핑 PDF, 종목 분석, 실적발표, 이슈 브리핑을 모두 무료로 볼 수 있어요.', p: ['검색창은 PDF 본문 내용까지 찾아줘요', '새 자료가 올라오면 텔레그램으로 알려드려요'], go: 'library' },
   { ic: TI('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'), t: '정보 공유', d: '운영자가 정리한 시장·종목 정보를 모아 볼 수 있어요.', p: ['종목명이나 날짜(예: 10.30)로 검색할 수 있어요', '도움이 된 글에는 하트를 눌러 주세요'], go: 'views' },
   { ic: TI('<path d="m3 20 6-11 4 6 3-4 5 9z"/>'), t: '뫼산 매매법', d: '산 모양 차트 패턴으로 진입과 청산 시점을 잡는 매매법을 정리했어요. 로그인한 회원은 전체 내용과 설명 영상을 볼 수 있어요.', p: ['표지 이미지를 누르면 전체 내용이 펼쳐져요'], go: 'moesan' },
