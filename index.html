@@ -1393,6 +1393,26 @@
   .bf-tabs button small{ font-weight:600; font-size:12px; color:var(--faint); margin-left:4px; }
   .bf-tabs button.on{ border-color:var(--gold); color:var(--ink); background:color-mix(in srgb, var(--gold) 10%, var(--paper)); }
   .bf-tabs button.on small{ color:var(--gold); }
+
+  .auto-badge{ font-size:11px; font-weight:700; padding:2px 7px; border-radius:6px; background:var(--gold-soft); color:var(--gold); }
+
+  /* ===== 라이브 요약: 한 줄 요약 · 핵심 정리 ===== */
+  .lib .post[data-cat="live"] h2{ -webkit-line-clamp:2; font-size:17.5px; line-height:1.45; }
+  .lv-one{ margin:10px 0 0; padding:12px 16px; border-radius:12px; background:color-mix(in srgb, var(--gold) 9%, var(--paper-2)); border:1px solid color-mix(in srgb, var(--gold) 28%, transparent); color:var(--ink); font-size:14.5px; font-weight:600; line-height:1.65; }
+  .lv-one.big{ font-size:16px; margin:14px 0 6px; }
+  .lv-keys{ list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  .lv-keys li{ position:relative; padding-left:18px; font-size:14px; line-height:1.6; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .lv-keys li:before{ content:""; position:absolute; left:3px; top:.62em; width:6px; height:6px; border-radius:2px; background:var(--gold); }
+  .lv-keys.full li{ -webkit-line-clamp:unset; display:block; font-size:15px; }
+  .lv-body{ white-space:normal !important; }
+  .lv-body h4{ margin:22px 0 8px; font-size:15.5px; color:var(--ink); padding-bottom:6px; border-bottom:1px solid var(--border); }
+  .lv-body h4:first-child{ margin-top:0; }
+  .lv-body p{ margin:0 0 10px; line-height:1.8; }
+  .lv-body ul{ margin:0 0 12px; padding-left:20px; } .lv-body li{ margin:4px 0; line-height:1.75; }
+  .lib .btn-more.ai{ color:var(--gold); border-color:color-mix(in srgb, var(--gold) 45%, transparent); }
+  .lib .btn-more.ai:hover{ background:color-mix(in srgb, var(--gold) 10%, transparent); color:var(--gold); }
+  .lib .live-badge{ color:#FF5463; }
+  #viewer .live-badge{ color:#FF5463; font-weight:700; font-size:12px; letter-spacing:.06em; } #viewer .live-dur{ color:var(--muted); font-size:12.5px; margin-left:4px; } #viewer .auto-badge{ margin-left:8px; }
 </style>
 </head><body>
 
@@ -1575,8 +1595,8 @@
           </div>
         </div>
         <div class="lfield"><label for="wOneline">한 줄 요약</label><input id="wOneline" placeholder="예) 반도체 추세는 살아 있지만 단기 리스크 관리가 필요한 구간"></div>
-        <div class="lfield"><label for="wChapters">핵심 구간 — 한 줄에 하나씩 "시간 내용"</label><textarea id="wChapters" class="ta-sm" placeholder="12:41 삼성전자&#10;27:18 SK하이닉스&#10;43:52 미국 반도체"></textarea></div>
-        <div class="lfield"><label for="wAi">AI 핵심 요약</label><textarea id="wAi" placeholder="라이브 전체 AI 요약을 붙여넣으세요. 카드의 'AI 핵심 요약 보기'로 읽을 수 있어요."></textarea></div>
+        <div class="lfield"><label for="wKeys">핵심 정리 — 한 줄에 하나씩 (3~5개, 카드와 텔레그램에 그대로 보여요)</label><textarea id="wKeys" class="ta-sm" placeholder="나스닥 급락 배경: 빅테크 설비투자 부담&#10;반도체 지수 7% 하락, 실적 전망 하향이 원인&#10;오늘 밤 확인할 일정: ISM 제조업지수"></textarea></div>
+        <div class="lfield"><label for="wAi">전체 요약</label><textarea id="wAi" placeholder="주제별로 정리한 전체 요약. '1. 제목' 또는 '■ 제목' 줄은 소제목, '- '로 시작하는 줄은 목록으로 보여요."></textarea></div>
       </div>
       <div id="stdFields" style="display:none">
         <div class="lfield"><label for="wBody">내용 · 요약 코멘트</label><textarea id="wBody" placeholder="이 자료의 핵심 코멘트를 작성하세요"></textarea></div>
@@ -4534,6 +4554,29 @@ function shareIconHtml(p){
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>`;
 }
 function tagsHtml(p){ return (p.tags && p.tags.length) ? `<div class="tags">${p.tags.map(t => `<span class="tag">#${esc(t)}</span>`).join("")}</div>` : ""; }
+/* ---------- 라이브 요약: 핵심 정리 · 전체 요약 서식 ---------- */
+const LV_BULLET = /^\s*(?:[-•·*▪◦]|\d+[.)]\s)\s*/;
+function lvKeyPoints(p){
+  if (Array.isArray(p.keyPoints) && p.keyPoints.filter(Boolean).length) return p.keyPoints.filter(Boolean).slice(0, 5);
+  const lines = String(p.content || '').split(/\n/).map(l => l.trim()).filter(Boolean);
+  const bullets = lines.filter(l => /^\s*[-•·*▪◦]\s*/.test(l)).map(l => l.replace(/^\s*[-•·*▪◦]\s*/, ''));
+  const src = bullets.length ? bullets : lines.filter(l => l.length > 12 && !lvIsHead(l));
+  return src.slice(0, 4).map(l => l.length > 110 ? l.slice(0, 108) + '…' : l);
+}
+function lvIsHead(l){ return /^(#{1,4}\s|■|▶|◆|【|\[[^\]]{1,30}\]$|\d+[.)]\s*[^\s].{0,40}$)/.test(l) && l.length <= 48 && !/[.!?。]$/.test(l); }
+function lvFormat(text){
+  const out = []; let list = null;
+  const flush = () => { if (list){ out.push(`<ul>${list.join('')}</ul>`); list = null; } };
+  for (const raw of String(text || '').split(/\n/)){
+    const l = raw.trim();
+    if (!l){ flush(); continue; }
+    if (lvIsHead(l)){ flush(); out.push(`<h4>${esc(l.replace(/^(#{1,4}\s|■\s?|▶\s?|◆\s?)/, '').replace(/^【|】$/g, '').replace(/^\[|\]$/g, ''))}</h4>`); continue; }
+    if (/^\s*[-•·*▪◦]\s*/.test(l)){ (list = list || []).push(`<li>${esc(l.replace(/^\s*[-•·*▪◦]\s*/, ''))}</li>`); continue; }
+    flush(); out.push(`<p>${esc(l)}</p>`);
+  }
+  flush();
+  return out.join('');
+}
 function parseChapters(raw){
   return (raw || "").split(/\n/).map(l => l.trim()).filter(Boolean).map(l => {
     const m = l.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$/);
@@ -4569,15 +4612,15 @@ function renderFeed(){
     const el = document.createElement("article");
     el.className = "post"; el.dataset.cat = p.category;
     if (p.category === "live"){
-      const chaps = parseChapters(p.chaptersRaw);
+      const keys = lvKeyPoints(p);
       el.innerHTML = `
-        <div class="post-meta"><span class="post-cat">라이브 요약</span><span class="post-date">${fmtMD(p.createdAt)}</span><span class="live-badge">LIVE</span>${p.duration ? `<span class="live-dur">· ${esc(p.duration)}</span>` : ""}${newBadge(p)}</div>
+        <div class="post-meta"><span class="post-cat">라이브 요약</span><span class="post-date">${fmtMD(p.createdAt)}</span><span class="live-badge">LIVE</span>${p.duration ? `<span class="live-dur">· ${esc(p.duration)}</span>` : ""}${p.auto ? `<span class="auto-badge">AI 요약</span>` : ""}${newBadge(p)}</div>
         <h2></h2>
-        ${p.oneLine ? `<div class="oneline">“${esc(p.oneLine)}”</div>` : ""}
-        ${chaps.length ? `<div class="chapters">${chaps.map(c => chapHtml(c, p.videoUrl)).join("")}</div>` : ""}
+        ${p.oneLine ? `<div class="lv-one">${esc(p.oneLine)}</div>` : ""}
+        ${keys.length ? `<ul class="lv-keys">${keys.map(k => `<li>${esc(k)}</li>`).join("")}</ul>` : ""}
         ${tagsHtml(p)}
         <div class="post-foot">
-          ${p.content ? `<button type="button" class="btn-more ai" data-more="${p.id}">AI 핵심 요약 보기</button>` : `<button type="button" class="btn-more" data-more="${p.id}">더보기</button>`}
+          ${p.content ? `<button type="button" class="btn-more ai" data-more="${p.id}">전체 요약 보기</button>` : `<button type="button" class="btn-more" data-more="${p.id}">더보기</button>`}
           ${p.videoUrl ? `<a class="btn-more video" href="${esc(p.videoUrl)}" target="_blank" rel="noopener">▶ 녹화본 시청</a>` : ""}
           ${shareIconHtml(p)}${adminMiniHtml(p)}
         </div>`;
@@ -4640,15 +4683,17 @@ function openViewer(p){
   $('#vTitle').textContent = postTitle(p);
   renderImageStage($('#vImgStage'), p);
   const extra = $('#vExtra'); extra.innerHTML = "";
-  if (p.category === "live"){
-    const chaps = parseChapters(p.chaptersRaw);
+  const isLv = p.category === "live";
+  if (isLv){
+    const keys = lvKeyPoints(p);
     extra.innerHTML = `
-      ${p.duration ? `<div class="post-meta"><span class="live-badge" style="color:#3DD68C">LIVE</span><span class="live-dur" style="font-family:var(--font-mono);font-size:11.5px;color:var(--muted)">· ${esc(p.duration)}</span></div>` : ""}
-      ${p.oneLine ? `<div class="v-sec"><div class="v-label">한 줄 요약</div><div class="oneline" style="-webkit-line-clamp:99">“${esc(p.oneLine)}”</div></div>` : ""}
-      ${chaps.length ? `<div class="v-sec"><div class="v-label">핵심 구간</div><div class="chapters full">${chaps.map(c => chapHtml(c, p.videoUrl)).join("")}</div></div>` : ""}`;
-    $('#vBodyLabel').textContent = "AI 핵심 요약";
+      ${p.duration ? `<div class="post-meta"><span class="live-badge">LIVE</span><span class="live-dur">· ${esc(p.duration)}</span>${p.auto ? '<span class="auto-badge">AI 요약</span>' : ''}</div>` : ""}
+      ${p.oneLine ? `<div class="lv-one big">${esc(p.oneLine)}</div>` : ""}
+      ${keys.length ? `<div class="v-sec"><div class="v-label">핵심 정리</div><ul class="lv-keys full">${keys.map(k => `<li>${esc(k)}</li>`).join("")}</ul></div>` : ""}`;
+    $('#vBodyLabel').textContent = "전체 요약";
   } else $('#vBodyLabel').textContent = "내용";
-  $('#vBody').textContent = p.content || "";
+  $('#vBody').classList.toggle('lv-body', isLv);
+  if (isLv) $('#vBody').innerHTML = lvFormat(p.content); else $('#vBody').textContent = p.content || "";
   $('#vBodyWrap').style.display = p.content ? "block" : "none";
   const foot = $('#vFoot'); foot.innerHTML = "";
   let comp = $('#vComp');
@@ -4831,7 +4876,7 @@ function startEdit(id){
   $('#adminPanel').hidden = false;
   writeCat = p.category; $$('#wCat button').forEach(x => x.classList.toggle('on', x.dataset.cat === p.category)); syncWriteFields();
   $('#wTitle').value = p.title || ''; $('#wDur').value = p.duration || ''; $('#wVideo').value = p.videoUrl || '';
-  $('#wOneline').value = p.oneLine || ''; $('#wChapters').value = p.chaptersRaw || '';
+  $('#wOneline').value = p.oneLine || ''; $('#wKeys').value = (Array.isArray(p.keyPoints) && p.keyPoints.length ? p.keyPoints : (p.category === 'live' ? lvKeyPoints(p) : [])).join('\n');
   $('#wAi').value = p.category === 'live' ? (p.content || '') : '';
   $('#wBody').value = p.category === 'live' ? '' : (p.content || '');
   $('#wTags').value = (p.tags || []).join(', '); syncTagQuick();
@@ -4849,7 +4894,7 @@ function startEdit(id){
 }
 function cancelEdit(){
   editingId = null; editingPost = null; keepPdf = true; keepImg = true;
-  ['wTitle','wDur','wVideo','wOneline','wChapters','wAi','wBody','wTags','wAsOf','wSource','wHolding'].forEach(i => { $('#' + i).value = ''; });
+  ['wTitle','wDur','wVideo','wOneline','wKeys','wAi','wBody','wTags','wAsOf','wSource','wHolding'].forEach(i => { $('#' + i).value = ''; });
   syncTagQuick();
   $('#wPdf').value = ''; $('#wPdfName').textContent = ''; $('#wPdfRemove').style.display = 'none';
   $('#wImg').value = ''; $('#wImgName').textContent = ''; $('#wImgRemove').style.display = 'none';
@@ -4875,7 +4920,7 @@ $('#btnPublish').addEventListener('click', async () => {
   let newPost = null;
   try{
     const readB64 = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(f); });
-    const liveData = isLive ? { liveType: 'live', duration: $('#wDur').value.trim() || null, videoUrl: $('#wVideo').value.trim() || null, oneLine: $('#wOneline').value.trim() || null, chaptersRaw: $('#wChapters').value.trim() || null }
+    const liveData = isLive ? { liveType: 'live', duration: $('#wDur').value.trim() || null, videoUrl: $('#wVideo').value.trim() || null, oneLine: $('#wOneline').value.trim() || null, keyPoints: $('#wKeys').value.split('\n').map(s => s.trim().replace(/^[-•·*]\s*/, '')).filter(Boolean).slice(0, 5), chaptersRaw: null }
       : { liveType: null, duration: null, videoUrl: null, oneLine: null, chaptersRaw: null };
     const uploadImages = async () => {
       const arr = [];
