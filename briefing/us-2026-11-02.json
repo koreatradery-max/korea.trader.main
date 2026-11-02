@@ -1,0 +1,106 @@
+{
+ "date": "2026-11-02",
+ "weekday": "월",
+ "generatedAt": "2026-11-02T21:35+09:00",
+ "headline": "AI주 급락 뒤 나스닥100 선물이 0.8% 오르고, 미·이란 협상 기대에 유가는 하락했습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,648.25",
+   "chg": "+0.45%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "28,772.25",
+   "chg": "+0.83%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "52,143.00",
+   "chg": "+0.43%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "19.23",
+   "chg": "-0.98%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,342.60원",
+   "chg": "+0.51%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.92%",
+   "chg": "-0.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$99.83",
+   "chg": "-4.12%"
+  },
+  {
+   "name": "금",
+   "value": "$3,915.50",
+   "chg": "+0.43%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$78,011",
+   "chg": "-0.27%"
+  }
+ ],
+ "news": [
+  {
+   "title": "미국 지수 선물, 지난주 AI발 급락 뒤 반등",
+   "summary": "나스닥100 선물이 0.8%, S&P 500·다우 선물이 0.4%가량 오르며 위험 선호가 살아났습니다. 나스닥 종합지수는 10월에 5.2% 하락했고, 이번 주에는 실적 발표와 중간선거, 금요일 고용보고서가 이어집니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-2-dow-sp-500-nasdaq-091835095.html"
+  },
+  {
+   "title": "국제유가 3% 넘게 하락…미·이란 외교 해법 기대",
+   "summary": "트럼프 대통령이 추가 공습 전에 외교에 시간을 더 주겠다는 뜻을 밝혔다는 보도로 공급 차질 우려가 줄었습니다. 다만 호르무즈 해협 등에서 선박 피격이 이어지고 있습니다.",
+   "source": "더 내셔널",
+   "url": "https://www.thenationalnews.com/business/2026/11/02/oil-prices-slide-more-than-3-as-trump-signals-more-time-for-iran-diplomacy/"
+  },
+  {
+   "title": "애플, 오늘 장 마감 후 실적 발표",
+   "summary": "시장 예상치는 주당순이익 2달러, 매출 1,134억 6천만 달러입니다. 존 터너스 CEO 체제의 첫 실적 발표이며, 애플 주가는 장 전에 소폭 약세를 보였습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-2-dow-sp-500-nasdaq-091835095.html"
+  },
+  {
+   "title": "10월 ISM 제조업 지수 발표 예정",
+   "summary": "시장 예상치는 54.7로 전월 54.5와 비슷한 수준입니다. 가격지불지수는 77.5로 예상돼 높은 원가 부담이 이어지는지가 관심사입니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-2-dow-sp-500-nasdaq-091835095.html"
+  },
+  {
+   "title": "바이낸스 63억 달러 해킹…사상 최대 규모",
+   "summary": "바이낸스는 약 63억 달러가 탈취됐으며 그중 약 30억 달러를 동결했다고 밝혔습니다. 블록체인 분석업체들은 북한 연계 해킹 조직을 지목했고, 비트코인은 7만 8천 달러 안팎에서 거래되고 있습니다.",
+   "source": "알자지라",
+   "url": "https://aljazeera.com/news/2026/10/30/binance-says-6-3bn-stolen-in-biggest-crypto-heist-in-history-what-we-know"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장 (서머타임 해제)"
+  },
+  {
+   "time": "00:00",
+   "text": "미국 10월 ISM 제조업 지수 발표"
+  },
+  {
+   "time": "00:00",
+   "text": "미국 9월 건설지출 발표"
+  },
+  {
+   "time": "06:00",
+   "text": "미국 정규장 마감 후 애플 실적 발표"
+  }
+ ],
+ "kind": "us"
+}
