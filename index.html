@@ -1370,6 +1370,23 @@
   .vw-login-cta{ text-align:center; padding:26px 20px; border:1px solid var(--border-strong); border-radius:16px; background:linear-gradient(160deg, color-mix(in srgb, var(--gold) 9%, var(--paper)), var(--paper) 65%); }
   .vw-login-cta h2{ margin:0; font-size:19px; } .vw-login-cta p{ margin:8px 0 16px; color:var(--muted); font-size:14px; }
   @media (max-width:720px){ .vw-teasers{ grid-template-columns:1fr; } .be-body{ padding:16px; min-height:260px; } .vw-rich{ font-size:15.5px; } }
+
+  /* 정보 공유: 임시저장 */
+  .vd-tools{ display:flex; gap:6px; }
+  .vd-tools #vwDraftCount{ margin-left:4px; color:var(--gold); }
+  .vd-badge{ margin-left:8px; padding:2px 8px; border-radius:999px; font-size:11.5px; background:var(--gold); color:#14100A; font-weight:700; }
+  .vd-list{ border:1px solid var(--border-strong); border-radius:12px; background:var(--bg); padding:6px; margin:0 0 14px; display:flex; flex-direction:column; gap:4px; }
+  .vd-item{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:9px; }
+  .vd-item:hover, .vd-item.cur{ background:var(--paper-2); }
+  .vd-main{ min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .vd-main b{ font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .vd-main span{ font-size:12.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .vd-main em{ font-style:normal; font-size:11.5px; color:var(--faint); }
+  .vd-btns{ display:flex; gap:6px; flex:none; }
+  .vd-actions{ display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; }
+  .vd-status{ margin-right:auto; font-size:12.5px; color:var(--faint); }
+  .vd-status.ok{ color:var(--gain); } .vd-status.err{ color:var(--loss); }
+  @media (max-width:640px){ .vd-item{ flex-direction:column; align-items:stretch; } .vd-btns{ justify-content:flex-end; } }
 </style>
 </head><body>
 
@@ -1646,7 +1663,7 @@
       <h1>정보 공유</h1>
       <div class="sub">운영자가 정리한 시장·종목 정보를 종목명과 날짜로 찾아볼 수 있어요. 도움이 된 글에는 하트를 눌러 주세요.</div>
     </div>
-    <button class="btn primary" type="button" id="vwBtnWrite" hidden>글 올리기 (관리자)</button>
+    <button class="btn primary" type="button" id="vwBtnWrite" hidden>글 올리기 (관리자)<span class="vd-badge" id="vwDraftBadge" hidden></span></button>
   </div>
   <div class="disclaimer vw-disc"><strong>면책 안내</strong> 이 게시판의 글은 일반적인 정보 제공·교육 목적이며 투자 권유나 종목 추천, 개인별 투자자문이 아니에요. 글의 내용을 근거로 한 투자 판단과 그 결과에 대한 책임은 투자자 본인에게 있고, 투자에는 원금 손실 위험이 있어요. 글마다 기준일·근거와 작성자의 보유 여부가 표시돼요.</div>
   <div class="vw-locked" id="vwLocked">
@@ -1661,7 +1678,8 @@
   <div id="vwApp" hidden>
     <div class="lib vw-lib">
     <section id="vwPanel" hidden>
-      <div class="ap-title"><span id="vwFormTitle">정보 공유 글 올리기 · 수정</span><button class="btn sm" type="button" id="vwCancel">접기</button></div>
+      <div class="ap-title"><span id="vwFormTitle">정보 공유 글 올리기 · 수정</span><span class="vd-tools"><button class="btn sm" type="button" id="vwDraftList">임시저장 글 <b id="vwDraftCount">0</b></button><button class="btn sm" type="button" id="vwCancel">접기</button></span></div>
+      <div class="vd-list" id="vwDrafts" hidden></div>
       <div class="lfield">
         <label>분류</label>
         <div class="seg" id="vwCatSeg">
@@ -1725,7 +1743,7 @@
       </div>
       <label class="notify-row" id="vwNotifyRow"><input type="checkbox" id="vwNotify" checked> 올린 뒤 로그인 회원 전체에게 텔레그램 알림 보내기</label>
       <span class="submit-msg" id="vwMsg"></span>
-      <button class="btn-primary" id="vwSubmit" type="button">글 올리기</button>
+      <div class="vd-actions"><span class="vd-status" id="vwDraftStatus"></span><button class="btn" id="vwDraftSave" type="button">임시저장</button><button class="btn-primary" id="vwSubmit" type="button">글 올리기</button></div>
     </section>
     <div class="searchbar vw-search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -6020,11 +6038,13 @@ function vwSanitize(html, opt){
         [...out.attributes].forEach(a => out.removeAttribute(a.name));
         if (h){ out.setAttribute('href', h); out.setAttribute('target', '_blank'); out.setAttribute('rel', 'noopener nofollow ugc'); }
       } else if (tag === 'IMG'){
-        const key = out.getAttribute('data-vimg') || '', src = out.getAttribute('src') || '';
-        [...out.attributes].forEach(a => out.removeAttribute(a.name));
+        const key = out.getAttribute('data-vimg') || '', src = out.getAttribute('src') || '', dk0 = out.getAttribute('data-dk') || '';
+        [...out.attributes].forEach(a => { if (a.name !== 'data-dk') out.removeAttribute(a.name); });
+        const dk = dk0; out.removeAttribute('data-dk');
         if (/^[A-Za-z0-9_-]+_\d{1,2}$/.test(key)) out.setAttribute('data-vimg', key);
+        if (opt.keepDk && /^[a-z0-9]{6,24}$/.test(dk)) out.setAttribute('data-dk', dk);
         if (opt.keepSrc && /^data:image\/(png|jpe?g|webp);base64,/.test(src)) out.setAttribute('src', src);
-        if (!out.hasAttribute('data-vimg') && !out.hasAttribute('src')){ out.remove(); continue; }
+        if (!out.hasAttribute('data-vimg') && !out.hasAttribute('src') && !out.hasAttribute('data-dk')){ out.remove(); continue; }
         out.setAttribute('alt', '');
       } else {
         [...out.attributes].forEach(a => out.removeAttribute(a.name));
@@ -6209,7 +6229,7 @@ function vwInsertBlock(node){
 }
 function vwFigure(src){
   const f = document.createElement('figure');
-  f.innerHTML = `<img src="${src}" alt=""><figcaption></figcaption>`;
+  f.innerHTML = `<img src="${src}" data-dk="${uid().toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16) || Date.now().toString(36)}" alt=""><figcaption></figcaption>`;
   return f;
 }
 function vwTextToHtml(t){
@@ -6224,8 +6244,10 @@ async function vwEnsureImages(post){
 }
 function vwSetCat(c){ vwCat = VW_CATS[c] ? c : 'etc'; $$('#vwCatSeg [data-vcat]').forEach(b => b.classList.toggle('on', b.dataset.vcat === vwCat)); }
 function vwSyncTagQuick(){ const tags = $('#vwTags').value.split(',').map(s => s.trim()); $$('#vwTagQuick [data-vtag]').forEach(b => b.classList.toggle('on', tags.includes(b.dataset.vtag))); }
-async function vwOpenForm(post){
+async function vwOpenForm(post, draft){
   if (!isAdmin) return;
+  vwDraftReset(draft ? draft.id : null); vwDraftLoading = true;
+  if (draft && draft.editId) post = (vwAll || []).find(x => x.id === draft.editId) || vwPosts.find(x => x.id === draft.editId) || null;
   vwEditing = post ? post.id : null;
   $('#vwFormTitle').textContent = post ? '정보 공유 글 수정' : '정보 공유 글 올리기';
   $('#vwSubmit').textContent = post ? '수정 저장' : '글 올리기';
@@ -6254,12 +6276,15 @@ async function vwOpenForm(post){
       for (let i = 0; i < Number(post.imgCount || 0); i++){ const src = vwImgCache[post.id + '_' + i]; if (src) ed.appendChild(vwFigure(src)); }
     }
   } else ed.innerHTML = '<p><br></p>';
+  if (draft) await vwApplyDraft(draft);
   vwRenderThumbs();
+  setTimeout(() => { vwDraftLoading = false; vwDraftDirty = false; clearTimeout(vwDraftTimer); }, 0);
+  vwDraftDirty = false; vwDraftStatus(draft ? `임시저장한 글을 불러왔어요 (${fmtDate(draft.updatedAt).slice(5)})` : '작성하면 자동으로 임시저장돼요');
   $('#vwPanel').hidden = false;
   $('#vwPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-$('#vwBtnWrite').addEventListener('click', () => vwOpenForm(null));
-$('#vwCancel').addEventListener('click', () => { $('#vwPanel').hidden = true; vwEditing = null; });
+$('#vwBtnWrite').addEventListener('click', async () => { await vwOpenForm(null); if (vwDraftsCache.length){ $('#vwDrafts').hidden = false; vwRenderDrafts(); } });
+$('#vwCancel').addEventListener('click', async () => { if (vwDraftDirty) await vwDraftSaveNow(true); $('#vwPanel').hidden = true; vwEditing = null; vwDraftReset(null); });
 $('#vwCatSeg').addEventListener('click', e => { const b = e.target.closest('[data-vcat]'); if (b) vwSetCat(b.dataset.vcat); });
 $('#vwTagQuick').addEventListener('click', e => {
   const b = e.target.closest('[data-vtag]'); if (!b) return;
@@ -6375,11 +6400,137 @@ $('#vwSubmit').addEventListener('click', async () => {
     }
     toast(old ? '수정했어요.' : '글을 올렸어요.');
     if (created && $('#vwNotify').checked) notifyNewView({ id, ...created });
+    if (vwDraftId) await vwDraftDelete(vwDraftId).catch(() => {});
+    vwDraftReset(null);
     $('#vwPanel').hidden = true; vwEditing = null; vwFiles = []; vwPdfFile = null;
     msg.textContent = '';
   } catch(err){ msg.className = 'submit-msg err'; msg.textContent = '실패: ' + err.message; }
   $('#vwSubmit').disabled = false;
 });
+
+/* ---------- 임시저장 (블로그 자동저장처럼) ----------
+ * vdrafts/{id}: 제목·본문(html)·분류·태그 등 / vdraftimgs/{id}_{key}: 사진 (한 번 올린 사진은 다시 올리지 않음)
+ * 입력이 멈추고 3초 뒤 자동 저장, 최소 30초마다 한 번은 저장. 글을 올리면 임시저장은 지워짐. 관리자만 읽고 쓸 수 있음. */
+const VD_DELAY = 3000, VD_MAX_WAIT = 30000;
+let vwDraftLoading = false, vwDraftId = null, vwDraftDirty = false, vwDraftTimer = 0, vwDraftFirstDirty = 0, vwDraftSaving = null, vwDraftImgsSaved = new Set(), vwDraftsCache = [];
+function vwDraftStatus(t, cls){ const el = $('#vwDraftStatus'); el.textContent = t || ''; el.className = 'vd-status' + (cls ? ' ' + cls : ''); }
+function vwDraftReset(id){ clearTimeout(vwDraftTimer); vwDraftId = id || null; vwDraftDirty = false; vwDraftFirstDirty = 0; vwDraftImgsSaved = new Set(); }
+function vwDraftMark(){
+  if ($('#vwPanel').hidden || !isAdmin || vwDraftLoading) return;
+  vwDraftDirty = true; if (!vwDraftFirstDirty) vwDraftFirstDirty = Date.now();
+  vwDraftStatus('입력 중…');
+  clearTimeout(vwDraftTimer);
+  const wait = Math.max(0, Math.min(VD_DELAY, VD_MAX_WAIT - (Date.now() - vwDraftFirstDirty)));
+  vwDraftTimer = setTimeout(() => vwDraftSaveNow(false), wait);
+}
+function vwDraftHasContent(){ return !!($('#vwTitle').value.trim() || ($('#vwEditor').innerText || '').trim() || $$('#vwEditor img').length); }
+async function vwDraftSaveNow(manual){
+  if (!authUser || !isAdmin) return;
+  if (vwDraftSaving) { await vwDraftSaving; if (!vwDraftDirty && !manual) return; }
+  if (!vwDraftHasContent()){ if (manual) vwDraftStatus('저장할 내용이 없어요', 'err'); return; }
+  vwDraftSaving = (async () => {
+    clearTimeout(vwDraftTimer);
+    vwDraftDirty = false; vwDraftFirstDirty = 0;
+    vwDraftStatus('저장 중…');
+    try{
+      if (!vwDraftId) vwDraftId = doc(collection(db, 'vdrafts')).id;
+      const id = vwDraftId;
+      const tpl = document.createElement('template'); tpl.innerHTML = $('#vwEditor').innerHTML;
+      for (const im of tpl.content.querySelectorAll('img')){
+        let dk = im.getAttribute('data-dk'); const src = im.getAttribute('src') || '';
+        if (im.hasAttribute('data-vimg')){ im.removeAttribute('src'); continue; }   // 이미 올린 글의 사진은 원본을 그대로 참조
+        if (!dk){ dk = uid().toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16); im.setAttribute('data-dk', dk); }
+        if (/^data:image\//.test(src) && !vwDraftImgsSaved.has(dk)){
+          await setDoc(doc(db, 'vdraftimgs', id + '_' + dk), { draft: id, key: dk, data: src, uid: authUser.uid, at: Date.now() });
+          vwDraftImgsSaved.add(dk);
+        }
+        im.removeAttribute('src');
+      }
+      // 편집기 안의 사진에도 같은 키를 붙여 다음 저장 때 다시 올리지 않게 함
+      const edImgs = $$('#vwEditor img'), tplImgs = [...tpl.content.querySelectorAll('img')];
+      edImgs.forEach((im, i) => { const k = tplImgs[i] && tplImgs[i].getAttribute('data-dk'); if (k && !im.getAttribute('data-dk')) im.setAttribute('data-dk', k); });
+      const data = {
+        uid: authUser.uid, editId: vwEditing || null, title: $('#vwTitle').value.trim().slice(0, 120),
+        html: vwSanitize(tpl.innerHTML, { keepSrc: false, keepDk: true }).slice(0, 290000),
+        preview: ($('#vwEditor').innerText || '').replace(/\s+/g, ' ').trim().slice(0, 80),
+        imgKeys: [...tpl.content.querySelectorAll('img[data-dk]')].map(x => x.getAttribute('data-dk')),
+        category: vwCat, tags: $('#vwTags').value, asOf: $('#vwAsOf').value || '', source: $('#vwSource').value, holding: $('#vwHolding').value,
+        updatedAt: Date.now()
+      };
+      await setDoc(doc(db, 'vdrafts', id), data);
+      vwDraftStatus(`${manual ? '임시저장했어요' : '자동 저장됨'} · ${fmtDate(data.updatedAt).slice(11)}`, 'ok');
+      vwDraftsRefresh();
+    } catch(err){ vwDraftDirty = true; vwDraftStatus('임시저장 실패: ' + err.message, 'err'); }
+  })();
+  await vwDraftSaving; vwDraftSaving = null;
+}
+async function vwApplyDraft(d){
+  $('#vwTitle').value = d.title || '';
+  vwSetCat(d.category || 'kr');
+  $('#vwTags').value = d.tags || ''; vwSyncTagQuick();
+  $('#vwAsOf').value = d.asOf || ''; $('#vwSource').value = d.source || ''; $('#vwHolding').value = d.holding || '';
+  const imgs = {};
+  try{
+    const snap = await getDocs(query(collection(db, 'vdraftimgs'), where('draft', '==', d.id)));
+    snap.docs.forEach(s => { const x = s.data(); imgs[x.key] = x.data; });
+  } catch(e){}
+  const tpl = document.createElement('template'); tpl.innerHTML = vwSanitize(d.html || '', { keepSrc: true, keepDk: true });
+  for (const im of tpl.content.querySelectorAll('img')){
+    const dk = im.getAttribute('data-dk'), key = im.getAttribute('data-vimg');
+    if (dk && imgs[dk]){ im.setAttribute('src', imgs[dk]); vwDraftImgsSaved.add(dk); continue; }
+    if (key){ if (!vwImgCache[key]){ try{ const s = await getDoc(doc(db, 'vimgs', key)); if (s.exists()) vwImgCache[key] = s.data().data; } catch(e){} } if (vwImgCache[key]){ im.setAttribute('src', vwImgCache[key]); continue; } }
+    (im.closest('figure') || im).remove();
+  }
+  tpl.content.querySelectorAll('figure').forEach(f => { if (!f.querySelector('figcaption')) f.appendChild(document.createElement('figcaption')); });
+  $('#vwEditor').innerHTML = tpl.innerHTML || '<p><br></p>';
+}
+async function vwDraftDelete(id){
+  try{ const snap = await getDocs(query(collection(db, 'vdraftimgs'), where('draft', '==', id))); for (const s of snap.docs) await deleteDoc(s.ref); } catch(e){}
+  await deleteDoc(doc(db, 'vdrafts', id));
+  vwDraftsRefresh();
+}
+async function vwDraftsRefresh(){
+  if (!authUser || !isAdmin) return;
+  try{
+    const snap = await getDocs(query(collection(db, 'vdrafts'), orderBy('updatedAt', 'desc'), limit(30)));
+    vwDraftsCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  } catch(e){ vwDraftsCache = []; }
+  const n = vwDraftsCache.length;
+  $('#vwDraftCount').textContent = n;
+  const badge = $('#vwDraftBadge'); badge.hidden = !n; badge.textContent = n ? `임시저장 ${n}` : '';
+  if (!$('#vwDrafts').hidden) vwRenderDrafts();
+}
+function vwRenderDrafts(){
+  $('#vwDrafts').innerHTML = vwDraftsCache.length ? vwDraftsCache.map(d => `<div class="vd-item${d.id === vwDraftId ? ' cur' : ''}">
+      <div class="vd-main"><b>${escapeHtml(d.title || '(제목 없음)')}</b><span>${escapeHtml(d.preview || '')}</span><em>${fmtDate(d.updatedAt)}${d.editId ? ' · 기존 글 수정 중' : ''}${(d.imgKeys || []).length ? ` · 사진 ${(d.imgKeys || []).length}장` : ''}</em></div>
+      <div class="vd-btns"><button type="button" class="btn-mini" data-vdopen="${d.id}">이어서 쓰기</button><button type="button" class="btn-mini danger" data-vddel="${d.id}">삭제</button></div>
+    </div>`).join('') : '<div class="section-note" style="margin:0">임시저장한 글이 없어요.</div>';
+}
+['input', 'change'].forEach(ev => {
+  ['#vwTitle', '#vwTags', '#vwAsOf', '#vwSource', '#vwHolding'].forEach(sel => $(sel).addEventListener(ev, vwDraftMark));
+});
+$('#vwEditor').addEventListener('input', vwDraftMark);
+new MutationObserver(() => { if (!$('#vwPanel').hidden) vwDraftMark(); }).observe($('#vwEditor'), { childList: true, subtree: true });
+$('#vwCatSeg').addEventListener('click', e => { if (e.target.closest('[data-vcat]')) vwDraftMark(); });
+$('#vwDraftSave').addEventListener('click', () => vwDraftSaveNow(true));
+$('#vwDraftList').addEventListener('click', async () => { const box = $('#vwDrafts'); box.hidden = !box.hidden; if (!box.hidden){ vwRenderDrafts(); vwDraftsRefresh(); } });
+$('#vwDrafts').addEventListener('click', async e => {
+  const o = e.target.closest('[data-vdopen]'), d = e.target.closest('[data-vddel]');
+  if (o){
+    if (vwDraftDirty) await vwDraftSaveNow(false);
+    const dr = vwDraftsCache.find(x => x.id === o.dataset.vdopen); if (!dr) return;
+    $('#vwDrafts').hidden = true; await vwOpenForm(null, dr);
+  } else if (d){
+    if (!confirmClick(d)) return;
+    const id = d.dataset.vddel; await vwDraftDelete(id).catch(err => toast('삭제 실패: ' + err.message));
+    if (id === vwDraftId) vwDraftReset(null);
+    toast('임시저장 글을 삭제했어요.');
+  }
+});
+window.addEventListener('beforeunload', e => { if (vwDraftDirty && !$('#vwPanel').hidden){ vwDraftSaveNow(false); e.preventDefault(); e.returnValue = ''; } });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && vwDraftDirty) vwDraftSaveNow(false); });
+authHooks.push(() => { if (isAdmin) vwDraftsRefresh(); });
+
 async function notifyNewView(p){
   const targets = usersCache.filter(u => u.canDM !== false && u.notify !== false && u.chatId).map(u => u.id);
   if (!targets.length){ toast('알림 받을 회원이 아직 없어요.'); return; }
