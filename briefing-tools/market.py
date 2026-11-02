@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""아침 시황용 시장 수치 수집 (네이버 증권 공개 API). 결과를 JSON으로 출력."""
-import json, urllib.request
+"""시황용 시장 수치 수집 (네이버 증권·업비트 공개 API). 결과를 JSON으로 출력.
+사용: python3 market.py        → 아침 시황 (전날 미국 4대 지수 마감)
+      python3 market.py --us   → 미국장 시황 (지수 선물 실시간 + VIX)"""
+import json, sys, urllib.request
 UA = {'User-Agent': 'Mozilla/5.0'}
 def get(u):
     with urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=15) as r: return json.load(r)
@@ -9,11 +11,23 @@ def pct(x):
     except: return ''
     return ('+' if v > 0 else '' if v < 0 else '') + f'{v:.2f}%'
 out = {'us': [], 'macro': [], 'raw': {}}
-for code, name in [('.INX', 'S&P 500'), ('.IXIC', '나스닥'), ('.DJI', '다우'), ('.SOX', '필라델피아 반도체')]:
+US_MODE = '--us' in sys.argv
+if US_MODE:
+    for code, name in [('EScv1', 'S&P 500 선물'), ('NQcv1', '나스닥100 선물'), ('YMcv1', '다우 선물')]:
+        try:
+            d = get(f'https://api.stock.naver.com/futures/{code}/basic')
+            out['us'].append({'name': name, 'value': d['closePrice'], 'chg': pct(d['fluctuationsRatio']), 'at': d.get('localTradedAt')})
+        except Exception as e: out['raw'][name] = str(e)
     try:
-        d = get(f'https://api.stock.naver.com/index/{code}/basic')
-        out['us'].append({'name': name, 'value': d['closePrice'], 'chg': pct(d['fluctuationsRatio']), 'at': d.get('localTradedAt')})
-    except Exception as e: out['raw'][name] = str(e)
+        d = get('https://api.stock.naver.com/index/.VIX/basic')
+        out['us'].append({'name': 'VIX(전일)', 'value': d['closePrice'], 'chg': pct(d['fluctuationsRatio']), 'at': d.get('localTradedAt')})
+    except Exception as e: out['raw']['VIX'] = str(e)
+else:
+    for code, name in [('.INX', 'S&P 500'), ('.IXIC', '나스닥'), ('.DJI', '다우'), ('.SOX', '필라델피아 반도체')]:
+        try:
+            d = get(f'https://api.stock.naver.com/index/{code}/basic')
+            out['us'].append({'name': name, 'value': d['closePrice'], 'chg': pct(d['fluctuationsRatio']), 'at': d.get('localTradedAt')})
+        except Exception as e: out['raw'][name] = str(e)
 def mi(cat, code):
     return get(f'https://m.stock.naver.com/front-api/marketIndex/productDetail?category={cat}&reutersCode={code}')['result']
 specs = [('exchange', 'FX_USDKRW', '원/달러', lambda v: v + '원'),

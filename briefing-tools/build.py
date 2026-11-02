@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """아침 시황 발행: draft.json 을 검사하고 briefing/<date>.json, latest.json, index.json 을 갱신.
-사용: python3 briefing-tools/build.py draft.json   (저장소 루트에서 실행)"""
+사용: python3 briefing-tools/build.py draft.json         아침 시황
+      python3 briefing-tools/build.py draft.json --us    미국장 시황 (briefing/us-*.json)
+(저장소 루트에서 실행)"""
 import json, sys, os, re
 d = json.load(open(sys.argv[1], encoding='utf-8'))
+US = '--us' in sys.argv
+P = 'us-' if US else ''
+d['kind'] = 'us' if US else 'morning'
 req = ['date', 'weekday', 'generatedAt', 'headline', 'us', 'macro', 'news', 'schedule']
 miss = [k for k in req if k not in d]
 assert not miss, f'빠진 항목: {miss}'
@@ -18,11 +23,11 @@ for x in d['us'] + d['macro']:
     assert x.get('name') and x.get('value'), f'지표 누락: {x}'
     x.pop('at', None)
 os.makedirs('briefing', exist_ok=True)
-for name in (d['date'] + '.json', 'latest.json'):
+for name in (P + d['date'] + '.json', P + 'latest.json'):
     json.dump(d, open(os.path.join('briefing', name), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-idx_path = 'briefing/index.json'
+idx_path = 'briefing/' + P + 'index.json'
 idx = json.load(open(idx_path, encoding='utf-8')) if os.path.exists(idx_path) else {'dates': []}
 dates = [x for x in idx.get('dates', []) if x != d['date']]
 dates.insert(0, d['date'])
 json.dump({'dates': sorted(set(dates), reverse=True)[:365]}, open(idx_path, 'w', encoding='utf-8'), ensure_ascii=False)
-print('OK', d['date'], len(d['news']), 'news')
+print('OK', d['kind'], d['date'], len(d['news']), 'news')

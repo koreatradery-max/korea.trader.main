@@ -1387,6 +1387,12 @@
   .vd-status{ margin-right:auto; font-size:12.5px; color:var(--faint); }
   .vd-status.ok{ color:var(--gain); } .vd-status.err{ color:var(--loss); }
   @media (max-width:640px){ .vd-item{ flex-direction:column; align-items:stretch; } .vd-btns{ justify-content:flex-end; } }
+
+  .bf-tabs{ display:flex; gap:6px; margin:20px auto 0; max-width:860px; }
+  .bf-tabs button{ flex:1; height:44px; border-radius:12px; border:1px solid var(--border); background:var(--paper); color:var(--muted); font:inherit; font-weight:700; font-size:14.5px; cursor:pointer; }
+  .bf-tabs button small{ font-weight:600; font-size:12px; color:var(--faint); margin-left:4px; }
+  .bf-tabs button.on{ border-color:var(--gold); color:var(--ink); background:color-mix(in srgb, var(--gold) 10%, var(--paper)); }
+  .bf-tabs button.on small{ color:var(--gold); }
 </style>
 </head><body>
 
@@ -1411,7 +1417,7 @@
     </a>
     <nav class="tabnav" id="tabnav" aria-label="메뉴">
       <a data-view="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span class="nl">홈</span><span class="ns">홈</span></a>
-      <a data-view="briefing" href="#briefing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2"/><path d="M5.6 5.6 7 7"/><path d="M18.4 5.6 17 7"/><path d="M3 13h2"/><path d="M19 13h2"/><path d="M7.5 17a4.5 4.5 0 1 1 9 0"/><path d="M3 20h18"/></svg><span class="nl">아침 시황</span><span class="ns">시황</span></a>
+      <a data-view="briefing" href="#briefing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2"/><path d="M5.6 5.6 7 7"/><path d="M18.4 5.6 17 7"/><path d="M3 13h2"/><path d="M19 13h2"/><path d="M7.5 17a4.5 4.5 0 1 1 9 0"/><path d="M3 20h18"/></svg><span class="nl">시황</span><span class="ns">시황</span></a>
       <a data-view="library" href="#library"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg><span class="nl">공부 자료실</span><span class="ns">자료실</span><i class="nav-dot" id="libDot" hidden></i></a>
       <a data-view="challenge" href="#challenge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="nl">100불 챌린지</span><span class="ns">챌린지</span></a>
       <a data-view="moesan" href="#moesan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 20 6-11 4 6 3-4 5 9z"/></svg><span class="nl">뫼산 매매법</span><span class="ns">뫼산</span></a>
@@ -2413,11 +2419,15 @@
 <section class="view" id="view-briefing" data-view="briefing" hidden>
   <div class="view-head">
     <div>
-      <div class="eyebrow">매일 아침 8시 50분</div>
-      <h1>아침 시황</h1>
-      <div class="sub">밤사이 미국 증시와 환율·금리, 체크할 뉴스와 오늘 일정을 한 페이지에 정리해요. 로그인 회원에게는 텔레그램으로도 보내드려요.</div>
+      <div class="eyebrow">매일 아침 8시 50분 · 밤 10시</div>
+      <h1>시황</h1>
+      <div class="sub">아침에는 밤사이 미국 증시와 오늘 일정을, 밤 10시에는 미국장 개장 전 선물·뉴스·일정을 정리해요. 로그인 회원에게는 텔레그램으로도 보내드려요.</div>
     </div>
     <div class="bf-pick"><label for="bfDate" class="sr-only">날짜 선택</label><select id="bfDate" class="inp"></select></div>
+  </div>
+  <div class="bf-tabs" id="bfTabs" role="tablist">
+    <button type="button" data-bk="morning" class="on" role="tab">아침 시황 <small>08:50</small></button>
+    <button type="button" data-bk="us" role="tab">미국장 시황 <small>22:00</small></button>
   </div>
   <div id="bfEmpty" class="section-note" hidden>아직 발행된 시황이 없어요.</div>
   <article class="bf" id="bfArticle" hidden>
@@ -2426,12 +2436,12 @@
       <h2 class="bf-head" id="bfHeadline"></h2>
       <div class="bf-meta" id="bfMeta"></div>
     </header>
-    <section class="bf-sec"><h3 class="bf-h">밤사이 미국 증시</h3><div class="bf-idx" id="bfUs"></div></section>
+    <section class="bf-sec"><h3 class="bf-h" id="bfH1">밤사이 미국 증시</h3><div class="bf-idx" id="bfUs"></div></section>
     <div class="bf-gate" id="bfGate">
       <div class="bf-rest" id="bfRest">
-        <section class="bf-sec"><h3 class="bf-h">환율 · 금리 · 원자재</h3><div class="bf-macro" id="bfMacro"></div></section>
-        <section class="bf-sec"><h3 class="bf-h">밤사이 체크할 뉴스</h3><ol class="bf-news" id="bfNews"></ol></section>
-        <section class="bf-sec"><h3 class="bf-h">오늘의 일정</h3><ul class="bf-cal" id="bfCal"></ul></section>
+        <section class="bf-sec"><h3 class="bf-h" id="bfH2">환율 · 금리 · 원자재</h3><div class="bf-macro" id="bfMacro"></div></section>
+        <section class="bf-sec"><h3 class="bf-h" id="bfH3">밤사이 체크할 뉴스</h3><ol class="bf-news" id="bfNews"></ol></section>
+        <section class="bf-sec"><h3 class="bf-h" id="bfH4">오늘의 일정</h3><ul class="bf-cal" id="bfCal"></ul></section>
       </div>
       <div class="bf-lock" id="bfLock" hidden><div class="bf-lock-panel">
         <b>텔레그램으로 로그인하고 전체 시황 보기</b>
@@ -2601,9 +2611,9 @@
   </div>
   <div class="adm-grid">
     <div class="card adm-card" id="admBriefCard">
-      <h3>아침 시황 발송</h3>
-      <div class="section-note">매일 8:50에 자동 발송돼요. 여기서는 오늘 시황을 나에게만 테스트로 보내거나, 전체 회원에게 지금 보낼 수 있어요.</div>
-      <div class="adm-row"><span id="admBriefInfo" class="section-note" style="margin:0;flex:1">불러오는 중…</span><button class="btn sm" id="admBriefTest" type="button">나에게 테스트 발송</button><button class="btn primary sm" id="admBriefAll" type="button">전체 회원에게 지금 발송</button></div>
+      <h3>시황 발송</h3>
+      <div class="section-note">아침 시황은 매일 8:50, 미국장 시황은 평일 22:00에 자동 발송돼요. 여기서는 최신 시황을 나에게만 테스트로 보내거나, 전체 회원에게 지금 보낼 수 있어요.</div>
+      <div class="adm-row"><select class="inp" id="admBriefKind" style="width:auto"><option value="morning">아침 시황</option><option value="us">미국장 시황</option></select><span id="admBriefInfo" class="section-note" style="margin:0;flex:1">불러오는 중…</span><button class="btn sm" id="admBriefTest" type="button">나에게 테스트 발송</button><button class="btn primary sm" id="admBriefAll" type="button">전체 회원에게 지금 발송</button></div>
       <div class="submit-msg" id="admBriefMsg"></div>
     </div>
     <div class="card adm-card">
@@ -3228,10 +3238,11 @@ const VIEWS = ['home','briefing','library','views','moesan','challenge','journal
 const routeHooks = {};   // 탭이 열릴 때 실행
 const authHooks = [];    // 로그인 상태가 바뀔 때 실행
 const journalHooks = []; // 매매일지 목록이 바뀔 때 실행
-let pendingPostId = null, vwPendingId = null;
+let pendingPostId = null, vwPendingId = null, bfKindPending = null;
 function applyRoute(){
   let h = decodeURIComponent(location.hash.slice(1));
   if (h.startsWith('post=')){ pendingPostId = h.slice(5); h = 'library'; }
+  if (h.startsWith('briefing/')){ bfKindPending = h.slice(9) === 'us' ? 'us' : 'morning'; h = 'briefing'; }
   if (h.startsWith('views/')){ vwPendingId = h.slice(6).replace(/[^A-Za-z0-9_-]/g, '') || null; h = 'views'; }
   if (!VIEWS.includes(h)) h = 'home';
   if (h === 'admin' && !isAdmin) h = 'home';
@@ -6801,10 +6812,14 @@ authHooks.push(() => {
 });
 
 /* ================================================================
-   아침 시황 (briefing/*.json — 매일 아침 자동 발행)
+   시황 (briefing/*.json 아침 · briefing/us-*.json 미국장 — 자동 발행)
 ================================================================ */
 const BF_BASE = 'briefing/';
-let bfIndex = null, bfCache = {}, bfCur = null;
+const BF_KINDS = {
+  morning: { pre: '', title: '아침 시황', h: ['밤사이 미국 증시', '환율 · 금리 · 원자재', '밤사이 체크할 뉴스', '오늘의 일정'] },
+  us: { pre: 'us-', title: '미국장 시황', h: ['미국 지수 선물 (개장 전)', '환율 · 금리 · 원자재', '오늘 밤 체크할 뉴스', '오늘 밤 일정 (한국 시간)'] }
+};
+let bfKind = null, bfIndex = {}, bfCache = {}, bfCur = null;
 function bfCls(c){ const s = String(c || '').trim(); return /^[+▲]/.test(s) || (/^\d/.test(s) && parseFloat(s) > 0) ? 'bf-up' : /^[-−▼]/.test(s) ? 'bf-down' : 'bf-flat'; }
 function bfChg(c){ const s = String(c || '').trim(); if (!s) return ''; const cls = bfCls(s); const arrow = cls === 'bf-up' ? '▲' : cls === 'bf-down' ? '▼' : ''; return `<span class="c ${cls}">${arrow}${escapeHtml(s.replace(/^[+\-−▲▼]/, ''))}</span>`; }
 function bfSafeUrl(u){ return /^https?:\/\//.test(String(u || '')) ? String(u) : ''; }
@@ -6815,10 +6830,13 @@ async function bfFetch(name){
   return (bfCache[name] = await r.json());
 }
 function bfDateLabel(b){ const d = String(b.date || ''); const m = d.match(/^(\d{4})-(\d{2})-(\d{2})$/); return m ? `${+m[2]}월 ${+m[3]}일${b.weekday ? '(' + b.weekday + ')' : ''}` : d; }
+function bfDefaultKind(){ const h = new Date(Date.now() + 9 * 3600 * 1000).getUTCHours(); return (h >= 22 || h < 8) ? 'us' : 'morning'; }
 function bfRender(b){
   bfCur = b;
+  const K = BF_KINDS[bfKind];
   $('#bfArticle').hidden = false; $('#bfEmpty').hidden = true;
-  $('#bfDateLine').textContent = 'STOCK PICK! 아침 시황 · ' + bfDateLabel(b);
+  $('#bfDateLine').textContent = `STOCK PICK! ${K.title} · ` + bfDateLabel(b);
+  ['#bfH1', '#bfH2', '#bfH3', '#bfH4'].forEach((s, i) => { $(s).textContent = K.h[i]; });
   $('#bfHeadline').textContent = b.headline || '';
   const t = b.generatedAt ? new Date(b.generatedAt) : null;
   $('#bfMeta').textContent = (t && !isNaN(t) ? t.toLocaleString('ko-KR', { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) + ' 작성 · ' : '') + 'AI가 공개 자료를 바탕으로 정리';
@@ -6833,45 +6851,58 @@ function bfGate(){
   $('#bfGate').classList.toggle('locked', locked);
   $('#bfLock').hidden = !locked;
 }
-async function bfLoad(date){
+async function bfLoad(date, kind){
+  if (kind && kind !== bfKind){ bfKind = kind; }
+  if (!bfKind) bfKind = bfDefaultKind();
+  $$('#bfTabs [data-bk]').forEach(b => b.classList.toggle('on', b.dataset.bk === bfKind));
+  const P = BF_KINDS[bfKind].pre;
   try{
-    if (!bfIndex){
-      try{ bfIndex = await bfFetch('index.json'); } catch(e){ bfIndex = { dates: [] }; }
-      const sel = $('#bfDate');
-      sel.innerHTML = (bfIndex.dates || []).slice(0, 60).map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
-      sel.hidden = !(bfIndex.dates || []).length;
+    if (!bfIndex[bfKind]){
+      try{ bfIndex[bfKind] = await bfFetch(P + 'index.json'); } catch(e){ bfIndex[bfKind] = { dates: [] }; }
     }
-    const b = await bfFetch(date ? date + '.json' : 'latest.json');
+    const sel = $('#bfDate'), dates = (bfIndex[bfKind].dates || []).slice(0, 60);
+    sel.innerHTML = dates.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
+    sel.hidden = !dates.length;
+    const b = await bfFetch(date ? P + date + '.json' : P + 'latest.json');
     if (!b || !b.date) throw new Error('empty');
-    $('#bfDate').value = b.date;
+    sel.value = b.date;
     bfRender(b);
   } catch(e){
-    $('#bfArticle').hidden = true; $('#bfEmpty').hidden = false;
+    // 미국장 시황이 아직 없으면 아침 시황으로
+    if (!date && bfKind === 'us' && !kind){ bfKind = 'morning'; return bfLoad(null, 'morning'); }
+    bfCur = null; $('#bfArticle').hidden = true; $('#bfEmpty').hidden = false;
+    $('#bfEmpty').textContent = `아직 발행된 ${BF_KINDS[bfKind].title}이 없어요.`;
   }
 }
-routeHooks.briefing = () => { if (!bfCur) bfLoad(); else bfGate(); };
+routeHooks.briefing = () => {
+  if (bfKindPending){ const k = bfKindPending; bfKindPending = null; bfLoad(null, k); return; }
+  if (!bfCur) bfLoad(); else bfGate();
+};
 authHooks.push(bfGate);
 $('#bfDate').addEventListener('change', e => bfLoad(e.target.value));
+$('#bfTabs').addEventListener('click', e => { const b = e.target.closest('[data-bk]'); if (b && b.dataset.bk !== bfKind) bfLoad(null, b.dataset.bk); });
 $('#bfLogin').addEventListener('click', openLogin);
 
 /* 관리자: 시황 발송 */
 async function admBriefInfo(){
-  try{ const b = await bfFetch('latest.json'); $('#admBriefInfo').textContent = `최신 시황: ${b.date} · ${b.headline || ''}`; }
-  catch(e){ $('#admBriefInfo').textContent = '아직 발행된 시황이 없어요.'; }
+  const k = $('#admBriefKind').value, K = BF_KINDS[k];
+  try{ const b = await bfFetch(K.pre + 'latest.json'); $('#admBriefInfo').textContent = `최신 ${K.title}: ${b.date} · ${b.headline || ''}`; }
+  catch(e){ $('#admBriefInfo').textContent = `아직 발행된 ${K.title}이 없어요.`; }
 }
+$('#admBriefKind').addEventListener('change', admBriefInfo);
 routeHooks.admin = (prev => () => { if (prev) prev(); admBriefInfo(); })(routeHooks.admin);
 $('#admBriefTest').addEventListener('click', async () => {
   const msg = $('#admBriefMsg'); msg.className = 'submit-msg'; msg.textContent = '보내는 중…';
-  try{ const d = await meApi('/briefing/send', { mode: 'test' }); msg.className = 'submit-msg ok'; msg.textContent = `테스트 발송 완료 (${d.sent}명 · ${d.date})`; }
+  try{ const d = await meApi('/briefing/send', { mode: 'test', kind: $('#admBriefKind').value }); msg.className = 'submit-msg ok'; msg.textContent = `테스트 발송 완료 (${d.sent}명 · ${d.date})`; }
   catch(e){ msg.className = 'submit-msg err'; msg.textContent = '실패: ' + e.message; }
 });
 $('#admBriefAll').addEventListener('click', async () => {
-  if (!confirm('오늘 시황을 알림을 켠 모든 회원에게 지금 보낼까요?')) return;
+  if (!confirm(`최신 ${BF_KINDS[$('#admBriefKind').value].title}을 알림을 켠 모든 회원에게 지금 보낼까요?`)) return;
   const msg = $('#admBriefMsg'); msg.className = 'submit-msg'; let total = 0;
   try{
     for (let i = 0; i < 30; i++){
       msg.textContent = `보내는 중… ${total}명`;
-      const d = await meApi('/briefing/send', { mode: i === 0 ? 'all-start' : 'all' });
+      const d = await meApi('/briefing/send', { mode: i === 0 ? 'all-start' : 'all', kind: $('#admBriefKind').value });
       total += d.sent || 0;
       if (d.done) break;
     }
