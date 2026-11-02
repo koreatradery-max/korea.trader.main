@@ -356,6 +356,11 @@ async function liveImport(req, env, cors) {
   const rows = [[{ text: '전체 요약 보기', url: `${base}#post=${pid}` }]];
   if (post.videoUrl) rows.push([{ text: '▶ 다시보기', url: post.videoUrl }]);
   const markup = { inline_keyboard: rows };
+  if (body.test === true) {   // 테스트: 관리자에게만 1회 발송 (회원 발송 기록 안 남김)
+    let sent = 0;
+    for (const a of adminIds(env)) { const r = await sendBriefingTo(env, a, text, markup, ''); if (r.ok) sent++; }
+    return json({ ok: sent > 0, id: pid, sent, done: true, test: true }, 200, cors);
+  }
   const r2 = await dmBatch(env, `liveRuns/${id}`, text, markup, false, '');
   return json({ ok: true, id: pid, ...r2 }, 200, cors);
 }
