@@ -4482,7 +4482,7 @@ function loadPdfJs(){
   return pdfjsReady;
 }
 async function analyzePdf(file){
-  const out = { text: "", thumb: null, pages: 0 };
+  const out = { text: "", thumb: null, cover: null, pages: 0 };
   try{
     const lib = await loadPdfJs();
     const pdf = await lib.getDocument({ data: await file.arrayBuffer() }).promise;
@@ -4499,6 +4499,12 @@ async function analyzePdf(file){
     const canvas = document.createElement('canvas'); canvas.width = v2.width; canvas.height = v2.height;
     await page1.render({ canvasContext: canvas.getContext('2d'), viewport: v2 }).promise;
     out.thumb = canvas.toDataURL('image/jpeg', 0.72);
+    try{   // 텔레그램 알림용 고해상도 표지 (1080px)
+      const v3 = page1.getViewport({ scale: 1080 / vp.width });
+      const c3 = document.createElement('canvas'); c3.width = v3.width; c3.height = v3.height;
+      await page1.render({ canvasContext: c3.getContext('2d'), viewport: v3 }).promise;
+      out.cover = c3.toDataURL('image/jpeg', 0.86);
+    } catch(e){ console.warn('표지 생성 실패', e); }
   } catch(err){ console.warn('PDF 분석 실패(업로드는 계속):', err); }
   return out;
 }
@@ -4512,6 +4518,7 @@ const store = {
     if (s.exists()){
       const d = s.data();
       if (d.pdfId) await this.delFile(d.pdfId, d.pdfChunks || 1);
+      if (d.coverId) await this.delFile(d.coverId, d.coverChunks || 1);
       if (d.imgId) await this.delFile(d.imgId, d.imgChunks || 1);
       if (Array.isArray(d.images)) for (const im of d.images) await this.delFile(im.id, im.chunks || 1);
     }
@@ -4994,14 +5001,17 @@ $('#btnPublish').addEventListener('click', async () => {
       target.pdfId = uid(); target.pdfName = file.name;
       target.pdfChunks = await store.putFile(target.pdfId, await readB64(file));
       target.pdfThumb = info.thumb; target.pdfPages = info.pages; target.searchText = info.text;
+      target.coverId = null; target.coverChunks = 0;
+      if (info.cover){ target.coverId = uid(); target.coverChunks = await store.putFile(target.coverId, info.cover.split(',')[1]); }
       target.pdfSizeMB = +(file.size / 1048576).toFixed(1);
     };
     if (editingId){
       const data = { title, content, category: writeCat, tags, ...liveData, ...comp };
-      if (file){ if (editingPost.pdfId) await store.delFile(editingPost.pdfId, editingPost.pdfChunks || 1); await uploadPdf(data); }
+      if (file){ if (editingPost.pdfId) await store.delFile(editingPost.pdfId, editingPost.pdfChunks || 1); if (editingPost.coverId) await store.delFile(editingPost.coverId, editingPost.coverChunks || 1); await uploadPdf(data); }
       else if ((!keepPdf || isLive) && editingPost.pdfId){
         await store.delFile(editingPost.pdfId, editingPost.pdfChunks || 1);
-        Object.assign(data, { pdfId: null, pdfName: null, pdfChunks: 0, pdfThumb: null, pdfPages: 0, searchText: null, pdfSizeMB: 0 });
+        if (editingPost.coverId) await store.delFile(editingPost.coverId, editingPost.coverChunks || 1);
+        Object.assign(data, { pdfId: null, pdfName: null, pdfChunks: 0, pdfThumb: null, pdfPages: 0, searchText: null, pdfSizeMB: 0, coverId: null, coverChunks: 0 });
       }
       if (imgFiles.length){
         for (const im of postImages(editingPost)) await store.delFile(im.id, im.chunks || 1);
@@ -5033,12 +5043,34 @@ $('#btnPublish').addEventListener('click', async () => {
 async function notifyNewPost(p){
   const targets = usersCache.filter(u => u.canDM !== false && u.notify !== false && u.chatId).map(u => u.id);
   if (!targets.length){ toast('알림 받을 회원이 아직 없어요.'); return; }
-  const snippet = (p.oneLine || p.content || '').replace(/\s+/g, ' ').slice(0, 90);
-  const text = `📚 새 자료가 올라왔어요\n\n[${CAT_LABEL[p.category]}] ${postTitle(p)}${snippet ? '\n' + snippet + (snippet.length >= 90 ? '…' : '') : ''}`;
+  let text, button, extra;
+  if (p.pdfId && ['market','stock','earnings'].includes(p.category)){
+    const r = rpNoticeOf(p); text = r.text; button = r.button; extra = r.extra;
+  } else {
+    const snippet = (p.oneLine || p.content || '').replace(/\s+/g, ' ').slice(0, 90);
+    text = `📚 새 자료가 올라왔어요\n\n[${CAT_LABEL[p.category]}] ${postTitle(p)}${snippet ? '\n' + snippet + (snippet.length >= 90 ? '…' : '') : ''}`;
+    button = { text: '자료 보기', url: SITE_URL + '#post=' + p.id };
+  }
   toast(`텔레그램 알림 보내는 중… (${targets.length}명)`);
-  const res = await sendTelegram(targets, text, { text: '자료 보기', url: SITE_URL + '#post=' + p.id });
+  const res = await sendTelegram(targets, text, button, null, extra);
   toast(`알림 발송 완료 · 성공 ${res.ok}명${res.fail.length ? ' / 실패 ' + res.fail.length + '명' : ''}`);
 }
+/* PDF 리포트 알림: 표지 사진 + 제목 + 요약 + [자세히 보기] (사진 설명은 1,024자 제한) */
+function rpNoticeOf(p){
+  const tk = rpTicker(p);
+  const head = p.category === 'earnings' ? '📊 실적발표 리포트' : p.category === 'market' ? '📈 증시 브리핑' : '🔎 종목 분석 리포트';
+  const sum = String(p.content || '').replace(/\s+/g, ' ').replace(/^["“]|["”]$/g, '').trim();
+  const cut = sum.length > 520 ? sum.slice(0, 520).replace(/\s\S*$/, '') + '…' : sum;
+  const lines = [`${head}${tk ? ' · ' + tk : ''}`, '', rpTitle(p)];
+  if (cut) lines.push('', '▍한 줄 요약', cut);
+  lines.push('', `📄 PDF ${p.pdfPages ? p.pdfPages + '페이지 ' : ''}전체 보기는 아래 버튼에서`, '', '※ 정보 제공 목적이며 매수·매도 추천이 아닙니다.');
+  return {
+    text: lines.join('\n'),
+    button: { text: '자세히 보기', url: SITE_URL + '#post=' + p.id },
+    extra: { photo: `${WORKER_URL}/posts/cover/${p.id}/${(p.coverId || 't').slice(0, 12)}.jpg` }
+  };
+}
+window.__rpNotice = id => { const p = postsCache.find(x => x.id === id); return p ? rpNoticeOf(p) : null; };
 
 /* ================================================================
    매매일지 (챌린지와 별개) + 순위
