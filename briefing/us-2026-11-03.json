@@ -1,0 +1,106 @@
+{
+ "date": "2026-11-03",
+ "weekday": "화",
+ "generatedAt": "2026-11-03T21:30+09:00",
+ "headline": "중간선거 당일 미국 지수 선물은 혼조세이고, 미국의 이란 공습 소식에 유가는 다시 올랐습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,559.25",
+   "chg": "-0.20%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "28,161.25",
+   "chg": "+0.12%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "51,655.00",
+   "chg": "-0.92%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "21.62",
+   "chg": "+2.22%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,346.60원",
+   "chg": "+0.04%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.94%",
+   "chg": "+4.3bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$98.70",
+   "chg": "+2.32%"
+  },
+  {
+   "name": "금",
+   "value": "$3,910.70",
+   "chg": "-1.48%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$77,112",
+   "chg": "+0.36%"
+  }
+ ],
+ "news": [
+  {
+   "title": "미국 지수 선물 혼조… 다우 약세, 나스닥100 소폭 상승",
+   "summary": "다우 선물이 0.7%가량 내린 반면 나스닥100 선물은 0.2% 안팎 올랐습니다. 전날에는 AI·반도체주 매도가 이어지며 나스닥 종합지수가 1.07% 하락했습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-3-dow-sp-500-nasdaq-midterms-amd-090846378.html"
+  },
+  {
+   "title": "미국의 이란 케심섬 공습에 유가 반등",
+   "summary": "미국이 이란 케심섬을 공격했다는 소식과 이란 측의 '종전 합의는 아직 멀다'는 발언이 겹치며 브렌트유가 1.8%가량 올라 배럴당 106달러를 넘었습니다. 전날 두 유종은 협상 기대감에 7% 넘게 급락했습니다.",
+   "source": "로이터(더스타 게재)",
+   "url": "https://www.thestar.com.my/business/business-news/2026/11/03/oil-rises-as-peace-prospects-dim-after-us-hits-iran039s-qeshm-island"
+  },
+  {
+   "title": "애플·팔란티어, 실적 예상치 상회에도 주가 약세",
+   "summary": "애플은 매출이 12% 늘며 시장 예상을 넘었지만 중화권 매출이 기대에 못 미쳤고, 프리마켓에서 주가가 내렸습니다. 팔란티어는 3분기 실적이 예상을 웃돌고 연간 매출 전망을 올렸으며 미국 상업 부문 매출이 처음으로 정부 부문을 넘어섰지만 실적 발표 뒤 주가가 하락했습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-3-dow-sp-500-nasdaq-midterms-amd-090846378.html"
+  },
+  {
+   "title": "화이자, 3분기 실적 예상 상회·연간 가이던스 제시",
+   "summary": "화이자의 3분기 주당순이익은 0.87달러로 예상치(0.73달러)를 넘었고 매출도 166억 달러로 예상치(159억 1천만 달러)를 웃돌았습니다. 2026년 주당순이익 전망은 2.95~3.05달러, 매출 전망은 620억~640억 달러로 제시했습니다.",
+   "source": "인베스팅닷컴",
+   "url": "https://in.investing.com/news/earnings/pfizer-earnings-beat-by-014-revenue-topped-estimates-5674549"
+  },
+  {
+   "title": "오늘 미국 중간선거… 장 마감 후 AMD 실적 발표",
+   "summary": "예측시장과 여론조사 모델 모두 민주당의 상·하원 승리 가능성을 높게 보고 있으며, 투자자들은 의약품·주택·AI 데이터센터 관련 정책 신호를 주시하고 있습니다. AMD는 장 마감 후 실적을 발표하며 AI 수요에 대한 언급이 관심을 받고 있습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-3-dow-sp-500-nasdaq-midterms-amd-090846378.html"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장 (서머타임 해제)"
+  },
+  {
+   "time": "00:00",
+   "text": "미국 9월 JOLTS 구인건수 발표 (4일 새벽)"
+  },
+  {
+   "time": "06:00",
+   "text": "미국 정규장 마감, 이후 AMD 실적 발표 (4일 새벽)"
+  },
+  {
+   "time": "종일",
+   "text": "미국 중간선거 투표 진행"
+  }
+ ],
+ "kind": "us"
+}
