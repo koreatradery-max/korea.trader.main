@@ -56,6 +56,7 @@ const HANDLER = {
       if (url.pathname === '/auth/poll' && req.method === 'GET') return json(await authPoll(env, ctx, url.searchParams.get('token')), 200, cors);
       if (url.pathname === '/tg/webhook' && req.method === 'POST') return await tgWebhook(req, env);
       if (url.pathname === '/admin/send' && req.method === 'POST') return await adminSend(req, env, cors);
+      if (url.pathname === '/admin/channel' && req.method === 'POST') return await adminChannel(req, env, cors);
       if (url.pathname === '/setup' && req.method === 'GET') return json(await setup(env, url), 200, cors);
       if (url.pathname === '/market' && req.method === 'GET') return await cached(req, ctx, 120, async () => json(await marketData(), 200, cors), cors);
       if (url.pathname === '/stats' && req.method === 'GET') return await cached(req, ctx, 600, async () => json(await siteStats(env), 200, cors), cors);
@@ -116,6 +117,19 @@ async function tgWebhook(req, env) {
   if (req.headers.get('X-Telegram-Bot-Api-Secret-Token') !== await hookToken(env)) return new Response('forbidden', { status: 403 });
   const update = await req.json().catch(() => ({}));
   const msg = update.message;
+  // 관리자가 채널 글을 봇에게 전달(forward)하면 그 채널을 알림 채널로 등록
+  const fwd = msg && (msg.forward_origin && msg.forward_origin.type === 'channel' ? msg.forward_origin.chat : msg.forward_from_chat);
+  if (msg && msg.from && msg.chat && msg.chat.type === 'private' && fwd && fwd.type === 'channel') {
+    if (!adminIds(env).includes(String(msg.from.id))) return new Response('ok');
+    const botId = String(env.BOT_TOKEN || '').split(':')[0];
+    const cm = await tg(env, 'getChatMember', { chat_id: fwd.id, user_id: Number(botId) });
+    const canPost = cm.ok && (cm.result.status === 'creator' || (cm.result.status === 'administrator' && cm.result.can_post_messages !== false));
+    if (canPost) await fsWrite(env, [{ path: 'config/channel', data: { chatId: String(fwd.id), title: String(fwd.title || ''), at: Date.now() } }]);
+    await tg(env, 'sendMessage', { chat_id: msg.chat.id, text: canPost
+      ? `✅ 알림 채널로 등록했어요: ${fwd.title || fwd.id}\n앞으로 새 글·리포트·라이브 요약·시황 알림이 이 채널에도 함께 올라가요.`
+      : `⚠️ ${fwd.title || '이 채널'}에 봇의 '메시지 게시' 권한이 없어요. 채널 관리자 설정에서 권한을 켠 뒤 다시 전달해 주세요.` });
+    return new Response('ok');
+  }
   if (!msg || !msg.text || !msg.from || msg.chat.type !== 'private') return new Response('ok');
 
   const text = msg.text.trim();
@@ -538,10 +552,37 @@ async function briefingBatch(env, b, restart) {
   const r = await dmBatch(env, statePath, briefingText(b), briefingMarkup(env, b.kind), restart, 'HTML');
   return { ...r, date: b.date };
 }
+/* 메인 텔레그램 채널(config/channel)에 1건 게시. 채널이 없으면 조용히 건너뜀 */
+async function channelPost(env, text, markup, photo, parseMode) {
+  const c = await fsGet(env, 'config/channel');
+  if (!c || !c.chatId) return { ok: false, error: 'no_channel' };
+  if (photo) {
+    const p = { chat_id: c.chatId, photo, caption: String(text).slice(0, 1000), reply_markup: markup };
+    if (parseMode) p.parse_mode = parseMode;
+    const r = await tg(env, 'sendPhoto', p);
+    if (r.ok) return r;
+  }
+  const payload = { chat_id: c.chatId, text, reply_markup: markup, disable_web_page_preview: true };
+  if (parseMode) payload.parse_mode = parseMode;
+  return tg(env, 'sendMessage', payload);
+}
+async function adminChannel(req, env, cors) {
+  const auth = await requireUser(req, env);
+  if (!auth || !auth.admin) return json({ error: 'forbidden', message: '관리자만 보낼 수 있어요.' }, 403, cors);
+  const body = await req.json().catch(() => ({}));
+  const text = String(body.text || '').slice(0, 3800);
+  if (!text.trim()) return json({ error: 'bad_request' }, 400, cors);
+  const markup = body.button && body.button.url && /^https?:\/\//.test(body.button.url)
+    ? { inline_keyboard: [[{ text: String(body.button.text || '열기').slice(0, 40), url: body.button.url }]] } : undefined;
+  const photo = typeof body.photo === 'string' && /^https:\/\//.test(body.photo) ? body.photo : '';
+  const r = await channelPost(env, text, markup, photo, '');
+  return json({ ok: !!r.ok, error: r.ok ? undefined : (r.error || r.description || 'fail') }, 200, cors);
+}
 /* 알림 켠 로그인 회원에게 38명씩 나눠 DM. 진행 상황은 statePath 문서에 저장 (다시 부르면 이어서) */
 async function dmBatch(env, statePath, text, markup, restart, parseMode) {
   let st = restart ? null : await fsGet(env, statePath);
   if (st && st.done) return { sent: 0, done: true };
+  if (!(st && st.ch)) await channelPost(env, text, markup, '', parseMode).catch(e => console.error('channel', e));
   const users = await fsUsersPage(env, st && st.cursor, BRIEF_BATCH);
   let sent = 0; const blocked = [];
   for (const u of users) {
@@ -551,7 +592,7 @@ async function dmBatch(env, statePath, text, markup, restart, parseMode) {
     if (r.ok) sent++; else if (r.error_code === 403) blocked.push(u.id);
   }
   const done = users.length < BRIEF_BATCH;
-  const writes = [{ path: statePath, data: { cursor: users.length ? users[users.length - 1].id : (st && st.cursor) || '', done, sent: ((st && st.sent) || 0) + sent, at: Date.now() } }];
+  const writes = [{ path: statePath, data: { ch: true, cursor: users.length ? users[users.length - 1].id : (st && st.cursor) || '', done, sent: ((st && st.sent) || 0) + sent, at: Date.now() } }];
   blocked.forEach(id => writes.push({ path: `users/${id}`, data: { canDM: false }, mask: true }));
   await fsWrite(env, writes);
   return { sent, done };
