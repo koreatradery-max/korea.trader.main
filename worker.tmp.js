@@ -63,6 +63,7 @@ export default {
       let m;
       if (req.method === 'GET' && (m = url.pathname.match(/^\/views\/teaser\/([A-Za-z0-9_-]{6,40})$/))) return await cached(req, ctx, 120, async () => { const t = await viewTeaser(env, m[1]); return json(t || { error: 'not_found' }, t ? 200 : 404, cors); }, cors);
       if (req.method === 'GET' && (m = url.pathname.match(/^\/views\/cover\/([A-Za-z0-9_-]{6,40})\/[0-9a-z]+(\.jpg)?$/))) return await cached(req, ctx, 86400, async () => await viewCover(env, m[1]), cors);
+      if (req.method === 'GET' && (m = url.pathname.match(/^\/posts\/cover\/([A-Za-z0-9_-]{6,40})(?:\/[0-9A-Za-z_-]+)?\.jpg$/))) return await cached(req, ctx, 86400, async () => await postCover(env, m[1]), cors);
       if (req.method === 'GET' && (m = url.pathname.match(/^\/p\/([A-Za-z0-9_-]{6,40})$/))) return await cached(req, ctx, 300, async () => await sharePage(env, url, m[1]), {});
       if (url.pathname === '/' ) return json({ ok: true, service: 'telegram-login-worker' }, 200, cors);
       return json({ error: 'not_found' }, 404, cors);
@@ -363,6 +364,27 @@ async function liveImport(req, env, cors) {
   }
   const r2 = await dmBatch(env, `liveRuns/${id}`, text, markup, false, '');
   return json({ ok: true, id: pid, ...r2 }, 200, cors);
+}
+
+/* 자료실 PDF 리포트 표지 (텔레그램 알림 사진용). 리포트 분류(market·stock·earnings)만 공개 */
+async function postCover(env, id) {
+  const p = await fsGet(env, `posts/${id}`);
+  if (!p || !['market', 'stock', 'earnings'].includes(p.category)) return new Response('not found', { status: 404 });
+  let b64 = '', type = 'image/jpeg';
+  if (p.coverId) {
+    for (let i = 0; i < Math.min(Number(p.coverChunks || 1), 6); i++) {
+      const f = await fsGet(env, `files/${p.coverId}_${i}`);
+      if (!f) { b64 = ''; break; }
+      b64 += String(f.data || '');
+    }
+  }
+  if (!b64) {
+    const m = String(p.pdfThumb || '').match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/);
+    if (m) { type = m[1]; b64 = m[2]; }
+  }
+  if (!b64) return new Response('not found', { status: 404 });
+  const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+  return new Response(bin, { status: 200, headers: { 'Content-Type': type, 'Cache-Control': 'public, max-age=86400' } });
 }
 
 /* ======================= 정보 공유: 공개 미리보기 · 공유 링크 =======================
