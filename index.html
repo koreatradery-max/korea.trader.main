@@ -1451,6 +1451,9 @@
     .rp-spec{ display:none; }
     .rp-ph-tk{ font-size:16px; }
   }
+  .vw-acts .vw-tg{ color:#2AABEE; border-color:color-mix(in srgb, #2AABEE 45%, transparent); }
+  .vw-acts .vw-tg:hover{ background:color-mix(in srgb, #2AABEE 10%, transparent); }
+  .vw-acts .vw-tg:disabled{ opacity:.6; }
 </style>
 </head><body>
 
@@ -6224,7 +6227,7 @@ function vwPostHtml(p){
   const link = safeUrl(p.link || '');
   const tags = (p.tags || []).map(t => `<button type="button" class="vw-tag" data-vtagsearch="${escapeAttr(t)}">#${escapeHtml(t)}</button>`).join('');
   return `<article class="vw-post${p.admin ? ' admin' : ''}${blog ? ' blog' : ''}" id="vp-${p.id}" data-vpost="${p.id}">
-    <div class="vw-meta"><span class="vw-cat">${VW_CATS[p.category] || '정보'}</span><b>${escapeHtml(p.name || '운영자')}</b>${p.admin ? '<span class="admin-tag">운영자</span>' : ''}<span title="${escapeAttr(fmtDate(p.createdAt))}">${fmtDate(p.createdAt).slice(0, 10)}${p.updatedAt && p.updatedAt - p.createdAt > 60000 ? ' · 수정됨' : ''}</span>${vwHoldTag(p)}</div>
+    <div class="vw-meta"><span class="vw-cat">${VW_CATS[p.category] || '정보'}</span><b>${escapeHtml(p.name || '운영자')}</b>${p.admin ? '<span class="admin-tag">운영자</span>' : ''}<span title="${escapeAttr(fmtDate(p.createdAt))}">${fmtDate(p.createdAt).slice(0, 10)}</span>${vwHoldTag(p)}</div>
     <h3 class="vw-title">${vwHi(p.title || '')}</h3>
     ${blog ? blogHtml : `<div class="vw-text${long && !expanded ? ' clamp' : ''}">${vwHi(p.body || '')}</div>`}
     ${long && (blog || !vwSearch) ? `<button type="button" class="text-link vw-more-btn" data-vexpand="${p.id}">${expanded ? '접기' : (blog ? '본문 전체 보기' : '더 보기')}</button>` : ''}
@@ -6237,7 +6240,7 @@ function vwPostHtml(p){
       <button type="button" class="heart-btn${liked ? ' on' : ''}" data-vheart="${p.id}" aria-label="하트">${HEART_SVG}<span>${Number(p.hearts || 0)}</span></button>
       <button type="button" class="btn-mini vw-share" data-vshare="${p.id}">공유</button>
       <span class="sp"></span>
-      ${isAdmin ? `<button type="button" class="btn-mini" data-vedit="${p.id}">수정</button><button type="button" class="btn-mini" data-vdel="${p.id}">삭제</button>` : ''}
+      ${isAdmin ? `<button type="button" class="btn-mini vw-tg" data-vnotify="${p.id}" title="로그인 회원 전체에게 텔레그램으로 이 글 알림 보내기">텔레그램 발송</button><button type="button" class="btn-mini" data-vedit="${p.id}">수정</button><button type="button" class="btn-mini" data-vdel="${p.id}">삭제</button>` : ''}
     </div>
   </article>`;
 }
@@ -6543,7 +6546,7 @@ $('#vwSubmit').addEventListener('click', async () => {
       await setDoc(doc(db, 'views', id), created);
     }
     toast(old ? '수정했어요.' : '글을 올렸어요.');
-    if (created && $('#vwNotify').checked) notifyNewView({ id, ...created });
+    if (created && $('#vwNotify').checked) notifyNewView({ id, ...created }).catch(err => toast('텔레그램 알림 실패: ' + err.message + ' — 글의 [텔레그램 발송] 버튼으로 다시 보낼 수 있어요.'));
     if (vwDraftId) await vwDraftDelete(vwDraftId).catch(() => {});
     vwDraftReset(null);
     $('#vwPanel').hidden = true; vwEditing = null; vwFiles = []; vwPdfFile = null;
@@ -6676,6 +6679,7 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 authHooks.push(() => { if (isAdmin) vwDraftsRefresh(); });
 
 async function notifyNewView(p){
+  if (!usersCache.length && isAdmin){ try{ const sn = await getDocs(collection(db, 'users')); usersCache = sn.docs.map(d => ({ id: d.id, ...d.data() })); } catch(e){} }
   const targets = usersCache.filter(u => u.canDM !== false && u.notify !== false && u.chatId).map(u => u.id);
   if (!targets.length){ toast('알림 받을 회원이 아직 없어요.'); return; }
   const snippet = (p.body || '').replace(/\s+/g, ' ').slice(0, 90);
@@ -6684,6 +6688,7 @@ async function notifyNewView(p){
   const photo = Number(p.imgCount || 0) > 0 ? `${WORKER_URL}/views/cover/${p.id}/${p.updatedAt || p.createdAt}.jpg` : '';
   const res = await sendTelegram(targets, text, { text: '글 보기', url: SITE_URL + '#views/' + p.id }, null, photo ? { photo } : null);
   toast(`알림 발송 완료 · 성공 ${res.ok}명${res.fail.length ? ' / 실패 ' + res.fail.length + '명' : ''}`);
+  if (!res.ok) throw new Error(res.fail[0] && res.fail[0].error || '발송 실패');
 }
 
 /* 하트 · 수정 · 삭제 · 태그 검색 · 이미지 확대 */
@@ -6702,6 +6707,19 @@ document.addEventListener('click', async e => {
       if (vwAll){ const p = vwAll.find(x => x.id === id); if (p){ p.hearts = Number(p.hearts || 0) + (on ? -1 : 1); } }
     } catch(err){ toast('실패: ' + err.message); }
     hb.disabled = false; return;
+  }
+  const nb = t.closest('[data-vnotify]');
+  if (nb){
+    if (!isAdmin) return;
+    const p = (vwAll || []).find(x => x.id === nb.dataset.vnotify) || vwPosts.find(x => x.id === nb.dataset.vnotify);
+    if (!p) return;
+    const n = usersCache.filter(u => u.canDM !== false && u.notify !== false && u.chatId).length;
+    if (!confirm(`「${p.title}」 알림을 로그인 회원 ${n}명에게 텔레그램으로 보낼까요?`)) return;
+    nb.disabled = true; nb.textContent = '보내는 중…';
+    try{ await notifyNewView(p); nb.textContent = '발송 완료'; }
+    catch(err){ toast('발송 실패: ' + err.message); nb.textContent = '텔레그램 발송'; }
+    setTimeout(() => { nb.disabled = false; nb.textContent = '텔레그램 발송'; }, 4000);
+    return;
   }
   const sh = t.closest('[data-vshare]');
   if (sh){
