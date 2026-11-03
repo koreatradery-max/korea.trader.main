@@ -40,11 +40,16 @@ const MAX_CODE_FAILS = 5;                // 챌린지 코드 오입력 허용 �
 const CODE_LOCK_MS = 10 * 60 * 1000;     // 초과 시 10분 잠금
 
 /* ======================= 진입점 ======================= */
-export default {
+const HANDLER = {
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const cors = corsHeaders(req, env);
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+    // 링크 미리보기 봇(카카오톡 등)은 HEAD로 먼저 확인하는 경우가 있음 → GET과 같은 결과를 본문 없이 응답
+    if (req.method === 'HEAD') {
+      const r = await HANDLER.fetch(new Request(req.url, { method: 'GET', headers: req.headers }), env, ctx);
+      return new Response(null, { status: r.status, headers: r.headers });
+    }
 
     try {
       if (url.pathname === '/auth/start' && req.method === 'POST') return json(await authStart(env), 200, cors);
@@ -434,8 +439,7 @@ async function sharePage(env, url, id) {
 <meta property="og:type" content="article"><meta property="og:site_name" content="STOCK PICK!">
 <meta property="og:title" content="${escAttr(title)}"><meta property="og:description" content="${escAttr(desc)}">
 <meta property="og:url" content="${escAttr(url.origin + '/p/' + id)}">
-${img ? `<meta property="og:image" content="${escAttr(img)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${escAttr(img)}">` : '<meta name="twitter:card" content="summary">'}
-<meta http-equiv="refresh" content="0;url=${escAttr(target)}">
+${img ? `<meta property="og:image" content="${escAttr(img)}"><meta property="og:image:secure_url" content="${escAttr(img)}"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="${escAttr(title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${escAttr(img)}">` : '<meta name="twitter:card" content="summary">'}
 <style>body{background:#0C131D;color:#E6EBF2;font-family:sans-serif;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#C8961E}</style>
 </head><body><p><a href="${escAttr(target)}">STOCK PICK!에서 글 보기 ›</a></p><script>location.replace(${JSON.stringify(target)})</script></body></html>`;
   return new Response(html, { status: t ? 200 : 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
@@ -857,3 +861,4 @@ function corsHeaders(req, env) {
 function json(obj, status, headers) {
   return new Response(JSON.stringify(obj), { status: status || 200, headers: { 'Content-Type': 'application/json; charset=utf-8', ...(headers || {}) } });
 }
+export default HANDLER;
