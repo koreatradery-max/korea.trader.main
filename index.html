@@ -5055,8 +5055,9 @@ async function notifyNewPost(p){
     button = { text: '자료 보기', url: SITE_URL + '#post=' + p.id };
   }
   toast(`텔레그램 알림 보내는 중… (${targets.length}명)`);
+  const chOk = await postChannel(text, button, extra);
   const res = await sendTelegram(targets, text, button, null, extra);
-  toast(`알림 발송 완료 · 성공 ${res.ok}명${res.fail.length ? ' / 실패 ' + res.fail.length + '명' : ''}`);
+  toast(`알림 발송 완료 · 성공 ${res.ok}명${res.fail.length ? ' / 실패 ' + res.fail.length + '명' : ''}${chOk ? ' · 채널 게시 완료' : ''}`);
 }
 /* PDF 리포트 알림: 표지 사진 + 제목 + 요약 + [자세히 보기] (사진 설명은 1,024자 제한) */
 function rpNoticeOf(p){
@@ -5473,6 +5474,18 @@ $('#pickList').addEventListener('change', e => { const c = e.target.closest('[da
 $('#pickAll').addEventListener('click', () => { $$('#pickList [data-pick]').forEach(c => { c.checked = true; picked.add(c.dataset.pick); }); updateSendCount(); });
 $('#pickNone').addEventListener('click', () => { picked.clear(); renderPickList(); updateSendCount(); });
 
+/* 메인 텔레그램 채널에도 1건 게시 (채널이 등록돼 있을 때) */
+async function postChannel(text, button, extra){
+  try{
+    const r = await fetch(WORKER_URL + '/admin/channel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + await authUser.getIdToken() },
+      body: JSON.stringify({ text, button, ...(extra || {}) })
+    });
+    const d = await r.json().catch(() => ({}));
+    return !!d.ok;
+  } catch(e){ return false; }
+}
 async function sendTelegram(uids, text, button, onProgress, extra){
   const result = { ok: 0, fail: [] };
   const BATCH = 40;
@@ -6686,8 +6699,10 @@ async function notifyNewView(p){
   const text = `💬 정보 공유에 새 글이 올라왔어요\n\n[${VW_CATS[p.category] || '정보'}] ${p.title}${snippet ? '\n' + snippet + (snippet.length >= 90 ? '…' : '') : ''}`;
   toast(`텔레그램 알림 보내는 중… (${targets.length}명)`);
   const photo = Number(p.imgCount || 0) > 0 ? `${WORKER_URL}/views/cover/${p.id}/${p.updatedAt || p.createdAt}.jpg` : '';
-  const res = await sendTelegram(targets, text, { text: '글 보기', url: SITE_URL + '#views/' + p.id }, null, photo ? { photo } : null);
-  toast(`알림 발송 완료 · 성공 ${res.ok}명${res.fail.length ? ' / 실패 ' + res.fail.length + '명' : ''}`);
+  const btn = { text: '글 보기', url: SITE_URL + '#views/' + p.id };
+  const chOk = await postChannel(text, btn, photo ? { photo } : null);
+  const res = await sendTelegram(targets, text, btn, null, photo ? { photo } : null);
+  toast(`알림 발송 완료 · 성공 ${res.ok}명${res.fail.length ? ' / 실패 ' + res.fail.length + '명' : ''}${chOk ? ' · 채널 게시 완료' : ''}`);
   if (!res.ok) throw new Error(res.fail[0] && res.fail[0].error || '발송 실패');
 }
 
@@ -6714,7 +6729,7 @@ document.addEventListener('click', async e => {
     const p = (vwAll || []).find(x => x.id === nb.dataset.vnotify) || vwPosts.find(x => x.id === nb.dataset.vnotify);
     if (!p) return;
     const n = usersCache.filter(u => u.canDM !== false && u.notify !== false && u.chatId).length;
-    if (!confirm(`「${p.title}」 알림을 로그인 회원 ${n}명에게 텔레그램으로 보낼까요?`)) return;
+    if (!confirm(`「${p.title}」 알림을 메인 채널과 로그인 회원 ${n}명에게 텔레그램으로 보낼까요?`)) return;
     nb.disabled = true; nb.textContent = '보내는 중…';
     try{ await notifyNewView(p); nb.textContent = '발송 완료'; }
     catch(err){ toast('발송 실패: ' + err.message); nb.textContent = '텔레그램 발송'; }
