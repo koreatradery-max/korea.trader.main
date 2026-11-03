@@ -1413,6 +1413,44 @@
   .lib .btn-more.ai:hover{ background:color-mix(in srgb, var(--gold) 10%, transparent); color:var(--gold); }
   .lib .live-badge{ color:#FF5463; }
   #viewer .live-badge{ color:#FF5463; font-weight:700; font-size:12px; letter-spacing:.06em; } #viewer .live-dur{ color:var(--muted); font-size:12.5px; margin-left:4px; } #viewer .auto-badge{ margin-left:8px; }
+
+  /* 공부 자료실 — PDF 리포트 카드 (표지 이미지형) */
+  .lib .post.rp{ grid-template-columns:150px minmax(0,1fr); column-gap:26px; align-items:start; padding:26px 0; }
+  .lib .post.rp > .rp-cover{ grid-column:1; grid-row:1; }
+  .lib .post.rp > .rp-main{ grid-column:2; grid-row:1; display:flex; flex-direction:column; min-width:0; min-height:100%; }
+  .rp-cover{ all:unset; box-sizing:border-box; display:block; width:100%; aspect-ratio:1 / 1.414; border-radius:8px; overflow:hidden; cursor:pointer; position:relative; background:#0b0d12; border:1px solid var(--border-strong); box-shadow:0 10px 24px -14px rgba(0,0,0,.65), 0 2px 6px -2px rgba(0,0,0,.35); transition:transform .18s ease, box-shadow .18s ease, border-color .18s; }
+  .rp-cover img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .rp-cover::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.06), transparent 30%); pointer-events:none; }
+  .rp-cover:hover{ transform:translateY(-3px); border-color:var(--ink); box-shadow:0 16px 30px -14px rgba(0,0,0,.7); }
+  .rp-cover:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .rp-cover.ph{ display:flex; flex-direction:column; justify-content:space-between; padding:14px 12px; background:radial-gradient(120% 80% at 20% 0%, #252a35 0%, #0d1016 60%); }
+  .rp-ph-cat{ font-size:10px; letter-spacing:.08em; color:#8a93a3; font-weight:600; }
+  .rp-ph-tk{ font-size:22px; font-weight:800; letter-spacing:-.01em; color:#f2f4f7; font-family:var(--font-mono); }
+  .rp-kicker{ display:flex; align-items:center; gap:7px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin-bottom:8px; }
+  .rp-tk{ font-family:var(--font-mono); font-size:11.5px; font-weight:700; letter-spacing:.04em; color:var(--gold); border:1px solid color-mix(in srgb, var(--gold) 45%, transparent); background:color-mix(in srgb, var(--gold) 9%, transparent); padding:2px 7px; border-radius:4px; }
+  .rp-cat{ font-weight:600; color:var(--ink-2); }
+  .rp-dot{ color:var(--faint); }
+  .rp-date{ font-variant-numeric:tabular-nums; }
+  .lib .post.rp h2{ font-size:19px; font-weight:700; letter-spacing:-.025em; line-height:1.35; margin:0 0 10px; -webkit-line-clamp:2; }
+  .rp-one{ margin:0; font-size:14.5px; line-height:1.65; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; word-break:keep-all; overflow-wrap:anywhere; }
+  .rp-one.q{ padding-left:12px; border-left:2px solid var(--gold); }
+  .lib .post.rp .tags{ margin-top:10px; }
+  .rp-foot{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:16px; }
+  .rp-spec{ font-size:12.5px; color:var(--faint); font-variant-numeric:tabular-nums; margin-left:4px; }
+  .rp-tools{ display:flex; align-items:center; gap:6px; margin-left:auto; }
+  .rp-tools .admin-mini{ margin-left:0; }
+  .rp-tools .btn-share-ic{ margin-left:0; }
+  @media (max-width:700px){
+    .lib .post.rp{ grid-template-columns:96px minmax(0,1fr); column-gap:16px; padding:20px 0; }
+    .lib .post.rp > .rp-cover{ grid-column:1; }
+    .lib .post.rp > .rp-main{ grid-column:2; }
+    .lib .post.rp h2{ font-size:16.5px; }
+    .rp-one{ font-size:13.5px; -webkit-line-clamp:3; }
+    .rp-foot{ gap:6px; }
+    .rp-foot .btn-read, .rp-foot .btn-dl2{ padding:7px 11px; font-size:13px; }
+    .rp-spec{ display:none; }
+    .rp-ph-tk{ font-size:16px; }
+  }
 </style>
 </head><body>
 
@@ -4592,6 +4630,13 @@ function chapHtml(c, videoUrl){
   }
   return `<span class="chap">${inner}</span>`;
 }
+function rpTicker(p){
+  const m = String(p.title || "").match(/^([A-Z][A-Z0-9.]{0,5})(?=[_\s·-])/);
+  if (m) return m[1];
+  const t = (p.tags || []).find(x => /^[A-Za-z]{1,5}$/.test(x) && x === x.toUpperCase());
+  return t || "";
+}
+function rpTitle(p){ return String(p.title || "").replace(/_/g, " ").replace(/\s+/g, " ").trim() || postTitle(p); }
 function newBadge(p){ return p.createdAt > libSeenPrev() ? '<span class="new-badge">NEW</span>' : ''; }
 
 function renderFeed(){
@@ -4636,17 +4681,28 @@ function renderFeed(){
       el.querySelector(".post-body").textContent = p.content || "";
     } else {
       const isEarnings = p.category === "earnings";
+      const tk = rpTicker(p);
+      el.classList.add("rp");
       el.innerHTML = `
-        <div class="post-meta"><span class="post-cat">${CAT_LABEL[p.category]}</span><span class="post-date">${fmtDate(p.createdAt)}</span>${newBadge(p)}</div>
-        <h2></h2>
-        ${isEarnings ? (p.content ? `<div class="oneline">“${esc(p.content)}”</div>` : "") : `<div class="post-body"></div>`}
-        ${tagsHtml(p)}
-        <div class="card-actions">
-          <button type="button" class="btn-read" data-read="${p.id}">리포트 읽기</button>
-          ${p.pdfId ? `<button type="button" class="btn-dl2" data-pdf="${p.pdfId}" data-chunks="${p.pdfChunks||1}" data-name="${encodeURIComponent(p.pdfName||"briefing.pdf")}">PDF 다운로드</button>` : `<button type="button" class="btn-dl2 disabled" disabled>PDF 없음</button>`}
-        </div>
-        <div class="card-sub">${adminMiniHtml(p, 'left')}${shareIconHtml(p)}</div>`;
-      if (!isEarnings) el.querySelector(".post-body").textContent = p.content || "";
+        <button type="button" class="rp-cover${p.pdfThumb ? "" : " ph"}" data-read="${p.id}" aria-label="리포트 읽기">
+          ${p.pdfThumb ? `<img src="${p.pdfThumb}" alt="" loading="lazy" decoding="async">` : `<span class="rp-ph-cat">${esc(CAT_LABEL[p.category] || "리포트")}</span><span class="rp-ph-tk">${esc(tk || "PDF")}</span>`}
+        </button>
+        <div class="rp-main">
+          <div class="rp-kicker">${tk ? `<span class="rp-tk">${esc(tk)}</span>` : ""}<span class="rp-cat">${CAT_LABEL[p.category]}</span><span class="rp-dot">·</span><span class="rp-date">${fmtDate(p.createdAt)}</span>${newBadge(p)}</div>
+          <h2></h2>
+          ${p.content ? `<p class="rp-one"></p>` : ""}
+          ${tagsHtml(p)}
+          <div class="rp-foot">
+            <button type="button" class="btn-read" data-read="${p.id}">리포트 읽기</button>
+            ${p.pdfId ? `<button type="button" class="btn-dl2" data-pdf="${p.pdfId}" data-chunks="${p.pdfChunks||1}" data-name="${encodeURIComponent(p.pdfName||"briefing.pdf")}">PDF 다운로드</button>` : ""}
+            ${p.pdfPages ? `<span class="rp-spec">${p.pdfPages}p${p.pdfSizeMB ? ` · ${p.pdfSizeMB}MB` : ""}</span>` : ""}
+            <span class="rp-tools">${adminMiniHtml(p, 'left')}${shareIconHtml(p)}</span>
+          </div>
+        </div>`;
+      if (p.content){ const o = el.querySelector(".rp-one"); o.textContent = isEarnings ? p.content.replace(/^["“]|["”]$/g, "") : p.content; o.classList.toggle("q", isEarnings); }
+      el.querySelector("h2").textContent = rpTitle(p);
+      feed.appendChild(el);
+      continue;
     }
     el.querySelector("h2").textContent = postTitle(p);
     feed.appendChild(el);
