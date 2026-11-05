@@ -6270,7 +6270,7 @@ function vwPostHtml(p){
   const link = safeUrl(p.link || '');
   const tags = (p.tags || []).map(t => `<button type="button" class="vw-tag" data-vtagsearch="${escapeAttr(t)}">#${escapeHtml(t)}</button>`).join('');
   return `<article class="vw-post${p.admin ? ' admin' : ''}${blog ? ' blog' : ''}${expanded && blog ? ' open' : ''}" id="vp-${p.id}" data-vpost="${p.id}">
-    <div class="vw-meta"><span class="vw-cat">${VW_CATS[p.category] || '정보'}</span><b>${escapeHtml(p.name || '운영자')}</b>${p.admin ? '<span class="admin-tag">운영자</span>' : ''}<span title="${escapeAttr(fmtDate(p.createdAt))}">${fmtDate(p.createdAt).slice(0, 10)}</span>${vwHoldTag(p)}</div>
+    <div class="vw-meta"><span class="vw-cat">${VW_CATS[p.category] || '정보'}</span><span title="${escapeAttr(fmtDate(p.createdAt))}">${fmtDate(p.createdAt).slice(0, 10)}</span>${vwHoldTag(p)}</div>
     <h3 class="vw-title">${vwHi(p.title || '')}</h3>
     ${blog ? blogHtml : `<div class="vw-text${long && !expanded ? ' clamp' : ''}">${vwHi(p.body || '')}</div>`}
     ${long && (blog || !vwSearch) ? `<button type="button" class="text-link vw-more-btn" data-vexpand="${p.id}">${expanded ? '접기' : (blog ? '본문 전체 보기' : '더 보기')}</button>` : ''}
