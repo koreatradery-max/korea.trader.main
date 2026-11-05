@@ -1476,6 +1476,14 @@
   .vw-fig-ghost{ position:fixed; left:0; top:0; width:120px; height:90px; z-index:10000; pointer-events:none; border-radius:10px; background:#111 center/cover no-repeat; box-shadow:0 12px 30px rgba(0,0,0,.45); border:2px solid #2AABEE; opacity:.92; }
   .vw-fig-line{ position:absolute; z-index:9999; height:3px; border-radius:3px; background:#2AABEE; box-shadow:0 0 0 3px color-mix(in srgb, #2AABEE 25%, transparent); pointer-events:none; }
   .vw-fig-hint{ font-size:12px; color:var(--muted); }
+  /* 로그아웃 상태 정보 공유 미리보기: 카드 자체에 블러 + 누르면 로그인 */
+  .vt[data-vtopen]{ cursor:pointer; transition:border-color .15s, transform .15s; }
+  .vt[data-vtopen]:hover{ border-color:#2AABEE; transform:translateY(-2px); }
+  .vt[data-vtopen]:focus-visible{ outline:2px solid #2AABEE; outline-offset:2px; }
+  .vt-lock{ position:relative; margin-top:8px; }
+  .vt-lock .vt-ghost{ margin-top:0; filter:blur(4px); opacity:.55; }
+  .vt-unlock{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:inline-flex; align-items:center; gap:7px; white-space:nowrap; padding:9px 16px; border-radius:999px; background:#2AABEE; color:#fff; font-size:13.5px; font-weight:700; box-shadow:0 8px 22px -8px rgba(42,171,238,.7); }
+  .vt[data-vtopen]:hover .vt-unlock{ background:#1E96D6; }
 </style>
 </head><body>
 
@@ -1758,11 +1766,6 @@
   <div class="vw-locked" id="vwLocked">
     <div id="vwTeaserFocus"></div>
     <div class="vw-teasers" id="vwTeasers"></div>
-    <div class="vw-login-cta">
-      <h2>텔레그램으로 로그인하고 전체 글 보기</h2>
-      <p>로그인하면 운영자가 정리한 정보를 끝까지 읽고, 종목명·날짜로 찾아보고, 하트를 남길 수 있어요.</p>
-      <button class="btn-tg lg" type="button" data-login><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.9 19.05c-.23 1.02-.83 1.27-1.69.79l-4.66-3.43-2.25 2.16c-.25.25-.46.46-.94.46l.34-4.76 8.66-7.82c.38-.34-.08-.52-.58-.19L7.08 13.01 2.5 11.58c-1-.31-1.01-1 .21-1.48L20.6 3.2c.83-.31 1.56.19 1.34 1.1z"/></svg> 텔레그램으로 로그인</button>
-    </div>
   </div>
   <div id="vwApp" hidden>
     <div class="lib vw-lib">
@@ -6290,10 +6293,11 @@ function vwPostHtml(p){
 }
 function vwTeaserCard(t, focus){
   const cover = t.cover ? `<div class="vt-cover"><img src="${WORKER_URL}/views/cover/${encodeURIComponent(t.id)}/${encodeURIComponent(t.v)}.jpg" alt="" loading="lazy"></div>` : '';
-  return `<article class="vt${focus ? ' focus' : ''}${t.cover ? '' : ' nocover'}">${cover}<div class="vt-body">
+  return `<article class="vt${focus ? ' focus' : ''}${t.cover ? '' : ' nocover'}" data-vtopen="${escapeAttr(t.id)}" role="button" tabindex="0" aria-label="${escapeAttr(t.title)} — 로그인하고 전체 글 보기">${cover}<div class="vt-body">
     <div class="vw-meta"><span class="vw-cat">${VW_CATS[t.category] || '정보'}</span><span>${fmtDate(t.createdAt).slice(0, 10)}</span></div>
     <h3>${escapeHtml(t.title)}</h3><p class="vt-ex">${escapeHtml(t.excerpt)}</p>
-    <div class="vt-ghost" aria-hidden="true"><i></i><i></i><i></i>${focus ? '<i></i><i></i><i></i>' : ''}</div></div></article>`;
+    <div class="vt-lock"><div class="vt-ghost" aria-hidden="true"><i></i><i></i><i></i><i></i>${focus ? '<i></i><i></i><i></i>' : ''}</div>
+      <span class="vt-unlock"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.9 19.05c-.23 1.02-.83 1.27-1.69.79l-4.66-3.43-2.25 2.16c-.25.25-.46.46-.94.46l.34-4.76 8.66-7.82c.38-.34-.08-.52-.58-.19L7.08 13.01 2.5 11.58c-1-.31-1.01-1 .21-1.48L20.6 3.2c.83-.31 1.56.19 1.34 1.1z"/></svg>로그인하고 이어서 읽기</span></div></div></article>`;
 }
 let vwTeaserLoaded = 0, vwTeaserList = [];
 async function vwLoadTeasers(){
@@ -6301,9 +6305,9 @@ async function vwLoadTeasers(){
   if (vwPendingId){
     try{ const r = await fetch(WORKER_URL + '/views/teaser/' + encodeURIComponent(vwPendingId)); if (r.ok){ $('#vwTeaserFocus').innerHTML = vwTeaserCard(await r.json(), true); } } catch(e){}
   } else $('#vwTeaserFocus').innerHTML = '';
-  if (!(vwTeaserLoaded && Date.now() - vwTeaserLoaded < 120000)){
+  if (!(vwTeaserLoaded && Date.now() - vwTeaserLoaded < 30000)){
     try{
-      const r = await fetch(WORKER_URL + '/views/teaser'); const d = await r.json();
+      const r = await fetch(WORKER_URL + '/views/teaser', { cache: 'no-store' }); const d = await r.json();
       vwTeaserList = d.posts || []; vwTeaserLoaded = vwTeaserList.length ? Date.now() : 0;
     } catch(e){ vwTeaserList = []; }
   }
@@ -6840,6 +6844,14 @@ document.addEventListener('click', async e => {
     } catch(err){ toast('실패: ' + err.message); }
     hb.disabled = false; return;
   }
+  const vt = t.closest('[data-vtopen]');
+  if (vt && !authUser){
+    const id = vt.dataset.vtopen;
+    vwPendingId = id;
+    try{ history.replaceState(null, '', '#views/' + id); } catch(e){}
+    openLogin();
+    return;
+  }
   const nb = t.closest('[data-vnotify]');
   if (nb){
     if (!isAdmin) return;
@@ -7192,6 +7204,7 @@ $('#admBriefAll').addEventListener('click', async () => {
     msg.className = 'submit-msg ok'; msg.textContent = `전체 발송 완료 (${total}명)`;
   } catch(e){ msg.className = 'submit-msg err'; msg.textContent = `실패 (${total}명까지 발송): ` + e.message; }
 });
+document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-vtopen]')){ e.preventDefault(); e.target.click(); } });
 /* 시작 */
 renderLibraryGate();
 renderChallengeMe();
