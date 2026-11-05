@@ -1469,6 +1469,13 @@
   }
   .vw-views{ display:inline-flex; align-items:center; gap:4px; font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; margin-left:4px; }
   .vw-views svg{ color:var(--faint); }
+  /* 글쓰기 사진 끌어서 옮기기 */
+  #vwEditor figure img{ cursor:grab; -webkit-user-drag:none; -webkit-touch-callout:none; user-select:none; -webkit-user-select:none; }
+  #vwEditor.vw-dragmode, #vwEditor.vw-dragmode *{ cursor:grabbing !important; user-select:none; }
+  #vwEditor figure.vw-fig-dragging{ opacity:.35; outline:2px dashed #2AABEE; outline-offset:4px; border-radius:10px; }
+  .vw-fig-ghost{ position:fixed; left:0; top:0; width:120px; height:90px; z-index:10000; pointer-events:none; border-radius:10px; background:#111 center/cover no-repeat; box-shadow:0 12px 30px rgba(0,0,0,.45); border:2px solid #2AABEE; opacity:.92; }
+  .vw-fig-line{ position:absolute; z-index:9999; height:3px; border-radius:3px; background:#2AABEE; box-shadow:0 0 0 3px color-mix(in srgb, #2AABEE 25%, transparent); pointer-events:none; }
+  .vw-fig-hint{ font-size:12px; color:var(--muted); }
 </style>
 </head><body>
 
@@ -1787,7 +1794,7 @@
             <button type="button" data-be="link" title="링크">링크</button>
             <input type="file" id="vwImgs" accept="image/png,image/jpeg,image/webp" multiple hidden>
           </div>
-          <div class="be-body vw-rich" id="vwEditor" contenteditable="true" data-ph="본문을 입력하세요. 사진 버튼을 누르면 커서가 있는 곳에 사진이 들어가요."></div>
+          <div class="be-body vw-rich" id="vwEditor" contenteditable="true" data-ph="본문을 입력하세요. 사진 버튼을 누르면 커서가 있는 곳에 사진이 들어가요. 넣은 사진은 꾹 눌러 끌면 위치를 옮길 수 있어요."></div>
           <div class="be-foot"><span id="vwImgName"></span></div>
         </div>
         <textarea id="vwBody" hidden></textarea>
@@ -6416,6 +6423,92 @@ function vwFigure(src){
   f.innerHTML = `<img src="${src}" data-dk="${uid().toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16) || Date.now().toString(36)}" alt=""><figcaption></figcaption>`;
   return f;
 }
+/* ---------- 글쓰기: 사진 꾹 눌러 끌어서 옮기기 ----------
+ * 마우스: 사진을 누른 채 조금 움직이면 시작 / 터치: 0.35초 꾹 누르면 시작(진동) → 끌어서 놓을 위치에 파란 선 표시 */
+(function vwFigDrag(){
+  const ed = () => document.getElementById('vwEditor');
+  let st = null;   // { fig, sx, sy, timer, active, ghost, line, ref, after, touch }
+  const blockOf = (node, root) => { while (node && node.parentNode !== root) node = node.parentNode; return node; };
+  function begin(){
+    const root = ed(); if (!st || !root) return;
+    st.active = true;
+    st.fig.classList.add('vw-fig-dragging');
+    root.classList.add('vw-dragmode');
+    const img = st.fig.querySelector('img');
+    const g = document.createElement('div'); g.className = 'vw-fig-ghost';
+    if (img) g.style.backgroundImage = `url("${img.src}")`;
+    document.body.appendChild(g); st.ghost = g;
+    const ln = document.createElement('div'); ln.className = 'vw-fig-line'; document.body.appendChild(ln); st.line = ln;
+    if (navigator.vibrate) try{ navigator.vibrate(15); } catch(e){}
+    const sel = window.getSelection(); if (sel) sel.removeAllRanges();
+    move(st.sx, st.sy);
+  }
+  function move(x, y){
+    if (!st || !st.active) return;
+    st.ghost.style.transform = `translate(${x - 60}px, ${y - 45}px)`;
+    const root = ed();
+    const blocks = [...root.children].filter(b => b !== st.fig);
+    let ref = null, after = false;
+    for (const b of blocks){
+      const r = b.getBoundingClientRect();
+      if (y < r.top + r.height / 2){ ref = b; after = false; break; }
+      ref = b; after = true;
+    }
+    st.ref = ref; st.after = after;
+    const rr = root.getBoundingClientRect();
+    let top;
+    if (!ref) top = rr.top + 8;
+    else { const r = ref.getBoundingClientRect(); top = after ? r.bottom + 2 : r.top - 4; }
+    Object.assign(st.line.style, { top: (top + window.scrollY) + 'px', left: (rr.left + window.scrollX + 8) + 'px', width: (rr.width - 16) + 'px' });
+    // 화면 끝에 가까우면 자동 스크롤
+    const edge = 70;
+    if (y < edge) window.scrollBy(0, -12); else if (y > window.innerHeight - edge) window.scrollBy(0, 12);
+  }
+  function end(drop){
+    if (!st) return;
+    clearTimeout(st.timer);
+    const root = ed();
+    if (st.active){
+      if (drop && root){
+        if (!st.ref) root.insertBefore(st.fig, root.firstChild);
+        else if (st.after) st.ref.after(st.fig); else st.ref.before(st.fig);
+        root.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      st.fig.classList.remove('vw-fig-dragging');
+      root && root.classList.remove('vw-dragmode');
+      st.ghost && st.ghost.remove(); st.line && st.line.remove();
+    }
+    st = null;
+  }
+  function start(e, x, y, touch){
+    const root = ed(); if (!root || root.closest('[hidden]')) return;
+    const img = e.target.closest && e.target.closest('img'); if (!img || !root.contains(img)) return;
+    const fig = blockOf(img.closest('figure') || img, root); if (!fig) return;
+    st = { fig, sx: x, sy: y, active: false, touch };
+    if (touch) st.timer = setTimeout(() => { if (st && !st.active) begin(); }, 350);
+  }
+  document.addEventListener('dragstart', e => { const root = ed(); if (root && root.contains(e.target) && e.target.tagName === 'IMG') e.preventDefault(); });
+  // 마우스
+  document.addEventListener('mousedown', e => { if (e.button === 0) start(e, e.clientX, e.clientY, false); });
+  document.addEventListener('mousemove', e => {
+    if (!st || st.touch) return;
+    if (!st.active && Math.hypot(e.clientX - st.sx, e.clientY - st.sy) > 6) begin();
+    if (st && st.active){ e.preventDefault(); move(e.clientX, e.clientY); }
+  });
+  document.addEventListener('mouseup', () => { if (st && !st.touch) end(true); });
+  // 터치
+  document.addEventListener('touchstart', e => { if (e.touches.length === 1) start(e, e.touches[0].clientX, e.touches[0].clientY, true); }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    if (!st || !st.touch) return;
+    const t = e.touches[0];
+    if (!st.active){ if (Math.hypot(t.clientX - st.sx, t.clientY - st.sy) > 10){ clearTimeout(st.timer); st = null; } return; }
+    e.preventDefault(); move(t.clientX, t.clientY);
+  }, { passive: false });
+  document.addEventListener('touchend', () => { if (st && st.touch) end(true); });
+  document.addEventListener('touchcancel', () => end(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && st && st.active) end(false); });
+  document.addEventListener('contextmenu', e => { if (st && st.touch) e.preventDefault(); });
+})();
 function vwTextToHtml(t){
   return String(t || '').split(/\n{2,}/).map(par => `<p>${linkify(par).replace(/\n/g, '<br>')}</p>`).join('');
 }
