@@ -1454,6 +1454,21 @@
   .vw-acts .vw-tg{ color:#2AABEE; border-color:color-mix(in srgb, #2AABEE 45%, transparent); }
   .vw-acts .vw-tg:hover{ background:color-mix(in srgb, #2AABEE 10%, transparent); }
   .vw-acts .vw-tg:disabled{ opacity:.6; }
+  /* 정보 공유 — 한 줄에 2개 */
+  @media (min-width:760px){
+    #vwList.vw-list{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; align-items:stretch; }
+    #vwList > .vw-post.open, #vwList > :not(.vw-post){ grid-column:1 / -1; }
+    #vwList > .vw-post:not(.open){ padding:16px; gap:9px; }
+    #vwList > .vw-post:not(.open) .vw-title{ font-size:16.5px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    #vwList > .vw-post:not(.open) .vw-cover{ aspect-ratio:16 / 9; overflow:hidden; border-radius:10px; }
+    #vwList > .vw-post:not(.open) .vw-cover img{ width:100%; height:100%; object-fit:cover; }
+    #vwList > .vw-post:not(.open) .vw-ex{ font-size:13.5px; line-height:1.6; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    #vwList > .vw-post:not(.open) .vw-comp{ margin-top:auto; font-size:11.5px; }
+    #vwList > .vw-post:not(.open) .vw-comp{ line-height:1.5; }
+    #vwList > .vw-post:not(.open) .vw-acts .btn-mini{ padding:5px 9px; font-size:12px; }
+  }
+  .vw-views{ display:inline-flex; align-items:center; gap:4px; font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; margin-left:4px; }
+  .vw-views svg{ color:var(--faint); }
 </style>
 </head><body>
 
@@ -6224,6 +6239,14 @@ function vwRichHtml(p){
   return tpl.innerHTML;
 }
 function vwExcerpt(p, n){ const t = String(p.body || '').replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n) + '…' : t; }
+/* 조회수: 글을 펼치거나 링크로 열 때 +1, 같은 브라우저에서는 하루 한 번만 */
+function vwHit(id){
+  const day = new Date().toISOString().slice(0, 10), key = 'vwHit:' + id;
+  try{ if (localStorage.getItem(key) === day) return; localStorage.setItem(key, day); } catch(e){}
+  const p = (vwAll || []).find(x => x.id === id) || vwPosts.find(x => x.id === id);
+  if (p) p.viewCount = Number(p.viewCount || 0) + 1;
+  fetch(WORKER_URL + '/views/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }), keepalive: true }).catch(() => {});
+}
 function vwShareUrl(id){ return WORKER_URL + '/p/' + id; }
 
 function vwPostHtml(p){
@@ -6239,7 +6262,7 @@ function vwPostHtml(p){
   const imgHtml = imgs && !blog ? `<div class="vw-imgs n${imgs}">${Array.from({ length: imgs }, (_, i) => { const src = vwImgCache[p.id + '_' + i]; return `<img alt="첨부 이미지 ${i + 1}" data-vimg="${p.id}_${i}" ${src ? `src="${src}"` : ''}>`; }).join('')}</div>` : '';
   const link = safeUrl(p.link || '');
   const tags = (p.tags || []).map(t => `<button type="button" class="vw-tag" data-vtagsearch="${escapeAttr(t)}">#${escapeHtml(t)}</button>`).join('');
-  return `<article class="vw-post${p.admin ? ' admin' : ''}${blog ? ' blog' : ''}" id="vp-${p.id}" data-vpost="${p.id}">
+  return `<article class="vw-post${p.admin ? ' admin' : ''}${blog ? ' blog' : ''}${expanded && blog ? ' open' : ''}" id="vp-${p.id}" data-vpost="${p.id}">
     <div class="vw-meta"><span class="vw-cat">${VW_CATS[p.category] || '정보'}</span><b>${escapeHtml(p.name || '운영자')}</b>${p.admin ? '<span class="admin-tag">운영자</span>' : ''}<span title="${escapeAttr(fmtDate(p.createdAt))}">${fmtDate(p.createdAt).slice(0, 10)}</span>${vwHoldTag(p)}</div>
     <h3 class="vw-title">${vwHi(p.title || '')}</h3>
     ${blog ? blogHtml : `<div class="vw-text${long && !expanded ? ' clamp' : ''}">${vwHi(p.body || '')}</div>`}
@@ -6252,6 +6275,7 @@ function vwPostHtml(p){
     <div class="vw-acts">
       <button type="button" class="heart-btn${liked ? ' on' : ''}" data-vheart="${p.id}" aria-label="하트">${HEART_SVG}<span>${Number(p.hearts || 0)}</span></button>
       <button type="button" class="btn-mini vw-share" data-vshare="${p.id}">공유</button>
+      <span class="vw-views" title="조회수"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><span>${Number(p.viewCount || 0).toLocaleString()}</span></span>
       <span class="sp"></span>
       ${isAdmin ? `<button type="button" class="btn-mini vw-tg" data-vnotify="${p.id}" title="로그인 회원 전체에게 텔레그램으로 이 글 알림 보내기">텔레그램 발송</button><button type="button" class="btn-mini" data-vedit="${p.id}">수정</button><button type="button" class="btn-mini" data-vdel="${p.id}">삭제</button>` : ''}
     </div>
@@ -6334,7 +6358,7 @@ async function vwRevealPending(){
   const id = vwPendingId, el = document.getElementById('vp-' + id);
   if (el){
     vwPendingId = null;
-    if (!vwExpanded.has(id)){ vwExpanded.add(id); renderViews(); }
+    if (!vwExpanded.has(id)){ vwExpanded.add(id); vwHit(id); renderViews(); }
     setTimeout(() => { const e2 = document.getElementById('vp-' + id); if (e2){ e2.classList.add('flash'); window.scrollTo({ top: e2.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); } }, 60);
     return;
   }
@@ -6748,7 +6772,7 @@ document.addEventListener('click', async e => {
   const tg = t.closest('[data-vtagsearch]');
   if (tg){ vwSearch = tg.dataset.vtagsearch; $('#vwSearch').value = vwSearch; renderViews(); window.scrollTo({ top: $('#vwSearch').getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); return; }
   const xb = t.closest('[data-vexpand]');
-  if (xb){ const id = xb.dataset.vexpand; if (vwExpanded.has(id)) vwExpanded.delete(id); else vwExpanded.add(id); renderViews(); return; }
+  if (xb){ const id = xb.dataset.vexpand; if (vwExpanded.has(id)) vwExpanded.delete(id); else { vwExpanded.add(id); vwHit(id); } renderViews(); if (vwExpanded.has(id)) document.getElementById('vp-' + id)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); return; }
   const eb = t.closest('[data-vedit]');
   if (eb){ const p = (vwAll || []).find(x => x.id === eb.dataset.vedit) || vwPosts.find(x => x.id === eb.dataset.vedit); if (p) vwOpenForm(p); return; }
   const db_ = t.closest('[data-vdel]');
