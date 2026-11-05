@@ -56,6 +56,7 @@ const HANDLER = {
       if (url.pathname === '/auth/poll' && req.method === 'GET') return json(await authPoll(env, ctx, url.searchParams.get('token')), 200, cors);
       if (url.pathname === '/tg/webhook' && req.method === 'POST') return await tgWebhook(req, env);
       if (url.pathname === '/admin/send' && req.method === 'POST') return await adminSend(req, env, cors);
+      if (url.pathname === '/views/hit' && req.method === 'POST') return await viewsHit(req, env, cors);
       if (url.pathname === '/admin/channel' && req.method === 'POST') return await adminChannel(req, env, cors);
       if (url.pathname === '/setup' && req.method === 'GET') return json(await setup(env, url), 200, cors);
       if (url.pathname === '/market' && req.method === 'GET') return await cached(req, ctx, 120, async () => json(await marketData(), 200, cors), cors);
@@ -383,6 +384,17 @@ async function liveImport(req, env, cors) {
   }
   const r2 = await dmBatch(env, `liveRuns/${id}`, text, markup, false, '');
   return json({ ok: true, id: pid, ...r2 }, 200, cors);
+}
+
+/* 정보 공유 조회수 +1 (브라우저에서 글을 펼치거나 링크로 열 때, 같은 브라우저는 하루 1번만 부름) */
+async function viewsHit(req, env, cors) {
+  const body = await req.json().catch(() => ({}));
+  const id = String(body.id || '');
+  if (!/^[A-Za-z0-9_-]{6,40}$/.test(id)) return json({ error: 'bad_request' }, 400, cors);
+  try {
+    await fsCommit(env, [{ transform: { document: fsName(env, `views/${id}`), fieldTransforms: [{ fieldPath: 'viewCount', increment: { integerValue: '1' } }] }, currentDocument: { exists: true } }]);
+  } catch (e) { return json({ ok: false }, 200, cors); }
+  return json({ ok: true }, 200, cors);
 }
 
 /* 자료실 PDF 리포트 표지 (텔레그램 알림 사진용). 리포트 분류(market·stock·earnings)만 공개 */
