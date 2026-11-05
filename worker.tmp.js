@@ -66,9 +66,9 @@ const HANDLER = {
       if (url.pathname === '/me/delete' && req.method === 'POST') return await meDelete(req, env, cors);
       if (url.pathname === '/briefing/send' && req.method === 'POST') return await briefingSendApi(req, env, cors);
       if (url.pathname === '/live/import' && req.method === 'POST') return await liveImport(req, env, cors);
-      if (req.method === 'GET' && url.pathname === '/views/teaser') return await cached(req, ctx, 120, async () => json(await viewsTeaser(env), 200, cors), cors);
+      if (req.method === 'GET' && url.pathname === '/views/teaser') return await cached(req, ctx, 30, async () => json(await viewsTeaser(env), 200, cors), cors);
       let m;
-      if (req.method === 'GET' && (m = url.pathname.match(/^\/views\/teaser\/([A-Za-z0-9_-]{6,40})$/))) return await cached(req, ctx, 120, async () => { const t = await viewTeaser(env, m[1]); return json(t || { error: 'not_found' }, t ? 200 : 404, cors); }, cors);
+      if (req.method === 'GET' && (m = url.pathname.match(/^\/views\/teaser\/([A-Za-z0-9_-]{6,40})$/))) return await cached(req, ctx, 30, async () => { const t = await viewTeaser(env, m[1]); return json(t || { error: 'not_found' }, t ? 200 : 404, cors); }, cors);
       if (req.method === 'GET' && (m = url.pathname.match(/^\/views\/cover\/([A-Za-z0-9_-]{6,40})\/[0-9a-z]+(\.jpg)?$/))) return await cached(req, ctx, 86400, async () => await viewCover(env, m[1]), cors);
       if (req.method === 'GET' && (m = url.pathname.match(/^\/posts\/cover\/([A-Za-z0-9_-]{6,40})(?:\/[0-9A-Za-z_-]+)?\.jpg$/))) return await cached(req, ctx, 86400, async () => await postCover(env, m[1]), cors);
       if (req.method === 'GET' && (m = url.pathname.match(/^\/p\/([A-Za-z0-9_-]{6,40})$/))) return await cached(req, ctx, 300, async () => await sharePage(env, url, m[1]), {});
