@@ -61,6 +61,7 @@ const HANDLER = {
       if (url.pathname === '/setup' && req.method === 'GET') return json(await setup(env, url), 200, cors);
       if (url.pathname === '/market' && req.method === 'GET') return await cached(req, ctx, 120, async () => json(await marketData(), 200, cors), cors);
       if (url.pathname === '/home/config' && req.method === 'GET') return await cached(req, ctx, 30, async () => json(await homeConfig(env), 200, cors), cors);
+      if (url.pathname === '/home/quotes' && req.method === 'GET') return await cached(req, ctx, 60, async () => json(await homeQuotes(env), 200, cors), cors);
       if (url.pathname === '/admin/home' && req.method === 'POST') return await adminHome(req, env, cors);
       if (url.pathname === '/stats' && req.method === 'GET') return await cached(req, ctx, 600, async () => json(await siteStats(env), 200, cors), cors);
       if (url.pathname === '/ch/unlock' && req.method === 'POST') return await chUnlock(req, env, cors);
@@ -410,6 +411,7 @@ async function adminHome(req, env, cors) {
   }
   const data = { watchlist, earnings, at: Date.now() };
   await fsWrite(env, [{ path: 'config/home', data }]);
+  try { const o = new URL(req.url).origin, c = caches.default; await Promise.all(['/home/config', '/home/quotes'].map(p => c.delete(new Request(o + p, { method: 'GET' })))); } catch (e) {}
   return json({ ok: true, ...data }, 200, cors);
 }
 
@@ -718,6 +720,62 @@ async function naverIndex(code) {
       pct: Number(d.fluctuationsRatio || 0), status: d.marketStatus === 'OPEN' ? '장중' : d.marketStatus === 'CLOSE' ? '장 마감' : '', at: d.localTradedAt || ''
     };
   } catch (e) { return null; }
+}
+/* 홈 시장 시세 · 관심 종목 시세 (네이버 증권 · 업비트) */
+const HOME_DEFAULT_WATCH = [
+  { s: 'NASDAQ:PLTR', n: '팔란티어' }, { s: 'NASDAQ:AAPL', n: '애플' }, { s: 'AMEX:SOXL', n: '반도체 3X' },
+  { s: 'NASDAQ:LITE', n: '루멘텀' }, { s: 'NASDAQ:TEM', n: '템퍼스 AI' }, { s: 'BITSTAMP:ETHUSD', n: '이더리움' }
+];
+const COINS = ['BTC', 'ETH', 'XRP', 'SOL', 'DOGE', 'ADA', 'TRX', 'AVAX', 'LINK', 'SUI', 'BNB', 'DOT', 'TON', 'SHIB'];
+const numOf = v => Number(String(v == null ? '' : v).replace(/,/g, ''));
+async function njson(u) { try { const r = await fetch(u, { headers: UA }); return r.ok ? await r.json() : null; } catch (e) { return null; } }
+function qOut(n, s, price, pct, extra) { return price == null || price === '' ? null : { n, s, price: String(price), pct: Number(pct) || 0, ...(extra || {}) }; }
+async function qNaverIndex(n, code) { const d = await njson(`https://api.stock.naver.com/index/${code}/basic`); return d && qOut(n, code, d.closePrice, d.fluctuationsRatio); }
+async function qNaverMI(n, cat, code, fmt) {
+  const d = await njson(`https://m.stock.naver.com/front-api/marketIndex/productDetail?category=${cat}&reutersCode=${encodeURIComponent(code)}`);
+  const r = d && d.result; return r && qOut(n, code, fmt ? fmt(r.closePrice) : r.closePrice, r.fluctuationsRatio);
+}
+async function qUpbit(list) {
+  if (!list.length) return {};
+  const d = await njson('https://api.upbit.com/v1/ticker?markets=' + list.map(c => 'USDT-' + c).join(','));
+  const out = {}; (d || []).forEach(x => { out[x.market.replace('USDT-', '')] = { price: Number(x.trade_price).toLocaleString('en-US', { maximumFractionDigits: x.trade_price < 10 ? 4 : 2 }), pct: Number(x.signed_change_rate) * 100 }; });
+  return out;
+}
+function coinOf(sym) {
+  const t = String(sym).toUpperCase(), tick = t.includes(':') ? t.split(':')[1] : t;
+  const m = tick.match(/^([A-Z0-9]{2,10}?)(USDT|USD|KRW)?$/);
+  if (!m) return null;
+  if (/^(BITSTAMP|BINANCE|UPBIT|COINBASE|BITHUMB|CRYPTO)$/.test(t.split(':')[0]) || (!t.includes(':') && COINS.includes(m[1]))) return m[1];
+  return null;
+}
+async function qOne(w, coinMap) {
+  const s = String(w.s || '').toUpperCase(), [ex, tk0] = s.includes(':') ? s.split(':') : ['', s], tk = tk0 || s;
+  const coin = coinOf(s); if (coin) { const c = coinMap[coin]; return c ? qOut(w.n || coin, s, c.price, c.pct) : null; }
+  if (ex === 'KRX' || /^\d{6}$/.test(tk)) {
+    const d = await njson(`https://m.stock.naver.com/api/stock/${tk}/basic`);
+    return d && qOut(w.n || d.stockName, s, d.closePrice, d.fluctuationsRatio);
+  }
+  const suf = ex === 'NASDAQ' ? ['.O', ''] : ex === 'NYSE' ? ['.N', ''] : /^(AMEX|NYSEARCA|ARCA|CBOE)$/.test(ex) ? ['.K', '.A', '.N', ''] : ['.O', '.N', '.K', ''];
+  for (const x of suf) {
+    const d = await njson(`https://api.stock.naver.com/stock/${tk}${x}/basic`);
+    if (d && d.closePrice) return qOut(w.n || d.stockName || tk, s, d.closePrice, d.fluctuationsRatio, { tk });
+  }
+  return null;
+}
+async function homeQuotes(env) {
+  const cfg = await homeConfig(env);
+  const watch = (cfg.watchlist && cfg.watchlist.length ? cfg.watchlist : HOME_DEFAULT_WATCH).slice(0, 20);
+  const coins = [...new Set(['BTC', 'ETH', ...watch.map(w => coinOf(w.s)).filter(Boolean)])];
+  const coinMap = await qUpbit(coins);
+  const market = (await Promise.all([
+    qNaverIndex('S&P 500', '.INX'), qNaverIndex('나스닥', '.IXIC'), qNaverIndex('다우', '.DJI'), qNaverIndex('VIX', '.VIX'),
+    Promise.resolve(coinMap.BTC ? qOut('비트코인', 'BTC', coinMap.BTC.price, coinMap.BTC.pct) : null),
+    Promise.resolve(coinMap.ETH ? qOut('이더리움', 'ETH', coinMap.ETH.price, coinMap.ETH.pct) : null),
+    qNaverMI('원/달러', 'exchange', 'FX_USDKRW'), qNaverMI('미 10년물', 'bond', 'US10YT=RR', v => Number(numOf(v)).toFixed(2) + '%'),
+    qNaverMI('WTI', 'energy', 'CLcv1'), qNaverMI('금', 'metals', 'GCcv1')
+  ])).filter(Boolean);
+  const wq = (await Promise.all(watch.map(w => qOne(w, coinMap).catch(() => null)))).map((q, i) => q || { n: watch[i].n || watch[i].s, s: watch[i].s, price: null, pct: 0 });
+  return { market, watch: wq, at: Date.now() };
 }
 async function fearGreed() {
   try {
