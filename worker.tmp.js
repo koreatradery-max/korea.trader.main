@@ -758,7 +758,15 @@ async function qOne(w, coinMap) {
   const suf = ex === 'NASDAQ' ? ['.O', ''] : ex === 'NYSE' ? ['.N', ''] : /^(AMEX|NYSEARCA|ARCA|CBOE)$/.test(ex) ? ['.K', '.A', '.N', ''] : ['.O', '.N', '.K', ''];
   for (const x of suf) {
     const d = await njson(`https://api.stock.naver.com/stock/${tk}${x}/basic`);
-    if (d && d.closePrice) return qOut(w.n || d.stockName || tk, s, d.closePrice, d.fluctuationsRatio, { tk });
+    if (d && d.closePrice) {
+      let pct = Number(d.fluctuationsRatio) || 0;
+      if (!pct) {   // 새 거래일 개장 전엔 0으로 나와서 직전 거래일 등락률로 대신
+        const h = await njson(`https://api.stock.naver.com/stock/${tk}${x}/price?page=1&pageSize=3`);
+        const row = Array.isArray(h) ? h.find(r => Number(r.fluctuationsRatio)) : null;
+        if (row) pct = Number(row.fluctuationsRatio);
+      }
+      return qOut(w.n || d.stockName || tk, s, d.closePrice, pct, { tk });
+    }
   }
   return null;
 }
