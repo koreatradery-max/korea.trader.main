@@ -7720,7 +7720,7 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
     }
     fx.innerHTML = `<div class="gd-wash"></div>${sp}<div class="gd-core"><svg class="gd-heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg><div class="gd-msg">따뜻한 응원이 기록을 이어갑니다</div><div class="gd-sub">THANK YOU</div></div>`;
     document.body.appendChild(fx);
-    requestAnimationFrame(() => requestAnimationFrame(() => fx.classList.add('go')));
+    void fx.offsetWidth; setTimeout(() => fx.classList.add('go'), 20);
     setTimeout(() => {
       location.hash = 'support';
       setTimeout(() => {
