@@ -1750,6 +1750,7 @@
   .sh-fx .sh-t{ font-size:clamp(22px,2.6vw,32px); font-weight:800; letter-spacing:-.02em; }
   .sh-fx .sh-t em{ font-style:normal; color:#C6F36B; }
   .sh-fx .sh-s{ margin-top:6px; font-size:13px; color:#8F97A3; letter-spacing:.06em; }
+  .post .lv-one:not(.big){ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 </style>
 </head><body>
 
@@ -4948,9 +4949,28 @@ function shareIconHtml(p){
 function tagsHtml(p){ return (p.tags && p.tags.length) ? `<div class="tags">${p.tags.map(t => `<span class="tag">#${esc(t)}</span>`).join("")}</div>` : ""; }
 /* ---------- 라이브 요약: 핵심 정리 · 전체 요약 서식 ---------- */
 const LV_BULLET = /^\s*(?:[-•·*▪◦]|\d+[.)]\s)\s*/;
+/* 한 덩어리로 저장된 옛 요약 → 줄 나누기 ([ 08:33 종목 ] 같은 표시, 면책 문구 기준) */
+function lvNorm(text){
+  let t = String(text || '').replace(/\r/g, '');
+  const lines = t.split('\n').filter(l => l.trim());
+  if (lines.length > 3 && !lines.some(l => l.length > 600)) return t;
+  t = t.replace(/\s*\[\s*(\d{4}\.\d{2}\.\d{2}[^\]]{0,40})\]\s*/g, '\n[$1]\n').replace(/\[(\S[^\]]*?)\s+\]/g, '[$1]')
+       .replace(/\s*(전체\s*장\s*요약)\s*[:：]\s*/g, '\n[$1]\n')
+       .replace(/\s*\[\s*((?:\d{1,2}:)?\d{1,2}:\d{2}\s*[^\]]{1,40}?)\s*\]\s*/g, '\n\n[$1]\n')
+       .replace(/\s*(⚠️?\s*면책)/g, '\n\n$1');
+  return t.replace(/\n{3,}/g, '\n\n').trim();
+}
+/* 카드 상단 한 줄 요약: 너무 길면 첫 문장만 */
+function lvOneLine(p){
+  let s = String(p.oneLine || '').replace(/^\s*\[[^\]]{0,50}\]\s*/, '').replace(/^\s*전체\s*장\s*요약\s*[:：]\s*/, '').trim();
+  s = s.split(/\s*\[\s*(?:\d{1,2}:)?\d{1,2}:\d{2}/)[0].split(/\s*⚠/)[0].trim();
+  if (s.length <= 180) return s;
+  const m = s.slice(0, 220).match(/^.{30,}?(?:다|요)\.(?=\s)/);
+  return m ? m[0] : s.slice(0, 170) + '…';
+}
 function lvKeyPoints(p){
   if (Array.isArray(p.keyPoints) && p.keyPoints.filter(Boolean).length) return p.keyPoints.filter(Boolean).slice(0, 5);
-  const lines = String(p.content || '').split(/\n/).map(l => l.trim()).filter(Boolean);
+  const lines = lvNorm(p.content).split(/\n/).map(l => l.trim()).filter(Boolean);
   const bullets = lines.filter(l => /^\s*[-•·*▪◦]\s*/.test(l)).map(l => l.replace(/^\s*[-•·*▪◦]\s*/, ''));
   const src = bullets.length ? bullets : lines.filter(l => l.length > 12 && !lvIsHead(l));
   return src.slice(0, 4).map(l => l.length > 110 ? l.slice(0, 108) + '…' : l);
@@ -4959,7 +4979,7 @@ function lvIsHead(l){ return /^(#{1,4}\s|■|▶|◆|【|\[[^\]]{1,30}\]$|\d+[.)
 function lvFormat(text){
   const out = []; let list = null;
   const flush = () => { if (list){ out.push(`<ul>${list.join('')}</ul>`); list = null; } };
-  for (const raw of String(text || '').split(/\n/)){
+  for (const raw of lvNorm(text).split(/\n/)){
     const l = raw.trim();
     if (!l){ flush(); continue; }
     if (lvIsHead(l)){ flush(); out.push(`<h4>${esc(l.replace(/^(#{1,4}\s|■\s?|▶\s?|◆\s?)/, '').replace(/^【|】$/g, '').replace(/^\[|\]$/g, ''))}</h4>`); continue; }
@@ -5015,7 +5035,7 @@ function renderFeed(){
       el.innerHTML = `
         <div class="post-meta"><span class="post-cat">라이브 요약</span><span class="post-date">${fmtMD(p.createdAt)}</span><span class="live-badge">LIVE</span>${p.duration ? `<span class="live-dur">· ${esc(p.duration)}</span>` : ""}${p.auto ? `<span class="auto-badge">AI 요약</span>` : ""}${newBadge(p)}</div>
         <h2></h2>
-        ${p.oneLine ? `<div class="lv-one">${esc(p.oneLine)}</div>` : ""}
+        ${p.oneLine ? `<div class="lv-one">${esc(lvOneLine(p))}</div>` : ""}
         ${keys.length ? `<ul class="lv-keys">${keys.map(k => `<li>${esc(k)}</li>`).join("")}</ul>` : ""}
         ${tagsHtml(p)}
         <div class="post-foot">
@@ -5098,7 +5118,7 @@ function openViewer(p){
     const keys = lvKeyPoints(p);
     extra.innerHTML = `
       ${p.duration ? `<div class="post-meta"><span class="live-badge">LIVE</span><span class="live-dur">· ${esc(p.duration)}</span>${p.auto ? '<span class="auto-badge">AI 요약</span>' : ''}</div>` : ""}
-      ${p.oneLine ? `<div class="lv-one big">${esc(p.oneLine)}</div>` : ""}
+      ${p.oneLine ? `<div class="lv-one big">${esc(lvOneLine(p))}</div>` : ""}
       ${keys.length ? `<div class="v-sec"><div class="v-label">핵심 정리</div><ul class="lv-keys full">${keys.map(k => `<li>${esc(k)}</li>`).join("")}</ul></div>` : ""}`;
     $('#vBodyLabel').textContent = "전체 요약";
   } else $('#vBodyLabel').textContent = "내용";
