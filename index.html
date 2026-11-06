@@ -1636,17 +1636,24 @@
     #view-home .hx-tv{ inset:auto; }
     #hxMarket{ grid-template-columns:1fr; }
   }
+  /* 맨 위: 함께 만들어 주신 분들 띠 · 헤더 아래: 시세 레일 */
+  .thx-bar{ display:flex; align-items:center; gap:14px; height:30px; padding:0 28px; background:#060708; border-bottom:1px solid #15181C; color:#8F97A3; font-size:12px; text-decoration:none !important; }
+  .thx-bar .hx-th-l{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; color:#E8C35A; font-weight:600; opacity:.9; }
+  .thx-bar .hx-th-mask{ position:relative; flex:1; min-width:0; overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .thx-bar .hx-th-track{ display:inline-flex; gap:12px; white-space:nowrap; animation:hxth var(--th-dur, 60s) linear infinite; }
+  .thx-bar .hx-th-track span{ color:#9AA2AE; } .thx-bar .hx-th-track i{ font-style:normal; color:#33383F; }
+  .thx-bar:hover .hx-th-track{ animation-play-state:paused; } .thx-bar:hover .hx-th-track span{ color:#D5D9DF; }
+  .site-head + .tape-bar, .tape-bar{ background:#0A0B0D; }
+  .tape-fixed{ background:#0A0B0D; }
+  @media (max-width:760px){ .thx-bar{ padding:0 12px; gap:10px; } .thx-bar .hx-th-l{ font-size:11.5px; } }
 </style>
 </head><body>
 
-<!-- ================= 가격 레일 ================= -->
-<div class="tape-bar" aria-label="실시간 시세">
-  <div class="tape-fixed" id="tapeKr">
-    <span class="tq"><b>코스피</b><span class="tq-v" id="tqKospi">-</span><span class="tq-c" id="tqKospiC"></span></span>
-    <span class="tq"><b>코스닥</b><span class="tq-v" id="tqKosdaq">-</span><span class="tq-c" id="tqKosdaqC"></span></span>
-  </div>
-  <div class="tape-tv" id="tapeTv"></div>
-</div>
+<!-- ================= 함께 만들어 주신 분들 (맨 위 띠) ================= -->
+<a class="thx-bar" href="#support" id="hxThanks" hidden aria-label="함께 만들어 주신 분들 보기">
+  <span class="hx-th-l"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>함께 만들어 주신 분들</span>
+  <span class="hx-th-mask"><span class="hx-th-track" id="hxThTrack"></span></span>
+</a>
 
 <!-- ================= 공지 배너 ================= -->
 <div class="top-banner" id="noticeBar" hidden><span class="banner-dot"></span><span class="n-text" id="noticeText"></span><span class="n-date" id="noticeDate"></span></div>
@@ -1690,7 +1697,16 @@
     </div>
   </div>
 </header>
-<div class="mkt-bar" aria-label="장 운영 현황"><div class="mkt-inner">
+<!-- ================= 가격 레일 (헤더 아래) ================= -->
+<div class="tape-bar" aria-label="실시간 시세">
+  <div class="tape-fixed" id="tapeKr">
+    <span class="tq"><b>코스피</b><span class="tq-v" id="tqKospi">-</span><span class="tq-c" id="tqKospiC"></span></span>
+    <span class="tq"><b>코스닥</b><span class="tq-v" id="tqKosdaq">-</span><span class="tq-c" id="tqKosdaqC"></span></span>
+  </div>
+  <div class="tape-tv" id="tapeTv"></div>
+</div>
+
+<div class="mkt-bar" aria-label="장 운영 현황" hidden><div class="mkt-inner">
   <span class="mk"><i class="dot" id="dotKr"></i>국내 <b id="stKr">-</b><span id="subKr"></span></span>
   <span class="mk"><i class="dot" id="dotUs"></i>미국 <b id="stUs">-</b><span id="subUs"></span></span>
   <span class="mk"><i class="dot always"></i>코인 <b>24시간 거래</b></span>
@@ -1716,10 +1732,6 @@
           <div><dt>공부 자료</dt><dd id="hsPosts">무료</dd></div>
           <div><dt>이용료</dt><dd class="lime" id="hsJournal">0원</dd></div>
         </dl>
-        <a class="hx-thanks" href="#support" id="hxThanks" hidden aria-label="함께 만들어 주신 분들 보기">
-          <span class="hx-th-l"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>함께 만들어 주신 분들</span>
-          <span class="hx-th-mask"><span class="hx-th-track" id="hxThTrack"></span></span>
-        </a>
       </div>
       <div class="hx-tabs" role="group" aria-label="차트 종목">
         <button type="button" class="on" data-hxsym="FOREXCOM:NSXUSD">나스닥 100</button>
@@ -7417,7 +7429,7 @@ function renderSupporters(){
     if (!supporters.length){ box.hidden = true; return; }
     let list = supporters.slice(); while (list.length < 10) list = list.concat(supporters);
     const html = list.map(n => `<span>${escapeHtml(n)}</span>`).join('<i>·</i>') + '<i>·</i>';
-    tr.innerHTML = html + html; tr.style.setProperty('--th-dur', Math.max(30, list.length * 4) + 's');
+    tr.innerHTML = html + html; tr.style.setProperty('--th-dur', Math.max(40, list.length * 5) + 's');
     box.hidden = false;
   };
   const orig = renderSupporters;
