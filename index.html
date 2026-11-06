@@ -4972,6 +4972,14 @@ function lvKeyPoints(p){
   if (Array.isArray(p.keyPoints) && p.keyPoints.filter(Boolean).length) return p.keyPoints.filter(Boolean).slice(0, 5);
   const lines = lvNorm(p.content).split(/\n/).map(l => l.trim()).filter(Boolean);
   const bullets = lines.filter(l => /^\s*[-•·*▪◦]\s*/.test(l)).map(l => l.replace(/^\s*[-•·*▪◦]\s*/, ''));
+  if (!bullets.length){
+    const seg = [];
+    for (let i = 0; i < lines.length - 1; i++){
+      const m = lines[i].match(/^\[(?:\d{1,2}:)?\d{1,2}:\d{2}\s*(.+)\]$/);
+      if (m && !lvIsHead(lines[i + 1])){ const fs = (lines[i + 1].match(/^.+?(?:다|요)\.(?=\s|$)/) || [lines[i + 1]])[0]; seg.push(m[1].trim() + ' — ' + fs); }
+    }
+    if (seg.length >= 2) return seg.slice(0, 4).map(l => l.length > 110 ? l.slice(0, 108) + '…' : l);
+  }
   const src = bullets.length ? bullets : lines.filter(l => l.length > 12 && !lvIsHead(l));
   return src.slice(0, 4).map(l => l.length > 110 ? l.slice(0, 108) + '…' : l);
 }
