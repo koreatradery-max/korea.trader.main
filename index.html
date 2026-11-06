@@ -1710,6 +1710,46 @@
   @media (prefers-reduced-motion:reduce){ .nav-support::before{ animation:none; } }
   .sp-top{ padding:12px 0 40px; margin-bottom:40px; border-bottom:1px solid var(--border); }
   .sp-top > .sp-thanks{ margin-top:0; border-top:0; padding-top:0; }
+
+  /* ===== 전체 페이지 꽉 찬 폭 ===== */
+  .sh-inner, .mkt-inner, .foot-inner{ max-width:none; padding-left:28px; padding-right:28px; }
+  .view{ max-width:none; padding-left:28px; padding-right:28px; }
+  .site-foot{ background:var(--bg); }
+  @media (max-width:760px){ .sh-inner, .mkt-inner, .foot-inner, .view{ padding-left:16px; padding-right:16px; } }
+  /* 시황 탭 같은 크기 */
+  .bf-tabs{ width:100%; max-width:860px; align-self:center; }
+  .bf-tabs button{ flex:1 1 0; min-width:0; white-space:nowrap; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+  .bf-tabs button small{ margin-left:0; }
+  /* 응원 보내기 버튼 */
+  .hx-btn.hx-cheer{ display:inline-flex; align-items:center; gap:8px; border-color:rgba(232,195,90,.35); color:#F3D98B; }
+  .hx-btn.hx-cheer svg{ color:#E8C35A; }
+  .hx-btn.hx-cheer:hover{ border-color:#E8C35A; box-shadow:0 10px 28px -12px rgba(232,195,90,.55); }
+  /* ===== 정보 공유 전환 ===== */
+  .sh-fx{ position:fixed; inset:0; z-index:9999; pointer-events:none; overflow:hidden; }
+  .sh-fx .sh-panel{ position:absolute; inset:0; background:#08090B; transform:translateX(-101%); transition:transform .55s cubic-bezier(.7,0,.25,1); }
+  .sh-fx .sh-panel::after{ content:""; position:absolute; top:0; bottom:0; right:-6px; width:6px; background:#C6F36B; box-shadow:0 0 40px 8px rgba(198,243,107,.5); }
+  .sh-fx .sh-panel.p2{ background:#C6F36B; transition-delay:0s; }
+  .sh-fx .sh-panel.p2::after{ display:none; }
+  .sh-fx.go .sh-panel{ transform:translateX(0); }
+  .sh-fx.go .sh-panel.p1{ transition-delay:.08s; }
+  .sh-fx.out .sh-panel{ transform:translateX(101%); }
+  .sh-fx.out .sh-panel.p2{ transition-delay:.1s; }
+  .sh-fx .sh-core{ position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); text-align:center; color:#F1F3F5; opacity:0; transition:opacity .3s ease .35s; }
+  .sh-fx.go .sh-core{ opacity:1; }
+  .sh-fx.out .sh-core{ opacity:0; transition-delay:0s; }
+  .sh-fx .sh-bubbles{ position:relative; width:120px; height:84px; margin:0 auto 16px; }
+  .sh-fx .sh-bubbles b{ position:absolute; border-radius:16px; background:#1A1E24; border:1px solid #2A3038; opacity:0; transform:scale(.4) translateY(10px); }
+  .sh-fx.go .sh-bubbles b{ animation:shPop .45s cubic-bezier(.2,1.4,.4,1) forwards; }
+  .sh-fx .sh-bubbles b:nth-child(1){ left:0; top:6px; width:62px; height:30px; animation-delay:.4s !important; border-bottom-left-radius:4px; }
+  .sh-fx .sh-bubbles b:nth-child(2){ right:0; top:24px; width:70px; height:32px; background:#C6F36B; border-color:#C6F36B; animation-delay:.55s !important; border-bottom-right-radius:4px; }
+  .sh-fx .sh-bubbles b:nth-child(3){ left:14px; top:54px; width:48px; height:26px; animation-delay:.7s !important; border-bottom-left-radius:4px; }
+  .sh-fx .sh-bubbles b i{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; gap:4px; }
+  .sh-fx .sh-bubbles b i::before, .sh-fx .sh-bubbles b i::after, .sh-fx .sh-bubbles b i span{ content:""; width:5px; height:5px; border-radius:50%; background:#6B7380; }
+  .sh-fx .sh-bubbles b:nth-child(2) i::before, .sh-fx .sh-bubbles b:nth-child(2) i::after, .sh-fx .sh-bubbles b:nth-child(2) i span{ background:#1B2410; }
+  @keyframes shPop{ to{ opacity:1; transform:none; } }
+  .sh-fx .sh-t{ font-size:clamp(22px,2.6vw,32px); font-weight:800; letter-spacing:-.02em; }
+  .sh-fx .sh-t em{ font-style:normal; color:#C6F36B; }
+  .sh-fx .sh-s{ margin-top:6px; font-size:13px; color:#8F97A3; letter-spacing:.06em; }
 </style>
 </head><body>
 
@@ -1785,12 +1825,12 @@
         <h1>기록하는 트레이더가<br><em>오래 남습니다.</em></h1>
         <div class="hx-cta">
           <a class="hx-btn pri" href="#views">정보 공유 보기</a>
-          <a class="hx-btn" href="#journal">매매일지 쓰기</a>
+          <a class="hx-btn hx-cheer" href="#support"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>응원 보내기</a>
         </div>
         <dl class="hx-facts">
           <div><dt>이용자</dt><dd id="hsUsers">-</dd></div>
           <div><dt>공부 자료</dt><dd id="hsPosts">무료</dd></div>
-          <div><dt>이용료</dt><dd class="lime" id="hsJournal">0원</dd></div>
+          <div><dt>누적 방문</dt><dd class="lime" id="hsJournal">-</dd></div>
         </dl>
         <a class="hx-thanks" href="#support" id="hxThanks" hidden aria-label="응원해 주신 분들 보기">
           <span class="hx-th-l"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>응원해 주신 분들</span>
@@ -7688,7 +7728,7 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
     (function step(t){ const k = Math.min(1, (t - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - k, 3)));
       el.textContent = v.toLocaleString() + suf; if (k < 1) requestAnimationFrame(step); else el._axBusy = false; })(t0);
   }
-  ['#hsUsers', '#hsPosts'].forEach(id => { const el = $(id); if (!el) return;
+  ['#hsUsers', '#hsPosts', '#hsJournal'].forEach(id => { const el = $(id); if (!el) return;
     new MutationObserver(() => { if (el._axBusy) return; if (!/^\d/.test(el.textContent) || el.dataset.axn === el.textContent.replace(/\D/g, '')) return; countUp(el); }).observe(el, { childList:true, characterData:true, subtree:true });
   });
   // 시세 깜빡임
@@ -7711,7 +7751,7 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   let busy = false;
   document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a.nav-support');
+    const a = e.target.closest && e.target.closest('a.nav-support, a.hx-cheer');
     if (!a || reduce || busy || e.metaKey || e.ctrlKey || e.shiftKey) return;
     if (currentView === 'support') return;
     e.preventDefault(); busy = true;
@@ -7736,6 +7776,34 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
       }, 120);
     }, 1350);
   }, true);
+})();
+/* ===== 정보 공유 전환 ===== */
+(function shareFx(){
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let busy = false;
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href="#views"]');
+    if (!a || reduce || busy || e.metaKey || e.ctrlKey || e.shiftKey || currentView === 'views') return;
+    e.preventDefault(); busy = true;
+    const fx = document.createElement('div'); fx.className = 'sh-fx';
+    fx.innerHTML = '<div class="sh-panel p2"></div><div class="sh-panel p1"></div><div class="sh-core"><div class="sh-bubbles"><b><i><span></span></i></b><b><i><span></span></i></b><b><i><span></span></i></b></div><div class="sh-t"><em>정보</em> 공유</div><div class="sh-s">함께 나누는 투자 이야기</div></div>';
+    document.body.appendChild(fx); void fx.offsetWidth;
+    setTimeout(() => fx.classList.add('go'), 20);
+    setTimeout(() => {
+      location.hash = 'views';
+      setTimeout(() => { fx.classList.add('out'); setTimeout(() => { fx.remove(); busy = false; }, 800); }, 150);
+    }, 1250);
+  }, true);
+})();
+/* ===== 누적 방문 ===== */
+(async function siteVisits(){
+  const el = $('#hsJournal'); if (!el) return;
+  let first = false; try{ first = !sessionStorage.getItem('spVisit'); if (first) sessionStorage.setItem('spVisit', '1'); } catch(e){}
+  try{
+    const r = await fetch(WORKER_URL + '/visit', { method: first ? 'POST' : 'GET' });
+    const d = await r.json();
+    if (d && d.visits != null) el.textContent = Number(d.visits).toLocaleString() + '회';
+  } catch(e){}
 })();
 /* 시작 */
 renderLibraryGate();
