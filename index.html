@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="STOCK PICK!">
 <meta property="og:title" content="STOCK PICK!">
-<meta name="theme-color" content="#0C131D">
+<meta name="theme-color" content="#08090B">
 <meta property="og:description" content="국내주식·미국주식·코인 공부 자료와 매매일지, 100불 챌린지 수익률 랭킹. 모두 무료.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,11 +35,11 @@
     color-scheme:light;
   }
   [data-theme="dark"]{
-    --ink:#E6EBF2; --ink-2:#C3CCD8; --muted:#8E9BAD; --faint:#6E7B8D; --ink-4:#465366;
-    --bg:#0C131D; --paper:#111A26; --paper-2:#15202E; --paper-3:#1B2737; --border:#223044; --border-strong:#33445B;
-    --accent:#E6EBF2; --accent-hover:#FFFFFF; --accent-ink:#E6EBF2; --accent-soft:#1B2737; --on-accent:#0C131D;
-    --up:#FF5463; --up-soft:#3A1820; --down:#5C93FF; --down-soft:#152643;
-    --gain:#3CC79A; --gain-soft:#10291F; --loss:#FF5463; --loss-soft:#3A1820;
+    --ink:#EEF0F3; --ink-2:#C9CED6; --muted:#8F97A3; --faint:#6B7380; --ink-4:#454B54;
+    --bg:#08090B; --paper:#0F1114; --paper-2:#14171B; --paper-3:#1A1E23; --border:#1C2026; --border-strong:#2A2F36;
+    --accent:#EEF0F3; --accent-hover:#FFFFFF; --accent-ink:#EEF0F3; --accent-soft:#1A1E23; --on-accent:#08090B;
+    --up:#F2545B; --up-soft:#2A1416; --down:#4C8DF6; --down-soft:#121C2E;
+    --gain:#3CC79A; --gain-soft:#0F241C; --loss:#F2545B; --loss-soft:#2A1416;
     --gold-soft:#33280F;
     color-scheme:dark;
   }
@@ -999,12 +999,12 @@
   .fake-hero b{ font-size:24px; } .fake-hero em{ font-style:normal; color:var(--up); font-size:26px; font-weight:700; margin-left:auto; }
   .fake-row{ display:flex; gap:14px; padding:12px 16px; border:1px solid var(--border); border-radius:var(--radius); }
   .fake-row em{ font-style:normal; margin-left:auto; color:var(--up); }
-  .bg-over{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(180deg, rgba(12,19,29,.15), rgba(12,19,29,.45)); transition:background .2s; }
+  .bg-over{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(180deg, rgba(8,9,11,.15), rgba(8,9,11,.45)); transition:background .2s; }
   .bg-panel{ max-width:440px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px; padding:26px 26px 24px; border-radius:12px; background:rgba(17,26,38,.0); border:1px solid transparent; transition:background .2s, border-color .2s, transform .2s; }
   .bg-panel h2{ margin:0; font-size:20px; }
   .bg-panel p{ margin:0 0 8px; color:var(--muted); font-size:14.5px; }
   .bg-panel .btn-tg, .bg-panel p{ opacity:.0; transition:opacity .2s; }
-  .blur-gate:hover .bg-over, .blur-gate:focus-within .bg-over{ background:rgba(12,19,29,.55); }
+  .blur-gate:hover .bg-over, .blur-gate:focus-within .bg-over{ background:rgba(8,9,11,.55); }
   .blur-gate:hover .bg-panel, .blur-gate:focus-within .bg-panel{ background:var(--paper); border-color:var(--border-strong); transform:translateY(-2px); }
   .blur-gate:hover .bg-panel .btn-tg, .blur-gate:hover .bg-panel p, .blur-gate:focus-within .bg-panel .btn-tg, .blur-gate:focus-within .bg-panel p{ opacity:1; }
   @media (hover:none){ .bg-panel{ background:var(--paper); border-color:var(--border-strong); } .bg-panel .btn-tg, .bg-panel p{ opacity:1; } }
@@ -1580,6 +1580,12 @@
     .hx-week{ grid-template-columns:1fr; } .hx-day{ min-height:0; flex-direction:row; flex-wrap:wrap; align-items:center; }
     .hx-day .dl{ width:100%; }
   }
+  /* 홈: 화면 전체 폭 대시보드 */
+  body.is-home .sh-inner, body.is-home .mkt-inner{ max-width:none; padding-left:28px; padding-right:28px; }
+  #view-home > .view{ max-width:none; padding:18px 28px 28px; gap:0; }
+  #view-home .hx{ height:clamp(380px, 44vh, 520px); margin-top:0; }
+  #view-home .hx-legacy{ display:none !important; }
+  @media (max-width:760px){ #view-home > .view{ padding:12px 12px 24px; } body.is-home .sh-inner, body.is-home .mkt-inner{ padding-left:16px; padding-right:16px; } #view-home .hx{ height:auto; } }
 </style>
 </head><body>
 
@@ -1709,6 +1715,7 @@
       </form>
     </dialog>
 
+    <div class="hx-legacy" hidden aria-hidden="true">
     <section class="home-sec hx-board">
       <div class="board" aria-label="100불 챌린지 실시간 수익률">
         <div class="board-head"><div><b>100불 챌린지</b><span>실시간 수익률</span></div><span class="board-d" id="homeDday"></span></div>
@@ -1751,6 +1758,7 @@
       <a class="link-chip" href="https://t.me/+4IJvJ_u138QxZTg1" target="_blank" rel="noopener"><span class="link-icon"><img src="data:image/png;base64,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" alt="텔레그램"></span>텔레그램</a>
         </div>
       </section>
+    </div>
     </div>
   </div>
 </section>
@@ -3479,6 +3487,7 @@ function applyRoute(){
   if (h === 'admin' && !isAdmin) h = 'home';
   const changed = h !== currentView;
   currentView = h;
+  document.body.classList.toggle('is-home', h === 'home');
   $$('main > section[data-view]').forEach(v => { v.hidden = v.dataset.view !== h; });
   $$('#tabnav a').forEach(a => a.classList.toggle('on', a.dataset.view === h));
   if (changed) window.scrollTo(0, 0);
@@ -6065,12 +6074,6 @@ let homeWidgetsMounted = false;
 function mountHomeWidgets(){
   if (currentView !== 'home' || homeWidgetsMounted) return;
   homeWidgetsMounted = true;
-  tvEmbed($('#tvHeat'), 'embed-widget-stock-heatmap.js', {
-    exchanges: [], dataSource: 'SPX500', grouping: 'sector', blockSize: 'market_cap_basic', blockColor: 'change',
-    locale: 'kr', symbolUrl: '', colorTheme: 'dark', hasTopBar: false, isDataSetEnabled: false, isZoomEnabled: true,
-    hasSymbolTooltip: true, isMonoSize: false, width: '100%', height: '100%'
-  });
-  $$('[data-tv-quote]').forEach(el => tvEmbed(el, 'embed-widget-single-quote.js', { symbol: el.dataset.tvQuote, width: '100%', colorTheme: 'dark', isTransparent: true, locale: 'kr' }));
   hxChart();
   hxLoadQuotes();
 }
