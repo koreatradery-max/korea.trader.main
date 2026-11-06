@@ -770,6 +770,12 @@ function coinOf(sym) {
 async function qOne(w, coinMap) {
   const s = String(w.s || '').toUpperCase(), [ex, tk0] = s.includes(':') ? s.split(':') : ['', s], tk = tk0 || s;
   const coin = coinOf(s); if (coin) { const c = coinMap[coin]; return c ? qOut(w.n || coin, s, c.price, c.pct) : null; }
+  if (/^(KOSPI|KOSDAQ|KPI200)$/.test(tk)) {
+    const d = await njson(`https://m.stock.naver.com/api/index/${tk}/basic`);
+    return d && qOut(w.n || tk, s, d.closePrice, d.fluctuationsRatio);
+  }
+  const US_IDX = { IXIC: '.IXIC', NDX: '.NDX', SPX: '.INX', INX: '.INX', DJI: '.DJI', VIX: '.VIX', SOX: '.SOX' };
+  if (US_IDX[tk]) { const d = await njson(`https://api.stock.naver.com/index/${US_IDX[tk]}/basic`); return d && qOut(w.n || tk, s, d.closePrice, d.fluctuationsRatio); }
   if (ex === 'KRX' || /^\d{6}$/.test(tk)) {
     const d = await njson(`https://m.stock.naver.com/api/stock/${tk}/basic`);
     return d && qOut(w.n || d.stockName, s, d.closePrice, d.fluctuationsRatio);
