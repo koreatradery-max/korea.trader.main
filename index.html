@@ -1708,6 +1708,8 @@
   section[data-view="support"].gd-arrive{ animation:gdArrive 1.6s ease both; }
   @keyframes gdArrive{ 0%{ box-shadow:inset 0 0 0 0 rgba(0,0,0,0); filter:brightness(1.35) sepia(.35); } 100%{ filter:none; } }
   @media (prefers-reduced-motion:reduce){ .nav-support::before{ animation:none; } }
+  .sp-top{ padding:12px 0 40px; margin-bottom:40px; border-bottom:1px solid var(--border); }
+  .sp-top > .sp-thanks{ margin-top:0; border-top:0; padding-top:0; }
 </style>
 </head><body>
 
@@ -2725,6 +2727,27 @@
 
 <!-- ================= 후원 ================= -->
 <section class="view" id="view-support" data-view="support" hidden>
+  <div class="sp-top">
+  <section class="sp-thanks">
+    <div class="sp-thanks-head"><b>함께해 주신 분들</b><span id="spCount"></span></div>
+    <div class="sp-marquee" id="spMarquee"><div class="sp-track" id="spTrack"></div></div>
+  </section>
+
+  <section class="sp-give">
+    <div class="sp-give-copy">
+      <h2>이 이야기에 함께해 주시려면</h2>
+      <p>이 공간은 앞으로도 누구나 무료로 쓸 수 있어요. 다만 서버와 자료를 만드는 비용은 지금까지 사비로 감당해 왔어요. 도움이 되셨다면 부담 없는 만큼 마음을 보태 주세요. 보내 주신 후원금은 홈페이지 운영과 자료 제작에 쓰여요.</p>
+      <p class="sp-small">'함께해 주신 분들'에는 이름 공개에 동의한 분만 올려요. 공개를 원하시면 입금 메모에 <b>공개 + 닉네임</b>(예: 공개 반도체러버)을 적어 주세요. 메모가 없으면 이름을 올리지 않아요(익명). 올라간 이름은 언제든 문의 메일로 내릴 수 있어요.</p>
+    </div>
+    <div class="sp-acc">
+      <div class="sp-acc-bank">토스뱅크</div>
+      <div class="sp-acc-num mono" id="spAccNum">1001-6492-2687</div>
+      <div class="sp-acc-owner">예금주 윤서준</div>
+      <button class="btn primary" type="button" id="spCopy">계좌번호 복사</button>
+    </div>
+  </section>
+  <p class="chart-note">후원은 선택이에요. 후원 여부와 관계없이 모든 기능과 자료는 똑같이 무료로 이용할 수 있어요. 후원금은 투자 자문·리딩의 대가가 아니며, 후원자에게 특별한 투자정보·알림·상담 등 별도 혜택을 드리지 않아요.</p>
+  </div>
   <div class="sp-hero">
     <div class="eyebrow">고려대학교 재학생 트레이더 · MY STORY</div>
     <h1>평범한 대학생,<br>그리고 트레이더가 되기까지.</h1>
@@ -2753,25 +2776,7 @@
   </div>
   <div class="sp-sign"><p>지금까지 함께해 주신 모든 분들께 진심으로 감사드립니다.</p><b>고려대학교 재학생 트레이더 드림.</b></div>
 
-  <section class="sp-thanks">
-    <div class="sp-thanks-head"><b>함께해 주신 분들</b><span id="spCount"></span></div>
-    <div class="sp-marquee" id="spMarquee"><div class="sp-track" id="spTrack"></div></div>
-  </section>
 
-  <section class="sp-give">
-    <div class="sp-give-copy">
-      <h2>이 이야기에 함께해 주시려면</h2>
-      <p>이 공간은 앞으로도 누구나 무료로 쓸 수 있어요. 다만 서버와 자료를 만드는 비용은 지금까지 사비로 감당해 왔어요. 도움이 되셨다면 부담 없는 만큼 마음을 보태 주세요. 보내 주신 후원금은 홈페이지 운영과 자료 제작에 쓰여요.</p>
-      <p class="sp-small">'함께해 주신 분들'에는 이름 공개에 동의한 분만 올려요. 공개를 원하시면 입금 메모에 <b>공개 + 닉네임</b>(예: 공개 반도체러버)을 적어 주세요. 메모가 없으면 이름을 올리지 않아요(익명). 올라간 이름은 언제든 문의 메일로 내릴 수 있어요.</p>
-    </div>
-    <div class="sp-acc">
-      <div class="sp-acc-bank">토스뱅크</div>
-      <div class="sp-acc-num mono" id="spAccNum">1001-6492-2687</div>
-      <div class="sp-acc-owner">예금주 윤서준</div>
-      <button class="btn primary" type="button" id="spCopy">계좌번호 복사</button>
-    </div>
-  </section>
-  <p class="chart-note">후원은 선택이에요. 후원 여부와 관계없이 모든 기능과 자료는 똑같이 무료로 이용할 수 있어요. 후원금은 투자 자문·리딩의 대가가 아니며, 후원자에게 특별한 투자정보·알림·상담 등 별도 혜택을 드리지 않아요.</p>
 </section>
 
 <!-- ================= 도구 ================= -->
