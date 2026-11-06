@@ -1,0 +1,106 @@
+{
+ "date": "2026-11-06",
+ "weekday": "금",
+ "generatedAt": "2026-11-06T18:30+09:00",
+ "headline": "AI·반도체 투매에 나스닥 5.5% 급락하며 조정 국면 진입, S&P 500은 2025년 4월 이후 최악의 하루를 기록했습니다.",
+ "us": [
+  {
+   "name": "S&P 500",
+   "value": "7,353.73",
+   "chg": "-4.36%"
+  },
+  {
+   "name": "나스닥",
+   "value": "24,315.00",
+   "chg": "-5.52%"
+  },
+  {
+   "name": "다우",
+   "value": "51,523.06",
+   "chg": "-3.44%"
+  },
+  {
+   "name": "필라델피아 반도체",
+   "value": "9,011.14",
+   "chg": "-12.25%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,355.20원",
+   "chg": "-0.13%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.83%",
+   "chg": "-0.4bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$89.62",
+   "chg": "-0.99%"
+  },
+  {
+   "name": "금",
+   "value": "$4,080.90",
+   "chg": "-0.79%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$75,775",
+   "chg": "-0.43%"
+  }
+ ],
+ "news": [
+  {
+   "title": "다우 1,833포인트·나스닥 5.5% 급락…나스닥 조정 국면 진입",
+   "summary": "5일(현지시간) 다우는 3.44%, S&P 500은 4.36%, 나스닥은 5.52% 하락했습니다. 나스닥은 10월 6일 고점 대비 10% 넘게 내려 조정 국면에 들어섰고, 필라델피아 반도체지수는 12% 넘게 빠졌습니다.",
+   "source": "Fox Business",
+   "url": "https://www.foxbusiness.com/markets/stocks-nov-5-2026"
+  },
+  {
+   "title": "‘AI 투자 사이클’ 재평가…엔비디아 9%·AMD 17% 하락",
+   "summary": "AI 데이터센터에 대한 대규모 투자가 충분한 수익을 낼지에 대한 의문이 커지며 반도체·AI 인프라주 매도가 시장 전체로 번졌습니다. 엔비디아는 약 9.3%, AMD는 약 17.3% 하락했습니다.",
+   "source": "The Motley Fool",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/05/stock-market-today-nov-5-nasdaq-suffers-worst-day-in-18-months-as-ai-trade-comes-under-fire/"
+  },
+  {
+   "title": "중간선거 이후 데이터센터 규제 우려…VIX 28 돌파",
+   "summary": "민주당의 중간선거 승리로 데이터센터 건설이 늦어질 수 있다는 우려가 커졌고, UBS는 2028년 예정 데이터센터 증설의 약 30%가 위험하다고 추정했습니다. 마이크론·마벨도 16~17%대 하락했고 VIX는 장중 28.09까지 올랐습니다.",
+   "source": "StockTitan (CNBC 인용)",
+   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-5-2026"
+  },
+  {
+   "title": "장 마감 후 실적: 클라우드플레어·에어비앤비 상승, 드래프트킹스·아틀라시안 하락",
+   "summary": "클라우드플레어는 매출 39% 증가, 에어비앤비는 2026년 전망 상향으로 시간외에서 올랐습니다. 드래프트킹스는 실적 전망을 낮추며, 아틀라시안도 시간외에서 크게 내렸습니다.",
+   "source": "StockTitan",
+   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-5-2026"
+  },
+  {
+   "title": "유가는 반등, 비트코인은 7만5천 달러대로 하락",
+   "summary": "이란 관련 공급 우려와 호르무즈 해협 인근 유조선 공격 소식에 WTI가 약 2.7% 반등했습니다. 비트코인은 24시간 동안 약 5.7% 내려 7만5천 달러대에 머물렀고, 미 10년물 금리는 4.8%대로 내려왔습니다.",
+   "source": "Capp Notes",
+   "url": "https://cappnotes.substack.com/p/closing-look-thursday-november-5"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "20:00",
+   "text": "휴매나 실적 발표 (미국 장 전)"
+  },
+  {
+   "time": "22:00",
+   "text": "모더나 실적 발표 (미국 장 전)"
+  },
+  {
+   "time": "22:30",
+   "text": "미국 10월 고용보고서 (비농업 고용·실업률)"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  }
+ ],
+ "kind": "morning"
+}

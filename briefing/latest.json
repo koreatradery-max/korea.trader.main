@@ -1,105 +1,106 @@
 {
- "date": "2026-11-02",
- "weekday": "월",
- "generatedAt": "2026-11-02T14:02+09:00",
- "headline": "미국 반도체지수가 7% 넘게 급락하며 10월을 마감했고, 국내 10월 수출은 반도체 호조로 두 달 연속 1,100억 달러를 넘었습니다.",
+ "date": "2026-11-06",
+ "weekday": "금",
+ "generatedAt": "2026-11-06T18:30+09:00",
+ "headline": "AI·반도체 투매에 나스닥 5.5% 급락하며 조정 국면 진입, S&P 500은 2025년 4월 이후 최악의 하루를 기록했습니다.",
  "us": [
   {
    "name": "S&P 500",
-   "value": "7,580.07",
-   "chg": "-1.82%"
+   "value": "7,353.73",
+   "chg": "-4.36%"
   },
   {
    "name": "나스닥",
-   "value": "25,437.00",
-   "chg": "-2.86%"
+   "value": "24,315.00",
+   "chg": "-5.52%"
   },
   {
    "name": "다우",
-   "value": "51,770.31",
-   "chg": "-1.09%"
+   "value": "51,523.06",
+   "chg": "-3.44%"
   },
   {
    "name": "필라델피아 반도체",
-   "value": "10,688.80",
-   "chg": "-7.20%"
+   "value": "9,011.14",
+   "chg": "-12.25%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,345.00원",
-   "chg": "+0.69%"
+   "value": "1,355.20원",
+   "chg": "-0.13%"
   },
   {
    "name": "미 10년물",
-   "value": "4.93%",
-   "chg": "+0.2bp"
+   "value": "4.83%",
+   "chg": "-0.4bp"
   },
   {
    "name": "WTI",
-   "value": "$100.87",
-   "chg": "-3.12%"
+   "value": "$89.62",
+   "chg": "-0.99%"
   },
   {
    "name": "금",
-   "value": "$3,907.40",
-   "chg": "+0.22%"
+   "value": "$4,080.90",
+   "chg": "-0.79%"
   },
   {
    "name": "비트코인",
-   "value": "$78,475",
-   "chg": "+0.32%"
+   "value": "$75,775",
+   "chg": "-0.43%"
   }
  ],
  "news": [
   {
-   "title": "인텔 하루 약 29% 급락, 1974년 이후 최악의 하루",
-   "summary": "4분기 매출 전망이 시장 기대에 못 미치면서 주가가 크게 밀렸습니다. 회사는 PC 수요 둔화를 이유로 들었습니다.",
-   "source": "TheStreet",
-   "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-30-2026"
+   "title": "다우 1,833포인트·나스닥 5.5% 급락…나스닥 조정 국면 진입",
+   "summary": "5일(현지시간) 다우는 3.44%, S&P 500은 4.36%, 나스닥은 5.52% 하락했습니다. 나스닥은 10월 6일 고점 대비 10% 넘게 내려 조정 국면에 들어섰고, 필라델피아 반도체지수는 12% 넘게 빠졌습니다.",
+   "source": "Fox Business",
+   "url": "https://www.foxbusiness.com/markets/stocks-nov-5-2026"
   },
   {
-   "title": "빅테크 AI 투자 부담 부각, 나스닥 2.86% 하락",
-   "summary": "아마존의 분기 설비투자가 약 770억 달러로 1년 전의 두 배를 넘었고, 최근 12개월 잉여현금흐름은 420억 달러 넘게 마이너스를 기록했습니다. 나스닥은 6월 이후 가장 큰 하루 낙폭을 보였고, 10월 한 달간 5%대 하락했습니다.",
-   "source": "Yahoo Finance",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-october-30-dow-sp-500-nasdaq-amazon-intel-ai-sell-off-191429143.html"
+   "title": "‘AI 투자 사이클’ 재평가…엔비디아 9%·AMD 17% 하락",
+   "summary": "AI 데이터센터에 대한 대규모 투자가 충분한 수익을 낼지에 대한 의문이 커지며 반도체·AI 인프라주 매도가 시장 전체로 번졌습니다. 엔비디아는 약 9.3%, AMD는 약 17.3% 하락했습니다.",
+   "source": "The Motley Fool",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/05/stock-market-today-nov-5-nasdaq-suffers-worst-day-in-18-months-as-ai-trade-comes-under-fire/"
   },
   {
-   "title": "국제유가 3% 넘게 하락, 미·이란 외교 여지에 주목",
-   "summary": "트럼프 대통령이 추가 공습 전에 이란과의 외교에 시간을 더 두겠다는 뜻을 전했다는 보도가 나왔습니다. 다만 호르무즈 해협 인근 선박 공격 소식은 주말에도 이어졌습니다.",
-   "source": "The National",
-   "url": "https://www.thenationalnews.com/business/2026/11/02/oil-prices-slide-more-than-3-as-trump-signals-more-time-for-iran-diplomacy/"
+   "title": "중간선거 이후 데이터센터 규제 우려…VIX 28 돌파",
+   "summary": "민주당의 중간선거 승리로 데이터센터 건설이 늦어질 수 있다는 우려가 커졌고, UBS는 2028년 예정 데이터센터 증설의 약 30%가 위험하다고 추정했습니다. 마이크론·마벨도 16~17%대 하락했고 VIX는 장중 28.09까지 올랐습니다.",
+   "source": "StockTitan (CNBC 인용)",
+   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-5-2026"
   },
   {
-   "title": "바이낸스 63억 달러 해킹, FBI는 북한 소행으로 지목",
-   "summary": "바이낸스는 이용자 자금은 안전하며 손실을 회사가 부담하겠다고 밝혔습니다. 약 30억 달러 규모의 자산은 동결된 것으로 알려졌습니다.",
-   "source": "ABC News",
-   "url": "https://abc7news.com/story/binance-estimates-security-breach-impact-63-billion/19999397/"
+   "title": "장 마감 후 실적: 클라우드플레어·에어비앤비 상승, 드래프트킹스·아틀라시안 하락",
+   "summary": "클라우드플레어는 매출 39% 증가, 에어비앤비는 2026년 전망 상향으로 시간외에서 올랐습니다. 드래프트킹스는 실적 전망을 낮추며, 아틀라시안도 시간외에서 크게 내렸습니다.",
+   "source": "StockTitan",
+   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-5-2026"
   },
   {
-   "title": "10월 수출 1,153억 달러, 반도체 564억 달러로 사상 최대권",
-   "summary": "10월 수출은 1년 전보다 93.7% 늘었고, 반도체 수출은 259.4% 증가했습니다. 무역수지는 약 425억 달러 흑자이며, 연간 수출 1조 달러는 11월 중 달성이 유력하다는 전망입니다.",
-   "source": "한국일보",
-   "url": "https://www.hankookilbo.com/news/article/A2026110108520005142"
+   "title": "유가는 반등, 비트코인은 7만5천 달러대로 하락",
+   "summary": "이란 관련 공급 우려와 호르무즈 해협 인근 유조선 공격 소식에 WTI가 약 2.7% 반등했습니다. 비트코인은 24시간 동안 약 5.7% 내려 7만5천 달러대에 머물렀고, 미 10년물 금리는 4.8%대로 내려왔습니다.",
+   "source": "Capp Notes",
+   "url": "https://cappnotes.substack.com/p/closing-look-thursday-november-5"
   }
  ],
  "schedule": [
   {
-   "time": "24:00",
-   "text": "미국 10월 ISM 제조업지수 발표"
+   "time": "20:00",
+   "text": "휴매나 실적 발표 (미국 장 전)"
   },
   {
-   "time": "3일 06:30경",
-   "text": "애플 회계 4분기 실적 발표 (미국 장 마감 후)"
+   "time": "22:00",
+   "text": "모더나 실적 발표 (미국 장 전)"
   },
   {
-   "time": "3일(화)",
-   "text": "미국 중간선거"
+   "time": "22:30",
+   "text": "미국 10월 고용보고서 (비농업 고용·실업률)"
   },
   {
-   "time": "6일(금) 22:30",
-   "text": "미국 10월 고용보고서"
+   "time": "23:30",
+   "text": "미국 정규장 개장"
   }
- ]
+ ],
+ "kind": "morning"
 }
