@@ -7802,8 +7802,9 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
   try{
     const r = await fetch(WORKER_URL + '/visit', { method: first ? 'POST' : 'GET' });
     const d = await r.json();
-    if (d && d.visits != null) el.textContent = Number(d.visits).toLocaleString() + '회';
+    if (d && d.visits != null){ el.textContent = Number(d.visits).toLocaleString() + '회'; return; }
   } catch(e){}
+  const dt = el.previousElementSibling; if (dt) dt.textContent = '이용료'; el.textContent = '0원';
 })();
 /* 시작 */
 renderLibraryGate();
