@@ -4961,6 +4961,7 @@ function lvNorm(text){
   return t.replace(/\n{3,}/g, '\n\n').trim();
 }
 /* 카드 상단 한 줄 요약: 너무 길면 첫 문장만 */
+function lvFull(p){ const o = String(p.oneLine || ''), c = String(p.content || ''); return o.length > 300 && o.length > c.length ? o : c; }
 function lvOneLine(p){
   let s = String(p.oneLine || '').replace(/^\s*\[[^\]]{0,50}\]\s*/, '').replace(/^\s*전체\s*장\s*요약\s*[:：]\s*/, '').trim();
   s = s.split(/\s*\[\s*(?:\d{1,2}:)?\d{1,2}:\d{2}/)[0].split(/\s*⚠/)[0].trim();
@@ -4970,7 +4971,7 @@ function lvOneLine(p){
 }
 function lvKeyPoints(p){
   if (Array.isArray(p.keyPoints) && p.keyPoints.filter(Boolean).length) return p.keyPoints.filter(Boolean).slice(0, 5);
-  const lines = lvNorm(p.content).split(/\n/).map(l => l.trim()).filter(Boolean);
+  const lines = lvNorm(lvFull(p)).split(/\n/).map(l => l.trim()).filter(Boolean);
   const bullets = lines.filter(l => /^\s*[-•·*▪◦]\s*/.test(l)).map(l => l.replace(/^\s*[-•·*▪◦]\s*/, ''));
   if (!bullets.length){
     const seg = [];
@@ -5131,8 +5132,8 @@ function openViewer(p){
     $('#vBodyLabel').textContent = "전체 요약";
   } else $('#vBodyLabel').textContent = "내용";
   $('#vBody').classList.toggle('lv-body', isLv);
-  if (isLv) $('#vBody').innerHTML = lvFormat(p.content); else $('#vBody').textContent = p.content || "";
-  $('#vBodyWrap').style.display = p.content ? "block" : "none";
+  if (isLv) $('#vBody').innerHTML = lvFormat(lvFull(p)); else $('#vBody').textContent = p.content || "";
+  $('#vBodyWrap').style.display = (isLv ? lvFull(p) : p.content) ? "block" : "none";
   const foot = $('#vFoot'); foot.innerHTML = "";
   let comp = $('#vComp');
   if (!comp){ comp = document.createElement('div'); comp.id = 'vComp'; comp.className = 'r-comp'; foot.parentNode.insertBefore(comp, foot); }
