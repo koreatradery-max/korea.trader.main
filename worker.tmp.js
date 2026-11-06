@@ -60,6 +60,8 @@ const HANDLER = {
       if (url.pathname === '/admin/channel' && req.method === 'POST') return await adminChannel(req, env, cors);
       if (url.pathname === '/setup' && req.method === 'GET') return json(await setup(env, url), 200, cors);
       if (url.pathname === '/market' && req.method === 'GET') return await cached(req, ctx, 120, async () => json(await marketData(), 200, cors), cors);
+      if (url.pathname === '/home/config' && req.method === 'GET') return await cached(req, ctx, 30, async () => json(await homeConfig(env), 200, cors), cors);
+      if (url.pathname === '/admin/home' && req.method === 'POST') return await adminHome(req, env, cors);
       if (url.pathname === '/stats' && req.method === 'GET') return await cached(req, ctx, 600, async () => json(await siteStats(env), 200, cors), cors);
       if (url.pathname === '/ch/unlock' && req.method === 'POST') return await chUnlock(req, env, cors);
       if (url.pathname === '/me/notify' && req.method === 'POST') return await meNotify(req, env, cors);
@@ -384,6 +386,31 @@ async function liveImport(req, env, cors) {
   }
   const r2 = await dmBatch(env, `liveRuns/${id}`, text, markup, false, '');
   return json({ ok: true, id: pid, ...r2 }, 200, cors);
+}
+
+/* 홈 화면 설정: 관심 종목 · 이번 주 실적 일정 (관리자가 홈에서 편집) */
+async function homeConfig(env) {
+  const c = await fsGet(env, 'config/home').catch(() => null);
+  return { watchlist: (c && Array.isArray(c.watchlist)) ? c.watchlist : [], earnings: (c && Array.isArray(c.earnings)) ? c.earnings : [], at: (c && c.at) || 0 };
+}
+async function adminHome(req, env, cors) {
+  const auth = await requireUser(req, env);
+  if (!auth || !auth.admin) return json({ error: 'forbidden', message: '관리자만 바꿀 수 있어요.' }, 403, cors);
+  const body = await req.json().catch(() => ({}));
+  const cur = await homeConfig(env);
+  const clean = (v, n) => String(v == null ? '' : v).replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, n);
+  let watchlist = cur.watchlist, earnings = cur.earnings;
+  if (Array.isArray(body.watchlist)) {
+    watchlist = body.watchlist.slice(0, 20).map(w => ({ s: clean(w && w.s, 40).toUpperCase(), n: clean(w && w.n, 24) }))
+      .filter(w => /^[A-Z0-9_.!:-]{1,40}$/.test(w.s));
+  }
+  if (Array.isArray(body.earnings)) {
+    earnings = body.earnings.slice(0, 60).map(e => ({ d: clean(e && e.d, 10), t: clean(e && e.t, 12).toUpperCase(), w: clean(e && e.w, 8), m: clean(e && e.m, 30) }))
+      .filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.d) && /^[A-Z0-9.]{1,12}$/.test(e.t));
+  }
+  const data = { watchlist, earnings, at: Date.now() };
+  await fsWrite(env, [{ path: 'config/home', data }]);
+  return json({ ok: true, ...data }, 200, cors);
 }
 
 /* 정보 공유 조회수 +1 (브라우저에서 글을 펼치거나 링크로 열 때, 같은 브라우저는 하루 1번만 부름) */
