@@ -1671,9 +1671,9 @@
   /* 카드: 스크롤하면 떠오르기 */
   .ax-rv{ opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); transition-delay:var(--ax-d, 0s); }
   .ax-rv.ax-in{ opacity:1; transform:none; }
-  .hx-card, .vt, .vw-post, main .card, .post{ transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease, opacity .7s cubic-bezier(.2,.7,.2,1); }
-  .hx-card:hover, .vt:hover, .post:hover{ border-color:#2A3038; box-shadow:0 14px 34px -18px rgba(0,0,0,.8); }
-  .vt:hover, .post:hover{ transform:translateY(-3px); }
+  .hx-card, main .card, .post{ transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease, opacity .7s cubic-bezier(.2,.7,.2,1); }
+  .hx-card:hover, .post:hover{ border-color:#2A3038; box-shadow:0 14px 34px -18px rgba(0,0,0,.8); }
+  .post:hover{ transform:translateY(-3px); }
   .hx-krow, .hx-wrow{ transition:background .2s; }
   .hx-krow:hover, .hx-wrow:hover{ background:rgba(255,255,255,.03); }
   .ax-flash-up{ animation:axFlashUp 1.2s ease; } .ax-flash-dn{ animation:axFlashDn 1.2s ease; }
@@ -1711,11 +1711,6 @@
   .sp-top{ padding:12px 0 40px; margin-bottom:40px; border-bottom:1px solid var(--border); }
   .sp-top > .sp-thanks{ margin-top:0; border-top:0; padding-top:0; }
 
-  /* ===== 전체 페이지 꽉 찬 폭 ===== */
-  .sh-inner, .mkt-inner, .foot-inner{ max-width:none; padding-left:28px; padding-right:28px; }
-  .view{ max-width:none; padding-left:28px; padding-right:28px; }
-  .site-foot{ background:var(--bg); }
-  @media (max-width:760px){ .sh-inner, .mkt-inner, .foot-inner, .view{ padding-left:16px; padding-right:16px; } }
   /* 시황 탭 같은 크기 */
   .bf-tabs{ width:100%; max-width:860px; align-self:center; }
   .bf-tabs button{ flex:1 1 0; min-width:0; white-space:nowrap; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
@@ -7733,7 +7728,7 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
 /* ===== 애니메이션 (등장·스크롤·숫자) ===== */
 (function axInit(){
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const SEL = '.hx-card, .vt, .vw-post, main .card, .post';
+  const SEL = '.hx-card, main .card, .post';
   let io = null;
   if (!reduce && 'IntersectionObserver' in window){
     io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('ax-in'); io.unobserve(e.target); } }), { rootMargin:'0px 0px -6% 0px', threshold:0.05 });
@@ -7766,7 +7761,7 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
   // 페이지 전환
   function onRoute(){
     const sec = $('main > section[data-view]:not([hidden])');
-    if (sec && !reduce){ sec.classList.remove('ax-enter'); void sec.offsetWidth; sec.classList.add('ax-enter'); }
+    if (sec && !reduce && sec.dataset.view !== 'views'){ sec.classList.remove('ax-enter'); void sec.offsetWidth; sec.classList.add('ax-enter'); }
     if (document.body.classList.contains('is-home')){ document.body.classList.remove('ax-home'); void document.body.offsetWidth; document.body.classList.add('ax-home'); }
     setTimeout(() => scan(document), 30);
   }
@@ -7804,24 +7799,6 @@ document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === 
         setTimeout(() => { fx.remove(); busy = false; }, 700);
       }, 120);
     }, 1350);
-  }, true);
-})();
-/* ===== 정보 공유 전환 ===== */
-(function shareFx(){
-  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let busy = false;
-  document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a[href="#views"]');
-    if (!a || reduce || busy || e.metaKey || e.ctrlKey || e.shiftKey || currentView === 'views') return;
-    e.preventDefault(); busy = true;
-    const fx = document.createElement('div'); fx.className = 'sh-fx';
-    fx.innerHTML = '<div class="sh-panel p2"></div><div class="sh-panel p1"></div><div class="sh-core"><div class="sh-bubbles"><b><i><span></span></i></b><b><i><span></span></i></b><b><i><span></span></i></b></div><div class="sh-t"><em>정보</em> 공유</div><div class="sh-s">함께 나누는 투자 이야기</div></div>';
-    document.body.appendChild(fx); void fx.offsetWidth;
-    setTimeout(() => fx.classList.add('go'), 20);
-    setTimeout(() => {
-      location.hash = 'views';
-      setTimeout(() => { fx.classList.add('out'); setTimeout(() => { fx.remove(); busy = false; }, 800); }, 150);
-    }, 1250);
   }, true);
 })();
 /* ===== 누적 방문 ===== */
