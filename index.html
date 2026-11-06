@@ -1522,9 +1522,13 @@
   .hx-krow span{ font-weight:600; color:#EEF0F3; } .hx-krow b{ font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:500; color:#EEF0F3; }
   .hx-krow em{ font-style:normal; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:700; padding:3px 7px; border-radius:6px; color:#8F97A3; }
   .hx-krow em.up{ color:#F2545B; background:rgba(242,84,91,.12); } .hx-krow em.down{ color:#4C8DF6; background:rgba(76,141,246,.12); }
-  .hx-quotes{ height:330px; margin:4px -8px 0; }
-  .hx-row3 .hx-card:nth-child(2) .hx-quotes{ height:410px; }
-  .hx-quotes .tradingview-widget-container, .hx-quotes .tradingview-widget-container__widget{ width:100%; height:100%; }
+  .hx-quotes{ display:flex; flex-direction:column; }
+  .hx-wrow{ display:flex; align-items:center; gap:10px; padding:7px 0; border-top:1px solid #181B20; }
+  .hx-wrow .av{ width:30px; height:30px; flex-shrink:0; border-radius:9px; background:#1B1F26; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; font-weight:700; color:#C9CED6; }
+  .hx-wrow .nm{ flex-grow:1; min-width:0; line-height:1.25; } .hx-wrow .nm b{ display:block; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13.5px; color:#EEF0F3; } .hx-wrow .nm span{ font-size:11.5px; color:#6B7380; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; }
+  .hx-wrow .pr{ font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13.5px; font-weight:500; color:#EEF0F3; }
+  .hx-wrow em{ width:70px; text-align:right; font-style:normal; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:700; color:#6B7380; }
+  .hx-wrow em.up{ color:#F2545B; } .hx-wrow em.down{ color:#4C8DF6; }
   .hx-seg{ display:flex; gap:2px; padding:2px; background:#15181C; border-radius:8px; }
   .hx-seg button{ all:unset; cursor:pointer; padding:4px 9px; border-radius:6px; font-size:11.5px; color:#8F97A3; }
   .hx-seg button.on{ background:#EEF0F3; color:#0A0B0D; font-weight:700; }
@@ -6068,12 +6072,7 @@ function mountHomeWidgets(){
   });
   $$('[data-tv-quote]').forEach(el => tvEmbed(el, 'embed-widget-single-quote.js', { symbol: el.dataset.tvQuote, width: '100%', colorTheme: 'dark', isTransparent: true, locale: 'kr' }));
   hxChart();
-  hxQuotes($('#hxMarket'), [
-    { name: '미국 지수', symbols: [ { name: 'FOREXCOM:SPXUSD', displayName: 'S&P 500' }, { name: 'FOREXCOM:NSXUSD', displayName: '나스닥 100' }, { name: 'FOREXCOM:DJI', displayName: '다우' }, { name: 'CAPITALCOM:VIX', displayName: 'VIX' } ] },
-    { name: '코인', symbols: [ { name: 'BITSTAMP:BTCUSD', displayName: '비트코인' }, { name: 'BITSTAMP:ETHUSD', displayName: '이더리움' } ] },
-    { name: '환율·원자재', symbols: [ { name: 'FX_IDC:USDKRW', displayName: '원/달러' }, { name: 'TVC:US10Y', displayName: '미 10년물' }, { name: 'TVC:USOIL', displayName: 'WTI' }, { name: 'OANDA:XAUUSD', displayName: '금' } ] }
-  ]);
-  hxRenderWatch();
+  hxLoadQuotes();
 }
 
 /* 배경에 연하게 깔리는 캔들 차트 (장식용) */
@@ -6149,20 +6148,35 @@ function hxChart(){
   tvEmbed(box, 'embed-widget-advanced-chart.js', {
     autosize: true, symbol: HX.sym, interval: 'D', timezone: 'Asia/Seoul', theme: 'dark', style: '1', locale: 'kr',
     backgroundColor: 'rgba(12,14,17,1)', gridColor: 'rgba(255,255,255,0.04)',
-    hide_top_toolbar: true, hide_side_toolbar: true, hide_legend: false, allow_symbol_change: false,
+    hide_top_toolbar: true, hide_side_toolbar: true, hide_legend: true, allow_symbol_change: false,
     save_image: false, calendar: false, hide_volume: false, withdateranges: false,
     studies: ['MASimple@tv-basicstudies'], support_host: 'https://www.tradingview.com'
   });
 }
-function hxQuotes(box, groups){
-  if (!box) return;
-  tvEmbed(box, 'embed-widget-market-quotes.js', { width: '100%', height: '100%', symbolsGroups: groups, showSymbolLogo: true, isTransparent: true, colorTheme: 'dark', locale: 'kr', backgroundColor: 'rgba(0,0,0,0)' });
-}
 function hxWatchList(){ return (HX.cfg && HX.cfg.watchlist && HX.cfg.watchlist.length) ? HX.cfg.watchlist : HX_DEFAULT_WATCH; }
-function hxRenderWatch(){
-  if (!homeWidgetsMounted) return;
-  hxQuotes($('#hxWatch'), [{ name: '관심 종목', symbols: hxWatchList().map(w => ({ name: w.s, displayName: w.n || w.s.split(':').pop() })) }]);
+function hxPct(p){ const v = Number(p) || 0; return { cls: v > 0 ? 'up' : v < 0 ? 'down' : '', txt: (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(2) + '%' }; }
+function hxRowsMarket(list){
+  return list.map(q => { const c = hxPct(q.pct); return `<div class="hx-krow"><span>${escapeHtml(q.n)}</span><b>${escapeHtml(q.price)}</b><em class="${c.cls}">${c.txt}</em></div>`; }).join('');
 }
+function hxRowsWatch(list){
+  return list.map(q => {
+    const tk = String(q.s || '').split(':').pop().replace(/USDT?$|KRW$/, '');
+    const c = hxPct(q.pct);
+    return `<div class="hx-wrow"><span class="av">${escapeHtml(tk.slice(0, 2))}</span><div class="nm"><b>${escapeHtml(tk)}</b><span>${escapeHtml(q.n || '')}</span></div><b class="pr">${q.price == null ? '-' : escapeHtml(q.price)}</b><em class="${q.price == null ? '' : c.cls}">${q.price == null ? '시세 없음' : c.txt}</em></div>`;
+  }).join('');
+}
+let hxQuotesAt = 0;
+async function hxLoadQuotes(force){
+  if (!force && Date.now() - hxQuotesAt < 50000) return;
+  hxQuotesAt = Date.now();
+  try{
+    const r = await fetch(WORKER_URL + '/home/quotes' + (force ? '?t=' + Date.now() : '')); const d = await r.json();
+    $('#hxMarket').innerHTML = hxRowsMarket(d.market || []) || '<p class="hx-empty">시세를 불러오지 못했어요.</p>';
+    $('#hxWatch').innerHTML = hxRowsWatch(d.watch || []) || '<p class="hx-empty">관심 종목이 없어요.</p>';
+  } catch(e){ $('#hxMarket').innerHTML = '<p class="hx-empty">시세를 불러오지 못했어요.</p>'; }
+}
+function hxRenderWatch(){ hxLoadQuotes(true); }
+setInterval(() => { if (!document.hidden && currentView === 'home' && homeWidgetsMounted) hxLoadQuotes(); }, 60000);
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-hxsym]');
   if (b){ $$('[data-hxsym]').forEach(x => x.classList.toggle('on', x === b)); HX.sym = b.dataset.hxsym; hxChart(); return; }
