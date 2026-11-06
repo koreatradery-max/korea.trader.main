@@ -6115,7 +6115,10 @@ async function loadMarketData(){
       const c = chgHtml(x.change, x.pct); const el = $('#' + cId); el.textContent = c.text; el.className = el.className.split(' ')[0] + ' ' + c.cls;
     };
     put('kospi', 'tqKospi', 'tqKospiC'); put('kosdaq', 'tqKosdaq', 'tqKosdaqC'); put('kospi', 'mkKospi', 'mkKospiC');
-    put('kospi', 'hxKospi', 'hxKospiC'); put('kosdaq', 'hxKosdaq', 'hxKosdaqC');
+    [['kospi', 'hxKospi', 'hxKospiC'], ['kosdaq', 'hxKosdaq', 'hxKosdaqC']].forEach(([k, v, c]) => {
+      const x = d[k]; if (!x || !x.price) return;
+      const q = hxPct(x.pct); $('#' + v).textContent = x.price; $('#' + c).textContent = q.txt; $('#' + c).className = q.cls;
+    });
     if (d.kospi && d.kospi.status) $('#mkKospiS').textContent = d.kospi.status;
     if (d.fearGreed && d.fearGreed.score != null){
       const sc = Math.round(d.fearGreed.score);
