@@ -1581,7 +1581,12 @@
     .hx-day .dl{ width:100%; }
   }
   /* 홈: 화면 전체 폭 대시보드 */
-  body.is-home .sh-inner, body.is-home .mkt-inner{ max-width:none; padding-left:28px; padding-right:28px; }
+  body.is-home .sh-inner, body.is-home .mkt-inner, body.is-home .foot-inner{ max-width:none; padding-left:28px; padding-right:28px; }
+  body.is-home .site-foot{ background:var(--bg); }
+  #view-home .hx-tabs{ right:92px; }
+  #hxMarket{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:22px; }
+  #view-home .hx-row3 > .hx-card:first-child > .hx-krow{ }
+  @media (max-width:1300px) and (min-width:761px){ #hxMarket{ grid-template-columns:1fr; } }
   #view-home > .view{ max-width:none; padding:18px 28px 28px; gap:0; }
   #view-home .hx{ height:clamp(380px, 44vh, 520px); margin-top:0; }
   #view-home .hx-legacy{ display:none !important; }
@@ -1678,9 +1683,7 @@
     <div class="hx-row3">
       <section class="hx-card">
         <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/></svg><b>시장 시세</b><span class="sp"></span><span class="hx-live"><i></i>LIVE</span></div>
-        <div class="hx-krow"><span>코스피</span><b id="hxKospi">-</b><em id="hxKospiC"></em></div>
-        <div class="hx-krow"><span>코스닥</span><b id="hxKosdaq">-</b><em id="hxKosdaqC"></em></div>
-        <div class="hx-quotes" id="hxMarket"></div>
+        <div class="hx-quotes" id="hxMarket"><div class="hx-krow"><span>코스피</span><b id="hxKospi">-</b><em id="hxKospiC"></em></div><div class="hx-krow"><span>코스닥</span><b id="hxKosdaq">-</b><em id="hxKosdaqC"></em></div></div>
       </section>
       <section class="hx-card">
         <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><b>관심 종목</b><span class="hx-sub">리포트·라이브 언급 종목</span><span class="sp"></span><button type="button" class="hx-edit" id="hxWatchEdit" hidden>편집</button></div>
@@ -6177,9 +6180,10 @@ async function hxLoadQuotes(force){
   hxQuotesAt = Date.now();
   try{
     const r = await fetch(WORKER_URL + '/home/quotes' + (force ? '?t=' + Date.now() : '')); const d = await r.json();
-    $('#hxMarket').innerHTML = hxRowsMarket(d.market || []) || '<p class="hx-empty">시세를 불러오지 못했어요.</p>';
+    const box = $('#hxMarket'); box.querySelectorAll('.hx-krow.q').forEach(e => e.remove());
+    box.insertAdjacentHTML('beforeend', hxRowsMarket(d.market || []).replace(/class="hx-krow"/g, 'class="hx-krow q"'));
     $('#hxWatch').innerHTML = hxRowsWatch(d.watch || []) || '<p class="hx-empty">관심 종목이 없어요.</p>';
-  } catch(e){ $('#hxMarket').innerHTML = '<p class="hx-empty">시세를 불러오지 못했어요.</p>'; }
+  } catch(e){ console.warn('quotes', e); }
 }
 function hxRenderWatch(){ hxLoadQuotes(true); }
 setInterval(() => { if (!document.hidden && currentView === 'home' && homeWidgetsMounted) hxLoadQuotes(); }, 60000);
