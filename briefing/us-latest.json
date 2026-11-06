@@ -1,101 +1,93 @@
 {
- "date": "2026-11-05",
- "weekday": "목",
- "generatedAt": "2026-11-05T21:30+09:00",
- "headline": "중간선거 랠리 이튿날 다우 선물은 오르고, 퀄컴 부진에 나스닥100 선물은 약세입니다",
+ "date": "2026-11-06",
+ "weekday": "금",
+ "generatedAt": "2026-11-06T21:35+09:00",
+ "headline": "AI주 급락 뒤 나스닥100 선물이 1%대 반등했고, 다우 선물은 약세 속에 10월 고용보고서를 기다립니다",
  "us": [
   {
    "name": "S&P 500 선물",
-   "value": "7,736.75",
-   "chg": "+0.21%"
+   "value": "7,400.50",
+   "chg": "+0.24%"
   },
   {
    "name": "나스닥100 선물",
-   "value": "28,416.00",
-   "chg": "-0.53%"
+   "value": "27,142.25",
+   "chg": "+1.46%"
   },
   {
    "name": "다우 선물",
-   "value": "53,856.00",
-   "chg": "+0.66%"
+   "value": "51,103.00",
+   "chg": "-0.99%"
   },
   {
    "name": "VIX(전일)",
-   "value": "16.74",
-   "chg": "+0.78%"
+   "value": "26.69",
+   "chg": "-5.29%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,344.00원",
-   "chg": "+0.11%"
+   "value": "1,359.80원",
+   "chg": "+0.21%"
   },
   {
    "name": "미 10년물",
-   "value": "4.89%",
-   "chg": "보합"
+   "value": "4.86%",
+   "chg": "+2.6bp"
   },
   {
    "name": "WTI",
-   "value": "$89.55",
-   "chg": "+1.62%"
+   "value": "$90.95",
+   "chg": "+0.48%"
   },
   {
    "name": "금",
-   "value": "$4,138.80",
-   "chg": "+1.62%"
+   "value": "$4,076.50",
+   "chg": "-0.90%"
   },
   {
    "name": "비트코인",
-   "value": "$80,200",
-   "chg": "-0.31%"
+   "value": "$76,187",
+   "chg": "+0.11%"
   }
  ],
  "news": [
   {
-   "title": "중간선거 랠리 이후 S&P 선물 보합… 나스닥은 반도체 약세로 부진",
-   "summary": "민주당의 중간선거 압승 후 전날 S&P 500이 3개월 만의 최대 일간 상승률을 기록했습니다. 오늘 장 전에는 다우 선물이 오르고 나스닥100 선물은 반도체주 약세로 내리는 등 엇갈린 흐름을 보이고 있습니다.",
-   "source": "로이터(야후 파이낸스)",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-futures-steady-midterm-105838388.html"
+   "title": "AI주 매도세 이후 나스닥100 선물 반등… 다우 선물은 약세",
+   "summary": "선거 이후 랠리가 AI 관련주 급락으로 바뀌면서 수요일 하루 시가총액 2조 3천억 달러가 사라졌고, 나스닥100은 목요일 조정 국면에 들어갔습니다. 오늘 장 전에는 나스닥100 선물이 1% 넘게 오르고 다우 선물은 0.9% 내리는 등 엇갈린 흐름입니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-091927729.html"
   },
   {
-   "title": "퀄컴, 스마트폰 칩 매출 예상 하회로 장 전 10%대 하락",
-   "summary": "퀄컴이 스마트폰 수요 둔화와 애플 관련 매출 감소로 4분기 스마트폰 칩 매출이 시장 예상에 못 미쳤다고 발표했습니다. 이후 프리마켓에서 주가가 약 10% 하락했고, 엔비디아·마벨·인텔 등 다른 반도체주도 약세입니다.",
-   "source": "로이터(야후 파이낸스)",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-futures-steady-midterm-105838388.html"
+   "title": "10월 고용보고서 발표… 비농업 고용 6만 5천 명 증가 예상",
+   "summary": "블룸버그 집계 기준 시장은 10월 비농업 고용이 6만 5천 명 늘어 9월(2만 9천 명)보다 개선되고, 실업률은 4.2%로 유지될 것으로 예상하고 있습니다. 평균 시간당 임금은 전월 대비 0.3% 상승이 예상됩니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/economy/article/fridays-jobs-report-is-expected-to-show-the-labor-market-chugging-along-213135742.html"
   },
   {
-   "title": "앱러빈 호실적에 급등, 스냅은 매출 부진에 급락",
-   "summary": "앱러빈은 3분기 실적이 예상을 웃돌고 4분기 전망도 시장 예상보다 높게 제시해 장 전 16%가량 올랐습니다. 반면 스냅은 3분기 매출이 예상에 못 미쳤고 일간 이용자 수 공개를 중단할 계획이라고 밝혀 10%가량 하락했습니다.",
-   "source": "시킹알파",
-   "url": "https://seekingalpha.com/news/4666310-biggest-stock-movers-thursday-app-qcom-and-more?feed_item_type=news"
+   "title": "에어비앤비·클라우드플레어·IREN, 실적 호조에 장 전 강세",
+   "summary": "에어비앤비는 3분기 매출과 이익이 예상을 웃돌고 연간 매출 성장 전망을 높이면서 120억 달러 규모 자사주 매입을 발표해 장 전 11%대 올랐습니다. 클라우드플레어는 3분기 매출이 39% 늘어 12%대, IREN은 AI 클라우드 매출 호조로 18%가량 상승했습니다.",
+   "source": "인베스팅닷컴",
+   "url": "https://www.investing.com/news/stock-market-news/premarket-movers-airbnb-cloudflare-iren-rally-atlassian-five9-tumble-5007530"
   },
   {
-   "title": "데이터센터 건설 중단 여파로 AI 인프라주 약세",
-   "summary": "일부 주에서 데이터센터 건설이 멈추면서 코어위브, 네비우스, 델, HPE 등 AI 인프라 관련주가 장 전 약세를 보이고 있습니다. UBS는 이 영향으로 2028년까지 데이터센터 구축 속도가 느려질 것이라고 분석했습니다.",
-   "source": "로이터(야후 파이낸스)",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-futures-steady-midterm-105838388.html"
+   "title": "아틀라시안·파이브나인, 실적은 웃돌았지만 전망 부진에 급락",
+   "summary": "아틀라시안은 분기 실적이 예상을 넘었지만 2027 회계연도 매출 성장률 전망을 약 13.75%로 제시해 장 전 15%대 하락했습니다. 파이브나인도 4분기 이익 가이던스가 시장 예상에 못 미쳐 16%대 내렸습니다.",
+   "source": "인베스팅닷컴",
+   "url": "https://www.investing.com/news/stock-market-news/premarket-movers-airbnb-cloudflare-iren-rally-atlassian-five9-tumble-5007530"
   },
   {
-   "title": "연준 인사 발언 줄줄이… 금요일 10월 고용보고서 앞둬",
-   "summary": "연준은 9월 금리를 인상했고, 시장은 다음 달 추가 인상 가능성을 반영하고 있습니다. 오늘은 바킨 리치먼드 연은 총재 등 최소 3명의 연준 인사가 발언하며, 금요일에는 10월 고용보고서가 발표됩니다. 한편 브렌트유는 전날 8% 넘게 급락한 뒤 1% 이상 반등했습니다.",
-   "source": "로이터(야후 파이낸스)",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-futures-steady-midterm-105838388.html"
+   "title": "반도체주 장 전 일제히 반등",
+   "summary": "전날까지 이어진 AI주 약세 이후 램리서치가 9% 넘게, 마이크론이 7.5%, 마벨이 약 7% 오르는 등 반도체주가 프리마켓에서 반등하고 있습니다. 아이셰어즈 반도체 ETF도 약 5% 오름세입니다.",
+   "source": "인베스팅닷컴",
+   "url": "https://www.investing.com/news/stock-market-news/premarket-movers-airbnb-cloudflare-iren-rally-atlassian-five9-tumble-5007530"
   }
  ],
  "schedule": [
   {
    "time": "22:30",
-   "text": "미국 주간 신규 실업수당 청구건수·3분기 단위노동비용 발표"
-  },
-  {
-   "time": "22:50",
-   "text": "해맥 클리블랜드 연은 총재 패널 토론(취리히)"
-  },
-  {
-   "time": "23:10",
-   "text": "바킨 리치먼드 연은 총재 대담"
+   "text": "미국 10월 고용보고서(비농업 고용·실업률·임금) 발표"
   },
   {
    "time": "23:30",
