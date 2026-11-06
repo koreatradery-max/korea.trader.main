@@ -1591,6 +1591,50 @@
   #view-home .hx{ height:clamp(380px, 44vh, 520px); margin-top:0; }
   #view-home .hx-legacy{ display:none !important; }
   @media (max-width:760px){ #view-home > .view{ padding:12px 12px 24px; } body.is-home .sh-inner, body.is-home .mkt-inner{ padding-left:16px; padding-right:16px; } #view-home .hx{ height:auto; } }
+  /* 홈 v2: 큰 타이포 + 4열 정렬 그리드 + 후원자 띠 */
+  #view-home .hx{ height:clamp(440px, calc(100vh - 560px), 640px); min-height:440px; }
+  #view-home .hx-copy{ width:min(760px, 46%); padding:clamp(32px, 3.2vw, 56px); gap:clamp(16px, 1.4vw, 24px); }
+  #view-home .hx h1{ font-size:clamp(46px, 4.1vw, 84px); line-height:1.08; }
+  #view-home .hx-pill{ font-size:clamp(12.5px, .8vw, 15px); padding:6px 14px 6px 12px; }
+  #view-home .hx-btn{ padding:clamp(13px, .9vw, 17px) clamp(22px, 1.6vw, 30px); font-size:clamp(14.5px, .95vw, 17px); border-radius:14px; }
+  #view-home .hx-facts dt{ font-size:clamp(11.5px, .72vw, 13.5px); }
+  #view-home .hx-facts dd{ font-size:clamp(19px, 1.45vw, 28px); }
+  #view-home .hx-facts > div{ padding:0 clamp(18px, 1.5vw, 28px); }
+  #view-home .hx-facts > div:first-child{ padding-left:0; }
+  #view-home .hx-shade{ background:linear-gradient(90deg, #0C0E11 0%, #0C0E11 34%, rgba(12,14,17,.86) 42%, rgba(12,14,17,0) 58%); }
+  #view-home .hx-tv{ inset:0 0 0 34%; }
+  .hx-grid{ display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1.15fr) minmax(0,.9fr); gap:14px; margin-top:14px; align-items:stretch; }
+  .hx-grid > .hx-card{ height:100%; box-sizing:border-box; padding:18px 20px 16px; }
+  .hx-grid .hx-h{ height:30px; padding-bottom:10px; border-bottom:1px solid #181B20; margin-bottom:2px; }
+  .hx-grid .hx-krow, .hx-grid .hx-wrow, .hx-grid .hx-news li, .hx-grid .hx-sched li:not(.hx-empty){ min-height:44px; box-sizing:border-box; }
+  .hx-grid .hx-krow:first-child, .hx-grid .hx-wrow:first-child{ border-top:0; }
+  .hx-grid #hxMarket .hx-krow:nth-child(2){ border-top:0; }
+  .hx-grid .hx-wrow{ padding:6px 0; }
+  .hx-grid .hx-head{ font-size:15px; margin:8px 0 8px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .hx-grid .hx-news li{ padding:8px 0; } .hx-grid .hx-news a{ -webkit-line-clamp:1; }
+  .hx-grid .hx-sched li:not(.hx-empty){ flex-direction:column; gap:2px; padding:9px 0; }
+  .hx-grid .hx-sched li:first-child{ border-top:0; }
+  .hx-grid .hx-sched .tx{ font-size:13.5px; line-height:1.45; }
+  .hx-grid .hx-sub{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hx-thanks{ display:flex; align-items:center; gap:12px; margin-top:4px; max-width:520px; text-decoration:none !important; color:#8F97A3; font-size:12.5px; opacity:.8; transition:opacity .2s; }
+  .hx-thanks:hover{ opacity:1; }
+  .hx-th-l{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; color:#E8C35A; font-weight:600; }
+  .hx-th-mask{ position:relative; flex:1; min-width:0; overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .hx-th-track{ display:inline-flex; gap:10px; white-space:nowrap; animation:hxth var(--th-dur, 40s) linear infinite; }
+  .hx-th-track span{ color:#B7BEC8; } .hx-th-track i{ font-style:normal; color:#3A3F47; }
+  .hx-thanks:hover .hx-th-track{ animation-play-state:paused; }
+  @keyframes hxth{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion:reduce){ .hx-th-track{ animation:none; } }
+  @media (max-width:1400px) and (min-width:761px){ .hx-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:1300px) and (min-width:761px){ #hxMarket{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:760px){
+    .hx-grid{ grid-template-columns:1fr; }
+    #view-home .hx-copy{ width:auto; padding:26px 20px 18px; }
+    #view-home .hx h1{ font-size:36px; }
+    #view-home .hx{ height:auto; min-height:0; }
+    #view-home .hx-tv{ inset:auto; }
+    #hxMarket{ grid-template-columns:1fr; }
+  }
 </style>
 </head><body>
 
@@ -1671,6 +1715,10 @@
           <div><dt>공부 자료</dt><dd id="hsPosts">무료</dd></div>
           <div><dt>이용료</dt><dd class="lime" id="hsJournal">0원</dd></div>
         </dl>
+        <a class="hx-thanks" href="#support" id="hxThanks" hidden aria-label="함께 만들어 주신 분들 보기">
+          <span class="hx-th-l"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.5 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.5 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>함께 만들어 주신 분들</span>
+          <span class="hx-th-mask"><span class="hx-th-track" id="hxThTrack"></span></span>
+        </a>
       </div>
       <div class="hx-tabs" role="group" aria-label="차트 종목">
         <button type="button" class="on" data-hxsym="FOREXCOM:NSXUSD">나스닥 100</button>
@@ -1680,33 +1728,27 @@
       </div>
     </div>
 
-    <div class="hx-row3">
-      <section class="hx-card">
+    <div class="hx-grid">
+      <section class="hx-card hx-mk">
         <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/></svg><b>시장 시세</b><span class="sp"></span><span class="hx-live"><i></i>LIVE</span></div>
         <div class="hx-quotes" id="hxMarket"><div class="hx-krow"><span>코스피</span><b id="hxKospi">-</b><em id="hxKospiC"></em></div><div class="hx-krow"><span>코스닥</span><b id="hxKosdaq">-</b><em id="hxKosdaqC"></em></div></div>
       </section>
-      <section class="hx-card">
+      <section class="hx-card hx-wl">
         <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><b>관심 종목</b><span class="hx-sub">리포트·라이브 언급 종목</span><span class="sp"></span><button type="button" class="hx-edit" id="hxWatchEdit" hidden>편집</button></div>
         <div class="hx-quotes" id="hxWatch"></div>
       </section>
-      <section class="hx-card">
+      <section class="hx-card hx-bf">
         <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h4"/></svg><b>오늘의 시황</b><span class="sp"></span>
           <div class="hx-seg" role="group" aria-label="시황 종류"><button type="button" class="on" data-hxbf="morning">아침 08:50</button><button type="button" data-hxbf="us">미국장 22:00</button></div></div>
         <div id="hxBrief"><p class="hx-empty">시황을 불러오는 중…</p></div>
         <a class="hx-more" href="#briefing">시황 전체 보기 →</a>
       </section>
-    </div>
-
-    <div class="hx-row2">
-      <section class="hx-card">
-        <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>이번 주 실적 발표</b><span class="hx-sub" id="hxWeekLbl"></span><span class="sp"></span><button type="button" class="hx-edit" id="hxEarnEdit" hidden>편집</button><a class="hx-link" href="#library">실적 리포트 모아보기</a></div>
-        <div class="hx-week" id="hxEarn"></div>
-      </section>
-      <section class="hx-card">
+      <section class="hx-card hx-sc">
         <div class="hx-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>오늘 밤 일정</b><span class="hx-sub">한국 시간</span></div>
         <ol class="hx-sched" id="hxSched"><li class="hx-empty">일정을 불러오는 중…</li></ol>
       </section>
     </div>
+    <div class="hx-legacy" hidden aria-hidden="true"><div id="hxEarn"></div><span id="hxWeekLbl"></span><button type="button" id="hxEarnEdit" hidden></button></div>
     <p class="hx-note">시세는 TradingView·네이버 금융 기준으로 지연될 수 있으며, 모든 정보는 공부 목적이에요. 매수·매도 추천이 아니에요.</p>
 
     <dialog class="hx-dlg" id="hxDlg">
@@ -7367,6 +7409,20 @@ function renderSupporters(){
   track.style.animation = '';
   track.style.setProperty('--sp-dur', Math.max(18, list.length * 3) + 's');
 }
+/* 홈 상단: 공개 동의한 후원자 닉네임이 은은하게 흐르는 띠 */
+(function hxThanksHook(){
+  const draw = () => {
+    const box = $('#hxThanks'), tr = $('#hxThTrack'); if (!box) return;
+    if (!supporters.length){ box.hidden = true; return; }
+    let list = supporters.slice(); while (list.length < 10) list = list.concat(supporters);
+    const html = list.map(n => `<span>${escapeHtml(n)}</span>`).join('<i>·</i>') + '<i>·</i>';
+    tr.innerHTML = html + html; tr.style.setProperty('--th-dur', Math.max(30, list.length * 4) + 's');
+    box.hidden = false;
+  };
+  const orig = renderSupporters;
+  renderSupporters = function(){ orig(); draw(); };
+  draw();
+})();
 $('#spCopy').addEventListener('click', () => copyText($('#spAccNum').textContent.trim(), () => { $('#spCopy').textContent = '복사됐어요'; setTimeout(() => { $('#spCopy').textContent = '계좌번호 복사'; }, 2000); }));
 $('#admSupSave').addEventListener('click', async () => {
   const names = [...new Set($('#admSupList').value.split('\n').map(s => s.trim().slice(0, 30)).filter(Boolean))];
