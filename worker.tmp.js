@@ -57,6 +57,8 @@ const HANDLER = {
       if (url.pathname === '/tg/webhook' && req.method === 'POST') return await tgWebhook(req, env);
       if (url.pathname === '/admin/send' && req.method === 'POST') return await adminSend(req, env, cors);
       if (url.pathname === '/views/hit' && req.method === 'POST') return await viewsHit(req, env, cors);
+      if (url.pathname === '/visit' && req.method === 'POST') return await siteVisit(env, cors, true);
+      if (url.pathname === '/visit' && req.method === 'GET') return await cached(req, ctx, 60, async () => await siteVisit(env, cors, false), cors);
       if (url.pathname === '/admin/channel' && req.method === 'POST') return await adminChannel(req, env, cors);
       if (url.pathname === '/setup' && req.method === 'GET') return json(await setup(env, url), 200, cors);
       if (url.pathname === '/market' && req.method === 'GET') return await cached(req, ctx, 120, async () => json(await marketData(), 200, cors), cors);
@@ -424,6 +426,23 @@ async function viewsHit(req, env, cors) {
     await fsCommit(env, [{ transform: { document: fsName(env, `views/${id}`), fieldTransforms: [{ fieldPath: 'viewCount', increment: { integerValue: '1' } }] }, currentDocument: { exists: true } }]);
   } catch (e) { return json({ ok: false }, 200, cors); }
   return json({ ok: true }, 200, cors);
+}
+
+/* 홈페이지 총 입장 수 (브라우저 세션당 1번 +1) */
+async function siteVisit(env, cors, inc) {
+  try {
+    if (inc) {
+      const res = await fetch(`${fsBase(env)}:commit`, {
+        method: 'POST', headers: { Authorization: `Bearer ${await getAccessToken(env)}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ writes: [{ transform: { document: fsName(env, 'config/stats'), fieldTransforms: [{ fieldPath: 'visits', increment: { integerValue: '1' } }] } }] })
+      });
+      const j = await res.json();
+      const v = j && j.writeResults && j.writeResults[0] && j.writeResults[0].transformResults && j.writeResults[0].transformResults[0];
+      return json({ visits: v ? Number(v.integerValue) : null }, 200, cors);
+    }
+    const d = await fsGet(env, 'config/stats');
+    return json({ visits: d && d.visits != null ? Number(d.visits) : 0 }, 200, cors);
+  } catch (e) { return json({ visits: null }, 200, cors); }
 }
 
 /* 자료실 PDF 리포트 표지 (텔레그램 알림 사진용). 리포트 분류(market·stock·earnings)만 공개 */
