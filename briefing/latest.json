@@ -1,87 +1,87 @@
 {
- "date": "2026-11-09",
- "weekday": "월",
- "generatedAt": "2026-11-09T08:15+09:00",
- "headline": "브렌트유가 미·이란 긴장 완화 기대에 주간 16% 넘게 급락했고, 비트코인은 7만5천 달러대에서 5주 연속 하락 위기에 놓였습니다.",
+ "date": "2026-11-10",
+ "weekday": "화",
+ "generatedAt": "2026-11-10T08:10+09:00",
+ "headline": "뉴욕증시가 유가 하락과 AI주 반등에 4월 이후 최대폭 올랐고, 엔비디아는 CEO 조사 소식에 하락했습니다.",
  "us": [
   {
    "name": "S&P 500",
-   "value": "7,376.86",
-   "chg": "+0.31%"
+   "value": "7,549.94",
+   "chg": "+2.35%"
   },
   {
    "name": "나스닥",
-   "value": "24,579.43",
-   "chg": "+1.09%"
+   "value": "25,253.14",
+   "chg": "+2.74%"
   },
   {
    "name": "다우",
-   "value": "51,285.73",
-   "chg": "-0.46%"
+   "value": "52,389.75",
+   "chg": "+2.15%"
   },
   {
    "name": "필라델피아 반도체",
-   "value": "9,390.25",
-   "chg": "+4.21%"
+   "value": "10,033.93",
+   "chg": "+6.86%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,363.50원",
-   "chg": "+0.48%"
+   "value": "1,342.00원",
+   "chg": "-1.58%"
   },
   {
    "name": "미 10년물",
-   "value": "4.86%",
-   "chg": "+2.2bp"
+   "value": "4.88%",
+   "chg": "+2.5bp"
   },
   {
    "name": "WTI",
-   "value": "$90.83",
+   "value": "$86.85",
    "chg": "0.00%"
   },
   {
    "name": "금",
-   "value": "$4,074.90",
+   "value": "$4,114.50",
    "chg": "0.00%"
   },
   {
    "name": "비트코인",
-   "value": "$74,743",
-   "chg": "-1.51%"
+   "value": "$75,134",
+   "chg": "+0.77%"
   }
  ],
  "news": [
   {
-   "title": "브렌트유 주간 16%대 급락, 코로나 이후 최대 주간 낙폭",
-   "summary": "지난주 브렌트유는 배럴당 98.32달러, WTI는 90.83달러로 마감해 각각 주간 16% 이상, 약 13% 하락했습니다. 이란 관련 갈등이 누그러질 수 있다는 기대가 반영됐지만, 호르무즈 해협 유조선 공격이 이어지면서 추가 하락은 제한됐습니다.",
-   "source": "Newswire(로이터 인용)",
-   "url": "https://www.newswire.lk/2026/11/08/global-oil-prices-record-sharp-weekly-decline-amid-hopes-of-easing-middle-east-tensions/"
+   "title": "뉴욕증시, 4월 이후 최대 상승…3대 지수 2%대 급등",
+   "summary": "S&P 500이 2.3%, 나스닥이 2.7%, 다우가 2.2% 오르며 4월 이후 가장 좋은 하루를 보냈습니다. 유가 하락과 함께, 지난주 AI 데이터센터 투자 둔화 우려로 급락했던 종목들이 반등했습니다.",
+   "source": "AP(BNN 블룸버그 게재)",
+   "url": "https://www.bnnbloomberg.ca/markets/dow-jones/2026/11/09/world-markets-bounce-back-after-a-recovery-for-ai-stocks-on-wall-street/"
   },
   {
-   "title": "비트코인 7만5천 달러대, 5주 연속 주간 하락 위기",
-   "summary": "비트코인은 일요일 7만5천8백 달러 안팎에서 거래되며 5주 연속 주간 하락 가능성이 커졌습니다. 지난주 미국 현물 비트코인 ETF에서 약 12억8천만 달러가 순유출된 것으로 집계됐습니다.",
-   "source": "CryptoTicker",
-   "url": "https://cryptoticker.io/en/bitcoin-price-fifth-losing-week-weekly-close/"
+   "title": "엔비디아, 젠슨 황 CEO 내부 조사 착수에 주가 하락",
+   "summary": "엔비디아 이사회가 젠슨 황 CEO의 사적 관계와 관련해 조사에 나서면서 주가가 장중 8% 가까이 빠졌다가 낙폭을 줄여 4%대 하락으로 마감했습니다. 이사회는 국가안보나 회사 기밀이 유출됐다고 볼 근거는 없다고 밝혔습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-9-dow-sp-500-nasdaq-nvidia-090535419.html"
   },
   {
-   "title": "고용 서프라이즈에 12월 금리 인상 확률 73%로 상승",
-   "summary": "10월 비농업 고용이 16만5천 명 늘며 예상치(약 6만5천 명)를 크게 웃돌자, CME 페드워치 기준 12월 금리 인상 확률이 약 73%로 전날 60%에서 높아졌습니다. 시간당 임금도 전월 대비 0.4% 올라 예상을 웃돌았습니다.",
-   "source": "Charles Schwab",
-   "url": "https://www.schwab.com/learn/story/stock-market-update-open"
+   "title": "브렌트유 5.8% 급락, 93달러대로 내려와",
+   "summary": "브렌트유가 배럴당 93.73달러로 5.8% 떨어졌습니다. 11월 초 112달러를 웃돌던 수준에서 크게 내려왔으며, 트럼프 대통령은 협상에 진전이 있으면 이란 공습 재개 가능성은 매우 낮다고 말했습니다.",
+   "source": "AP(BNN 블룸버그 게재)",
+   "url": "https://www.bnnbloomberg.ca/markets/dow-jones/2026/11/09/world-markets-bounce-back-after-a-recovery-for-ai-stocks-on-wall-street/"
   },
   {
-   "title": "이번 주 10월 CPI(화)·PPI(금) 발표 예정",
-   "summary": "미국 10월 소비자물가지수는 10일(화), 생산자물가지수는 13일(금) 각각 미 동부시간 오전 8시 30분에 발표됩니다. 11일(수)은 재향군인의 날로 채권시장은 휴장하지만 주식시장은 정상 개장합니다.",
-   "source": "TradingKey",
-   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262294759-week-ahead-october-cpi-ppi-coreweave-cisco-applied-materials-tradingkey"
+   "title": "AMD 12%대 급등, 반도체주 일제히 반등",
+   "summary": "AMD가 오펜하이머의 투자의견 상향 소식에 12%가량 오르며 반도체주 반등을 이끌었습니다. 마이크론, ASML 등 다른 반도체주도 함께 강세를 보였습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-9-dow-sp-500-nasdaq-nvidia-090535419.html"
   },
   {
-   "title": "이번 주 코어위브·시스코·어플라이드 머티어리얼즈 실적 발표",
-   "summary": "코어위브는 10일(화) 장 마감 후 3분기 실적을, 시스코와 어플라이드 머티어리얼즈는 12일(목) 장 마감 후 실적을 발표할 예정입니다. 같은 날 장 시작 전에는 네비우스도 실적을 공개합니다.",
-   "source": "TradingKey",
-   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262294759-week-ahead-october-cpi-ppi-coreweave-cisco-applied-materials-tradingkey"
+   "title": "컨스텔레이션 에너지, 실적 호조에 10% 상승",
+   "summary": "컨스텔레이션 에너지가 시장 예상을 웃돈 분기 매출과 이익을 발표해 주가가 10.3% 올랐습니다. 같은 날 미 10년물 국채금리는 4.88%로 지난 금요일(4.86%)보다 소폭 올랐습니다.",
+   "source": "AP(BNN 블룸버그 게재)",
+   "url": "https://www.bnnbloomberg.ca/markets/dow-jones/2026/11/09/world-markets-bounce-back-after-a-recovery-for-ai-stocks-on-wall-street/"
   }
  ],
  "schedule": [
@@ -90,16 +90,16 @@
    "text": "국내 증시 개장"
   },
   {
-   "time": "23:30",
-   "text": "미국 정규장 개장 (개장 전 컨스텔레이션 에너지·배릭 실적 발표)"
+   "time": "22:30",
+   "text": "미국 10월 소비자물가지수(CPI) 발표"
   },
   {
-   "time": "00:00",
-   "text": "(10일) 미국 9월 도매재고 발표"
+   "time": "23:30",
+   "text": "미국 정규장 개장"
   },
   {
    "time": "06:00 이후",
-   "text": "(10일) 장 마감 후 로켓랩·테이크투 인터랙티브 실적 발표"
+   "text": "(11일) 장 마감 후 코어위브 실적 발표"
   }
  ],
  "kind": "morning"
