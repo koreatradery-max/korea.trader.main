@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-09",
+ "weekday": "월",
+ "generatedAt": "2026-11-09T21:30+09:00",
+ "headline": "엔비디아가 프리마켓에서 4%대 하락했지만, 다우 선물 중심으로 지수 선물은 오르며 이번 주 물가지표를 기다립니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,445.00",
+   "chg": "+0.58%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "27,205.50",
+   "chg": "+0.44%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "51,886.00",
+   "chg": "+0.97%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "23.44",
+   "chg": "-8.58%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,346.70원",
+   "chg": "-1.23%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.86%",
+   "chg": "+0.1bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$88.36",
+   "chg": "-2.72%"
+  },
+  {
+   "name": "금",
+   "value": "$4,118.10",
+   "chg": "+1.06%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$74,658",
+   "chg": "+0.13%"
+  }
+ ],
+ "news": [
+  {
+   "title": "지난주 하락 뒤 미국 지수 선물 상승… 실적·물가지표 주간 시작",
+   "summary": "세 지수가 모두 지난주 하락 마감한 뒤, 월요일 장 전 다우 선물을 중심으로 지수 선물이 올랐습니다. AI 관련 종목 흐름과 이번 주 이어질 실적 발표, 물가지표가 관심사로 꼽혔습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-9-dow-sp-500-nasdaq-nvidia-090535419.html"
+  },
+  {
+   "title": "엔비디아, 젠슨 황 CEO 관련 보도에 이사회 독립 조사… 프리마켓 4%대 하락",
+   "summary": "엔비디아 이사회가 젠슨 황 CEO와 관련한 언론 보도에 대해 독립 조사에 착수하면서 주가가 프리마켓에서 4% 넘게 내렸습니다. 회사는 미국 국가안보나 회사 기밀이 유출됐다고 볼 근거는 없다고 밝혔고, 관련 의혹은 확인되지 않은 상태입니다.",
+   "source": "야후 파이낸스(인베스팅닷컴)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/premarket-movers-nvidia-slides-huang-113609873.html"
+  },
+  {
+   "title": "중간선거 결과에 주택건설주 강세… NVR 프리마켓 26% 넘게 상승",
+   "summary": "중간선거에서 민주당이 상·하원 다수당을 차지한 뒤 주택건설주 강세가 이어지며 NVR이 프리마켓에서 26% 넘게 올랐습니다. UBS는 건축자재 관세 인하 가능성이 높아질 수 있다고 분석했습니다. 이 밖에 SAP는 JP모건의 투자의견 상향, 아젠엑스는 최대 약 11억 5천만 달러 규모 인수 발표가 있었습니다.",
+   "source": "야후 파이낸스(인베스팅닷컴)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/premarket-movers-nvidia-slides-huang-113609873.html"
+  },
+  {
+   "title": "버크셔 해서웨이 3분기 영업이익 5.8% 감소… 현금 3,774억 달러로 사상 최대",
+   "summary": "버크셔 해서웨이의 3분기 영업이익은 127억 달러로 전년보다 5.8% 줄었습니다. 보유 현금은 사상 최대인 3,774억 달러로 늘었고, 약 96억 달러 규모 자사주를 매입했습니다.",
+   "source": "야후 파이낸스(ADVFN)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/us-stock-futures-mixed-investors-095952467.html"
+  },
+  {
+   "title": "내일(화) 미국 10월 CPI 발표 앞둬… 오늘은 기대인플레이션·실적 발표",
+   "summary": "투자자들은 화요일 발표되는 미국 10월 소비자물가지수(CPI)를 기다리고 있습니다. 오늘은 뉴욕 연은의 10월 소비자 기대인플레이션 조사가 나오고, 컨스텔레이션 에너지·KKR·옥시덴털·테이크투·트레이드데스크 등이 실적을 발표합니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-9-dow-sp-500-nasdaq-nvidia-090535419.html"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "오늘 밤",
+   "text": "뉴욕 연은 10월 소비자 기대인플레이션, 미국 9월 도매재고 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  },
+  {
+   "time": "오늘",
+   "text": "컨스텔레이션 에너지·KKR·옥시덴털·테이크투·트레이드데스크·힘스앤허스 등 실적 발표"
+  }
+ ],
+ "kind": "us"
+}
