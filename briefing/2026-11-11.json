@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-11",
+ "weekday": "수",
+ "generatedAt": "2026-11-11T08:10+09:00",
+ "headline": "미국 10월 물가가 예상보다 높게 나오며 금리 인상 우려에 3대 지수가 하락했고, 엔비디아는 5% 넘게 내렸습니다.",
+ "us": [
+  {
+   "name": "S&P 500",
+   "value": "7,520.93",
+   "chg": "-0.38%"
+  },
+  {
+   "name": "나스닥",
+   "value": "25,065.87",
+   "chg": "-0.74%"
+  },
+  {
+   "name": "다우",
+   "value": "52,231.89",
+   "chg": "-0.30%"
+  },
+  {
+   "name": "필라델피아 반도체",
+   "value": "9,998.33",
+   "chg": "-0.36%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,344.50원",
+   "chg": "+0.19%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "5.00%",
+   "chg": "+13.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$86.04",
+   "chg": "0.00%"
+  },
+  {
+   "name": "금",
+   "value": "$4,030.20",
+   "chg": "0.00%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$73,721",
+   "chg": "-2.14%"
+  }
+ ],
+ "news": [
+  {
+   "title": "미 10월 CPI 예상 상회…뉴욕증시 3대 지수 동반 하락",
+   "summary": "10월 소비자물가지수가 전월 대비 0.4%, 근원 물가가 0.3% 올라 시장 예상(각 0.3%, 0.2%)을 웃돌았습니다. 12월 금리 인상 전망이 힘을 얻으면서 S&P 500은 0.38%, 나스닥은 0.74%, 다우는 0.30% 하락 마감했습니다.",
+   "source": "야후 파이낸스(더스트리트)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-10-144434892.html"
+  },
+  {
+   "title": "미 10년물 국채금리 다시 5%대…연준 인사들 추가 인상 시사",
+   "summary": "물가 지표 발표 뒤 미국 10년물 국채금리가 다시 5%를 넘었습니다. 월러 연준 이사는 12월 회의에서 0.25%포인트 인상에 무게를 두면서 0.5%포인트 인상도 검토할 수 있다고 밝혔고, 로리 로건 댈러스 연은 총재는 두 차례 추가 인상이 필요하다고 말했습니다.",
+   "source": "스톡타이탄",
+   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-10-2026"
+  },
+  {
+   "title": "엔비디아 5%대 급락…CEO 조사 여파로 이틀 연속 하락",
+   "summary": "엔비디아 주가가 이사회의 젠슨 황 CEO 조사 소식이 이어지며 5% 넘게 떨어져 이틀 연속 하락했습니다. 거래량은 평소의 세 배를 넘었고, 실적 발표는 11월 17일로 예정돼 있습니다.",
+   "source": "모틀리 풀",
+   "url": "https://fool.com/coverage/stock-market-today/2026/11/10/stock-market-today-nov-10-nvidia-stock-plunges-5-5-as-ceo-scandal-overshadows-its-upcoming-earnings-report"
+  },
+  {
+   "title": "AMD, 앤트로픽에 25억 달러 투자 계획…주가 1.3% 상승",
+   "summary": "앤트로픽이 정정 제출한 상장 서류에서 AMD가 260억 달러 규모 사모 배정의 일부로 25억 달러를 투자할 계획이라고 공개했습니다. AMD 주가는 1.30% 오른 515.21달러에 마감했습니다.",
+   "source": "모틀리 풀",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/10/stock-market-today-nov-10-amd-rises-on-plan-to-invest-usd2-5-billion-in-anthropic/"
+  },
+  {
+   "title": "코어위브, 3분기 매출 168% 증가…시간외 6% 상승",
+   "summary": "코어위브는 장 마감 후 3분기 매출이 전년보다 168% 늘어난 36억 6천만 달러라고 발표하고 연간 매출 전망을 130억~133억 달러로 올렸습니다. 순손실은 7억 900만 달러였으며, 주가는 시간외 거래에서 약 6% 올랐습니다.",
+   "source": "모틀리 풀",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/10/stock-market-today-nov-10-coreweave-stock-edges-lower-as-a-multibillion-dollar-question-looms-over-earnings/"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "09:00",
+   "text": "국내 증시 개장"
+  },
+  {
+   "time": "종일",
+   "text": "미국 재향군인의 날, 채권시장 휴장(SIFMA 권고)·주식시장 정상 거래"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  }
+ ],
+ "kind": "morning"
+}
