@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-10",
+ "weekday": "화",
+ "generatedAt": "2026-11-10T21:30+09:00",
+ "headline": "10월 CPI 발표를 앞두고 다우 선물은 오르고 나스닥 선물은 내리며 혼조세를 보이고 있습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,574.25",
+   "chg": "0.00%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "27,906.25",
+   "chg": "-0.39%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "52,680.00",
+   "chg": "+0.35%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "20.00",
+   "chg": "+0.40%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,339.50원",
+   "chg": "-0.19%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.89%",
+   "chg": "+3bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$85.15",
+   "chg": "-1.96%"
+  },
+  {
+   "name": "금",
+   "value": "$4,083.40",
+   "chg": "-0.76%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$74,411",
+   "chg": "-1.23%"
+  }
+ ],
+ "news": [
+  {
+   "title": "CPI 앞두고 지수 선물 혼조… 나스닥 선물 약세, 다우 선물은 유가 하락에 상승",
+   "summary": "엔비디아 CEO 관련 논란과 앤트로픽 기업공개(IPO) 소식을 소화하며 나스닥100 선물은 내리고, 유가 하락에 다우 선물은 올랐습니다. 로이터가 본 증권신고서 초안에 따르면 앤트로픽은 IPO로 최대 644억 달러를 조달할 것으로 예상됩니다.",
+   "source": "로이터(인베스팅닷컴)",
+   "url": "https://ca.investing.com/news/stock-market-news/sp-500-dow-futures-climb-as-oil-slide-lifts-sentiment-4945722"
+  },
+  {
+   "title": "오늘 밤 10월 CPI 발표… 전월 대비 0.3% 상승 예상",
+   "summary": "미국 10월 소비자물가지수(CPI)는 전월 대비 0.3% 올라 9월(0.6%)보다 상승 폭이 줄 것으로 예상됩니다. 근원 CPI는 전월 대비 0.2%, 전년 대비 2.8% 상승이 예상되며, 예상보다 높게 나오면 최근 증시 반등에 부담이 될 수 있다는 분석이 나왔습니다.",
+   "source": "로이터·팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-10-markets-await-the-consumer-inflation-report"
+  },
+  {
+   "title": "월러 연준 이사 \"물가 뜨거우면 12월 50bp 인상도 고려\"",
+   "summary": "크리스 월러 연준 이사는 런던 연설에서 12월 회의 때 0.25%포인트 금리 인상 쪽으로 기울어 있으며, 10월 물가가 높게 나오면 0.5%포인트 인상도 고려하겠다고 밝혔습니다. 지난주 강한 10월 고용지표도 금리 인상 가능성을 키웠습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-10-dow-sp-500-nasdaq-inflation-data-cpi-090627830.html"
+  },
+  {
+   "title": "트럼프 \"이란 추가 공습 연기\"에 유가 하락… 브렌트유 90달러 아래로",
+   "summary": "트럼프 대통령이 카타르 등 역내 국가의 요청에 따라 이란에 대한 추가 공습을 미루겠다고 밝히면서 공급 우려가 줄었습니다. 브렌트유는 2.86% 내린 배럴당 89.92달러, WTI는 2.60% 내린 84.59달러를 기록했습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-10-markets-await-the-consumer-inflation-report"
+  },
+  {
+   "title": "엔비디아, CEO 관련 추가 보도… 장 후엔 코어위브·리게티 실적 발표",
+   "summary": "디인포메이션은 젠슨 황 CEO와 연관된 인물을 통해 최소 75억 달러 규모의 엔비디아 칩이 중국 기업들로 흘러갔다고 보도했으며, 엔비디아 이사회는 독립 조사를 진행 중입니다. 엔비디아는 전날 4%대 하락한 뒤 프리마켓에서 소폭 움직이고 있고, 오늘 장 마감 후에는 코어위브와 리게티 컴퓨팅이 실적을 발표합니다.",
+   "source": "로이터(인베스팅닷컴)",
+   "url": "https://ca.investing.com/news/stock-market-news/sp-500-dow-futures-climb-as-oil-slide-lifts-sentiment-4945722"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "22:30",
+   "text": "미국 10월 소비자물가지수(CPI) 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  },
+  {
+   "time": "장 후",
+   "text": "코어위브·리게티 컴퓨팅 실적 발표"
+  }
+ ],
+ "kind": "us"
+}
