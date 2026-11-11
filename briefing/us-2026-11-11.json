@@ -1,0 +1,98 @@
+{
+ "date": "2026-11-11",
+ "weekday": "수",
+ "generatedAt": "2026-11-11T21:30+09:00",
+ "headline": "코어위브 호실적에 AI 투자 우려가 누그러지며 나스닥 선물이 1%대 후반 상승하고 있습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,609.00",
+   "chg": "+0.86%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "28,368.50",
+   "chg": "+1.92%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "52,387.00",
+   "chg": "+0.14%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "18.61",
+   "chg": "-4.37%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,335.10원",
+   "chg": "-0.70%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "5.00%",
+   "chg": "+13.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$87.06",
+   "chg": "+1.19%"
+  },
+  {
+   "name": "금",
+   "value": "$4,054.30",
+   "chg": "+0.60%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$73,977",
+   "chg": "+0.27%"
+  }
+ ],
+ "news": [
+  {
+   "title": "코어위브 실적 호조… 나스닥100 선물 상승 주도",
+   "summary": "코어위브는 3분기 매출 36억 6천만 달러로 시장 예상(35억 5천만 달러)을 웃돌고 연간 전망을 올렸으며, 2028년 상반기 조정 기준 흑자 전환 계획을 밝혔습니다. AI 투자 부담에 대한 우려가 줄면서 코어위브 주가는 프리마켓에서 10% 넘게 올랐습니다.",
+   "source": "로이터(야후 파이낸스)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-rise-104431138.html"
+  },
+  {
+   "title": "엔비디아, 이틀간 급락 뒤 프리마켓 반등",
+   "summary": "엔비디아는 젠슨 황 CEO 관련 논란으로 최근 두 거래일 동안 시가총액이 약 4,800억 달러 줄었으나, 오늘 프리마켓에서는 4% 안팎 오르고 있습니다. 마이크론과 마벨도 프리마켓에서 7% 가까이 상승했습니다.",
+   "source": "로이터(야후 파이낸스)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-rise-104431138.html"
+  },
+  {
+   "title": "10월 CPI 예상 상회… 12월 금리 인상 거의 반영",
+   "summary": "전날 발표된 10월 소비자물가는 식료품과 숙박비 영향으로 예상보다 많이 올랐고, 미 10년물 금리는 5%까지 다시 올랐습니다. 시장은 12월 연준의 금리 인상을 사실상 확실시하고 있으며, 오늘은 재향군인의 날로 미국 채권시장이 휴장합니다.",
+   "source": "로이터(야후 파이낸스)·업스톡스",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-rise-104431138.html"
+  },
+  {
+   "title": "호르무즈 해협 유조선 기뢰 피해 보도에 유가 반등",
+   "summary": "호르무즈 해협 동부에서 유조선이 기뢰에 부딪혀 불이 났다는 보도가 나오면서 브렌트유가 장중 배럴당 93달러대까지 올랐습니다. 전날에는 긴장 완화 기대로 유가가 두 달 만의 최저 수준까지 내렸습니다.",
+   "source": "업스톡스·스톡트윗츠",
+   "url": "https://upstox.com/news/market-news/us-stocks/dow-jones-s-and-p-500-nasdaq-futures-hint-positive-opening-on-nov-11-core-weave-tech-stocks-in-focus/article-203309/"
+  },
+  {
+   "title": "고프로, 3분기 실적 발표 연기에 프리마켓 급락",
+   "summary": "고프로는 자금 조달 계약 관련 결산 절차와 문서화를 이유로 3분기 실적 발표를 미뤘고, 주가는 프리마켓에서 10% 넘게 내렸습니다. 대주단의 동의를 받지 못하면 추진 중인 합병이 차질을 빚을 수 있다고 전해졌습니다.",
+   "source": "스톡트윗츠(야후 파이낸스)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-rise-095935016.html"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "종일",
+   "text": "미국 재향군인의 날, 채권시장 휴장(주식시장은 정상 개장)"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  }
+ ],
+ "kind": "us"
+}
