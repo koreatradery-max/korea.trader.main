@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-12",
+ "weekday": "목",
+ "generatedAt": "2026-11-12T21:30+09:00",
+ "headline": "엔비디아 CEO 거취 논란에 나스닥100 선물이 0.9% 가까이 하락하고, 다우 선물은 보합입니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,608.50",
+   "chg": "-0.42%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "28,218.75",
+   "chg": "-0.89%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "52,583.00",
+   "chg": "+0.01%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "18.35",
+   "chg": "+4.92%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,332.90원",
+   "chg": "-0.34%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.99%",
+   "chg": "+0.5bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$85.87",
+   "chg": "-0.76%"
+  },
+  {
+   "name": "금",
+   "value": "$3,949.50",
+   "chg": "-1.27%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$73,113",
+   "chg": "-1.37%"
+  }
+ ],
+ "news": [
+  {
+   "title": "엔비디아 이사회, 젠슨 황 CEO 거취 논의 보도… 프리마켓 6% 안팎 하락",
+   "summary": "월스트리트저널 등은 엔비디아 이사회가 젠슨 황 CEO의 사생활 관련 보도 이후 그의 거취를 논의하고 있다고 전했습니다. 회사의 공식 결정은 아직 나오지 않았으며, 엔비디아 주가는 프리마켓에서 6% 안팎 하락했습니다.",
+   "source": "로이터(마켓스크리너)",
+   "url": "https://www.marketscreener.com/news/nasdaq-futures-fall-as-nvidia-turmoil-rattles-ai-stocks-ce785ed8da88fe27"
+  },
+  {
+   "title": "대중 반도체 수출 추가 규제 우려… 알리바바 홍콩서 6% 넘게 하락",
+   "summary": "미국이 중국에 대한 반도체 수출 규제를 더 강화할 수 있다는 우려가 커지며 알리바바가 홍콩 증시에서 6% 넘게 떨어졌습니다. 블룸버그에 따르면 중국 당국은 미국이 엔비디아 관련 논란을 추가 규제의 근거로 삼지 말라고 요구했습니다.",
+   "source": "ADVFN(야후 파이낸스 UK)",
+   "url": "https://uk.finance.yahoo.com/news/nasdaq-futures-fall-nvidia-leadership-100447985.html"
+  },
+  {
+   "title": "예상 웃돈 물가에 12월 연준 금리 인상 전망 굳어져",
+   "summary": "지난달 미국 소비자물가가 예상보다 많이 오르면서 CME 페드워치 기준 12월 금리 인상 가능성이 거의 확실한 것으로 반영되고 있습니다. 0.5%포인트 인상 가능성도 약 10%로 나타났으며, 생산자물가지수는 금요일에 발표됩니다.",
+   "source": "로이터(마켓스크리너)",
+   "url": "https://www.marketscreener.com/news/nasdaq-futures-fall-as-nvidia-turmoil-rattles-ai-stocks-ce785ed8da88fe27"
+  },
+  {
+   "title": "MSCI 지수 편출 결정에 스트래티지 프리마켓 4% 넘게 하락",
+   "summary": "MSCI가 스트래티지(MSTR)를 글로벌 지수에서 제외하겠다고 밝히면서 주가가 프리마켓에서 4.3% 하락했습니다. 전날 25% 가까이 올랐던 코어위브도 프리마켓에서 약 6% 내렸습니다.",
+   "source": "로이터(마켓스크리너)",
+   "url": "https://www.marketscreener.com/news/nasdaq-futures-fall-as-nvidia-turmoil-rattles-ai-stocks-ce785ed8da88fe27"
+  },
+  {
+   "title": "중동·러-우 협상 기대에 유가 소폭 하락",
+   "summary": "중동과 러시아·우크라이나 협상 진전 기대에 브렌트유와 WTI가 각각 0.5%가량 내렸습니다. 러시아와 우크라이나는 대규모 포로 교환에 합의했지만 영토 문제는 풀리지 않았고, 이란은 미국의 추가 공격 시 대응하겠다고 경고했습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-12-u-s-tech-stocks-fall-on-nvidia-ceo-uncertainty"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "22:30",
+   "text": "미국 주간 신규 실업수당 청구건수 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  },
+  {
+   "time": "06:00",
+   "text": "(장 마감 후) 시스코·어플라이드 머티리얼즈 실적 발표"
+  }
+ ],
+ "kind": "us"
+}
