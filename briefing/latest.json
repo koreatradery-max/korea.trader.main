@@ -1,8 +1,8 @@
 {
- "date": "2026-11-14",
- "weekday": "토",
- "generatedAt": "2026-11-14T08:15+09:00",
- "headline": "AI 반도체 매도세에 필라델피아 반도체지수가 3.43% 내렸고, 나스닥은 0.91% 하락한 반면 다우는 소폭 올랐습니다.",
+ "date": "2026-11-16",
+ "weekday": "월",
+ "generatedAt": "2026-11-16T08:15+09:00",
+ "headline": "지난 금요일 반도체 약세로 나스닥이 0.91% 내렸고, 이번 주에는 엔비디아 실적과 앤트로픽 상장이 예정돼 있습니다.",
  "us": [
   {
    "name": "S&P 500",
@@ -28,8 +28,8 @@
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,339.00원",
-   "chg": "+0.19%"
+   "value": "1,338.00원",
+   "chg": "+0.11%"
   },
   {
    "name": "미 10년물",
@@ -39,59 +39,67 @@
   {
    "name": "WTI",
    "value": "$88.56",
-   "chg": "-0.20%"
+   "chg": "0.00%"
   },
   {
    "name": "금",
    "value": "$3,886.30",
-   "chg": "+0.03%"
+   "chg": "0.00%"
   },
   {
    "name": "비트코인",
-   "value": "$68,270",
-   "chg": "-4.48%"
+   "value": "$65,408",
+   "chg": "+1.85%"
   }
  ],
  "news": [
   {
-   "title": "AI 반도체주 장중 반락… AMD 8.75%·브로드컴 4.76% 하락",
-   "summary": "장 초반 AI 반도체주에 매수세가 몰렸다가 매도세로 돌아서며 AMD가 8.75% 내린 534.06달러에 마감했습니다. 브로드컴은 4.76%, 엔비디아는 2.01% 내렸습니다.",
-   "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-13-221355021.html"
+   "title": "엔비디아, 17일(현지시간) 3분기 실적 발표",
+   "summary": "엔비디아가 이번 주 화요일 장 마감 후 회계 3분기 실적을 발표합니다. 시장 예상 매출은 약 1,090억 달러이며, 시가총액은 10월 초 약 5조 8천억 달러에서 지난 금요일 3조 9천억 달러로 줄었습니다.",
+   "source": "민트(트레이딩뷰)",
+   "url": "https://www.tradingview.com/news/moodys:45cad514d6c8f:0-wall-street-week-ahead-nvidia-earnings-anthropic-ipo-federal-reserve-minutes-retail-sales-top-things-to-watch/"
   },
   {
-   "title": "미국 10월 생산자물가 전월 대비 0.3% 상승… 연간 6.5%",
-   "summary": "10월 생산자물가지수(PPI)는 전월보다 0.3% 올라 시장 예상치(0.4%)를 밑돌았습니다. 다만 1년 전 대비 상승률은 6.5%로 2022년 11월 이후 가장 높았습니다.",
-   "source": "스톡타이탄",
-   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-13-2026"
+   "title": "앤트로픽, 공모가 70~78달러로 이번 주 나스닥 상장 추진",
+   "summary": "앤트로픽이 주당 70~78달러에 8억 2,500만 주를 공모할 계획이며, 티커는 ANT입니다. 올해 상반기 매출은 163억 달러, 순손실은 807억 달러로 공시했습니다.",
+   "source": "ABC뉴스",
+   "url": "https://abc7news.com/story/anthropic-seeks-70-78-share-new-ipo-filing-values-13-trillion/20029820/"
   },
   {
-   "title": "모딘, 삼성전자 인수 협상 보도에 27.95% 급등",
-   "summary": "블룸버그가 삼성전자가 데이터센터 냉각 장비 업체 모딘 인수를 협상 중이라고 보도하면서 모딘 주가가 27.95% 올랐습니다. 삼성전자는 보도 내용을 확인해 줄 수 없다고 밝혔습니다.",
-   "source": "스톡타이탄",
-   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-13-2026"
+   "title": "워시 연준 의장 16일 연설… 12월 금리 인상 가능성 반영",
+   "summary": "케빈 워시 연준 의장이 현지시간 16일 연설에 나섭니다. 고용 지표 호조와 물가 상승으로 시장에는 12월 금리 인상 가능성이 반영되고 있으며, 18일에는 10월 FOMC 의사록이 공개됩니다.",
+   "source": "민트(트레이딩뷰)",
+   "url": "https://www.tradingview.com/news/moodys:45cad514d6c8f:0-wall-street-week-ahead-nvidia-earnings-anthropic-ipo-federal-reserve-minutes-retail-sales-top-things-to-watch/"
   },
   {
-   "title": "시스코, 사상 최대 매출에도 마진 하락에 6.24% 하락",
-   "summary": "시스코는 1분기 매출이 185억 달러로 24% 늘었다고 발표했지만, 매출총이익률이 63.7%로 1년 전(65.5%)보다 낮아지며 주가가 6.24% 내렸습니다.",
+   "title": "이번 주 홈디포·타깃·월마트 실적 잇따라",
+   "summary": "홈디포가 17일, 타깃이 18일, 월마트가 19일(현지시간) 각각 개장 전에 실적을 발표합니다. 17일 오전에는 미국 10월 소매판매 지표도 나옵니다.",
    "source": "스톡타이탄",
-   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-13-2026"
+   "url": "https://www.stocktitan.net/articles/earnings-calendar-week-of-november-16-2026"
   },
   {
-   "title": "세레브라스, 분기 최대 매출·연간 전망 상향에 11.22% 상승",
-   "summary": "AI 반도체 업체 세레브라스는 3분기 매출이 2억1,080만 달러로 55% 늘어 사상 최대를 기록했다고 밝히고 연간 매출 전망을 높였습니다. 주가는 11.22% 올랐습니다.",
-   "source": "스톡타이탄",
-   "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-13-2026"
+   "title": "국제유가 2주 연속 약세… 미국, 이란 봉쇄 유지",
+   "summary": "트럼프 대통령이 이란 전쟁 종식에 합의가 꼭 필요하지 않다고 밝히면서 봉쇄가 이어지고 있습니다. 미국 원유 재고가 예상과 달리 470만 배럴 늘어난 가운데 WTI와 브렌트유는 주간 2%대 하락이 예상됐습니다.",
+   "source": "로이터(인베스팅닷컴)",
+   "url": "https://investing.com/news/commodities-news/oil-prices-set-for-second-weekly-decline-as-trump-to-stay-with-iran-blockade-5024008"
   }
  ],
  "schedule": [
   {
-   "time": "종일",
-   "text": "국내 증시 주말 휴장"
+   "time": "09:00",
+   "text": "국내 증시 개장"
   },
   {
-   "time": "종일",
-   "text": "미국 증시 주말 휴장 (다음 정규장은 11월 16일(월) 23:30 개장)"
+   "time": "미국 개장 전",
+   "text": "바이두·타이슨푸드 3분기 실적 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  },
+  {
+   "time": "시간 미정",
+   "text": "케빈 워시 연준 의장 연설(현지시간 16일)"
   }
  ],
  "kind": "morning"
