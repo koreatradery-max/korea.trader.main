@@ -3,7 +3,7 @@
    - assets/ 정적 파일: 저장본을 먼저 쓰고 뒤에서 갱신.
    - 그 밖의 요청(Firebase, Worker API, 시황 JSON, 외부 위젯)은 건드리지 않는다.
    문제가 생기면 이 파일의 fetch 리스너를 비우고 VERSION 만 올려 배포하면 저장본이 정리된다. */
-var VERSION = 'sp-v38-1';
+var VERSION = 'sp-v38-2';
 self.addEventListener('install', function(e){ self.skipWaiting(); });
 self.addEventListener('activate', function(e){
   e.waitUntil(caches.keys().then(function(keys){ return Promise.all(keys.filter(function(k){ return k !== VERSION; }).map(function(k){ return caches.delete(k); })); }).then(function(){ return self.clients.claim(); }));

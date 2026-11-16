@@ -45,11 +45,12 @@
 </div>
 
 <h2>내 관심 종목</h2>
-<p class="muted" style="margin:0 0 12px">종목 코드를 추가하면 이 기기에 저장되고 시세를 모아 보여 줍니다. 최대 12개.</p>
+<p class="muted" style="margin:0 0 12px">종목 코드를 추가하면 시세를 모아 보여 줍니다. 최대 12개.</p>
 <form id="wf" style="display:flex;gap:10px;flex-wrap:wrap"><label for="wi" class="small muted" style="width:100%">종목 코드 (예: NASDAQ:NVDA, KRX:005930, BINANCE:BTCUSDT)</label><input type="text" id="wi" style="flex:1 1 220px" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">추가</button></form>
 <p class="small" id="wm" aria-live="polite" style="margin:8px 0 0;color:var(--gold)"></p>
 <div id="wl" style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0"></div>
 <div id="wq" class="card" style="padding:0;overflow:hidden;min-height:120px"></div>
+<p class="small muted" id="syncNote" aria-live="polite"></p>
 <p class="small muted">시세는 TradingView 위젯 기준으로 지연될 수 있으며, 투자 판단의 근거로 쓰지 마세요.</p>
 
 </main>
@@ -100,10 +101,12 @@
   }
   document.getElementById('wf').addEventListener('submit',function(e){ e.preventDefault(); var v=document.getElementById('wi').value.trim().toUpperCase().replace(/[^A-Z0-9:._!-]/g,'');
     wm.textContent=''; if(!v) return; if(list.indexOf(v)>=0){ wm.textContent='이미 추가한 종목입니다.'; return; } if(list.length>=12){ wm.textContent='최대 12개까지 추가할 수 있습니다.'; return; }
-    list.push(v); save(); document.getElementById('wi').value=''; draw(); });
-  wl.addEventListener('click',function(e){ var b=e.target.closest('[data-i]'); if(!b) return; list.splice(+b.getAttribute('data-i'),1); save(); draw(); });
+    list.push(v); save(); document.getElementById('wi').value=''; draw(); if(window.spSyncPush) window.spSyncPush(); });
+  wl.addEventListener('click',function(e){ var b=e.target.closest('[data-i]'); if(!b) return; list.splice(+b.getAttribute('data-i'),1); save(); draw(); if(window.spSyncPush) window.spSyncPush(); });
+  window.spSyncHooks={watch:{get:function(){ return list.slice(); },set:function(v){ list=(v||[]).filter(function(x){ return typeof x==='string'&&/^[A-Z0-9:._!-]{1,40}$/.test(x); }).slice(0,12); save(); draw(); }}};
   draw();
 })();
 </script>
+<script type="module" src="assets/sync.js"></script>
 </body>
 </html>

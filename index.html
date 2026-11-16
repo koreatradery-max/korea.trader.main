@@ -2859,6 +2859,7 @@
         <button class="btn-tg" type="button" id="bfLogin">텔레그램으로 로그인</button>
       </div></div>
     </div>
+    <section class="bf-sec" id="voteBox" hidden></section>
     <p class="bf-disc">본 시황은 공개된 자료를 바탕으로 AI가 정리한 정보 제공 목적의 글이며, 매수·매도 추천이나 개인별 투자자문이 아닙니다. 수치는 작성 시점 기준이며 출처의 원문과 다를 수 있어요. 투자 판단과 책임은 투자자 본인에게 있습니다.</p>
   </article>
 </section>
@@ -7756,6 +7757,65 @@ routeHooks.briefing = () => {
   if (!bfCur) bfLoad(); else bfGate();
 };
 authHooks.push(bfGate);
+
+/* ---------- 오늘의 투표 (v38.1) : votes/{날짜_uid} 1인 1표, voteDays/{날짜} 집계 ---------- */
+const voteState = { day: '', mine: null, up: 0, down: 0, busy: false };
+function voteDay(){ return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10); }
+async function voteLoad(){
+  const box = $('#voteBox'); if (!box) return;
+  const day = voteDay(); voteState.day = day;
+  try{
+    const s = await getDoc(doc(db, 'voteDays', day)); const d = s.exists() ? s.data() : {};
+    voteState.up = Number(d.up) || 0; voteState.down = Number(d.down) || 0;
+  } catch(e){ console.warn('voteDays', e); }
+  voteState.mine = null;
+  if (authUser){
+    try{
+      const q = await getDocs(query(collection(db, 'votes'), where('uid', '==', authUser.uid), where('day', '==', day)));
+      if (!q.empty) voteState.mine = q.docs[0].data().pick;
+    } catch(e){ console.warn('votes', e); }
+  }
+  voteRender();
+}
+function voteRender(){
+  const box = $('#voteBox'); if (!box) return;
+  const { mine, up, down, day, busy } = voteState, total = up + down;
+  const pu = total ? Math.round(up / total * 100) : 0, pd = total ? 100 - pu : 0;
+  const md = `${Number(day.slice(5, 7))}월 ${Number(day.slice(8, 10))}일`;
+  let body;
+  if (mine){
+    body = `<div class="vt-bar" role="img" aria-label="오른다 ${pu}퍼센트, 내린다 ${pd}퍼센트"><i class="vt-up" style="width:${pu}%"></i><i class="vt-dn" style="width:${pd}%"></i></div>
+      <div class="vt-legend"><span class="vt-c-up">▲ 오른다 ${pu}% (${up}명)</span><span class="vt-c-dn">▼ 내린다 ${pd}% (${down}명)</span></div>
+      <p class="vt-sub">내 선택: <b>${mine === 'up' ? '▲ 오른다' : '▼ 내린다'}</b> · 내일 아침 시황에서 실제 결과와 비교해 보세요.</p>`;
+  } else if (authUser){
+    body = `<div class="vt-btns"><button type="button" class="vt-btn vt-b-up" data-vote="up"${busy ? ' disabled' : ''}>▲ 오른다</button><button type="button" class="vt-btn vt-b-dn" data-vote="down"${busy ? ' disabled' : ''}>▼ 내린다</button></div>
+      <p class="vt-sub">지금까지 ${total}명 참여 · 하루 한 번, 선택은 바꿀 수 없어요. 투표하면 결과가 보여요.</p>`;
+  } else {
+    body = `<p class="vt-sub">지금까지 ${total}명 참여 · 로그인하면 투표하고 결과를 볼 수 있어요.</p><button type="button" class="btn-tg" data-vote-login>텔레그램으로 로그인</button>`;
+  }
+  box.hidden = false;
+  box.innerHTML = `<h3 class="bf-h">오늘의 투표 · ${md}</h3><p class="vt-q">오늘 밤 나스닥은 어제보다 오를까요, 내릴까요?</p>${body}<p class="vt-note">재미와 학습을 위한 투표이며 투자 권유나 전망 제공이 아니에요.</p>`;
+}
+async function voteCast(pick){
+  if (!authUser || voteState.busy || voteState.mine || !['up', 'down'].includes(pick)) return;
+  voteState.busy = true; voteRender();
+  const day = voteDay();
+  try{
+    const b = writeBatch(db);
+    b.set(doc(db, 'votes', day + '_' + authUser.uid), { uid: authUser.uid, day, pick, at: Date.now() });
+    b.set(doc(db, 'voteDays', day), { [pick]: increment(1) }, { merge: true });
+    await b.commit();
+    voteState.mine = pick; voteState[pick] += 1;
+  } catch(e){ console.warn('vote', e); toast('투표를 저장하지 못했어요. 이미 투표했는지 확인해 주세요.'); }
+  voteState.busy = false;
+  if (!voteState.mine) await voteLoad(); else voteRender();
+}
+$('#voteBox').addEventListener('click', e => {
+  const b = e.target.closest('[data-vote]'); if (b){ voteCast(b.dataset.vote); return; }
+  if (e.target.closest('[data-vote-login]')) openLogin();
+});
+routeHooks.briefing = (prev => () => { if (prev) prev(); voteLoad(); })(routeHooks.briefing);
+authHooks.push(() => { if (currentView === 'briefing') voteLoad(); });
 $('#bfDate').addEventListener('change', e => bfLoad(e.target.value));
 $('#bfTabs').addEventListener('click', e => { const b = e.target.closest('[data-bk]'); if (b && b.dataset.bk !== bfKind) bfLoad(null, b.dataset.bk); });
 $('#bfLogin').addEventListener('click', openLogin);

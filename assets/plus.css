@@ -35,3 +35,18 @@
 }
 /* 모바일 홈: 차트 탭이 왼쪽으로 밀려 잘리던 문제 수정 (v38) */
 @media (max-width:760px){ html body #view-home .hx-tabs{ right:auto; } }
+/* 오늘의 투표 (v38.1) */
+.vt-q{ margin:0 0 12px; font-size:16px; font-weight:600; color:var(--ink); }
+.vt-btns{ display:flex; gap:10px; }
+.vt-btn{ flex:1; min-height:52px; border-radius:12px; font:inherit; font-size:16px; font-weight:700; cursor:pointer; background:transparent; transition:transform .12s ease, background .2s ease; }
+.vt-btn:active{ transform:scale(.97); } .vt-btn:disabled{ opacity:.5; cursor:wait; }
+.vt-b-up{ border:1px solid var(--up); color:var(--up); } .vt-b-up:hover{ background:var(--up-soft); }
+.vt-b-dn{ border:1px solid var(--down); color:var(--down); } .vt-b-dn:hover{ background:var(--down-soft); }
+.vt-bar{ display:flex; height:14px; border-radius:999px; overflow:hidden; background:var(--paper-3); }
+.vt-bar i{ display:block; height:100%; transition:width .6s cubic-bezier(.2,.7,.2,1); } .vt-up{ background:var(--up); } .vt-dn{ background:var(--down); }
+.vt-legend{ display:flex; justify-content:space-between; gap:12px; margin-top:8px; font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; }
+.vt-c-up{ color:var(--up); } .vt-c-dn{ color:var(--down); }
+.vt-sub{ margin:10px 0 0; font-size:13.5px; color:var(--muted); line-height:1.7; } .vt-sub b{ color:var(--ink); }
+.vt-note{ margin:8px 0 0; font-size:12.5px; color:var(--faint); }
+#voteBox .btn-tg{ margin-top:10px; }
+@media (prefers-reduced-motion:reduce){ .vt-bar i, .vt-btn{ transition:none; } }
