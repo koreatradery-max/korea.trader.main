@@ -1,0 +1,98 @@
+{
+ "date": "2026-11-16",
+ "weekday": "월",
+ "generatedAt": "2026-11-16T21:30+09:00",
+ "headline": "엔비디아 실적과 앤트로픽 상장을 앞두고 AI주 약세 속에 나스닥100 선물이 1% 넘게 내리고 있습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,533.25",
+   "chg": "-0.66%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "27,635.50",
+   "chg": "-1.42%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "52,367.00",
+   "chg": "-0.10%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "20.41",
+   "chg": "+5.75%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,335.20원",
+   "chg": "-0.21%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "5.12%",
+   "chg": "-2.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$87.92",
+   "chg": "-0.72%"
+  },
+  {
+   "name": "금",
+   "value": "$3,872.30",
+   "chg": "-0.36%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$64,140",
+   "chg": "-1.85%"
+  }
+ ],
+ "news": [
+  {
+   "title": "엔비디아 실적 발표 앞두고 S&P500·나스닥100 선물 하락",
+   "summary": "화요일(현지시간) 3분기 실적 발표를 앞둔 엔비디아가 프리마켓에서 2.2% 내렸습니다. 지난주 젠슨 황의 CEO 퇴진 이후 2012년 10월 이후 최장 주간 연속 하락을 기록했으며, FT는 황이 복귀를 검토 중이라고 보도했습니다.",
+   "source": "로이터(야후 파이낸스)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-slide-104351968.html"
+  },
+  {
+   "title": "반도체·AI 인프라주 프리마켓 동반 약세",
+   "summary": "인텔·AMD·브로드컴·마이크론이 프리마켓에서 3.5~5% 내렸고, 코어위브(-5.4%)와 네비우스(-5.5%), 델·HP(각 -5.1%)도 하락했습니다. AI 관련 종목 전반에 매도 압력이 이어지고 있습니다.",
+   "source": "로이터(야후 파이낸스)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-slide-104351968.html"
+  },
+  {
+   "title": "앤트로픽, 목요일 상장 예정… 기업가치 약 1.4조 달러 목표",
+   "summary": "앤트로픽이 목요일(현지시간) 상장할 예정이며, 사상 최대 규모 기업공개가 될 수 있다는 평가가 나옵니다. 일부 투자자가 공모 참여를 위해 기존 기술주를 매도할 수 있다는 분석도 있습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-16-dow-sp-500-nasdaq-nvidia-oil-091631084.html"
+  },
+  {
+   "title": "워시 연준 의장 오늘 연설… 시장은 12월 금리 인상 완전 반영",
+   "summary": "케빈 워시 연준 의장이 현지시간 월요일 샌프란시스코에서 연설하고, 베스 해맥 클리블랜드 연은 총재도 발언합니다. 지난주 예상보다 높은 물가 지표 이후 시장은 12월 금리 인상을 완전히 반영하고 있으며, 수요일에는 FOMC 의사록이 공개됩니다.",
+   "source": "로이터(야후 파이낸스)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-slide-104351968.html"
+  },
+  {
+   "title": "호르무즈 해협 선적 회복에 유가 약세… 중동 긴장은 지속",
+   "summary": "호르무즈 해협 선적이 회복되면서 브렌트유가 배럴당 92달러 선으로 내렸습니다. 다만 이란이 일요일 바레인의 미군 헬기 기지를 겨냥했고, 미국은 중동에 세 번째 항공모함을 배치했습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-monday-november-16-dow-sp-500-nasdaq-nvidia-oil-091631084.html"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "22:30",
+   "text": "미국 11월 뉴욕 엠파이어스테이트 제조업지수 발표 (예상 19, 이전 25.5)"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  }
+ ],
+ "kind": "us"
+}
