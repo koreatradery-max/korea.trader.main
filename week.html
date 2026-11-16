@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko" data-root="./">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이번 주 경제 일정 | STOCK PICK!</title>
+<meta name="description" content="이번 주 시황에 실린 실적 발표, 경제지표, 연준 일정을 요일별로 모아 봅니다. 한국 시간 기준.">
+<link rel="canonical" href="https://koreatradery-max.github.io/korea.trader.main/week.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STOCK PICK!">
+<meta property="og:title" content="이번 주 경제 일정 | STOCK PICK!">
+<meta property="og:description" content="이번 주 시황에 실린 실적 발표, 경제지표, 연준 일정을 요일별로 모아 봅니다. 한국 시간 기준.">
+<meta property="og:url" content="https://koreatradery-max.github.io/korea.trader.main/week.html">
+<meta property="og:image" content="https://koreatradery-max.github.io/korea.trader.main/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" type="image/png" href="assets/img/logo-4a0113b7bb.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body>
+<header class="pg-head"><div class="pg-head-in">
+<a class="pg-brand" href="index.html"><img src="assets/img/logo-4a0113b7bb.png" alt="" width="260" height="185">STOCK PICK!</a>
+<nav class="pg-nav" aria-label="메뉴"><a href="index.html">홈</a><a href="index.html#briefing">시황</a><a href="briefing/archive/">지난 시황</a><a href="week.html" aria-current="page">이번 주 일정</a><a href="glossary.html">용어 사전</a><a href="course.html">7일 코스</a><a href="outlook.html">전망과 결과</a><a href="more.html">검색 · 더보기</a></nav>
+</div></header>
+<main class="pg-wrap">
+
+<h1>이번 주 일정</h1>
+<p class="lead">이번 주 시황에 실린 일정을 요일별로 모았습니다. 시간은 한국 시간 기준이며, 시황이 발행될 때마다 채워집니다.</p>
+<div id="wk" class="grid" aria-live="polite"><div class="empty">일정을 불러오는 중입니다.</div></div>
+<p class="small muted" style="margin-top:24px">일정은 주최 측 사정으로 바뀔 수 있습니다. <a href="index.html#tools">경제 캘린더 전체 보기</a></p>
+
+</main>
+<footer class="pg-foot"><div class="pg-foot-in">모든 콘텐츠는 정보 제공과 교육 목적이며 특정 종목·자산의 매수 또는 매도 추천이 아닙니다. 투자의 최종 판단과 책임은 투자자 본인에게 있으며, 투자에는 원금 손실 위험이 있습니다. 고려대학교와 무관한 개인 운영 사이트입니다. · <a href="index.html">STOCK PICK! 홈</a></div></footer>
+<script src="assets/pages.js"></script>
+<script>
+(function(){
+  var box=document.getElementById('wk'), WD=['일','월','화','수','목','금','토'];
+  function ymd(d){ return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Seoul'}));
+  var mon=new Date(now); mon.setDate(now.getDate()-((now.getDay()+6)%7));
+  var days=[]; for(var i=0;i<7;i++){ var d=new Date(mon); d.setDate(mon.getDate()+i); days.push(ymd(d)); }
+  var today=ymd(now);
+  function get(u){ return fetch(u,{cache:'no-cache'}).then(function(r){ return r.ok?r.json():null; }).catch(function(){ return null; }); }
+  Promise.all([get('briefing/index.json'),get('briefing/us-index.json')]).then(function(ix){
+    var jobs=[];
+    days.forEach(function(d){ if(ix[0]&&ix[0].dates.indexOf(d)>=0) jobs.push(get('briefing/'+d+'.json')); if(ix[1]&&ix[1].dates.indexOf(d)>=0) jobs.push(get('briefing/us-'+d+'.json')); });
+    return Promise.all(jobs);
+  }).then(function(docs){
+    var by={}; docs.forEach(function(x){ if(!x||!x.schedule) return; by[x.date]=by[x.date]||[]; x.schedule.forEach(function(s){ var k=s.time+'|'+s.text; if(!by[x.date].some(function(y){return y.k===k;})) by[x.date].push({k:k,time:s.time,text:s.text}); }); });
+    var any=false;
+    var html=days.map(function(d){ var dt=new Date(d+'T00:00:00'); var rows=by[d]||[]; if(rows.length) any=true;
+      rows.sort(function(a,b){ var ta=/^\d/.test(a.time), tb=/^\d/.test(b.time); return ta&&tb?a.time.localeCompare(b.time):(ta?-1:tb?1:0); });
+      return '<section class="card rv"'+(d===today?' style="border-color:#3B4A1E"':'')+'><h3>'+(dt.getMonth()+1)+'월 '+dt.getDate()+'일('+WD[dt.getDay()]+')'+(d===today?' <span class="tag lime">오늘</span>':'')+'</h3>'
+        +(rows.length?'<ul class="list">'+rows.map(function(r){ return '<li class="row"><span class="t">'+spEsc(r.time)+'</span><span>'+spEsc(r.text)+'</span></li>'; }).join('')+'</ul>':'<p class="muted small" style="margin:0">'+(d>today?'시황 발행 후 표시됩니다.':'등록된 일정이 없습니다.')+'</p>')+'</section>'; }).join('');
+    box.innerHTML=html; spReveal(box);
+  }).catch(function(){ box.innerHTML='<div class="empty">일정을 불러오지 못했습니다. 새로 고침해 주세요.</div>'; });
+})();
+</script>
+</body>
+</html>

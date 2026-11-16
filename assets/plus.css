@@ -1,0 +1,37 @@
+/* STOCK PICK! 추가 효과 (기존 디자인 유지, 애니메이션·용어 툴팁·더보기 링크만 더함) */
+.sp-progress{ position:fixed; left:0; top:0; height:2px; width:100%; transform:scaleX(0); transform-origin:0 50%; background:#C6F36B; z-index:60; pointer-events:none; opacity:.9; }
+.foot-more{ display:flex; flex-wrap:wrap; gap:6px 18px; padding:14px 0 4px; margin-top:12px; border-top:1px solid var(--border); font-size:13px; }
+.foot-more b{ color:var(--ink-2); font-weight:600; }
+.foot-more a{ color:var(--muted); text-decoration:none; min-height:28px; display:inline-flex; align-items:center; }
+.foot-more a:hover{ color:var(--ink); text-decoration:underline; }
+.gl-term{ font:inherit; color:inherit; background:none; border:0; padding:0; margin:0; cursor:help; text-decoration:underline dashed rgba(198,243,107,.75) 1px; text-underline-offset:4px; border-radius:0; font-weight:inherit; letter-spacing:inherit; line-height:inherit; text-align:inherit; }
+.gl-term:hover, .gl-term:focus-visible{ color:#C6F36B; outline:none; }
+.gl-pop{ position:fixed; z-index:80; max-width:min(320px, calc(100vw - 24px)); background:#14171B; color:#EEF0F3; border:1px solid #2A2F36; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.6; box-shadow:0 14px 40px rgba(0,0,0,.55); opacity:0; transform:translateY(6px); transition:opacity .16s ease, transform .16s ease; pointer-events:none; }
+.gl-pop.on{ opacity:1; transform:none; pointer-events:auto; }
+.gl-pop b{ display:block; color:#C6F36B; font-size:13px; margin-bottom:2px; }
+.gl-pop a{ display:inline-block; margin-top:6px; font-size:13px; color:#C6F36B; }
+.jm-head{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+.jm-head h2{ margin:0; font-size:17px; }
+.jm-head select{ min-height:40px; padding:0 10px; border-radius:8px; border:1px solid var(--border-strong); background:var(--paper-2); color:var(--ink); font:inherit; font-size:14px; }
+.jm-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; }
+.jm-cell{ background:var(--paper-2); border:1px solid var(--border); border-radius:10px; padding:12px; }
+.jm-cell .k{ font-size:12.5px; color:var(--muted); }
+.jm-cell .v{ font-size:19px; font-weight:700; font-variant-numeric:tabular-nums; margin-top:2px; }
+.jm-note{ margin:12px 0 0; font-size:13.5px; color:var(--ink-2); line-height:1.7; }
+@media (hover:hover) and (pointer:fine){
+  .sp-tilt{ transform-style:preserve-3d; will-change:transform; }
+  .link-chip, .top3-card{ transition:transform .2s ease, border-color .2s ease; }
+  .link-chip:hover, .top3-card:hover{ transform:translateY(-2px); }
+}
+.btn-tg, .tab-btn, .link-chip{ transition:transform .12s ease; }
+.btn-tg:active, .tab-btn:active{ transform:scale(.97); }
+@keyframes spRowIn{ from{ opacity:0; transform:translateX(-8px); } to{ opacity:1; transform:none; } }
+.sp-row-in{ animation:spRowIn .35s ease both; }
+@media (prefers-reduced-motion:reduce){
+  .sp-progress{ display:none; }
+  .gl-pop, .link-chip, .top3-card, .btn-tg, .tab-btn{ transition:none; }
+  .link-chip:hover, .top3-card:hover{ transform:none; }
+  .sp-row-in{ animation:none; }
+}
+/* 모바일 홈: 차트 탭이 왼쪽으로 밀려 잘리던 문제 수정 (v38) */
+@media (max-width:760px){ html body #view-home .hx-tabs{ right:auto; } }

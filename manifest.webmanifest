@@ -1,0 +1,21 @@
+{
+  "name": "STOCK PICK!",
+  "short_name": "STOCK PICK!",
+  "description": "무료 투자 공부 · 매매 기록 플랫폼. 매일 아침·밤 시황과 100불 챌린지.",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08090B",
+  "theme_color": "#08090B",
+  "icons": [
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "오늘 시황", "url": "./#briefing" },
+    { "name": "매매일지", "url": "./#journal" },
+    { "name": "100불 챌린지", "url": "./#challenge" }
+  ]
+}

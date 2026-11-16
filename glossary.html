@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko" data-root="./">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>투자 용어 사전 | STOCK PICK!</title>
+<meta name="description" content="시황에 자주 나오는 금리·지수·경제지표·매매 용어를 초보자도 이해할 수 있게 한두 문장으로 설명합니다.">
+<link rel="canonical" href="https://koreatradery-max.github.io/korea.trader.main/glossary.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STOCK PICK!">
+<meta property="og:title" content="투자 용어 사전 | STOCK PICK!">
+<meta property="og:description" content="시황에 자주 나오는 금리·지수·경제지표·매매 용어를 초보자도 이해할 수 있게 한두 문장으로 설명합니다.">
+<meta property="og:url" content="https://koreatradery-max.github.io/korea.trader.main/glossary.html">
+<meta property="og:image" content="https://koreatradery-max.github.io/korea.trader.main/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" type="image/png" href="assets/img/logo-4a0113b7bb.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body>
+<header class="pg-head"><div class="pg-head-in">
+<a class="pg-brand" href="index.html"><img src="assets/img/logo-4a0113b7bb.png" alt="" width="260" height="185">STOCK PICK!</a>
+<nav class="pg-nav" aria-label="메뉴"><a href="index.html">홈</a><a href="index.html#briefing">시황</a><a href="briefing/archive/">지난 시황</a><a href="week.html">이번 주 일정</a><a href="glossary.html" aria-current="page">용어 사전</a><a href="course.html">7일 코스</a><a href="outlook.html">전망과 결과</a><a href="more.html">검색 · 더보기</a></nav>
+</div></header>
+<main class="pg-wrap">
+
+<h1>투자 용어 사전</h1>
+<p class="lead">시황에 자주 나오는 말을 한두 문장으로 풀었습니다. 시황 본문에서 점선이 그어진 단어를 누르면 같은 설명이 바로 뜹니다.</p>
+<label class="small muted" for="q">용어 찾기</label>
+<input type="search" id="q" placeholder="예: 10년물, bp, VIX" autocomplete="off">
+<div id="cats" style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px"></div>
+<p class="small muted" id="count" aria-live="polite"></p>
+<div id="list" class="grid c2"></div>
+
+</main>
+<footer class="pg-foot"><div class="pg-foot-in">모든 콘텐츠는 정보 제공과 교육 목적이며 특정 종목·자산의 매수 또는 매도 추천이 아닙니다. 투자의 최종 판단과 책임은 투자자 본인에게 있으며, 투자에는 원금 손실 위험이 있습니다. 고려대학교와 무관한 개인 운영 사이트입니다. · <a href="index.html">STOCK PICK! 홈</a></div></footer>
+<script src="assets/pages.js"></script>
+<script>
+(function(){
+  var all=[], cat='';
+  var list=document.getElementById('list'), q=document.getElementById('q'), cats=document.getElementById('cats'), count=document.getElementById('count');
+  function draw(){
+    var k=q.value.trim().toLowerCase();
+    var rows=all.filter(function(x){ return (!cat||x.c===cat) && (!k || (x.t+' '+(x.a||[]).join(' ')+' '+x.d).toLowerCase().indexOf(k)>=0); });
+    count.textContent=rows.length+'개 용어';
+    list.innerHTML=rows.length?rows.map(function(x){ return '<article class="card" id="'+encodeURIComponent(x.t)+'"><span class="tag">'+spEsc(x.c)+'</span><h3 style="margin-top:8px">'+spEsc(x.t)+'</h3><p style="margin:0;color:var(--ink-2)">'+spEsc(x.d)+'</p>'+((x.a&&x.a.length)?'<p class="small muted" style="margin:8px 0 0">같은 말: '+spEsc(x.a.join(', '))+'</p>':'')+'</article>'; }).join(''):'<div class="empty">찾는 용어가 없습니다. 다른 말로 검색해 보세요.</div>';
+  }
+  fetch('assets/data/glossary.json').then(function(r){return r.json();}).then(function(d){
+    all=d.terms.slice().sort(function(a,b){return a.t.localeCompare(b.t,'ko');});
+    var cs=[]; all.forEach(function(x){ if(cs.indexOf(x.c)<0) cs.push(x.c); });
+    cats.innerHTML=['전체'].concat(cs).map(function(c){ return '<button type="button" class="btn ghost" style="min-height:44px;padding:0 14px;font-size:14px" data-c="'+(c==='전체'?'':spEsc(c))+'">'+spEsc(c)+'</button>'; }).join('');
+    cats.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; cat=b.getAttribute('data-c'); Array.prototype.forEach.call(cats.children,function(x){ x.style.borderColor=x===b?'var(--lime)':''; }); draw(); });
+    var h=decodeURIComponent(location.hash.slice(1)); if(h){ q.value=h; }
+    draw();
+  }).catch(function(){ list.innerHTML='<div class="empty">용어를 불러오지 못했습니다. 새로 고침해 주세요.</div>'; });
+  q.addEventListener('input',draw);
+})();
+</script>
+</body>
+</html>

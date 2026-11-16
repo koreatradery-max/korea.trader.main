@@ -31,3 +31,9 @@ dates = [x for x in idx.get('dates', []) if x != d['date']]
 dates.insert(0, d['date'])
 json.dump({'dates': sorted(set(dates), reverse=True)[:365]}, open(idx_path, 'w', encoding='utf-8'), ensure_ascii=False)
 print('OK', d['kind'], d['date'], len(d['news']), 'news')
+# 지난 시황 정적 페이지·sitemap 갱신 (실패해도 시황 발행에는 영향 없음)
+try:
+    import subprocess
+    subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'archive.py')], check=False, timeout=120)
+except Exception as e:
+    print('archive skipped:', e)

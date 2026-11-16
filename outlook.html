@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko" data-root="./">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전망과 실제 결과 | STOCK PICK!</title>
+<meta name="description" content="라이브와 시황에서 말한 관심 구간이 이후 실제로 어떻게 됐는지, 맞은 것과 틀린 것을 모두 공개합니다.">
+<link rel="canonical" href="https://koreatradery-max.github.io/korea.trader.main/outlook.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STOCK PICK!">
+<meta property="og:title" content="전망과 실제 결과 | STOCK PICK!">
+<meta property="og:description" content="라이브와 시황에서 말한 관심 구간이 이후 실제로 어떻게 됐는지, 맞은 것과 틀린 것을 모두 공개합니다.">
+<meta property="og:url" content="https://koreatradery-max.github.io/korea.trader.main/outlook.html">
+<meta property="og:image" content="https://koreatradery-max.github.io/korea.trader.main/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" type="image/png" href="assets/img/logo-4a0113b7bb.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body>
+<header class="pg-head"><div class="pg-head-in">
+<a class="pg-brand" href="index.html"><img src="assets/img/logo-4a0113b7bb.png" alt="" width="260" height="185">STOCK PICK!</a>
+<nav class="pg-nav" aria-label="메뉴"><a href="index.html">홈</a><a href="index.html#briefing">시황</a><a href="briefing/archive/">지난 시황</a><a href="week.html">이번 주 일정</a><a href="glossary.html">용어 사전</a><a href="course.html">7일 코스</a><a href="outlook.html" aria-current="page">전망과 결과</a><a href="more.html">검색 · 더보기</a></nav>
+</div></header>
+<main class="pg-wrap">
+
+<h1>전망과 실제 결과</h1>
+<p class="lead">라이브와 시황에서 말한 내용이 이후 어떻게 됐는지 기록합니다. 맞은 것만 고르지 않고 틀린 것도 그대로 적습니다.</p>
+<div id="sum" class="grid c4" style="margin-bottom:20px"></div>
+<div id="ol" class="grid"></div>
+<p class="small muted" style="margin-top:24px">과거의 전망과 결과는 미래의 수익을 보장하지 않으며, 이 기록은 매수·매도 추천이 아닙니다.</p>
+
+</main>
+<footer class="pg-foot"><div class="pg-foot-in">모든 콘텐츠는 정보 제공과 교육 목적이며 특정 종목·자산의 매수 또는 매도 추천이 아닙니다. 투자의 최종 판단과 책임은 투자자 본인에게 있으며, 투자에는 원금 손실 위험이 있습니다. 고려대학교와 무관한 개인 운영 사이트입니다. · <a href="index.html">STOCK PICK! 홈</a></div></footer>
+<script src="assets/pages.js"></script>
+<script>
+(function(){
+  var box=document.getElementById('ol'), sum=document.getElementById('sum');
+  fetch('assets/data/outlook.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(d){
+    var it=(d.items||[]).slice().sort(function(a,b){ return String(b.date).localeCompare(String(a.date)); });
+    if(!it.length){ box.innerHTML='<div class="empty">아직 등록된 기록이 없습니다. 첫 기록이 올라오면 여기에 표시됩니다.</div>'; return; }
+    var hit=it.filter(function(x){return x.result==='적중';}).length, miss=it.filter(function(x){return x.result==='빗나감';}).length, open=it.length-hit-miss;
+    sum.innerHTML=[['전체',it.length],['적중',hit],['빗나감',miss],['진행 중',open]].map(function(x){ return '<div class="card stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'건</div></div>'; }).join('');
+    box.innerHTML=it.map(function(x){ var cls=x.result==='적중'?'lime':''; return '<article class="card rv"><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="muted small">'+spEsc(x.date)+' · '+spEsc(x.source||'')+'</span><span class="tag '+cls+'">'+spEsc(x.result||'진행 중')+'</span></div><h3 style="margin-top:8px">'+spEsc(x.call)+'</h3>'+(x.outcome?'<p style="margin:0;color:var(--ink-2)">'+spEsc(x.outcome)+'</p>':'')+'</article>'; }).join('');
+    spReveal(box);
+  }).catch(function(){ box.innerHTML='<div class="empty">기록을 불러오지 못했습니다. 새로 고침해 주세요.</div>'; });
+})();
+</script>
+</body>
+</html>

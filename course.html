@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko" data-root="./">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주식이 처음이라면 7일 코스 | STOCK PICK!</title>
+<meta name="description" content="지수 읽는 법부터 손절 기준, ETF 구조, 매매일지까지. 하루 5분씩 7일 동안 따라 하는 무료 투자 입문 코스입니다.">
+<link rel="canonical" href="https://koreatradery-max.github.io/korea.trader.main/course.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STOCK PICK!">
+<meta property="og:title" content="주식이 처음이라면 7일 코스 | STOCK PICK!">
+<meta property="og:description" content="지수 읽는 법부터 손절 기준, ETF 구조, 매매일지까지. 하루 5분씩 7일 동안 따라 하는 무료 투자 입문 코스입니다.">
+<meta property="og:url" content="https://koreatradery-max.github.io/korea.trader.main/course.html">
+<meta property="og:image" content="https://koreatradery-max.github.io/korea.trader.main/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" type="image/png" href="assets/img/logo-4a0113b7bb.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body>
+<header class="pg-head"><div class="pg-head-in">
+<a class="pg-brand" href="index.html"><img src="assets/img/logo-4a0113b7bb.png" alt="" width="260" height="185">STOCK PICK!</a>
+<nav class="pg-nav" aria-label="메뉴"><a href="index.html">홈</a><a href="index.html#briefing">시황</a><a href="briefing/archive/">지난 시황</a><a href="week.html">이번 주 일정</a><a href="glossary.html">용어 사전</a><a href="course.html" aria-current="page">7일 코스</a><a href="outlook.html">전망과 결과</a><a href="more.html">검색 · 더보기</a></nav>
+</div></header>
+<main class="pg-wrap">
+
+<h1>주식이 처음이라면 7일 코스</h1>
+<p class="lead">하루 5분, 7일이면 아침 시황을 혼자 읽을 수 있습니다. 진도는 이 기기에 저장됩니다.</p>
+<div class="card" style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span>진행</span><b id="pgText">0 / 7일</b></div><progress id="pg" max="7" value="0" aria-label="코스 진행률"></progress></div>
+<div id="days" class="grid"></div>
+<p class="small muted" style="margin-top:24px">이 코스는 일반적인 투자 지식을 소개하는 교육 자료이며, 특정 종목이나 상품의 매수·매도를 권유하지 않습니다.</p>
+
+</main>
+<footer class="pg-foot"><div class="pg-foot-in">모든 콘텐츠는 정보 제공과 교육 목적이며 특정 종목·자산의 매수 또는 매도 추천이 아닙니다. 투자의 최종 판단과 책임은 투자자 본인에게 있으며, 투자에는 원금 손실 위험이 있습니다. 고려대학교와 무관한 개인 운영 사이트입니다. · <a href="index.html">STOCK PICK! 홈</a></div></footer>
+<script src="assets/pages.js"></script>
+<script>
+(function(){
+  var KEY='sp_course_done', done={};
+  try{ done=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){}
+  var box=document.getElementById('days');
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(done)); }catch(e){} }
+  function prog(n){ var c=0; for(var i=1;i<=n;i++) if(done[i]) c++; document.getElementById('pg').value=c; document.getElementById('pgText').textContent=c+' / '+n+'일'; }
+  fetch('assets/data/course.json').then(function(r){return r.json();}).then(function(d){
+    var first=0; d.days.forEach(function(x){ if(!first && !done[x.n]) first=x.n; });
+    box.innerHTML=d.days.map(function(x){
+      return '<details class="card rv" id="day'+x.n+'"'+(x.n===first?' open':'')+'><summary>'+x.n+'일차 · '+spEsc(x.title)+' <span class="done-mark" data-mark="'+x.n+'">'+(done[x.n]?'완료':'')+'</span></summary>'
+        +'<p class="muted" style="margin:0 0 10px">목표: '+spEsc(x.goal)+'</p>'
+        +x.body.map(function(p){ return '<p style="margin:0 0 12px;color:var(--ink-2)">'+spEsc(p)+'</p>'; }).join('')
+        +'<div class="card" style="background:var(--paper-2);margin:6px 0 14px"><b>오늘 할 일</b><p style="margin:4px 0 0">'+spEsc(x.todo)+'</p></div>'
+        +'<p class="small muted" style="margin:0 0 14px">관련 용어: '+x.terms.map(function(t){ return '<a href="glossary.html#'+encodeURIComponent(t)+'">'+spEsc(t)+'</a>'; }).join(' · ')+'</p>'
+        +'<div style="display:flex;flex-wrap:wrap;gap:10px"><button type="button" class="btn" data-done="'+x.n+'">'+(done[x.n]?'완료 취소':'오늘 분량 완료')+'</button><a class="btn ghost" href="'+spEsc(x.link.href)+'">'+spEsc(x.link.text)+'</a></div></details>';
+    }).join('');
+    prog(d.days.length); spReveal(box);
+    box.addEventListener('click',function(e){ var b=e.target.closest('[data-done]'); if(!b) return; var n=+b.getAttribute('data-done'); done[n]=!done[n]; if(!done[n]) delete done[n]; save();
+      b.textContent=done[n]?'완료 취소':'오늘 분량 완료'; box.querySelector('[data-mark="'+n+'"]').textContent=done[n]?'완료':''; prog(d.days.length);
+      if(done[n]){ var nx=document.getElementById('day'+(n+1)); if(nx){ nx.open=true; } } });
+  }).catch(function(){ box.innerHTML='<div class="empty">코스를 불러오지 못했습니다. 새로 고침해 주세요.</div>'; });
+})();
+</script>
+</body>
+</html>

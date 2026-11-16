@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko" data-root="./">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>검색 · 더보기 | STOCK PICK!</title>
+<meta name="description" content="시황, 용어, 7일 코스를 한 번에 검색하고 내 관심 종목을 모아 봅니다.">
+<link rel="canonical" href="https://koreatradery-max.github.io/korea.trader.main/more.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STOCK PICK!">
+<meta property="og:title" content="검색 · 더보기 | STOCK PICK!">
+<meta property="og:description" content="시황, 용어, 7일 코스를 한 번에 검색하고 내 관심 종목을 모아 봅니다.">
+<meta property="og:url" content="https://koreatradery-max.github.io/korea.trader.main/more.html">
+<meta property="og:image" content="https://koreatradery-max.github.io/korea.trader.main/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" type="image/png" href="assets/img/logo-4a0113b7bb.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body>
+<header class="pg-head"><div class="pg-head-in">
+<a class="pg-brand" href="index.html"><img src="assets/img/logo-4a0113b7bb.png" alt="" width="260" height="185">STOCK PICK!</a>
+<nav class="pg-nav" aria-label="메뉴"><a href="index.html">홈</a><a href="index.html#briefing">시황</a><a href="briefing/archive/">지난 시황</a><a href="week.html">이번 주 일정</a><a href="glossary.html">용어 사전</a><a href="course.html">7일 코스</a><a href="outlook.html">전망과 결과</a><a href="more.html" aria-current="page">검색 · 더보기</a></nav>
+</div></header>
+<main class="pg-wrap">
+
+<h1>검색 · 더보기</h1>
+<label class="small muted" for="sq">시황 · 용어 · 코스 통합 검색</label>
+<input type="search" id="sq" placeholder="예: 엔비디아, 금리, 손절" autocomplete="off">
+<p class="small muted" id="sc" aria-live="polite" style="margin:8px 0 0"></p>
+<div id="sr" class="grid" style="margin-top:12px"></div>
+
+<h2>바로 가기</h2>
+<div class="grid c2">
+<a class="card link-card rv" href="briefing/archive/"><h3>지난 시황</h3><div class="d">날짜별 아침 · 미국장 시황</div></a>
+<a class="card link-card rv" href="week.html"><h3>이번 주 일정</h3><div class="d">요일별 실적 · 지표 · 연준 일정</div></a>
+<a class="card link-card rv" href="glossary.html"><h3>용어 사전</h3><div class="d">시황에 나오는 말 45개</div></a>
+<a class="card link-card rv" href="course.html"><h3>7일 코스</h3><div class="d">주식이 처음인 분을 위한 입문</div></a>
+<a class="card link-card rv" href="outlook.html"><h3>전망과 결과</h3><div class="d">말한 것과 실제를 함께 기록</div></a>
+<a class="card link-card rv" href="index.html#tools"><h3>계산기 · 도구</h3><div class="d">수익 · 손절 · 물타기 계산</div></a>
+</div>
+
+<h2>내 관심 종목</h2>
+<p class="muted" style="margin:0 0 12px">종목 코드를 추가하면 이 기기에 저장되고 시세를 모아 보여 줍니다. 최대 12개.</p>
+<form id="wf" style="display:flex;gap:10px;flex-wrap:wrap"><label for="wi" class="small muted" style="width:100%">종목 코드 (예: NASDAQ:NVDA, KRX:005930, BINANCE:BTCUSDT)</label><input type="text" id="wi" style="flex:1 1 220px" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">추가</button></form>
+<p class="small" id="wm" aria-live="polite" style="margin:8px 0 0;color:var(--gold)"></p>
+<div id="wl" style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0"></div>
+<div id="wq" class="card" style="padding:0;overflow:hidden;min-height:120px"></div>
+<p class="small muted">시세는 TradingView 위젯 기준으로 지연될 수 있으며, 투자 판단의 근거로 쓰지 마세요.</p>
+
+</main>
+<footer class="pg-foot"><div class="pg-foot-in">모든 콘텐츠는 정보 제공과 교육 목적이며 특정 종목·자산의 매수 또는 매도 추천이 아닙니다. 투자의 최종 판단과 책임은 투자자 본인에게 있으며, 투자에는 원금 손실 위험이 있습니다. 고려대학교와 무관한 개인 운영 사이트입니다. · <a href="index.html">STOCK PICK! 홈</a></div></footer>
+<script src="assets/pages.js"></script>
+<script>
+(function(){
+  /* ---- 통합 검색 ---- */
+  var idx=[], sq=document.getElementById('sq'), sr=document.getElementById('sr'), sc=document.getElementById('sc'), ready=false;
+  function get(u){ return fetch(u).then(function(r){ return r.ok?r.json():null; }).catch(function(){ return null; }); }
+  function load(){
+    if(ready) return Promise.resolve(); ready=true;
+    return Promise.all([get('assets/data/glossary.json'),get('assets/data/course.json'),get('briefing/index.json'),get('briefing/us-index.json')]).then(function(r){
+      if(r[0]) r[0].terms.forEach(function(x){ idx.push({k:'용어',t:x.t,d:x.d,s:(x.t+' '+(x.a||[]).join(' ')+' '+x.d).toLowerCase(),u:'glossary.html#'+encodeURIComponent(x.t)}); });
+      if(r[1]) r[1].days.forEach(function(x){ idx.push({k:'7일 코스',t:x.n+'일차 · '+x.title,d:x.goal,s:(x.title+' '+x.goal+' '+x.body.join(' ')).toLowerCase(),u:'course.html#day'+x.n}); });
+      var jobs=[];
+      if(r[2]) r[2].dates.slice(0,60).forEach(function(d){ jobs.push(get('briefing/'+d+'.json').then(function(x){ if(x) idx.push({k:'아침 시황',t:x.date+'('+x.weekday+') 아침 시황',d:x.headline,s:(x.headline+' '+x.date).toLowerCase(),u:'briefing/archive/'+x.date+'.html',o:x.date}); })); });
+      if(r[3]) r[3].dates.slice(0,60).forEach(function(d){ jobs.push(get('briefing/us-'+d+'.json').then(function(x){ if(x) idx.push({k:'미국장 시황',t:x.date+'('+x.weekday+') 미국장 시황',d:x.headline,s:(x.headline+' '+x.date).toLowerCase(),u:'briefing/archive/us-'+x.date+'.html',o:x.date}); })); });
+      return Promise.all(jobs);
+    });
+  }
+  var timer=null;
+  function run(){
+    var k=sq.value.trim().toLowerCase(); if(!k){ sr.innerHTML=''; sc.textContent=''; return; }
+    load().then(function(){
+      var ws=k.split(/\s+/);
+      var rows=idx.filter(function(x){ return ws.every(function(w){ return x.s.indexOf(w)>=0; }); }).sort(function(a,b){ return String(b.o||'').localeCompare(String(a.o||'')); }).slice(0,40);
+      sc.textContent=rows.length?rows.length+'건':'결과가 없습니다. 다른 단어로 찾아보세요.';
+      sr.innerHTML=rows.map(function(x){ return '<a class="card link-card" href="'+x.u+'"><span class="tag">'+x.k+'</span><h3 style="margin-top:8px">'+spEsc(x.t)+'</h3><div class="d">'+spEsc(x.d)+'</div></a>'; }).join('');
+    });
+  }
+  sq.addEventListener('input',function(){ clearTimeout(timer); timer=setTimeout(run,160); });
+  var h=decodeURIComponent(location.hash.slice(1)); if(h.indexOf('q=')===0){ sq.value=h.slice(2); run(); }
+
+  /* ---- 내 관심 종목 (이 기기에만 저장) ---- */
+  var KEY='sp_watch', list=[];
+  try{ list=JSON.parse(localStorage.getItem(KEY)||'[]')||[]; }catch(e){}
+  var wl=document.getElementById('wl'), wq=document.getElementById('wq'), wm=document.getElementById('wm');
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(list)); }catch(e){} }
+  function draw(){
+    wl.innerHTML=list.map(function(s,i){ return '<button type="button" class="btn ghost" style="min-height:44px;padding:0 12px;font-size:14px" data-i="'+i+'" aria-label="'+spEsc(s)+' 삭제">'+spEsc(s)+' ✕</button>'; }).join('');
+    wq.innerHTML='';
+    if(!list.length){ wq.innerHTML='<div class="empty" style="border:0">추가한 종목이 없습니다.</div>'; return; }
+    var c=document.createElement('div'); c.className='tradingview-widget-container'; c.innerHTML='<div class="tradingview-widget-container__widget"></div>';
+    var s=document.createElement('script'); s.src='https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js'; s.async=true;
+    s.text=JSON.stringify({width:'100%',height:Math.min(620,110+list.length*46),symbolsGroups:[{name:'내 관심 종목',symbols:list.map(function(x){return {name:x};})}],showSymbolLogo:true,isTransparent:true,colorTheme:'dark',locale:'kr'});
+    c.appendChild(s); wq.appendChild(c);
+  }
+  document.getElementById('wf').addEventListener('submit',function(e){ e.preventDefault(); var v=document.getElementById('wi').value.trim().toUpperCase().replace(/[^A-Z0-9:._!-]/g,'');
+    wm.textContent=''; if(!v) return; if(list.indexOf(v)>=0){ wm.textContent='이미 추가한 종목입니다.'; return; } if(list.length>=12){ wm.textContent='최대 12개까지 추가할 수 있습니다.'; return; }
+    list.push(v); save(); document.getElementById('wi').value=''; draw(); });
+  wl.addEventListener('click',function(e){ var b=e.target.closest('[data-i]'); if(!b) return; list.splice(+b.getAttribute('data-i'),1); save(); draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>
