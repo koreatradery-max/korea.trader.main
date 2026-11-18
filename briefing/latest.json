@@ -1,101 +1,97 @@
 {
- "date": "2026-11-18",
- "weekday": "수",
- "generatedAt": "2026-11-18T08:15+09:00",
- "headline": "뉴욕증시는 엔비디아 실적 발표를 앞두고 다우가 1.64% 내리는 등 하락했고, 엔비디아는 장 마감 후 예상을 웃도는 실적을 발표했습니다.",
+ "date": "2026-11-19",
+ "weekday": "목",
+ "generatedAt": "2026-11-19T08:15+09:00",
+ "headline": "뉴욕증시는 헬스케어주 급락에 다우가 1.11% 내렸지만, 반도체주 강세로 나스닥은 0.42% 올랐습니다.",
  "us": [
   {
    "name": "S&P 500",
-   "value": "7,340.53",
-   "chg": "-1.03%"
+   "value": "7,323.63",
+   "chg": "-0.23%"
   },
   {
    "name": "나스닥",
-   "value": "24,328.38",
-   "chg": "-0.74%"
+   "value": "24,429.89",
+   "chg": "+0.42%"
   },
   {
    "name": "다우",
-   "value": "50,759.42",
-   "chg": "-1.64%"
+   "value": "50,198.17",
+   "chg": "-1.11%"
   },
   {
    "name": "필라델피아 반도체",
-   "value": "9,642.88",
-   "chg": "+0.34%"
+   "value": "9,652.80",
+   "chg": "+0.10%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,335.50원",
-   "chg": "-0.07%"
+   "value": "1,334.00원",
+   "chg": "-0.11%"
   },
   {
    "name": "미 10년물",
-   "value": "5.11%",
-   "chg": "-1.2bp"
+   "value": "5.07%",
+   "chg": "-3.3bp"
   },
   {
    "name": "WTI",
-   "value": "$86.01",
+   "value": "$83.26",
    "chg": "0.00%"
   },
   {
    "name": "금",
-   "value": "$3,864.20",
+   "value": "$3,741.90",
    "chg": "0.00%"
   },
   {
    "name": "비트코인",
-   "value": "$64,847",
-   "chg": "-0.16%"
+   "value": "$62,370",
+   "chg": "-4.06%"
   }
  ],
  "news": [
   {
-   "title": "뉴욕증시, 엔비디아 실적 앞두고 일제히 하락",
-   "summary": "17일(현지시간) 다우는 1.64%, S&P 500은 1.03%, 나스닥은 0.74% 내렸습니다. 젠슨 황 전 CEO 사임 후 첫 엔비디아 실적 발표를 앞두고 AI 관련주를 중심으로 매도가 이어졌고, 변동성지수(VIX)는 장중 13% 넘게 올랐습니다.",
+   "title": "뉴욕증시 혼조 마감, 다우 1.11% 하락·나스닥 0.42% 상승",
+   "summary": "18일(현지시간) 다우는 561포인트 내렸고 S&P 500은 0.23% 하락했으며, 나스닥은 0.42% 올랐습니다. 미 보건당국(CMS)이 보험사 감사를 늘리는 규칙안을 내놓자 유나이티드헬스와 휴매나가 각각 6% 내리며 다우를 끌어내렸습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-retail-sales-143848454.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
   },
   {
-   "title": "엔비디아 3분기 매출 1,158억 달러, 시장 예상 웃돌아",
-   "summary": "엔비디아는 3분기 조정 주당순이익 2.68달러, 매출 1,158억 달러를 발표해 시장 예상(2.47달러, 약 1,089억 달러)을 넘었습니다. 4분기 매출 가이던스는 1,300억 달러(±3%)로 제시했고, 주가는 시간외거래에서 약 2% 올랐습니다.",
-   "source": "인베스팅닷컴",
-   "url": "https://www.investing.com/news/stock-market-news/afterhours-movers-nvda-crwv-nbis-aaoi-sls-432SI-5034129"
+   "title": "엔비디아, 호실적에도 2.89% 하락하며 5거래일 연속 약세",
+   "summary": "엔비디아는 매출이 전년 대비 103% 늘어난 실적을 발표한 뒤 장 초반 2.7%까지 올랐지만, 상승분을 반납하고 2.89% 내린 채 마감했습니다. 반면 AMD는 5.31%, 브로드컴은 3.65% 올랐습니다.",
+   "source": "트레이딩키",
+   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262311775-dow-falls-nasdaq-rise-nvidia-earnings-anthropic-ipo-fed-minutes-tradingkey"
   },
   {
-   "title": "미국 10월 소매판매 0.2% 증가, 주택건설업체 심리는 2012년 이후 최저",
-   "summary": "미국 10월 소매판매는 전월 대비 0.2% 늘어 시장 예상을 웃돌았습니다. 반면 11월 NAHB 주택시장지수는 4포인트 내린 25로 2012년 4월 이후 가장 낮았습니다.",
+   "title": "10월 FOMC 의사록, 대부분 위원 추가 금리 인상 가능성 언급",
+   "summary": "공개된 의사록에 따르면 거의 모든 참석자가 물가를 2%로 되돌리기 위해 추가 인상이 필요할 수 있다고 봤고, 일부는 25bp를 넘는 인상도 거론했습니다. 월러 연준 이사는 12월 회의에서 50bp 인상을 검토해야 한다는 의견을 밝혔습니다.",
+   "source": "트레이딩키",
+   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262311775-dow-falls-nasdaq-rise-nvidia-earnings-anthropic-ipo-fed-minutes-tradingkey"
+  },
+  {
+   "title": "앤트로픽 IPO 공모가 주당 83달러로 확정 보도, 오늘 나스닥 상장",
+   "summary": "블룸버그 보도에 따르면 앤트로픽은 공모가를 희망 범위(70~78달러)보다 높은 주당 83달러로 정하고 공모 규모도 늘렸습니다. 19일(현지시간)부터 나스닥에서 티커 'ANT'로 거래될 예정입니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-retail-sales-143848454.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
   },
   {
-   "title": "코어위브·네비우스 시간외 상승, 어플라이드 옵토는 증자 발표에 하락",
-   "summary": "엔비디아 실적 발표 후 코어위브는 5%, 네비우스는 4% 시간외에서 올랐습니다. 어플라이드 옵토일렉트로닉스는 최대 5억 5천만 달러 규모의 주식 발행 계획을 밝히며 시간외에서 5~8% 내렸습니다.",
-   "source": "인베스팅닷컴",
-   "url": "https://www.investing.com/news/stock-market-news/afterhours-movers-nvda-crwv-nbis-aaoi-sls-432SI-5034129"
-  },
-  {
-   "title": "디즈니·홈디포 실적 시장 예상 상회",
-   "summary": "디즈니는 조정 주당순이익 1.77달러로 예상치 1.68달러를 넘었습니다. 홈디포도 매출 434억 달러로 예상치를 웃돌았고, 리처드 맥페일이 차기 CEO로 선임됐습니다.",
+   "title": "타깃 3분기 실적 시장 예상 상회",
+   "summary": "타깃은 3분기 매출이 7.1% 늘어난 271억 달러, 주당순이익 2.65달러로 시장 예상(265억 달러, 2.08달러)을 웃돌았습니다. 주당순이익에는 관세 환급에 따른 0.50달러의 효과가 포함됐습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-retail-sales-143848454.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
   }
  ],
  "schedule": [
-  {
-   "time": "장 전",
-   "text": "미국 타깃·로우스·TJX 실적 발표 (미국 장 시작 전)"
-  },
   {
    "time": "23:30",
    "text": "미국 뉴욕증시 정규장 개장"
   },
   {
-   "time": "장 후",
-   "text": "팰로앨토 네트웍스 실적 발표 (미국 장 마감 후, 19일 새벽)"
+   "time": "장 중",
+   "text": "앤트로픽 나스닥 상장 첫 거래 (티커 ANT)"
   }
  ],
  "kind": "morning"

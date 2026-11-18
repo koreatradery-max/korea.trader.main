@@ -1,0 +1,98 @@
+{
+ "date": "2026-11-19",
+ "weekday": "목",
+ "generatedAt": "2026-11-19T08:15+09:00",
+ "headline": "뉴욕증시는 헬스케어주 급락에 다우가 1.11% 내렸지만, 반도체주 강세로 나스닥은 0.42% 올랐습니다.",
+ "us": [
+  {
+   "name": "S&P 500",
+   "value": "7,323.63",
+   "chg": "-0.23%"
+  },
+  {
+   "name": "나스닥",
+   "value": "24,429.89",
+   "chg": "+0.42%"
+  },
+  {
+   "name": "다우",
+   "value": "50,198.17",
+   "chg": "-1.11%"
+  },
+  {
+   "name": "필라델피아 반도체",
+   "value": "9,652.80",
+   "chg": "+0.10%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,334.00원",
+   "chg": "-0.11%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "5.07%",
+   "chg": "-3.3bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$83.26",
+   "chg": "0.00%"
+  },
+  {
+   "name": "금",
+   "value": "$3,741.90",
+   "chg": "0.00%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$62,370",
+   "chg": "-4.06%"
+  }
+ ],
+ "news": [
+  {
+   "title": "뉴욕증시 혼조 마감, 다우 1.11% 하락·나스닥 0.42% 상승",
+   "summary": "18일(현지시간) 다우는 561포인트 내렸고 S&P 500은 0.23% 하락했으며, 나스닥은 0.42% 올랐습니다. 미 보건당국(CMS)이 보험사 감사를 늘리는 규칙안을 내놓자 유나이티드헬스와 휴매나가 각각 6% 내리며 다우를 끌어내렸습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
+  },
+  {
+   "title": "엔비디아, 호실적에도 2.89% 하락하며 5거래일 연속 약세",
+   "summary": "엔비디아는 매출이 전년 대비 103% 늘어난 실적을 발표한 뒤 장 초반 2.7%까지 올랐지만, 상승분을 반납하고 2.89% 내린 채 마감했습니다. 반면 AMD는 5.31%, 브로드컴은 3.65% 올랐습니다.",
+   "source": "트레이딩키",
+   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262311775-dow-falls-nasdaq-rise-nvidia-earnings-anthropic-ipo-fed-minutes-tradingkey"
+  },
+  {
+   "title": "10월 FOMC 의사록, 대부분 위원 추가 금리 인상 가능성 언급",
+   "summary": "공개된 의사록에 따르면 거의 모든 참석자가 물가를 2%로 되돌리기 위해 추가 인상이 필요할 수 있다고 봤고, 일부는 25bp를 넘는 인상도 거론했습니다. 월러 연준 이사는 12월 회의에서 50bp 인상을 검토해야 한다는 의견을 밝혔습니다.",
+   "source": "트레이딩키",
+   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262311775-dow-falls-nasdaq-rise-nvidia-earnings-anthropic-ipo-fed-minutes-tradingkey"
+  },
+  {
+   "title": "앤트로픽 IPO 공모가 주당 83달러로 확정 보도, 오늘 나스닥 상장",
+   "summary": "블룸버그 보도에 따르면 앤트로픽은 공모가를 희망 범위(70~78달러)보다 높은 주당 83달러로 정하고 공모 규모도 늘렸습니다. 19일(현지시간)부터 나스닥에서 티커 'ANT'로 거래될 예정입니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
+  },
+  {
+   "title": "타깃 3분기 실적 시장 예상 상회",
+   "summary": "타깃은 3분기 매출이 7.1% 늘어난 271억 달러, 주당순이익 2.65달러로 시장 예상(265억 달러, 2.08달러)을 웃돌았습니다. 주당순이익에는 관세 환급에 따른 0.50달러의 효과가 포함됐습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "23:30",
+   "text": "미국 뉴욕증시 정규장 개장"
+  },
+  {
+   "time": "장 중",
+   "text": "앤트로픽 나스닥 상장 첫 거래 (티커 ANT)"
+  }
+ ],
+ "kind": "morning"
+}
