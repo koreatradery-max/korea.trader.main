@@ -1,109 +1,105 @@
 {
- "date": "2026-11-17",
- "weekday": "화",
- "generatedAt": "2026-11-17T21:30+09:00",
- "headline": "엔비디아 실적 발표와 소매판매 지표를 앞두고 다우 선물은 내리고 나스닥100 선물은 소폭 오르고 있습니다",
+ "date": "2026-11-18",
+ "weekday": "수",
+ "generatedAt": "2026-11-18T21:25+09:00",
+ "headline": "엔비디아 호실적과 앤트로픽 IPO 기대에 나스닥100 선물이 오르며 이틀 하락 뒤 반등을 시도하고 있습니다",
  "us": [
   {
    "name": "S&P 500 선물",
-   "value": "7,440.75",
-   "chg": "+0.02%"
+   "value": "7,382.00",
+   "chg": "+0.31%"
   },
   {
    "name": "나스닥100 선물",
-   "value": "27,390.75",
-   "chg": "+0.39%"
+   "value": "27,283.00",
+   "chg": "+0.77%"
   },
   {
    "name": "다우 선물",
-   "value": "51,431.00",
-   "chg": "-0.46%"
+   "value": "50,810.00",
+   "chg": "-0.01%"
   },
   {
    "name": "VIX(전일)",
-   "value": "22.52",
-   "chg": "-1.70%"
+   "value": "24.27",
+   "chg": "-4.67%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,336.90원",
-   "chg": "+0.03%"
+   "value": "1,332.10원",
+   "chg": "-0.25%"
   },
   {
    "name": "미 10년물",
-   "value": "5.12%",
-   "chg": "-0.4bp"
+   "value": "5.11%",
+   "chg": "+0.2bp"
   },
   {
    "name": "WTI",
-   "value": "$86.27",
-   "chg": "+0.64%"
+   "value": "$85.10",
+   "chg": "-1.06%"
   },
   {
    "name": "금",
-   "value": "$3,869.90",
-   "chg": "+0.44%"
+   "value": "$3,772.80",
+   "chg": "-2.37%"
   },
   {
    "name": "비트코인",
-   "value": "$64,954",
-   "chg": "+0.01%"
+   "value": "$64,238",
+   "chg": "-1.19%"
   }
  ],
  "news": [
   {
-   "title": "엔비디아, 오늘 장 마감 후 젠슨 황 퇴진 이후 첫 실적 발표",
-   "summary": "엔비디아가 오늘(현지시간) 장 마감 후 3분기 실적을 발표하며, 지난주 사임한 젠슨 황 대신 콜레트 크레스 임시 CEO가 컨퍼런스콜에 나섭니다. 엔비디아 주가는 월요일 4% 넘게 내렸고 프리마켓에서도 약세를 보였습니다.",
+   "title": "엔비디아 3분기 매출 1,158억 달러로 예상 상회",
+   "summary": "엔비디아의 3분기 매출은 전년 대비 103% 늘어난 1,158억 달러, 주당순이익은 2.68달러로 시장 예상을 웃돌았습니다. 4일 연속 하락했던 주가는 프리마켓에서 3% 가까이 올랐고, 이사회는 사임한 젠슨 황을 복귀시키지 않겠다고 밝혔습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-091546152.html"
+   "url": "https://finance.yahoo.com/markets/stocks/articles/futures-climb-nvidia-earnings-boost-101949738.html"
   },
   {
-   "title": "미국, 제3국 데이터센터 통한 중국의 첨단 AI 칩 접근 차단 강화",
-   "summary": "미국 정부가 제3국 데이터센터를 거쳐 중국이 첨단 AI 연산 자원을 쓰는 것을 막는 수출 통제를 강화했습니다. 엔비디아 경영진 교체, 금리 전망과 함께 선물 흐름에 영향을 준 요인으로 꼽혔습니다.",
-   "source": "인베스터스허브(야후 파이낸스)",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-earnings-focus-us-stock-101304049.html"
-  },
-  {
-   "title": "10월 소매판매·산업생산 발표…12월 금리 인상 가능성 주목",
-   "summary": "오늘 10월 소매판매(전월 대비 예상 +0.2%, 직전 +0.8%)와 산업생산(예상 +0.1%, 직전 +0.7%)이 발표됩니다. 최근 물가 지표로 연준이 12월 회의에서 금리를 올릴 수 있다는 관측이 커진 상태입니다.",
+   "title": "미국 지수 선물, 이틀 하락 뒤 반등",
+   "summary": "전날 다우는 1.64%, S&P 500은 1.03%, 나스닥 종합은 0.74% 내렸습니다. 오늘은 엔비디아 실적과 앤트로픽 상장 기대에 나스닥100 선물을 중심으로 오르고 있습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-091546152.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html"
   },
   {
-   "title": "호르무즈 해협 유조선 공격 속 유가는 공급 과잉 전망에 약세",
-   "summary": "금요일 이후 호르무즈 해협에서 유조선 공격이 최소 4차례 있었고 미국·이란 협상도 불확실합니다. 다만 IEA가 4분기 공급이 수요를 하루 약 170만 배럴 웃돌 것으로 내다보면서 원유 가격은 이틀째 내렸습니다.",
-   "source": "인베스터스허브(야후 파이낸스)",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-earnings-focus-us-stock-101304049.html"
-  },
-  {
-   "title": "디즈니·홈디포 등 실적 발표, 목요일엔 앤트로픽 상장 예정",
-   "summary": "디즈니가 장 전에 실적을 발표하고 홈디포, JD닷컴, 클라르나 등도 오늘 실적을 내놓습니다. 앤트로픽의 기업공개(IPO)는 목요일로 예정돼 있습니다.",
+   "title": "앤트로픽, 오늘 저녁 공모가 확정 후 목요일 거래 시작 예정",
+   "summary": "앤트로픽이 현지시간 오늘 저녁 기업공개(IPO) 공모가를 정하고 목요일부터 거래를 시작할 예정입니다. 역대 최대 규모 상장 중 하나로 꼽히며, 코어위브·AMD 등 AI 관련주도 장 전 함께 오르고 있습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-091546152.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html"
+  },
+  {
+   "title": "10월 주택착공·FOMC 의사록 발표, 타깃·로우스 실적",
+   "summary": "오늘 10월 주택착공(예상 +4.4%)과 건축허가가 발표되고, 장 마감 후에는 10월 FOMC 회의 의사록이 공개됩니다. 기준금리는 3.75~4% 수준이며, 타깃·TJX·로우스·팔로알토 네트웍스도 실적을 내놓습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/futures-climb-nvidia-earnings-boost-101949738.html"
+  },
+  {
+   "title": "원유 재고 증가에 유가 하락, 호르무즈 긴장은 낙폭 제한",
+   "summary": "미국 원유·연료 재고가 늘었다는 소식에 WTI와 브렌트유가 장 전 하락했습니다. API는 지난주 원유 재고가 528만 배럴 늘었다고 집계했고, 미국·이란 간 공격과 호르무즈 해협 운항 차질이 하락 폭을 제한했습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-18-nvidias-strong-results-lift-market-sentiment"
   }
  ],
  "schedule": [
   {
    "time": "22:30",
-   "text": "미국 10월 소매판매 발표"
-  },
-  {
-   "time": "23:15",
-   "text": "미국 10월 산업생산·설비가동률 발표"
+   "text": "미국 10월 주택착공·건축허가 발표, 타깃·TJX·로우스 장 전 실적"
   },
   {
    "time": "23:30",
-   "text": "미국 정규장 개장, 해맥 클리블랜드 연은 총재 브루킹스 연설"
+   "text": "미국 정규장 개장"
   },
   {
-   "time": "00:00",
-   "text": "미국 11월 NAHB 주택시장지수 발표"
+   "time": "04:00",
+   "text": "10월 FOMC 회의 의사록 공개"
   },
   {
    "time": "06:00 이후",
-   "text": "엔비디아 3분기 실적 발표(장 마감 후)"
+   "text": "팔로알토 네트웍스 실적 발표(장 마감 후)"
   }
  ],
  "kind": "us"

@@ -1,0 +1,106 @@
+{
+ "date": "2026-11-18",
+ "weekday": "수",
+ "generatedAt": "2026-11-18T21:25+09:00",
+ "headline": "엔비디아 호실적과 앤트로픽 IPO 기대에 나스닥100 선물이 오르며 이틀 하락 뒤 반등을 시도하고 있습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,382.00",
+   "chg": "+0.31%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "27,283.00",
+   "chg": "+0.77%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "50,810.00",
+   "chg": "-0.01%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "24.27",
+   "chg": "-4.67%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,332.10원",
+   "chg": "-0.25%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "5.11%",
+   "chg": "+0.2bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$85.10",
+   "chg": "-1.06%"
+  },
+  {
+   "name": "금",
+   "value": "$3,772.80",
+   "chg": "-2.37%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$64,238",
+   "chg": "-1.19%"
+  }
+ ],
+ "news": [
+  {
+   "title": "엔비디아 3분기 매출 1,158억 달러로 예상 상회",
+   "summary": "엔비디아의 3분기 매출은 전년 대비 103% 늘어난 1,158억 달러, 주당순이익은 2.68달러로 시장 예상을 웃돌았습니다. 4일 연속 하락했던 주가는 프리마켓에서 3% 가까이 올랐고, 이사회는 사임한 젠슨 황을 복귀시키지 않겠다고 밝혔습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/futures-climb-nvidia-earnings-boost-101949738.html"
+  },
+  {
+   "title": "미국 지수 선물, 이틀 하락 뒤 반등",
+   "summary": "전날 다우는 1.64%, S&P 500은 1.03%, 나스닥 종합은 0.74% 내렸습니다. 오늘은 엔비디아 실적과 앤트로픽 상장 기대에 나스닥100 선물을 중심으로 오르고 있습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html"
+  },
+  {
+   "title": "앤트로픽, 오늘 저녁 공모가 확정 후 목요일 거래 시작 예정",
+   "summary": "앤트로픽이 현지시간 오늘 저녁 기업공개(IPO) 공모가를 정하고 목요일부터 거래를 시작할 예정입니다. 역대 최대 규모 상장 중 하나로 꼽히며, 코어위브·AMD 등 AI 관련주도 장 전 함께 오르고 있습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html"
+  },
+  {
+   "title": "10월 주택착공·FOMC 의사록 발표, 타깃·로우스 실적",
+   "summary": "오늘 10월 주택착공(예상 +4.4%)과 건축허가가 발표되고, 장 마감 후에는 10월 FOMC 회의 의사록이 공개됩니다. 기준금리는 3.75~4% 수준이며, 타깃·TJX·로우스·팔로알토 네트웍스도 실적을 내놓습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/futures-climb-nvidia-earnings-boost-101949738.html"
+  },
+  {
+   "title": "원유 재고 증가에 유가 하락, 호르무즈 긴장은 낙폭 제한",
+   "summary": "미국 원유·연료 재고가 늘었다는 소식에 WTI와 브렌트유가 장 전 하락했습니다. API는 지난주 원유 재고가 528만 배럴 늘었다고 집계했고, 미국·이란 간 공격과 호르무즈 해협 운항 차질이 하락 폭을 제한했습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-18-nvidias-strong-results-lift-market-sentiment"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "22:30",
+   "text": "미국 10월 주택착공·건축허가 발표, 타깃·TJX·로우스 장 전 실적"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  },
+  {
+   "time": "04:00",
+   "text": "10월 FOMC 회의 의사록 공개"
+  },
+  {
+   "time": "06:00 이후",
+   "text": "팔로알토 네트웍스 실적 발표(장 마감 후)"
+  }
+ ],
+ "kind": "us"
+}
