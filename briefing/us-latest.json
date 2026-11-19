@@ -1,105 +1,101 @@
 {
- "date": "2026-11-18",
- "weekday": "수",
- "generatedAt": "2026-11-18T21:25+09:00",
- "headline": "엔비디아 호실적과 앤트로픽 IPO 기대에 나스닥100 선물이 오르며 이틀 하락 뒤 반등을 시도하고 있습니다",
+ "date": "2026-11-19",
+ "weekday": "목",
+ "generatedAt": "2026-11-19T21:30+09:00",
+ "headline": "앤트로픽 나스닥 상장을 앞두고 나스닥100 선물이 2% 넘게 오르고, 월마트는 연간 전망을 올렸습니다",
  "us": [
   {
    "name": "S&P 500 선물",
-   "value": "7,382.00",
-   "chg": "+0.31%"
+   "value": "7,430.00",
+   "chg": "+1.22%"
   },
   {
    "name": "나스닥100 선물",
-   "value": "27,283.00",
-   "chg": "+0.77%"
+   "value": "27,780.25",
+   "chg": "+2.18%"
   },
   {
    "name": "다우 선물",
-   "value": "50,810.00",
-   "chg": "-0.01%"
+   "value": "50,602.00",
+   "chg": "+0.65%"
   },
   {
    "name": "VIX(전일)",
-   "value": "24.27",
-   "chg": "-4.67%"
+   "value": "22.10",
+   "chg": "-10.02%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,332.10원",
-   "chg": "-0.25%"
+   "value": "1,329.40원",
+   "chg": "-0.34%"
   },
   {
    "name": "미 10년물",
-   "value": "5.11%",
-   "chg": "+0.2bp"
+   "value": "5.10%",
+   "chg": "+3.1bp"
   },
   {
    "name": "WTI",
-   "value": "$85.10",
-   "chg": "-1.06%"
+   "value": "$83.43",
+   "chg": "+0.20%"
   },
   {
    "name": "금",
-   "value": "$3,772.80",
-   "chg": "-2.37%"
+   "value": "$3,722.30",
+   "chg": "-0.52%"
   },
   {
    "name": "비트코인",
-   "value": "$64,238",
-   "chg": "-1.19%"
+   "value": "$63,831",
+   "chg": "+1.71%"
   }
  ],
  "news": [
   {
-   "title": "엔비디아 3분기 매출 1,158억 달러로 예상 상회",
-   "summary": "엔비디아의 3분기 매출은 전년 대비 103% 늘어난 1,158억 달러, 주당순이익은 2.68달러로 시장 예상을 웃돌았습니다. 4일 연속 하락했던 주가는 프리마켓에서 3% 가까이 올랐고, 이사회는 사임한 젠슨 황을 복귀시키지 않겠다고 밝혔습니다.",
+   "title": "앤트로픽, 주당 83달러로 오늘 나스닥 상장",
+   "summary": "앤트로픽이 공모가를 주당 83달러로 정하고 수요 증가에 따라 공모 물량을 9억 8,000만 주로 늘렸습니다. 티커는 ANT이며 기업가치는 1조 달러를 넘고, 거래는 정규장 개장 이후 시작될 예정입니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/futures-climb-nvidia-earnings-boost-101949738.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-090910916.html"
   },
   {
-   "title": "미국 지수 선물, 이틀 하락 뒤 반등",
-   "summary": "전날 다우는 1.64%, S&P 500은 1.03%, 나스닥 종합은 0.74% 내렸습니다. 오늘은 엔비디아 실적과 앤트로픽 상장 기대에 나스닥100 선물을 중심으로 오르고 있습니다.",
-   "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html"
+   "title": "월마트 3분기 매출 1,888억 달러, 연간 전망 세 번째 상향",
+   "summary": "월마트의 3분기 매출은 5.2% 늘어난 1,888억 달러, 조정 주당순이익은 65센트로 예상을 소폭 웃돌았고 기존점 매출은 2.9% 늘었습니다. 연간 주당순이익 전망을 2.84~2.89달러로 올렸지만, 시장 예상보다는 보수적이라는 평가가 나왔습니다.",
+   "source": "AP",
+   "url": "https://www.clickorlando.com/business/2026/11/19/walmart-raises-outlook-for-3rd-time-this-year-after-a-solid-quarter/"
   },
   {
-   "title": "앤트로픽, 오늘 저녁 공모가 확정 후 목요일 거래 시작 예정",
-   "summary": "앤트로픽이 현지시간 오늘 저녁 기업공개(IPO) 공모가를 정하고 목요일부터 거래를 시작할 예정입니다. 역대 최대 규모 상장 중 하나로 꼽히며, 코어위브·AMD 등 AI 관련주도 장 전 함께 오르고 있습니다.",
+   "title": "AI 종목 부담 속 선물 반등, 엔비디아는 5거래일 연속 하락",
+   "summary": "지수 선물은 앤트로픽 상장을 앞두고 기술주 중심으로 오르고 있습니다. 다만 AI 안전성 우려와 투자 붐의 지속성에 대한 의문, 민주당 주도 의회 출범 등으로 AI 관련주는 부담을 받아 왔고, 엔비디아는 실적 발표 뒤 5거래일 연속 하락했습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-090910916.html"
   },
   {
-   "title": "10월 주택착공·FOMC 의사록 발표, 타깃·로우스 실적",
-   "summary": "오늘 10월 주택착공(예상 +4.4%)과 건축허가가 발표되고, 장 마감 후에는 10월 FOMC 회의 의사록이 공개됩니다. 기준금리는 3.75~4% 수준이며, 타깃·TJX·로우스·팔로알토 네트웍스도 실적을 내놓습니다.",
-   "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/futures-climb-nvidia-earnings-boost-101949738.html"
+   "title": "유가, 공급 과잉 전망과 호르무즈 선박 공격 사이에서 보합",
+   "summary": "호르무즈 해협 원유 운송이 전쟁 전 수준으로 회복되고 미국 원유 재고가 340만 배럴 늘면서 공급 과잉 전망이 커졌습니다. 반면 해협 인근 선박 공격이 이어지며 유가는 전날 WTI 3.2% 하락 뒤 보합권에서 움직였습니다.",
+   "source": "로이터",
+   "url": "https://finance.yahoo.com/energy/articles/oil-prices-steady-supply-surplus-024608326.html"
   },
   {
-   "title": "원유 재고 증가에 유가 하락, 호르무즈 긴장은 낙폭 제한",
-   "summary": "미국 원유·연료 재고가 늘었다는 소식에 WTI와 브렌트유가 장 전 하락했습니다. API는 지난주 원유 재고가 528만 배럴 늘었다고 집계했고, 미국·이란 간 공격과 호르무즈 해협 운항 차질이 하락 폭을 제한했습니다.",
-   "source": "팁랭크스",
-   "url": "https://www.tipranks.com/news/stock-market-today-nov-18-nvidias-strong-results-lift-market-sentiment"
+   "title": "연준 10월 의사록 뒤 12월 금리 인상 가능성 부각",
+   "summary": "연준 10월 회의 의사록이 공개된 뒤 12월 금리 인상 가능성이 높아졌다는 관측이 나왔습니다. 금리 인상 기대는 달러 강세와 원유 수요 둔화 우려로 이어지고 있다고 로이터는 전했습니다.",
+   "source": "로이터",
+   "url": "https://finance.yahoo.com/energy/articles/oil-prices-steady-supply-surplus-024608326.html"
   }
  ],
  "schedule": [
   {
    "time": "22:30",
-   "text": "미국 10월 주택착공·건축허가 발표, 타깃·TJX·로우스 장 전 실적"
+   "text": "미국 신규 실업수당 청구건수(예상 19만 7천 건) · 11월 필라델피아 연은 제조업지수(예상 23.2) 발표"
   },
   {
    "time": "23:30",
-   "text": "미국 정규장 개장"
+   "text": "미국 정규장 개장 (개장 이후 앤트로픽 거래 시작 예정)"
   },
   {
-   "time": "04:00",
-   "text": "10월 FOMC 회의 의사록 공개"
-  },
-  {
-   "time": "06:00 이후",
-   "text": "팔로알토 네트웍스 실적 발표(장 마감 후)"
+   "time": "01:00",
+   "text": "11월 캔자스시티 연은 제조업지수 발표 (전월 11)"
   }
  ],
  "kind": "us"
