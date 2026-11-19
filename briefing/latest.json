@@ -1,97 +1,105 @@
 {
- "date": "2026-11-19",
- "weekday": "목",
- "generatedAt": "2026-11-19T08:15+09:00",
- "headline": "뉴욕증시는 헬스케어주 급락에 다우가 1.11% 내렸지만, 반도체주 강세로 나스닥은 0.42% 올랐습니다.",
+ "date": "2026-11-20",
+ "weekday": "금",
+ "generatedAt": "2026-11-20T08:15+09:00",
+ "headline": "뉴욕증시는 앤트로픽 상장일에 3대 지수가 모두 2%대 급락했고, S&P 500은 6거래일 연속 내렸습니다.",
  "us": [
   {
    "name": "S&P 500",
-   "value": "7,323.63",
-   "chg": "-0.23%"
+   "value": "7,175.83",
+   "chg": "-2.02%"
   },
   {
    "name": "나스닥",
-   "value": "24,429.89",
-   "chg": "+0.42%"
+   "value": "23,879.20",
+   "chg": "-2.25%"
   },
   {
    "name": "다우",
-   "value": "50,198.17",
-   "chg": "-1.11%"
+   "value": "49,097.06",
+   "chg": "-2.19%"
   },
   {
    "name": "필라델피아 반도체",
-   "value": "9,652.80",
-   "chg": "+0.10%"
+   "value": "9,419.72",
+   "chg": "-2.42%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,334.00원",
-   "chg": "-0.11%"
+   "value": "1,335.50원",
+   "chg": "+0.11%"
   },
   {
    "name": "미 10년물",
-   "value": "5.07%",
-   "chg": "-3.3bp"
+   "value": "5.05%",
+   "chg": "-1.6bp"
   },
   {
    "name": "WTI",
-   "value": "$83.26",
+   "value": "$83.21",
    "chg": "0.00%"
   },
   {
    "name": "금",
-   "value": "$3,741.90",
+   "value": "$3,685.50",
    "chg": "0.00%"
   },
   {
    "name": "비트코인",
-   "value": "$62,370",
-   "chg": "-4.06%"
+   "value": "$62,330",
+   "chg": "-0.68%"
   }
  ],
  "news": [
   {
-   "title": "뉴욕증시 혼조 마감, 다우 1.11% 하락·나스닥 0.42% 상승",
-   "summary": "18일(현지시간) 다우는 561포인트 내렸고 S&P 500은 0.23% 하락했으며, 나스닥은 0.42% 올랐습니다. 미 보건당국(CMS)이 보험사 감사를 늘리는 규칙안을 내놓자 유나이티드헬스와 휴매나가 각각 6% 내리며 다우를 끌어내렸습니다.",
+   "title": "뉴욕증시 3대 지수 2%대 급락, 다우 1,100포인트 하락",
+   "summary": "19일(현지시간) 다우는 1,101포인트(2.19%) 내린 49,097.06에 마감했습니다. S&P 500은 2.02%, 나스닥은 2.25% 하락했으며, AI 관련주를 둘러싼 불안이 커진 것이 배경으로 꼽혔습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
   },
   {
-   "title": "엔비디아, 호실적에도 2.89% 하락하며 5거래일 연속 약세",
-   "summary": "엔비디아는 매출이 전년 대비 103% 늘어난 실적을 발표한 뒤 장 초반 2.7%까지 올랐지만, 상승분을 반납하고 2.89% 내린 채 마감했습니다. 반면 AMD는 5.31%, 브로드컴은 3.65% 올랐습니다.",
-   "source": "트레이딩키",
-   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262311775-dow-falls-nasdaq-rise-nvidia-earnings-anthropic-ipo-fed-minutes-tradingkey"
+   "title": "S&P 500 6거래일 연속 하락, 미 10년물 금리 5.05%",
+   "summary": "S&P 500은 이날 하락으로 6거래일 연속 약세를 이어갔습니다. 미 10년물 국채금리는 5.05% 수준에 머물렀고, 연준이 추가 금리 인상 가능성을 시사해 온 점도 부담으로 언급됐습니다.",
+   "source": "모틀리 풀",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/19/stock-market-today-nov-19-stock-market-today-nov-19-alphabet-shares-fall-as-anthropic-nasdaq-debut-puts-fresh-value-on-google-s-stake/"
   },
   {
-   "title": "10월 FOMC 의사록, 대부분 위원 추가 금리 인상 가능성 언급",
-   "summary": "공개된 의사록에 따르면 거의 모든 참석자가 물가를 2%로 되돌리기 위해 추가 인상이 필요할 수 있다고 봤고, 일부는 25bp를 넘는 인상도 거론했습니다. 월러 연준 이사는 12월 회의에서 50bp 인상을 검토해야 한다는 의견을 밝혔습니다.",
-   "source": "트레이딩키",
-   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262311775-dow-falls-nasdaq-rise-nvidia-earnings-anthropic-ipo-fed-minutes-tradingkey"
-  },
-  {
-   "title": "앤트로픽 IPO 공모가 주당 83달러로 확정 보도, 오늘 나스닥 상장",
-   "summary": "블룸버그 보도에 따르면 앤트로픽은 공모가를 희망 범위(70~78달러)보다 높은 주당 83달러로 정하고 공모 규모도 늘렸습니다. 19일(현지시간)부터 나스닥에서 티커 'ANT'로 거래될 예정입니다.",
+   "title": "앤트로픽, 나스닥 상장 첫날 17% 상승 마감",
+   "summary": "앤트로픽(ANT)은 공모가 83달러보다 34% 높은 111.50달러에 첫 거래를 시작한 뒤 상승 폭을 줄여 97.17달러(+17.07%)에 마감했습니다. 기사에 따르면 이번 공모로 813억 달러를 조달했습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
   },
   {
-   "title": "타깃 3분기 실적 시장 예상 상회",
-   "summary": "타깃은 3분기 매출이 7.1% 늘어난 271억 달러, 주당순이익 2.65달러로 시장 예상(265억 달러, 2.08달러)을 웃돌았습니다. 주당순이익에는 관세 환급에 따른 0.50달러의 효과가 포함됐습니다.",
+   "title": "AMD, 공매도 포지션 공개 여파로 큰 폭 하락",
+   "summary": "헌터브룩 캐피털이 중국 관련 수출 우려를 이유로 AMD 공매도 포지션을 공개하면서 AMD 주가가 크게 내렸습니다. 엔비디아도 오후장에서 약 2% 하락했습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
+  },
+  {
+   "title": "월마트 3분기 실적 시장 예상 상회",
+   "summary": "월마트는 장 시작 전 3분기 매출 1,888억 달러, 조정 주당순이익 0.65달러를 발표해 시장 예상치(1,872억 달러, 0.64달러)를 웃돌았습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
   }
  ],
  "schedule": [
   {
-   "time": "23:30",
-   "text": "미국 뉴욕증시 정규장 개장"
+   "time": "08:30",
+   "text": "일본 10월 소비자물가지수 발표"
   },
   {
-   "time": "장 중",
-   "text": "앤트로픽 나스닥 상장 첫 거래 (티커 ANT)"
+   "time": "오전",
+   "text": "중국 11월 대출우대금리(LPR) 발표"
+  },
+  {
+   "time": "16:00",
+   "text": "영국 10월 소매판매 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 뉴욕증시 정규장 개장"
   }
  ],
  "kind": "morning"
