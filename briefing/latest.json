@@ -1,105 +1,97 @@
 {
- "date": "2026-11-20",
- "weekday": "금",
- "generatedAt": "2026-11-20T08:15+09:00",
- "headline": "뉴욕증시는 앤트로픽 상장일에 3대 지수가 모두 2%대 급락했고, S&P 500은 6거래일 연속 내렸습니다.",
+ "date": "2026-11-21",
+ "weekday": "토",
+ "generatedAt": "2026-11-21T08:05+09:00",
+ "headline": "뉴욕증시는 AI 관련주 매도세에 나스닥이 5.28% 급락했고, 필라델피아 반도체지수는 10% 넘게 내렸습니다.",
  "us": [
   {
    "name": "S&P 500",
-   "value": "7,175.83",
-   "chg": "-2.02%"
+   "value": "6,910.39",
+   "chg": "-3.70%"
   },
   {
    "name": "나스닥",
-   "value": "23,879.20",
-   "chg": "-2.25%"
+   "value": "22,617.73",
+   "chg": "-5.28%"
   },
   {
    "name": "다우",
-   "value": "49,097.06",
-   "chg": "-2.19%"
+   "value": "48,147.33",
+   "chg": "-1.93%"
   },
   {
    "name": "필라델피아 반도체",
-   "value": "9,419.72",
-   "chg": "-2.42%"
+   "value": "8,408.59",
+   "chg": "-10.73%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,335.50원",
-   "chg": "+0.11%"
+   "value": "1,346.50원",
+   "chg": "+0.82%"
   },
   {
    "name": "미 10년물",
-   "value": "5.05%",
-   "chg": "-1.6bp"
+   "value": "4.95%",
+   "chg": "-10.2bp"
   },
   {
    "name": "WTI",
-   "value": "$83.21",
-   "chg": "0.00%"
+   "value": "$83.98",
+   "chg": "+0.93%"
   },
   {
    "name": "금",
-   "value": "$3,685.50",
-   "chg": "0.00%"
+   "value": "$3,515.40",
+   "chg": "-4.62%"
   },
   {
    "name": "비트코인",
-   "value": "$62,330",
-   "chg": "-0.68%"
+   "value": "$59,170",
+   "chg": "-4.59%"
   }
  ],
  "news": [
   {
-   "title": "뉴욕증시 3대 지수 2%대 급락, 다우 1,100포인트 하락",
-   "summary": "19일(현지시간) 다우는 1,101포인트(2.19%) 내린 49,097.06에 마감했습니다. S&P 500은 2.02%, 나스닥은 2.25% 하락했으며, AI 관련주를 둘러싼 불안이 커진 것이 배경으로 꼽혔습니다.",
+   "title": "뉴욕증시 급락, S&P 500·다우 조정 국면 진입",
+   "summary": "20일(현지시간) 나스닥은 5.28% 내려 올해 상승분을 모두 반납했고, S&P 500과 다우는 사상 최고치 대비 10% 넘게 떨어져 조정 국면에 들어섰습니다. 변동성지수(VIX)는 장중 40까지 치솟았습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-19-dow-sp-500-nasdaq-anthropic-nvidia-141644188.html"
   },
   {
-   "title": "S&P 500 6거래일 연속 하락, 미 10년물 금리 5.05%",
-   "summary": "S&P 500은 이날 하락으로 6거래일 연속 약세를 이어갔습니다. 미 10년물 국채금리는 5.05% 수준에 머물렀고, 연준이 추가 금리 인상 가능성을 시사해 온 점도 부담으로 언급됐습니다.",
-   "source": "모틀리 풀",
-   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/19/stock-market-today-nov-19-stock-market-today-nov-19-alphabet-shares-fall-as-anthropic-nasdaq-debut-puts-fresh-value-on-google-s-stake/"
+   "title": "엔비디아 14% 급락, SEC 회계 조사 보도 겹쳐",
+   "summary": "엔비디아는 14.01% 내린 125.53달러에 마감했습니다. 미 증권거래위원회(SEC)가 회계 처리를 조사한다는 보도가 나오면서 매도세가 커졌고, 거래량은 3개월 평균의 약 3.6배였습니다.",
+   "source": "모틀리풀",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/20/stock-market-today-nov-20-nvidia-s-usd2-5-trillion-rout-deepens-as-sec-accounting-probe-adds-to-wall-street-s-ai-sell-off/"
   },
   {
-   "title": "앤트로픽, 나스닥 상장 첫날 17% 상승 마감",
-   "summary": "앤트로픽(ANT)은 공모가 83달러보다 34% 높은 111.50달러에 첫 거래를 시작한 뒤 상승 폭을 줄여 97.17달러(+17.07%)에 마감했습니다. 기사에 따르면 이번 공모로 813억 달러를 조달했습니다.",
+   "title": "브로드컴·AMD·마이크론 등 반도체주 동반 하락",
+   "summary": "AI 투자 자금 조달 우려 속에 브로드컴과 AMD가 두 자릿수 하락률을 보였고, 마이크론과 SK하이닉스도 10% 넘게 떨어졌습니다. 앤트로픽 주가도 상장 이틀째 약세를 보였습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
+   "url": "https://finance.yahoo.com/markets/article/nvidia-amd-and-broadcom-lead-chip-stocks-lower-133658985.html"
   },
   {
-   "title": "AMD, 공매도 포지션 공개 여파로 큰 폭 하락",
-   "summary": "헌터브룩 캐피털이 중국 관련 수출 우려를 이유로 AMD 공매도 포지션을 공개하면서 AMD 주가가 크게 내렸습니다. 엔비디아도 오후장에서 약 2% 하락했습니다.",
+   "title": "쿡 연준 이사 \"금리 인상 늦추면 뒤처질 위험\"",
+   "summary": "리사 쿡 연준 이사는 칠레 연설에서 금리 인상을 미루면 대응이 늦어질 수 있다고 말했습니다. CME 페드워치 기준 12월 0.25%p 인상 확률은 90%대로 반영됐고, 10년물 국채금리는 13bp 내린 4.92%를 기록했습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-19-dow-sp-500-nasdaq-anthropic-nvidia-141644188.html"
   },
   {
-   "title": "월마트 3분기 실적 시장 예상 상회",
-   "summary": "월마트는 장 시작 전 3분기 매출 1,888억 달러, 조정 주당순이익 0.65달러를 발표해 시장 예상치(1,872억 달러, 0.64달러)를 웃돌았습니다.",
+   "title": "비트코인 5만9천 달러 아래로, 금 선물도 4% 가까이 하락",
+   "summary": "위험자산 회피 심리 속에 비트코인은 5만9천 달러 아래로 내려가 7월 이후 최저 수준에서 거래됐습니다. 금 선물도 4% 가까이 떨어졌습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-19-dow-sp-500-nasdaq-anthropic-nvidia-141644188.html"
   }
  ],
  "schedule": [
   {
-   "time": "08:30",
-   "text": "일본 10월 소비자물가지수 발표"
+   "time": "종일",
+   "text": "국내 증시 주말 휴장"
   },
   {
-   "time": "오전",
-   "text": "중국 11월 대출우대금리(LPR) 발표"
-  },
-  {
-   "time": "16:00",
-   "text": "영국 10월 소매판매 발표"
-  },
-  {
-   "time": "23:30",
-   "text": "미국 뉴욕증시 정규장 개장"
+   "time": "종일",
+   "text": "미국 증시 주말 휴장 (다음 정규장은 11월 23일(월) 23:30 개장)"
   }
  ],
  "kind": "morning"
