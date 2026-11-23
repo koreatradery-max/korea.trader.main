@@ -1,87 +1,87 @@
 {
- "date": "2026-11-20",
- "weekday": "금",
- "generatedAt": "2026-11-20T21:30+09:00",
- "headline": "AI 성장·밸류에이션 우려가 이어지며 나스닥100 선물이 1% 넘게 하락한 채 금요일 장을 앞두고 있습니다",
+ "date": "2026-11-23",
+ "weekday": "월",
+ "generatedAt": "2026-11-23T21:30+09:00",
+ "headline": "지난주 AI주 급락으로 S&P 500이 조정 국면에 들어선 뒤, 나스닥100 선물이 3% 넘게 반등하며 월요일 장을 앞두고 있습니다",
  "us": [
   {
    "name": "S&P 500 선물",
-   "value": "7,141.50",
-   "chg": "-0.77%"
+   "value": "7,124.25",
+   "chg": "+2.73%"
   },
   {
    "name": "나스닥100 선물",
-   "value": "26,155.50",
-   "chg": "-1.67%"
+   "value": "25,976.25",
+   "chg": "+3.38%"
   },
   {
    "name": "다우 선물",
-   "value": "49,126.00",
-   "chg": "-0.11%"
+   "value": "49,197.00",
+   "chg": "+2.03%"
   },
   {
    "name": "VIX(전일)",
-   "value": "30.20",
-   "chg": "+6.19%"
+   "value": "30.28",
+   "chg": "-15.63%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,340.70원",
-   "chg": "+0.39%"
+   "value": "1,346.80원",
+   "chg": "+0.13%"
   },
   {
    "name": "미 10년물",
-   "value": "4.98%",
-   "chg": "-7.2bp"
+   "value": "4.96%",
+   "chg": "+4.4bp"
   },
   {
    "name": "WTI",
-   "value": "$82.84",
-   "chg": "-0.44%"
+   "value": "$82.38",
+   "chg": "-1.23%"
   },
   {
    "name": "금",
-   "value": "$3,575.00",
-   "chg": "-3.00%"
+   "value": "$3,618.80",
+   "chg": "+2.94%"
   },
   {
    "name": "비트코인",
-   "value": "$61,368",
-   "chg": "-1.05%"
+   "value": "$61,517",
+   "chg": "+0.31%"
   }
  ],
  "news": [
   {
-   "title": "AI 투자 우려 지속, 나스닥100 선물 1%대 하락",
-   "summary": "AI 업종의 성장성과 밸류에이션에 대한 우려, 높은 차입 비용, 데이터센터 확장 둔화 우려가 겹치며 지수 선물이 약세를 보였습니다. 3대 지수는 2025년 4월 이후 가장 큰 주간 하락폭을 기록할 흐름입니다.",
-   "source": "로이터(AOL)",
-   "url": "https://www.aol.com/articles/wall-st-futures-slip-anthropic-103651000.html"
+   "title": "AI주 급락 다음 날, 미국 지수 선물 일제히 반등",
+   "summary": "월요일 아침 미국 지수 선물이 큰 폭으로 오르고 있습니다. 지난 금요일 AI 관련주 매도로 S&P 500은 3.7%, 나스닥 종합지수는 5.3% 하락했고, S&P 500은 10월 6일 고점 대비 10% 넘게 내려 조정 국면에 들어섰습니다.",
+   "source": "AP통신(CP24)",
+   "url": "https://www.cp24.com/news/money/2026/11/23/us-futures-climb-and-world-shares-are-mixed-as-big-tech-stocks-fall-in-asia/"
   },
   {
-   "title": "앤트로픽, 상장 이튿날 프리마켓에서 6%대 하락",
-   "summary": "공모가 83달러로 목요일 나스닥에 상장한 앤트로픽은 첫날 97달러에 마감했습니다. 오늘 프리마켓에서는 약 6~7% 내리며 전일 상승분 일부를 되돌리고 있습니다.",
-   "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-19-dow-sp-500-nasdaq-anthropic-nvidia-volatility-092827348.html"
+   "title": "엔비디아, 금요일 14% 하락…최근 10거래일 중 9일 내려",
+   "summary": "엔비디아는 금요일 14% 떨어져 최근 10거래일 가운데 9일 하락했고, 이달 초 전 CEO 젠슨 황 관련 논란 이후 30% 넘게 내렸다고 AP가 전했습니다. 마이크론·브로드컴·AMD 등 다른 AI 관련주도 함께 약세를 보였습니다.",
+   "source": "AP통신(CP24)",
+   "url": "https://www.cp24.com/news/money/2026/11/23/us-futures-climb-and-world-shares-are-mixed-as-big-tech-stocks-fall-in-asia/"
   },
   {
-   "title": "엔비디아·반도체주 프리마켓 동반 약세",
-   "summary": "엔비디아가 프리마켓에서 2%대 하락했고 AMD, 브로드컴, 마벨, 마이크론은 3.5~5.5% 내렸습니다. 코어위브와 네비우스 등 AI 클라우드 기업도 5% 넘게 하락했습니다.",
-   "source": "로이터(AOL)",
-   "url": "https://www.aol.com/articles/wall-st-futures-slip-anthropic-103651000.html"
+   "title": "오라클 \"오픈AI 계약 자금 모두 확보했다\"",
+   "summary": "오라클은 금요일 장 마감 직후 오픈AI와의 인프라 계약 이행에 필요한 자금을 모두 확보했다고 밝혔습니다. 로이터에 따르면 이 발표 뒤 오라클 주가는 시간외 거래에서 최대 3.3% 올랐습니다.",
+   "source": "더넥스트웹(로이터 인용)",
+   "url": "https://thenextweb.com/news/oracle-openai-contract-fully-funded-20bn-raise"
   },
   {
-   "title": "시장, 12월 연준 금리 인상 가능성 98% 반영",
-   "summary": "애나 폴슨 필라델피아 연은 총재가 인플레이션이 높아 추가 인상이 필요하다고 언급했습니다. CME 페드워치 기준 12월 회의에서 금리 인상 확률은 98.4%로 반영돼 있습니다.",
-   "source": "로이터(AOL)",
-   "url": "https://www.aol.com/articles/wall-st-futures-slip-anthropic-103651000.html"
+   "title": "한국·대만·중국, 주말 사이 증시 안정 대책 발표",
+   "summary": "대만은 전일 종가 아래 공매도를 전면 금지하는 등 다섯 가지 조치를 내놓았고, 한국은 증시 안정 기금 준비와 자사주 매입 제한의 한시적 완화를 발표했습니다. 중국 상하이·선전거래소는 신용매수 증거금 비율을 100%에서 80%로 낮췄습니다.",
+   "source": "인베스팅닷컴",
+   "url": "https://www.investing.com/news/stock-market-news/asian-countries-take-steps-to-aid-stock-markets-after-ai-rout-5044034"
   },
   {
-   "title": "국제유가, 공급 과잉 전망에 3주 연속 주간 하락 흐름",
-   "summary": "호르무즈 해협 원유 수송이 전쟁 이전 수준으로 회복되고 공급 과잉 전망이 이어지며 브렌트유와 WTI가 약 2% 하락했습니다. 유가는 3주 연속 주간 하락을 기록할 흐름입니다.",
-   "source": "팁랭크스",
-   "url": "https://www.tipranks.com/news/stock-market-today-nov-20-futures-wobble-as-anthropic-ipo-fails-to-lift-sentiment"
+   "title": "국제유가 소폭 하락, 공급 회복 영향",
+   "summary": "공급이 회복되면서 국제유가가 소폭 내리고 있습니다. 다만 미국과 이란은 아직 전쟁에 관한 영구 합의에 이르지 못했고, 유가는 전쟁 전인 2월 말 수준보다 여전히 높다고 AP가 전했습니다.",
+   "source": "AP통신(CP24)",
+   "url": "https://www.cp24.com/news/money/2026/11/23/us-futures-climb-and-world-shares-are-mixed-as-big-tech-stocks-fall-in-asia/"
   }
  ],
  "schedule": [
@@ -90,8 +90,12 @@
    "text": "미국 정규장 개장"
   },
   {
-   "time": "00:00",
-   "text": "미국 11월 미시간대 소비자심리지수 확정치 발표"
+   "time": "26일(목)",
+   "text": "추수감사절로 미국 증시 휴장"
+  },
+  {
+   "time": "28일 03:00",
+   "text": "미국 증시 조기 폐장 (현지 27일 오후 1시)"
   }
  ],
  "kind": "us"
