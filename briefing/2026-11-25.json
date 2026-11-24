@@ -1,0 +1,98 @@
+{
+ "date": "2026-11-25",
+ "weekday": "수",
+ "generatedAt": "2026-11-25T08:10+09:00",
+ "headline": "반도체주가 급락하며 필라델피아 반도체지수가 7.9% 내렸고, 다우는 경기방어주 강세로 5만 선을 회복했습니다.",
+ "us": [
+  {
+   "name": "S&P 500",
+   "value": "7,201.09",
+   "chg": "-0.50%"
+  },
+  {
+   "name": "나스닥",
+   "value": "23,733.54",
+   "chg": "-1.48%"
+  },
+  {
+   "name": "다우",
+   "value": "50,018.70",
+   "chg": "+0.85%"
+  },
+  {
+   "name": "필라델피아 반도체",
+   "value": "8,832.50",
+   "chg": "-7.88%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,342.50원",
+   "chg": "0.00%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.93%",
+   "chg": "+0.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$82.05",
+   "chg": "0.00%"
+  },
+  {
+   "name": "금",
+   "value": "$3,561.90",
+   "chg": "0.00%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$60,009",
+   "chg": "-1.45%"
+  }
+ ],
+ "news": [
+  {
+   "title": "반도체 급락에 나스닥 1.5% 하락, 다우는 5만 선 회복",
+   "summary": "24일 필라델피아 반도체지수는 8% 가까이 떨어졌고 엔비디아는 6%가량, 마이크론은 11% 하락했습니다. 반면 나이키·월마트·존슨앤드존슨 등 경기방어주로 자금이 옮겨가며 다우는 423포인트 올라 50,018에 마감했습니다.",
+   "source": "BigGo Finance",
+   "url": "https://finance.biggo.com/news/efa4550f-327b-4612-b151-77555e7d62dd"
+  },
+  {
+   "title": "HPE, 부품 부족 장기화 경고에 16% 급락",
+   "summary": "HPE는 메모리 등 부품 부족이 적어도 2028년 하반기까지 이어질 수 있다고 밝히며 2027회계연도 클라우드·AI 부문 영업이익률 전망을 약 14%로 제시했습니다. 같은 서버를 판매하는 델도 정규장에서 11.8% 하락했습니다.",
+   "source": "모틀리풀",
+   "url": "https://www.fool.com/investing/2026/11/24/dell-just-reported-earnings-and-raised-its-forecast-by-usd10-billion-is-the-stock-a-buy-after-tuesday-s-selloff/"
+  },
+  {
+   "title": "델, 연간 매출 전망 2,020억 달러로 상향…시간외 상승",
+   "summary": "델은 장 마감 후 3분기 매출 549억 4천만 달러, 조정 주당순이익 9.45달러를 발표해 시장 예상을 웃돌았고, 연간 매출 전망을 2,020억 달러로 높였습니다. HP는 시간외에서 9% 올랐고 워크데이·오토데스크는 각각 4% 내렸습니다.",
+   "source": "인베스팅닷컴",
+   "url": "https://za.investing.com/news/stock-market-news/afterhours-movers-dell-hpq-adsk-wday-ntnx-urbn-clsk-432SI-4595316"
+  },
+  {
+   "title": "AI 투자 의구심 재부각, AMD·Arm 동반 약세",
+   "summary": "전날 젠슨 황 복귀로 급등했던 AI 반도체주가 하루 만에 되밀렸습니다. AI 투자의 수익성과 자금 조달에 대한 의문이 다시 제기됐고, AMD는 오픈AI·메타 보유 워런트 관련 물량을 포함한 약 3억 3,690만 주의 재매각 등록 서류를 제출했습니다.",
+   "source": "FinanceFeeds",
+   "url": "https://financefeeds.com/nasdaq-falls-about-2-4-as-amd-nvidia-and-arm-give-back-huangs-rally-a-day-before-pce/"
+  },
+  {
+   "title": "美 소비자신뢰지수 103.3으로 반등, 오늘 밤 PCE 발표",
+   "summary": "11월 콘퍼런스보드 소비자신뢰지수는 103.3으로 전월(수정치 91.9)보다 크게 올랐습니다. 10월 PCE 물가는 25일 오전 8시 30분(동부시간)에 발표되며, 연준 회의는 12월 8~9일 열립니다.",
+   "source": "FinanceFeeds",
+   "url": "https://financefeeds.com/nasdaq-falls-about-2-4-as-amd-nvidia-and-arm-give-back-huangs-rally-a-day-before-pce/"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "22:30",
+   "text": "미국 10월 PCE 물가지수 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  }
+ ],
+ "kind": "morning"
+}
