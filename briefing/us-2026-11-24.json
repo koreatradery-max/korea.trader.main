@@ -1,0 +1,106 @@
+{
+ "date": "2026-11-24",
+ "weekday": "화",
+ "generatedAt": "2026-11-24T21:25+09:00",
+ "headline": "전날 AI주 급반등 뒤 나스닥100 선물이 1%대 하락하는 가운데, 화요일 미국장 개장을 앞두고 있습니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,196.75",
+   "chg": "-0.80%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "26,383.25",
+   "chg": "-1.58%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "49,504.00",
+   "chg": "-0.35%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "28.76",
+   "chg": "+8.04%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,343.70원",
+   "chg": "+0.09%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.90%",
+   "chg": "-1.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$80.39",
+   "chg": "+0.27%"
+  },
+  {
+   "name": "금",
+   "value": "$3,623.70",
+   "chg": "-0.76%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$60,350",
+   "chg": "-0.89%"
+  }
+ ],
+ "news": [
+  {
+   "title": "사상급 반등 하루 만에 미국 지수 선물 일제히 하락",
+   "summary": "전날 나스닥 종합지수가 6.51%, S&P 500이 4.73% 오르며 2025년 4월 이후 가장 큰 하루 상승을 기록했습니다. 화요일 아침에는 반도체주가 밀리면서 지수 선물이 초반 상승분을 반납하고 하락 전환했습니다.",
+   "source": "TipRanks",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-24-markets-turn-jittery-even-as-huang-returns-to-nvidia"
+  },
+  {
+   "title": "젠슨 황 CEO 복귀로 31% 급등한 엔비디아, 프리마켓 5% 하락",
+   "summary": "엔비디아 이사회가 젠슨 황을 CEO로 복귀시킨 뒤 주가가 하루 만에 31% 넘게 올랐습니다. 화요일 프리마켓에서는 급등 이후 약 5% 내리며 AI 랠리가 이어질지를 시험받고 있습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-24-dow-sp-500-nasdaq-rebound-090614276.html"
+  },
+  {
+   "title": "시장, 12월 연준 0.25%p 금리 인상 가능성 95% 반영",
+   "summary": "전날 증시 반등 이후 트레이더들은 12월 연준의 0.25%p 인상 확률을 95%, 0.5%p 인상 확률을 5%로 보고 있습니다. AI 랠리가 인플레이션 우려를 키웠다는 분석과 함께 워시 연준 의장의 금리 인상 전략이 시험대에 올랐다는 평가가 나옵니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-24-dow-sp-500-nasdaq-rebound-090614276.html"
+  },
+  {
+   "title": "WTI 3개월 저점 부근, 호르무즈 해협 유조선 피격 보도",
+   "summary": "WTI는 배럴당 80달러 안팎으로 3개월 저점 부근에 머물고 있습니다. 이란 혁명수비대가 월요일 호르무즈 해협에서 유조선 3척이 기뢰에 부딪혀 불이 났다고 밝혔다는 보도가 유가를 일부 떠받치고 있습니다.",
+   "source": "TipRanks",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-24-markets-turn-jittery-even-as-huang-returns-to-nvidia"
+  },
+  {
+   "title": "베스트바이·달러트리 장 전, 델·HP·워크데이 장 후 실적 발표",
+   "summary": "추수감사절 연휴를 앞두고 장 전에는 메드트로닉, 아날로그디바이스, 베스트바이, 달러트리, 콜스가 실적을 냅니다. 장 마감 후에는 델, HP, 오토데스크, 워크데이가 발표하며, 델은 시장 예상 매출이 492억 3천만 달러로 제시됐습니다.",
+   "source": "TipRanks",
+   "url": "https://www.tipranks.com/news/these-are-the-stocks-reporting-earnings-today-november-24-2026"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "장 전",
+   "text": "메드트로닉·아날로그디바이스·베스트바이·달러트리·콜스 실적 발표"
+  },
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장"
+  },
+  {
+   "time": "장 중",
+   "text": "미국 11월 콘퍼런스보드 소비자신뢰지수·9월 FHFA 주택가격지수 발표"
+  },
+  {
+   "time": "장 후",
+   "text": "델·HP·오토데스크·워크데이 실적 발표"
+  }
+ ],
+ "kind": "us"
+}
