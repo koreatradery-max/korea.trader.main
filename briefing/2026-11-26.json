@@ -1,0 +1,98 @@
+{
+ "date": "2026-11-26",
+ "weekday": "목",
+ "generatedAt": "2026-11-26T08:10+09:00",
+ "headline": "예상보다 높은 근원 PCE와 새 관세 발표에 기술주가 약세를 보였고, 다우는 장중 낙폭을 만회해 상승 마감했습니다.",
+ "us": [
+  {
+   "name": "S&P 500",
+   "value": "7,182.78",
+   "chg": "-0.25%"
+  },
+  {
+   "name": "나스닥",
+   "value": "23,585.80",
+   "chg": "-0.62%"
+  },
+  {
+   "name": "다우",
+   "value": "50,182.95",
+   "chg": "+0.33%"
+  },
+  {
+   "name": "필라델피아 반도체",
+   "value": "8,774.86",
+   "chg": "-0.65%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,345.50원",
+   "chg": "+0.22%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.86%",
+   "chg": "-3.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$83.68",
+   "chg": "0.00%"
+  },
+  {
+   "name": "금",
+   "value": "$3,535.80",
+   "chg": "0.00%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$60,104",
+   "chg": "+0.16%"
+  }
+ ],
+ "news": [
+  {
+   "title": "다우, 장중 1,100포인트 하락 딛고 상승 마감",
+   "summary": "25일 다우는 장중 1,100포인트 넘게 밀렸다가 막판에 반등해 0.33% 오른 50,182.95에 마감했습니다. 반면 S&P 500은 0.25%, 나스닥은 0.62% 내려 지수 흐름이 엇갈렸습니다.",
+   "source": "모틀리 풀",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/25/stock-market-today-nov-25-dow-erases-1-100-point-loss-as-wall-street-stages-dramatic-late-day-comeback/"
+  },
+  {
+   "title": "10월 근원 PCE 전년 대비 3.3%, 예상치 웃돌아",
+   "summary": "연준이 중시하는 10월 근원 PCE 물가가 전년 대비 3.3% 올라 시장 예상치(3.2%)를 넘었습니다. CME 페드워치 기준 12월 0.25%포인트 금리 인상 가능성은 98%로 반영됐습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+  },
+  {
+   "title": "미 행정부, 중국·EU 등 14개 교역국에 최대 20% 신규 관세 발표",
+   "summary": "미국 행정부가 중국과 EU를 포함한 주요 교역국에 최대 20%의 관세를 추가로 부과하겠다고 밝혔습니다. 의견 수렴 기간을 거쳐 빨라도 내년 1월부터 시행될 예정입니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+  },
+  {
+   "title": "엔비디아 3.9% 하락, 반도체주 약세 이어져",
+   "summary": "엔비디아는 장중 8%가량 밀렸다가 3.91% 내린 149.30달러에 마감했습니다. 젠슨 황 복귀 기대로 올랐던 상승분이 AI 수익성 우려와 금융 여건 긴축 속에 사라졌다는 분석이 나왔습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+  },
+  {
+   "title": "HP 실적 호조에 11% 급등, 앰바렐라·뉴타닉스는 급락",
+   "summary": "HP는 예상을 웃돈 실적과 2027 회계연도 전망 개선에 11.49% 올랐습니다. 반면 앰바렐라는 매출 가이던스 실망으로 19.77%, 뉴타닉스는 15%가량 하락했습니다.",
+   "source": "모틀리 풀",
+   "url": "https://www.fool.com/coverage/stock-market-today/2026/11/25/stock-market-today-nov-25-dow-erases-1-100-point-loss-as-wall-street-stages-dramatic-late-day-comeback/"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "09:00",
+   "text": "국내 증시 개장"
+  },
+  {
+   "time": "종일",
+   "text": "미국 증시·채권시장 추수감사절 휴장 (27일 금요일은 단축 거래)"
+  }
+ ],
+ "kind": "morning"
+}
