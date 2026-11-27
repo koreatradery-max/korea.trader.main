@@ -1,101 +1,97 @@
 {
- "date": "2026-11-27",
- "weekday": "금",
- "generatedAt": "2026-11-27T08:06+09:00",
- "headline": "미국 증시가 추수감사절로 휴장한 사이 유럽 증시가 2% 안팎 올랐고, S&P 500 선물도 상승 마감했습니다.",
+ "date": "2026-11-28",
+ "weekday": "토",
+ "generatedAt": "2026-11-28T08:15+09:00",
+ "headline": "뉴욕증시는 반도체주 강세에 나스닥이 2.31% 올랐고, S&P 500은 주간 5.6% 올라 2025년 4월 이후 최고의 한 주를 보냈습니다.",
  "us": [
   {
    "name": "S&P 500",
-   "value": "7,182.78",
-   "chg": "-0.25%"
+   "value": "7,297.49",
+   "chg": "+1.60%"
   },
   {
    "name": "나스닥",
-   "value": "23,585.80",
-   "chg": "-0.62%"
+   "value": "24,129.50",
+   "chg": "+2.31%"
   },
   {
    "name": "다우",
-   "value": "50,182.95",
-   "chg": "+0.33%"
+   "value": "50,774.94",
+   "chg": "+1.18%"
   },
   {
    "name": "필라델피아 반도체",
-   "value": "8,774.86",
-   "chg": "-0.65%"
+   "value": "9,186.71",
+   "chg": "+4.69%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,344.00원",
-   "chg": "-0.11%"
+   "value": "1,336.50원",
+   "chg": "-0.56%"
   },
   {
    "name": "미 10년물",
-   "value": "4.86%",
-   "chg": "-3.8bp"
+   "value": "4.94%",
+   "chg": "+8.8bp"
   },
   {
    "name": "WTI",
-   "value": "$83.68",
-   "chg": "0.00%"
+   "value": "$83.08",
+   "chg": "-0.72%"
   },
   {
    "name": "금",
-   "value": "$3,535.80",
-   "chg": "0.00%"
+   "value": "$3,639.60",
+   "chg": "+2.94%"
   },
   {
    "name": "비트코인",
-   "value": "$60,451",
-   "chg": "+0.19%"
+   "value": "$59,921",
+   "chg": "-0.88%"
   }
  ],
  "news": [
   {
-   "title": "유럽 증시 일제히 급등, S&P 500 선물 0.5% 상승",
-   "summary": "26일 STOXX 600 지수가 1.83%, 독일 DAX가 2.14%, 영국 FTSE 100이 1.77% 올랐습니다. 미국 현물 시장은 휴장했고 S&P 500 선물은 38.75포인트(0.54%) 오른 채 마감했습니다.",
-   "source": "인베스팅라이브",
-   "url": "https://investinglive.com/stocks/european-stocks-surge-s-p-500-futures-finish-higher-in-thanksgiving-trading/"
+   "title": "뉴욕증시 3대 지수 상승, S&P 500 1년여 만에 최고의 한 주",
+   "summary": "블랙프라이데이 단축 거래일인 27일(현지시간) S&P 500은 1.6%, 다우는 1.2%, 나스닥은 2.3% 올랐습니다. S&P 500은 이번 주 5.6% 올라 2025년 4월 이후 가장 큰 주간 상승률을 기록했고, 연말 쇼핑 시즌 기대 속에 아마존도 4% 올랐습니다.",
+   "source": "AP(피츠버그 포스트-가제트)",
+   "url": "https://www.post-gazette.com/business/personal-finance/stock-markets-today-november-27-2026-2KMWD23HNN7BAM2FQEDY3KOQKU/"
   },
   {
-   "title": "미국 신규 관세, 기존 7월 관세와 중첩되지 않고 내년 2~3월 이후 시행 전망",
-   "summary": "미 행정부가 제안한 14개 교역국 대상 관세는 지난 7월 부과된 관세에 더해지지 않으며, 실제 시행은 내년 2~3월 이전에는 어려울 것으로 전해졌습니다. 이 소식이 전날 관세 우려를 일부 덜어낸 것으로 풀이됐습니다.",
-   "source": "인베스팅라이브",
-   "url": "https://investinglive.com/stocks/european-stocks-surge-s-p-500-futures-finish-higher-in-thanksgiving-trading/"
+   "title": "반도체주 반등, 필라델피아 반도체지수 4.69% 상승",
+   "summary": "마이크론이 7.34%, SK하이닉스 ADR이 7.38%, AMD가 4.89%, 브로드컴이 3.81% 오르며 반도체지수 상승을 이끌었습니다. 반면 엔비디아는 0.88% 오르는 데 그쳤습니다.",
+   "source": "한국경제",
+   "url": "https://www.hankyung.com/article/2026112857597"
   },
   {
-   "title": "코스피 0.3% 반등, 닛케이 0.9%·대만 2.5% 상승",
-   "summary": "26일 코스피는 전날 6.2% 급락 뒤 0.3% 오른 4,711.21에 마감했습니다. 일본 닛케이225는 0.9% 오른 57,499.16을 기록했고, 소프트뱅크가 7.3%, 키옥시아가 12.6% 올랐습니다.",
-   "source": "AP(BNN 블룸버그)",
-   "url": "https://www.bnnbloomberg.ca/markets/2026/11/26/global-stocks-rise-and-tech-shares-rebound-as-us-closes-for-thanksgiving/"
+   "title": "앤트로픽 주가 11% 상승, 공모가 위로 복귀",
+   "summary": "앤트로픽 주가는 11% 오른 91.88달러에 마감해 공모가 83달러를 다시 웃돌았습니다. 다만 상장 첫날 기록한 고점 115달러에는 아직 못 미칩니다.",
+   "source": "AP(피츠버그 포스트-가제트)",
+   "url": "https://www.post-gazette.com/business/personal-finance/stock-markets-today-november-27-2026-2KMWD23HNN7BAM2FQEDY3KOQKU/"
   },
   {
-   "title": "국제유가 소폭 상승, 브렌트유 배럴당 91달러대",
-   "summary": "26일 장중 브렌트유는 0.5% 오른 배럴당 91.09달러, WTI는 1% 오른 84.51달러에 거래됐습니다. 엔·달러 환율은 159.30엔 수준이었습니다.",
-   "source": "AP(BNN 블룸버그)",
-   "url": "https://www.bnnbloomberg.ca/markets/2026/11/26/global-stocks-rise-and-tech-shares-rebound-as-us-closes-for-thanksgiving/"
+   "title": "미 10년물 금리 4.93%로 상승, 연준 금리 인상 경계 지속",
+   "summary": "미국 10년물 국채금리는 7bp 오른 4.93%를 기록했습니다. 10월 PCE 물가 지표 이후 시장은 연준이 앞으로 몇 달간 여러 차례 금리를 올릴 가능성에 무게를 두고 있으며, 변동성지수(VIX)는 11.16% 내린 23.81이었습니다.",
+   "source": "한국경제",
+   "url": "https://www.hankyung.com/article/2026112857597"
   },
   {
-   "title": "12월 연준 금리 인상 확률 99%, 3분기 GDP 4.3%로 상향",
-   "summary": "CME 페드워치 기준 12월 9일 회의에서 금리 인상 가능성이 99%로 반영됐습니다. 3분기 GDP 성장률은 4.3%로 수정됐고, 신규 실업수당 청구 건수는 18만 9천 건으로 예상치(20만 건)를 밑돌았습니다.",
-   "source": "CNBC TV18",
-   "url": "https://www.tradingview.com/news/cnbctv:372043c8b094b:0/"
+   "title": "사우디 정유시설 피격, 29일 OPEC+ 회의 주목",
+   "summary": "사우디 아람코 관련 자잔 정유시설이 26일 공격을 받아 일부 가동이 중단됐습니다. OPEC+는 29일 회의를 열고 내년 1분기 생산 목표 동결 여부를 논의할 예정입니다.",
+   "source": "디지털데일리",
+   "url": "https://www.ddaily.co.kr/page/view/2026112806262514799"
   }
  ],
  "schedule": [
   {
-   "time": "09:00",
-   "text": "국내 증시 개장"
+   "time": "종일",
+   "text": "국내 증시 주말 휴장"
   },
   {
-   "time": "23:30",
-   "text": "미국 증시 개장 (블랙프라이데이 단축 거래)"
-  },
-  {
-   "time": "03:00",
-   "text": "미국 증시 조기 마감 (28일 토요일 새벽, 채권시장은 04:00)"
+   "time": "종일",
+   "text": "미국 증시 주말 휴장 (다음 정규장은 11월 30일(월) 23:30 개장)"
   }
  ],
  "kind": "morning"
