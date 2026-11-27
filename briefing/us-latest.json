@@ -1,101 +1,101 @@
 {
- "date": "2026-11-25",
- "weekday": "수",
- "generatedAt": "2026-11-25T21:25+09:00",
- "headline": "새 관세 계획 보도와 반도체주 약세로 나스닥100 선물이 3% 하락한 가운데, PCE 물가 발표를 앞두고 있습니다",
+ "date": "2026-11-27",
+ "weekday": "금",
+ "generatedAt": "2026-11-27T21:25+09:00",
+ "headline": "반도체주 반등으로 나스닥100 선물이 2% 가까이 오른 가운데, 블랙프라이데이 단축장이 열립니다",
  "us": [
   {
    "name": "S&P 500 선물",
-   "value": "7,073.50",
-   "chg": "-2.00%"
+   "value": "7,301.25",
+   "chg": "+1.47%"
   },
   {
    "name": "나스닥100 선물",
-   "value": "25,483.00",
-   "chg": "-3.02%"
+   "value": "26,608.75",
+   "chg": "+1.95%"
   },
   {
    "name": "다우 선물",
-   "value": "49,407.00",
-   "chg": "-1.31%"
+   "value": "50,843.00",
+   "chg": "+1.22%"
   },
   {
    "name": "VIX(전일)",
-   "value": "30.78",
-   "chg": "+16.77%"
+   "value": "25.45",
+   "chg": "-5.04%"
   }
  ],
  "macro": [
   {
    "name": "원/달러",
-   "value": "1,345.20원",
-   "chg": "+0.20%"
+   "value": "1,336.10원",
+   "chg": "-0.59%"
   },
   {
    "name": "미 10년물",
-   "value": "4.84%",
-   "chg": "-6bp"
+   "value": "4.90%",
+   "chg": "+4.8bp"
   },
   {
    "name": "WTI",
-   "value": "$81.88",
-   "chg": "-0.21%"
+   "value": "$85.15",
+   "chg": "+1.76%"
   },
   {
    "name": "금",
-   "value": "$3,500.40",
-   "chg": "-1.73%"
+   "value": "$3,668.70",
+   "chg": "+3.76%"
   },
   {
    "name": "비트코인",
-   "value": "$58,581",
-   "chg": "-2.38%"
+   "value": "$61,547",
+   "chg": "+1.81%"
   }
  ],
  "news": [
   {
-   "title": "새 관세 계획 보도에 미국 지수 선물 일제히 하락",
-   "summary": "트럼프 행정부가 과잉 산업생산 조사에 따라 16개 주요 교역국 수입품 전반에 새 관세를 부과할 수 있다는 보도가 나왔습니다. 이 관세는 지난 2월 연방대법원이 무효화한 관세를 일부 대체하는 성격이라고 전해졌습니다.",
-   "source": "로이터",
-   "url": "https://kfgo.com/2026/11/25/nasdaq-futures-slide-over-2-on-fresh-us-tariff-concerns-inflation-data-in-focus/"
-  },
-  {
-   "title": "엔비디아·마이크론 등 반도체주 프리마켓 동반 약세",
-   "summary": "프리마켓에서 엔비디아가 4.9% 하락했고 마이크론, AMD, 마벨은 각각 5% 넘게 밀렸습니다. 부채로 늘어난 AI 투자가 수익으로 이어질지에 대한 의구심이 이어지고 있다고 전해졌습니다.",
-   "source": "로이터",
-   "url": "https://kfgo.com/2026/11/25/nasdaq-futures-slide-over-2-on-fresh-us-tariff-concerns-inflation-data-in-focus/"
-  },
-  {
-   "title": "델, 연간 전망 상향에도 프리마켓 6% 하락",
-   "summary": "델 테크놀로지스는 연간 매출과 이익 전망을 올렸지만 프리마켓에서 주가가 6% 떨어졌습니다. 기술주 전반의 매도 분위기 속에서 나온 움직임입니다.",
-   "source": "로이터",
-   "url": "https://kfgo.com/2026/11/25/nasdaq-futures-slide-over-2-on-fresh-us-tariff-concerns-inflation-data-in-focus/"
-  },
-  {
-   "title": "10월 PCE 물가·3분기 GDP 발표, 12월 연준 회의 전 마지막 주요 지표",
-   "summary": "연준이 중시하는 근원 PCE 물가는 전년 대비 3.2%로 전월(3.1%)보다 오를 것으로 예상됩니다. CME 페드워치 기준 시장은 12월 금리 인상 가능성을 97% 수준으로 반영하고 있습니다.",
+   "title": "반도체주 반등에 미국 지수 선물 일제히 상승",
+   "summary": "AI 수익성에 대한 우려가 누그러지면서 반도체주가 다시 오르고 있습니다. 프리마켓에서 엔비디아는 4% 가까이, 마이크론은 6% 상승했다고 전해졌습니다.",
    "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-firday-november-27-dow-sp-500-nasdaq-black-friday-holiday-091152065.html"
   },
   {
-   "title": "내일 추수감사절 휴장, 금요일은 단축 거래",
-   "summary": "미국 주식·채권 시장은 목요일 추수감사절로 휴장하고 금요일에는 반일만 거래합니다. 이번 주 실적 발표는 많지 않으며 오늘은 디어(Deere)가 실적을 발표합니다.",
-   "source": "야후 파이낸스",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+   "title": "젠슨 황 CEO 복귀 이후 이어진 주간 반등",
+   "summary": "이번 주 반등은 젠슨 황이 엔비디아 CEO로 복귀한 월요일에 시작됐으며, 그날 엔비디아 주가는 31.5% 올랐습니다. S&P 500은 이번 주 들어 4% 가까이 상승한 상태라고 전해졌습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-27-markets-reopen-for-shortened-black-friday-trading"
+  },
+  {
+   "title": "호르무즈 해협·사우디 시설 공격에 유가 상승",
+   "summary": "호르무즈 해협의 선박과 사우디아라비아 에너지 시설이 공격받았다는 소식에 공급 우려가 커지며 WTI가 2.6% 올랐습니다. 브렌트유와 WTI 모두 4주 만에 첫 주간 상승을 앞두고 있습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-27-markets-reopen-for-shortened-black-friday-trading"
+  },
+  {
+   "title": "끈질긴 물가에 12월 금리 인상 기대 강화",
+   "summary": "인플레이션이 이어지면서 연준이 12월에 기준금리를 올릴 수 있다는 기대가 커지고 있다고 보도됐습니다. 금리 인상 기대는 금값에 부담 요인으로 꼽혔습니다.",
+   "source": "SBS",
+   "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008866086"
+  },
+  {
+   "title": "블랙프라이데이로 연말 쇼핑 시즌 본격 개막",
+   "summary": "전미소매협회(NRF)는 11~12월 연말 소비가 지난해보다 4.2% 늘어난 1조 100억 달러에 이를 것으로 내다봤습니다. 다만 증가분의 약 절반은 물가 상승 영향이라고 설명했습니다.",
+   "source": "AP",
+   "url": "https://www.ksat.com/business/2026/10/15/us-retail-trade-group-forecasts-healthy-holiday-sales-in-part-due-to-inflation/"
   }
  ],
  "schedule": [
   {
-   "time": "22:30",
-   "text": "미국 10월 PCE 물가·개인소득·개인소비 발표"
-  },
-  {
-   "time": "22:30",
-   "text": "미국 3분기 GDP 발표"
-  },
-  {
    "time": "23:30",
-   "text": "미국 정규장 개장"
+   "text": "미국 정규장 개장 (블랙프라이데이 단축 거래)"
+  },
+  {
+   "time": "03:00",
+   "text": "뉴욕증시 조기 폐장 (현지 오후 1시)"
+  },
+  {
+   "time": "04:00",
+   "text": "미국 채권시장 조기 마감 (현지 오후 2시)"
   }
  ],
  "kind": "us"

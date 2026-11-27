@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-27",
+ "weekday": "금",
+ "generatedAt": "2026-11-27T21:25+09:00",
+ "headline": "반도체주 반등으로 나스닥100 선물이 2% 가까이 오른 가운데, 블랙프라이데이 단축장이 열립니다",
+ "us": [
+  {
+   "name": "S&P 500 선물",
+   "value": "7,301.25",
+   "chg": "+1.47%"
+  },
+  {
+   "name": "나스닥100 선물",
+   "value": "26,608.75",
+   "chg": "+1.95%"
+  },
+  {
+   "name": "다우 선물",
+   "value": "50,843.00",
+   "chg": "+1.22%"
+  },
+  {
+   "name": "VIX(전일)",
+   "value": "25.45",
+   "chg": "-5.04%"
+  }
+ ],
+ "macro": [
+  {
+   "name": "원/달러",
+   "value": "1,336.10원",
+   "chg": "-0.59%"
+  },
+  {
+   "name": "미 10년물",
+   "value": "4.90%",
+   "chg": "+4.8bp"
+  },
+  {
+   "name": "WTI",
+   "value": "$85.15",
+   "chg": "+1.76%"
+  },
+  {
+   "name": "금",
+   "value": "$3,668.70",
+   "chg": "+3.76%"
+  },
+  {
+   "name": "비트코인",
+   "value": "$61,547",
+   "chg": "+1.81%"
+  }
+ ],
+ "news": [
+  {
+   "title": "반도체주 반등에 미국 지수 선물 일제히 상승",
+   "summary": "AI 수익성에 대한 우려가 누그러지면서 반도체주가 다시 오르고 있습니다. 프리마켓에서 엔비디아는 4% 가까이, 마이크론은 6% 상승했다고 전해졌습니다.",
+   "source": "야후 파이낸스",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-firday-november-27-dow-sp-500-nasdaq-black-friday-holiday-091152065.html"
+  },
+  {
+   "title": "젠슨 황 CEO 복귀 이후 이어진 주간 반등",
+   "summary": "이번 주 반등은 젠슨 황이 엔비디아 CEO로 복귀한 월요일에 시작됐으며, 그날 엔비디아 주가는 31.5% 올랐습니다. S&P 500은 이번 주 들어 4% 가까이 상승한 상태라고 전해졌습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-27-markets-reopen-for-shortened-black-friday-trading"
+  },
+  {
+   "title": "호르무즈 해협·사우디 시설 공격에 유가 상승",
+   "summary": "호르무즈 해협의 선박과 사우디아라비아 에너지 시설이 공격받았다는 소식에 공급 우려가 커지며 WTI가 2.6% 올랐습니다. 브렌트유와 WTI 모두 4주 만에 첫 주간 상승을 앞두고 있습니다.",
+   "source": "팁랭크스",
+   "url": "https://www.tipranks.com/news/stock-market-today-nov-27-markets-reopen-for-shortened-black-friday-trading"
+  },
+  {
+   "title": "끈질긴 물가에 12월 금리 인상 기대 강화",
+   "summary": "인플레이션이 이어지면서 연준이 12월에 기준금리를 올릴 수 있다는 기대가 커지고 있다고 보도됐습니다. 금리 인상 기대는 금값에 부담 요인으로 꼽혔습니다.",
+   "source": "SBS",
+   "url": "https://news.sbs.co.kr/english/article.do?news_id=N1008866086"
+  },
+  {
+   "title": "블랙프라이데이로 연말 쇼핑 시즌 본격 개막",
+   "summary": "전미소매협회(NRF)는 11~12월 연말 소비가 지난해보다 4.2% 늘어난 1조 100억 달러에 이를 것으로 내다봤습니다. 다만 증가분의 약 절반은 물가 상승 영향이라고 설명했습니다.",
+   "source": "AP",
+   "url": "https://www.ksat.com/business/2026/10/15/us-retail-trade-group-forecasts-healthy-holiday-sales-in-part-due-to-inflation/"
+  }
+ ],
+ "schedule": [
+  {
+   "time": "23:30",
+   "text": "미국 정규장 개장 (블랙프라이데이 단축 거래)"
+  },
+  {
+   "time": "03:00",
+   "text": "뉴욕증시 조기 폐장 (현지 오후 1시)"
+  },
+  {
+   "time": "04:00",
+   "text": "미국 채권시장 조기 마감 (현지 오후 2시)"
+  }
+ ],
+ "kind": "us"
+}
